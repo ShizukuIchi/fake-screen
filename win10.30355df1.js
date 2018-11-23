@@ -13,4 +13,4 @@ module.exports=function(t){return fetch(t).then(function(t){return t.text()})};
 },{}],0:[function(require,module,exports) {
 var b=require("z1Am");b.register("css",require("ln2R"));b.register("html",require("cUwr"));b.load([["update.7cb51e72.html","AOSf"]]).then(function(){require("rFDk");});
 },{}]},{},[0], null)
-//# sourceMappingURL=/crash/win10.30355df1.map
+//# sourceMappingURL=/fake/win10.30355df1.map

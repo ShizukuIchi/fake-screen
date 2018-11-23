@@ -696,4 +696,4 @@ module.exports=function(n){return new Promise(function(e,o){var r=document.creat
 },{}],0:[function(require,module,exports) {
 var b=require("z1Am");b.register("html",require("cUwr"));b.register("css",require("ln2R"));b.register("js",require("Ijyk"));
 },{}]},{},[0,"H99C"], null)
-//# sourceMappingURL=/crash/src.8f7654e4.map
+//# sourceMappingURL=/fake/src.8f7654e4.map
