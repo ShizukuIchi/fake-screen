@@ -1,0 +1,27 @@
+{
+  "name": "crash",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "homepage": "https://ShizukuIchi.github.io/crash",
+  "scripts": {
+    "predeploy": "parcel build index.html --public-url /crash/",
+    "deploy": "gh-pages -d dist",
+    "start": "parcel index.pug --open",
+    "build": "parcel build index.html",
+    "serve": "serve dist"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1",
+    "parcel-bundler": "^1.10.3",
+    "pug": "^2.0.3",
+    "sass": "^1.15.1",
+    "serve": "^10.1.1"
+  },
+  "dependencies": {
+    "assets": "^3.0.0",
+    "babel-polyfill": "^6.26.0",
+    "popmotion": "^8.5.3",
+    "src": "^1.1.2"
+  }
+}
