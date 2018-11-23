@@ -1,0 +1,36 @@
+.app-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: #0065cc;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.face {
+  font-size: 10em;
+  margin-bottom: 60px;
+  color: #fff;
+}
+.face .mouth {
+  font-family: Sans-Serif;
+}
+
+.error {
+  font-family: Sans-Serif;
+  font-size: 1.2em;
+  padding: 30px 0 70px 0;
+  color: #5bdbea;
+}
+
+.message {
+  font-family: Sans-Serif;
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #fff;
+}
