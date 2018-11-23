@@ -104,12 +104,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"src/win10/update.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/win10/index.js":[function(require,module,exports) {
+})({"src/win10/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -120,6 +115,8 @@ exports.render = void 0;
 var _update = _interopRequireDefault(require("./update.pug"));
 
 require("./update.scss");
+
+require("./blue.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -169,7 +166,7 @@ function _startProgress() {
             progressValue = 1;
 
           case 6:
-            if (!(progressValue <= crash)) {
+            if (!(progressValue <= 1)) {
               _context.next = 12;
               break;
             }
@@ -184,21 +181,13 @@ function _startProgress() {
 
           case 12:
             _context.next = 14;
-            return sleep(3000);
-
-          case 14:
-            _context.next = 16;
-            return require("_bundle_loader")(require.resolve('./blue.scss'));
-
-          case 16:
-            _context.next = 18;
             return require("_bundle_loader")(require.resolve('./blue.pug'));
 
-          case 18:
+          case 14:
             blue = _context.sent;
             document.querySelector('.app-wrapper').innerHTML = blue;
 
-          case 20:
+          case 16:
           case "end":
             return _context.stop();
         }
@@ -264,7 +253,7 @@ function findProgress() {
     });
   });
 }
-},{"./update.pug":"src/win10/update.pug","./update.scss":"src/win10/update.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./blue.scss":[["blue.324c6c08.css","src/win10/blue.scss"],"blue.324c6c08.js","src/win10/blue.scss"],"./blue.pug":[["blue.3c81820e.html","src/win10/blue.pug"],"src/win10/blue.pug"]}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./update.pug":"src/win10/update.pug","./update.scss":"src/win10/update.scss","./blue.scss":"src/win10/blue.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./blue.pug":[["blue.3c81820e.html","src/win10/blue.pug"],"src/win10/blue.pug"]}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -291,7 +280,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35179" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32965" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -545,55 +534,13 @@ LazyPromise.prototype.catch = function (onError) {
   if (this.promise === null) this.promise = new Promise(this.executor);
   return this.promise.catch(onError);
 };
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js":[function(require,module,exports) {
-module.exports = function loadJSBundle(bundle) {
-  return new Promise(function (resolve, reject) {
-    var script = document.createElement('script');
-    script.async = true;
-    script.type = 'text/javascript';
-    script.charset = 'utf-8';
-    script.src = bundle;
-
-    script.onerror = function (e) {
-      script.onerror = script.onload = null;
-      reject(e);
-    };
-
-    script.onload = function () {
-      script.onerror = script.onload = null;
-      resolve();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(script);
-  });
-};
-},{}],"node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js":[function(require,module,exports) {
-module.exports = function loadCSSBundle(bundle) {
-  return new Promise(function (resolve, reject) {
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = bundle;
-
-    link.onerror = function (e) {
-      link.onerror = link.onload = null;
-      reject(e);
-    };
-
-    link.onload = function () {
-      link.onerror = link.onload = null;
-      resolve();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(link);
-  });
-};
-},{}],"node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js":[function(require,module,exports) {
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js":[function(require,module,exports) {
 module.exports = function loadHTMLBundle(bundle) {
   return fetch(bundle).then(function (res) {
     return res.text();
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("js",require("node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js"));b.register("css",require("node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js"));b.register("html",require("node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js"));b.load([["update.f9d857ef.html","src/win10/update.pug"]]).then(function(){require("src/win10/index.js");});
+var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("html",require("node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js"));b.load([["update.f9d857ef.html","src/win10/update.pug"]]).then(function(){require("src/win10/index.js");});
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0], null)
 //# sourceMappingURL=/win10.4c52f76e.map

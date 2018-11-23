@@ -7911,7 +7911,17 @@ function _renderTheme() {
   }));
   return _renderTheme.apply(this, arguments);
 }
-},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["update.f9d857ef.html","src/win10/update.pug"],"win10.4c52f76e.css","src/win10/index.js"],"./win10-update":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update.0ab94dc2.html","src/win10-update/update.pug"],"win10-update.61b83e2c.css","src/win10-update/index.js"],"./win10-blue":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue.12a93e49.html","src/win10-blue/blue.pug"],"win10-blue.abec6cd6.css","src/win10-blue/index.js"]}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["update.f9d857ef.html","src/win10/update.pug"],"src/win10/index.js"],"./win10-update":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/win10/blue.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -7938,7 +7948,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35179" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32965" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -8086,26 +8096,6 @@ module.exports = function loadHTMLBundle(bundle) {
     return res.text();
   });
 };
-},{}],"node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js":[function(require,module,exports) {
-module.exports = function loadCSSBundle(bundle) {
-  return new Promise(function (resolve, reject) {
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = bundle;
-
-    link.onerror = function (e) {
-      link.onerror = link.onload = null;
-      reject(e);
-    };
-
-    link.onload = function () {
-      link.onerror = link.onload = null;
-      resolve();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(link);
-  });
-};
 },{}],"node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js":[function(require,module,exports) {
 module.exports = function loadJSBundle(bundle) {
   return new Promise(function (resolve, reject) {
@@ -8129,6 +8119,6 @@ module.exports = function loadJSBundle(bundle) {
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("html",require("node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js"));b.register("css",require("node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js"));b.register("js",require("node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js"));
+var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("html",require("node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js"));b.register("js",require("node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js"));
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0,"src/index.js"], null)
 //# sourceMappingURL=/src.a2b27638.map

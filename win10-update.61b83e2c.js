@@ -104,12 +104,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"src/win10-update/update.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/win10-update/index.js":[function(require,module,exports) {
+})({"src/win10-update/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -117,9 +112,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.render = void 0;
 
-var _update = _interopRequireDefault(require("./update.pug"));
+var _updateOnly = _interopRequireDefault(require("./update-only.pug"));
 
-require("./update.scss");
+require("../win10/update.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -129,7 +124,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var render = function render() {
   startProgress();
-  return _update.default;
+  return _updateOnly.default;
 };
 
 exports.render = render;
@@ -234,7 +229,7 @@ function findProgress() {
     });
   });
 }
-},{"./update.pug":"src/win10-update/update.pug","./update.scss":"src/win10-update/update.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./update-only.pug":"src/win10-update/update-only.pug","../win10/update.scss":"src/win10/update.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -261,7 +256,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35179" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32965" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
