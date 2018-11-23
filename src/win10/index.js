@@ -1,5 +1,6 @@
 import update from './update.pug';
 import './update.scss';
+import './blue.scss';
 
 export const render = () => {
   startProgress();
@@ -24,8 +25,6 @@ async function startProgress() {
     await sleep(Math.random() * 1000 + next);
     progress.innerText = progressValue++;
   }
-  await sleep(3000);
-  await import('./blue.scss');
   const blue = await import('./blue.pug');
   document.querySelector('.app-wrapper').innerHTML = blue;
 }

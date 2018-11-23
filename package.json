@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "homepage": "https://ShizukuIchi.github.io/crash",
+  "homepage": "https://ShizukuIchi.github.io/fake",
   "scripts": {
-    "predeploy": "parcel build index.html --public-url /crash/",
+    "predeploy": "parcel build index.pug --public-url /fake/",
     "deploy": "gh-pages -d dist",
     "start": "parcel index.pug --open",
-    "build": "parcel build index.html",
+    "build": "parcel build index.pug",
     "serve": "serve dist"
   },
   "devDependencies": {

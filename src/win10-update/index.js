@@ -1,5 +1,5 @@
-import update from './update.pug';
-import './update.scss';
+import update from './update-only.pug';
+import '../win10/update.scss';
 
 export const render = () => {
   startProgress();
