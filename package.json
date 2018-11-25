@@ -1,11 +1,11 @@
 {
-  "name": "crash",
+  "name": "fake-screen",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "homepage": "https://ShizukuIchi.github.io/fake",
+  "homepage": "https://ShizukuIchi.github.io/fake-screen",
   "scripts": {
-    "predeploy": "parcel build index.pug --public-url /fake/",
+    "predeploy": "parcel build index.pug --public-url /fake-screen/",
     "deploy": "gh-pages -d dist",
     "start": "parcel index.pug --open",
     "build": "parcel build index.pug",
@@ -19,9 +19,6 @@
     "serve": "^10.1.1"
   },
   "dependencies": {
-    "assets": "^3.0.0",
-    "babel-polyfill": "^6.26.0",
-    "popmotion": "^8.5.3",
-    "src": "^1.1.2"
+    "babel-polyfill": "^6.26.0"
   }
 }

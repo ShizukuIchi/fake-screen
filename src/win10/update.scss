@@ -4,21 +4,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Segoe UI light', Arial;
+  word-break: break-word;
 }
 .update-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 12%;
 }
 .message {
-  font-family: Sans-Serif;
   font-size: 1.5em;
   margin-bottom: 5px;
   color: #fff;
 }
 .bottom {
   position: absolute;
-  bottom: 80px;
+  bottom: 12%;
 }
 
 .loader {
