@@ -8,7 +8,7 @@ export const render = () => {
 async function startProgress() {
   const progress = await getProgress();
   let progressValue = 1;
-  while (progressValue <= 100) {
+  while (true) {
     await sleep(Math.random() * 5000 + 5000);
     progress.innerText = progressValue++;
   }

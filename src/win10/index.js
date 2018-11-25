@@ -17,7 +17,7 @@ function setNext(second) {
   console.log(`Add progress every ${next} milliseconds`);
 }
 async function startProgress() {
-  setCrash(Math.floor(Math.random() * 100) + 1);
+  setCrash(Math.floor(Math.random() * 40) + 61);
   setNext(1000);
   const progress = await getProgress();
   let progressValue = 1;

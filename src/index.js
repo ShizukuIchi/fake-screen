@@ -12,7 +12,7 @@ const themes = {
 const app = document.querySelector('#app');
 const options = document.querySelector('.options');
 
-app.querySelector('.close').onclick = () => (app.style.visibility = 'hidden');
+app.querySelector('.close').onclick = onAppClose;
 options.onclick = e => {
   if (e.target !== options) render(e.target.closest('.option').id);
 };
@@ -22,10 +22,10 @@ function render(name) {
     .then(content => {
       const container = app.querySelector('.content');
       container.innerHTML = content;
-      app.style.visibility = 'visible';
+      onAppOpen();
     })
     .catch(e => {
-      app.style.visibility = 'hidden';
+      onAppClose();
       console.log(e);
     });
 }
@@ -33,4 +33,11 @@ function render(name) {
 async function renderTheme(name) {
   const theme = await themes[name];
   return theme.render();
+}
+
+function onAppClose() {
+  app.style.visibility = 'hidden';
+}
+function onAppOpen() {
+  app.style.visibility = 'visible';
 }
