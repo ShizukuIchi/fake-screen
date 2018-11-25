@@ -150,7 +150,7 @@ function _startProgress() {
             progressValue = 1;
 
           case 4:
-            if (!(progressValue <= 100)) {
+            if (!true) {
               _context.next = 10;
               break;
             }
@@ -256,7 +256,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32965" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53014" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -156,7 +156,7 @@ function _startProgress() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            setCrash(Math.floor(Math.random() * 100) + 1);
+            setCrash(Math.floor(Math.random() * 40) + 61);
             setNext(1000);
             _context.next = 4;
             return getProgress();
@@ -166,7 +166,7 @@ function _startProgress() {
             progressValue = 1;
 
           case 6:
-            if (!(progressValue <= 1)) {
+            if (!(progressValue <= crash)) {
               _context.next = 12;
               break;
             }
@@ -280,7 +280,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32965" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53014" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

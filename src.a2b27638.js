@@ -7862,10 +7862,7 @@ var themes = {
 };
 var app = document.querySelector('#app');
 var options = document.querySelector('.options');
-
-app.querySelector('.close').onclick = function () {
-  return app.style.visibility = 'hidden';
-};
+app.querySelector('.close').onclick = onAppClose;
 
 options.onclick = function (e) {
   if (e.target !== options) render(e.target.closest('.option').id);
@@ -7875,9 +7872,9 @@ function render(name) {
   renderTheme(name).then(function (content) {
     var container = app.querySelector('.content');
     container.innerHTML = content;
-    app.style.visibility = 'visible';
+    onAppOpen();
   }).catch(function (e) {
-    app.style.visibility = 'hidden';
+    onAppClose();
     console.log(e);
   });
 }
@@ -7910,6 +7907,14 @@ function _renderTheme() {
     }, _callee, this);
   }));
   return _renderTheme.apply(this, arguments);
+}
+
+function onAppClose() {
+  app.style.visibility = 'hidden';
+}
+
+function onAppOpen() {
+  app.style.visibility = 'visible';
 }
 },{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["update.f9d857ef.html","src/win10/update.pug"],"src/win10/index.js"],"./win10-update":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -7948,7 +7953,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "32965" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53014" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

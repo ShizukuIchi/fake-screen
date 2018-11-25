@@ -99,16 +99,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Segoe UI light", Arial;
+  word-break: break-word;
+  cursor: none;
 }
 
 .update-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 12%;
 }
 
 .message {
-  font-family: Sans-Serif;
   font-size: 1.5em;
   margin-bottom: 5px;
   color: #fff;
@@ -116,7 +119,7 @@ body {
 
 .bottom {
   position: absolute;
-  bottom: 80px;
+  bottom: 12%;
 }
 
 .loader {
@@ -189,6 +192,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin: 12%;
 }
 
 .face {
@@ -196,12 +200,8 @@ body {
   margin-bottom: 50px;
   color: #fff;
 }
-.face .mouth {
-  font-family: Sans-Serif;
-}
 
 .error {
-  font-family: Sans-Serif;
   padding: 30px 0 70px 0;
   color: #5bdbea;
 }
