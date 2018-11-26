@@ -1,4 +1,4 @@
-.app-wrapper {
+.wannacry-wrapper {
   height: 100%;
   background: #000;
   display: flex;
@@ -7,33 +7,66 @@
   cursor: auto;
   font-family: sans-serif;
 }
-.app-wrapper .content {
+.wannacry-wrapper .content {
   display: flex;
 }
-.app-wrapper .wannacry-container {
+.wannacry-wrapper .wannacry-container {
   background: darkred;
-  border: 2px gray solid;
+  border-radius: 2px;
+  border: 3px lightgray solid;
+  border-right-color: darkgray;
+  border-bottom-color: darkgray;
   transform: scale(0.9);
   font-family: sans-serif;
 }
 
 header {
   height: 24px;
-  padding-top: 2px;
-  border-bottom: gray 1px solid;
-  background: linear-gradient(to right, blue, white);
+  border-bottom: lightgray 1px solid;
+  background: linear-gradient(to right, #07126e, #a3c5ed);
+  display: flex;
+  align-items: center;
 }
-header .img {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
+header img {
+  margin: 2px 4px;
+  width: 15px;
+  height: 15px;
 }
 header span {
-  height: 20px;
-  vertical-align: top;
-  line-height: 20px;
-  font-weight: 500;
+  flex-grow: 1;
+  font-family: Arial;
   color: #fff;
+}
+header button {
+  background: lightgray;
+  border: 2px gray solid;
+  border-top-color: lightgray;
+  border-left-color: lightgray;
+  margin-bottom: 1px;
+  margin-right: 2px;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+header button:before {
+  content: "";
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 7px;
+  top: 1px;
+  width: 2px;
+  height: 14px;
+  background: #000;
+}
+header button:after {
+  content: "";
+  position: absolute;
+  transform: rotate(45deg);
+  left: 7px;
+  top: 1px;
+  width: 2px;
+  height: 14px;
+  background: #000;
 }
 
 .left {
@@ -44,18 +77,21 @@ header span {
   padding-top: 7px;
   text-align: center;
 }
-.left .logo .img {
-  border: 2px solid gray;
+.left .logo img {
+  border: 3px solid lightgray;
+  border-right-color: #868788;
+  border-bottom-color: darkgray;
+  border-radius: 2px;
   width: 150px;
   height: 150px;
-  background: #000;
   margin: auto;
 }
 
 .info-container {
   border: 2px solid lightgray;
   margin: 10px;
-  padding: 10px 2px;
+  padding: 10px 3px;
+  font-weight: 900;
 }
 .info-container .title {
   text-align: center;
@@ -69,16 +105,20 @@ header span {
 .info-container .info {
   text-align: center;
   color: #fff;
+  min-height: 1em;
 }
 .info-container .time {
   font-size: 2em;
   height: 40px;
+  font-weight: 100;
 }
 .info-container .bar .img {
   height: 100%;
   width: 20px;
   border: 1px solid gray;
-  background: linear-gradient(to bottom, green, red);
+  border-right-color: lightgray;
+  border-bottom-color: lightgray;
+  background: linear-gradient(to bottom, #0ad700, red);
 }
 
 footer {
@@ -92,11 +132,12 @@ footer {
 
 .contact {
   cursor: pointer;
-  color: skyblue;
+  color: #7be2e2;
   display: block;
 }
 .contact strong {
-  color: lightskyblue;
+  font-size: 1.1em;
+  color: #7bdfdf;
 }
 
 .contact:not(:last-child) {
@@ -117,17 +158,23 @@ footer {
 
 .announcement {
   color: #fff;
-  font-size: 1.1em;
+  line-height: 0.8em;
+  font-size: 1.2em;
   flex-grow: 1;
   text-align: center;
   font-weight: 700;
 }
 
 .lang {
-  border: 2px solid gray;
+  border: #5a5a5a 2px solid;
+  border-right-color: lightgray;
+  border-bottom-color: lightgray;
 }
 .lang select {
+  background: transparent;
   width: 150px;
+  height: 22px;
+  color: #fff;
 }
 
 .manuals {
@@ -147,7 +194,7 @@ footer {
 }
 
 .manual:not(:last-child) {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .bitcoins {
@@ -155,9 +202,10 @@ footer {
   border: 2px solid lightgray;
   padding: 10px 0;
 }
-.bitcoins .img {
-  width: 180px;
-  height: 70px;
+.bitcoins img {
+  border: 2px solid lightgray;
+  width: 170px;
+  height: 66px;
 }
 .bitcoins .text {
   margin-left: 10px;
@@ -165,18 +213,23 @@ footer {
 }
 .bitcoins .text .hint {
   margin-bottom: 15px;
+  font-weight: 600;
 }
 .bitcoins .text .inputs {
   height: 50%;
   display: flex;
 }
 .bitcoins .text .inputs input {
+  border: #5a5a5a 3px solid;
+  border-right-color: lightgray;
+  border-bottom-color: lightgray;
   color: #fff;
   background: darkred;
   margin-right: 3px;
   flex-grow: 1;
   padding: 3px 0 10px 5px;
   font-size: 1em;
+  font-weight: 900;
 }
 .bitcoins .text .inputs button {
   margin-right: 5px;
@@ -190,11 +243,12 @@ footer {
 .buttons button {
   background: lightgray;
   font-weight: 900;
-  height: 30px;
-  flex-grow: 1;
+  font-size: 1.2em;
+  height: 35px;
+  flex: 1;
 }
 .buttons button:not(:last-child) {
-  margin-right: 30px;
+  margin-right: 40px;
 }
 
 .yellow {
