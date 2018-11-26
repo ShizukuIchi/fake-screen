@@ -8,6 +8,7 @@ const themes = {
   win10: import('./win10'),
   'win10-update': import('./win10-update'),
   'win10-blue': import('./win10-blue'),
+  wannacry: import('./wannacry'),
 };
 const app = document.querySelector('#app');
 const options = document.querySelector('.options');
