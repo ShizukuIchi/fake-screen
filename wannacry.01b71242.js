@@ -104,7 +104,12 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"src/win10-blue/index.js":[function(require,module,exports) {
+})({"src/wannacry/wannacry.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/wannacry/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -112,20 +117,18 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.render = void 0;
 
-var _blueOnly = _interopRequireDefault(require("./blue-only.pug"));
+require("./wannacry.scss");
 
-require("../win10/update.scss");
-
-require("../win10/blue.scss");
+var _wannacry2 = _interopRequireDefault(require("./wannacry.pug"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var render = function render() {
-  return _blueOnly.default;
+  return _wannacry2.default;
 };
 
 exports.render = render;
-},{"./blue-only.pug":"src/win10-blue/blue-only.pug","../win10/update.scss":"src/win10/update.scss","../win10/blue.scss":"src/win10/blue.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./wannacry.scss":"src/wannacry/wannacry.scss","./wannacry.pug":"src/wannacry/wannacry.pug"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -295,4 +298,4 @@ function hmrAccept(bundle, id) {
   });
 }
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/win10-blue.abec6cd6.map
+//# sourceMappingURL=/wannacry.01b71242.map
