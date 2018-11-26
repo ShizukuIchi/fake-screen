@@ -1,8 +1,9 @@
-.app-wrapper
+.wannacry-wrapper
   .wannacry-container
     header
-      .img
+      img(src='./doge.ico')
       span Wana Decrypt0r 2.0
+      button
     .content
       section.left
         .logo
@@ -11,22 +12,23 @@
           .title Payment will be raised on
           .content
             .infos
-              .info 5/15/2017 15:58:08
+              .info#pay-on
               .info #{'　'}
               .info Time Left
-              .info.time 02:59:59:59
+              .info.time#pay
             .bar
               .img
         .info-container
           .title Your files will be lost on
           .content
             .infos
-              .info 5/15/2017 15:58:08
+              .info#lost-on
               .info #{'　'}
               .info Time Left
-              .info.time 02:59:59:59
+              .info.time#lost 
             .bar
               .img
+        script(src="./time.js")
       section.right
         .top-bar
           .announcement Ooops, your files have been encrypted!
@@ -44,11 +46,13 @@
             p <strong>S</strong>ure. We guarantee that you can recover all your files safely and easily. But you have not so enough time.
             p You can decrypt some of your files for free. Try now by clicking #{'<Decrypt>.'}
             p But if you want to decrypt all your files, you need to pay.
-            p You only have 3 days to submit the payment. After that the price will be doubled. Also, if you don't pay in 7 days, you won't be able to recover your files forever.
+            p You only have 3 days to submit the payment. After that the price will be doubled. 
+            p Also, if you don't pay in 7 days, you won't be able to recover your files forever.
             p We will have free events for users who are so poor that they couldn't pay in 6 months.
           .manual
             .title How Do I Pay?
-            p <strong>P</strong>ayment is accepted in Bitcoin only. For more information, click #{'<About bitcoin>'}. Please check the current price of Bitcoin and buy some bitcoins. For more information, click #{'<How to buy bitcoins>'}.
+            p <strong>P</strong>ayment is accepted in Bitcoin only. For more information, click #{'<About bitcoin>'}. 
+            p Please check the current price of Bitcoin and buy some bitcoins. For more information, click #{'<How to buy bitcoins>'}.
             p And send the correct amount to the address specified in this window.
             p After your payment, click #{'<Check Payment>'}. Best teim to check: 9:00am - 11:00am GMT from Monday to Friday.
             p Once the payment is checked, you can start decrypting your files immediately.       
@@ -71,9 +75,8 @@
           .text
             .hint.yellow Send $300 worth of bitcoins to this address:
             .inputs
-              input(type="text" value="1323fMF0fJe0mM29fMwlifW209Fp2" disabled)
+              input(type="text" value="115p7UMMngoj1pMvkpHijcRdfJNXj6LrLn" disabled)
               button Copy
         .buttons 
           button Check <span class="underline">P</span>ayment 
           button <span class="underline">D</span>ecrypt
-      

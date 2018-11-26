@@ -1,4 +1,4 @@
-.app-wrapper {
+.wannacry-wrapper {
   height: 100%;
   background: #000;
   display: flex;
@@ -22,21 +22,50 @@
 
 header {
   height: 24px;
-  padding-top: 2px;
-  border-bottom: gray 1px solid;
+  border-bottom: lightgray 1px solid;
   background: linear-gradient(to right, #07126e, #a3c5ed);
-  .img {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
+  display: flex;
+  align-items: center;
+  img {
+    margin: 2px 4px;
+    width: 15px;
+    height: 15px;
   }
   span {
+    flex-grow: 1;
     font-family: Arial;
-    height: 20px;
-    vertical-align: top;
-    line-height: 20px;
-    font-weight: 900;
     color: #fff;
+  }
+  button {
+    background: lightgray;
+    border: 2px gray solid;
+    border-top-color: lightgray;
+    border-left-color: lightgray;
+    margin-bottom: 1px;
+    margin-right: 2px;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      transform: rotate(-45deg);
+      left: 7px;
+      top: 1px;
+      width: 2px;
+      height: 14px;
+      background: #000;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      transform: rotate(45deg);
+      left: 7px;
+      top: 1px;
+      width: 2px;
+      height: 14px;
+      background: #000;
+    }
   }
 }
 
@@ -78,6 +107,7 @@ header {
   .time {
     font-size: 2em;
     height: 40px;
+    font-weight: 100;
   }
   .bar {
     .img {
@@ -100,11 +130,11 @@ footer {
 }
 .contact {
   cursor: pointer;
-  color: skyblue;
+  color: #7be2e2;
   display: block;
   strong {
     font-size: 1.1em;
-    color: lightskyblue;
+    color: #7bdfdf;
   }
 }
 .contact:not(:last-child) {
@@ -207,9 +237,9 @@ footer {
     font-weight: 900;
     font-size: 1.2em;
     height: 35px;
-    flex-grow: 1;
+    flex: 1;
     &:not(:last-child) {
-      margin-right: 30px;
+      margin-right: 40px;
     }
   }
 }

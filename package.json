@@ -19,6 +19,7 @@
     "serve": "^10.1.1"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "dayjs": "^1.7.7"
   }
 }
