@@ -11,7 +11,10 @@
   }
   .wannacry-container {
     background: darkred;
-    border: 2px gray solid;
+    border-radius: 2px;
+    border: 3px lightgray solid;
+    border-right-color: darkgray;
+    border-bottom-color: darkgray;
     transform: scale(0.9);
     font-family: sans-serif;
   }
@@ -21,17 +24,18 @@ header {
   height: 24px;
   padding-top: 2px;
   border-bottom: gray 1px solid;
-  background: linear-gradient(to right, blue, white);
+  background: linear-gradient(to right, #07126e, #a3c5ed);
   .img {
     display: inline-block;
     width: 20px;
     height: 20px;
   }
   span {
+    font-family: Arial;
     height: 20px;
     vertical-align: top;
     line-height: 20px;
-    font-weight: 500;
+    font-weight: 900;
     color: #fff;
   }
 }
@@ -42,11 +46,13 @@ header {
     width: 100%;
     padding-top: 7px;
     text-align: center;
-    .img {
-      border: 2px solid gray;
+    img {
+      border: 3px solid lightgray;
+      border-right-color: #868788;
+      border-bottom-color: darkgray;
+      border-radius: 2px;
       width: 150px;
       height: 150px;
-      background: #000;
       margin: auto;
     }
   }
@@ -54,7 +60,8 @@ header {
 .info-container {
   border: 2px solid lightgray;
   margin: 10px;
-  padding: 10px 2px;
+  padding: 10px 3px;
+  font-weight: 900;
   .title {
     text-align: center;
     color: yellow;
@@ -78,7 +85,9 @@ header {
       width: 20px;
 
       border: 1px solid gray;
-      background: linear-gradient(to bottom, green, red);
+      border-right-color: lightgray;
+      border-bottom-color: lightgray;
+      background: linear-gradient(to bottom, #0ad700, red);
     }
   }
 }
@@ -94,6 +103,7 @@ footer {
   color: skyblue;
   display: block;
   strong {
+    font-size: 1.1em;
     color: lightskyblue;
   }
 }
@@ -114,15 +124,21 @@ footer {
 
 .announcement {
   color: #fff;
-  font-size: 1.1em;
+  line-height: 0.8em;
+  font-size: 1.2em;
   flex-grow: 1;
   text-align: center;
   font-weight: 700;
 }
 .lang {
-  border: 2px solid gray;
+  border: rgb(90, 90, 90) 2px solid;
+  border-right-color: lightgray;
+  border-bottom-color: lightgray;
   select {
+    background: transparent;
     width: 150px;
+    height: 22px;
+    color: #fff;
   }
 }
 .manuals {
@@ -142,7 +158,7 @@ footer {
   }
 }
 .manual:not(:last-child) {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .bitcoins {
@@ -150,25 +166,31 @@ footer {
   border: 2px solid lightgray;
   padding: 10px 0;
   img {
-    width: 180px;
-    height: 70px;
+    border: 2px solid lightgray;
+    width: 170px;
+    height: 66px;
   }
   .text {
     margin-left: 10px;
     flex-grow: 1;
     .hint {
       margin-bottom: 15px;
+      font-weight: 600;
     }
     .inputs {
       height: 50%;
       display: flex;
       input {
+        border: rgb(90, 90, 90) 3px solid;
+        border-right-color: lightgray;
+        border-bottom-color: lightgray;
         color: #fff;
         background: darkred;
         margin-right: 3px;
         flex-grow: 1;
         padding: 3px 0 10px 5px;
         font-size: 1em;
+        font-weight: 900;
       }
       button {
         margin-right: 5px;
@@ -183,7 +205,8 @@ footer {
   button {
     background: lightgray;
     font-weight: 900;
-    height: 30px;
+    font-size: 1.2em;
+    height: 35px;
     flex-grow: 1;
     &:not(:last-child) {
       margin-right: 30px;
