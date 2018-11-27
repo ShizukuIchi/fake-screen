@@ -7,47 +7,97 @@ export function getDay(d) {
 export function formatHintDay(day) {
   return day.format('M/D/YYYY HH:mm:ss');
 }
+export class CountDowner {
+  constructor(time) {
+    this.day = time.day;
+    this.hour = time.hour;
+    this.minute = time.minute;
+    this.second = time.second;
+    this.stopped = false;
+    this.callbacks = {
+      day: [],
+      hour: [],
+      minute: [],
+      second: [],
+      stop: [],
+    };
+    this.tick = this.tick.bind(this);
+  }
 
-export class Timer {
-  constructor(day) {
-    this.day = day;
-    this.hour = 0;
-    this.minute = 0;
-    this.second = 0;
-    this.isTimeUp = false;
+  mday() {
+    this.triggerCallback('day');
+    if (this.day) {
+      this.day -= 1;
+      this.hour = 23;
+      this.minute = 59;
+      this.second = 59;
+    } else {
+      this.stopped = true;
+    }
+  }
+  mhour() {
+    this.triggerCallback('hour');
+    if (this.hour) {
+      this.hour -= 1;
+      this.minute = 59;
+      this.second = 59;
+    } else {
+      this.mday();
+    }
+  }
+  mminute() {
+    this.triggerCallback('minute');
+    if (this.minute) {
+      this.minute -= 1;
+      this.second = 59;
+    } else {
+      this.mhour();
+    }
+  }
+  msecond() {
+    this.triggerCallback('second');
+    if (this.second) {
+      this.second -= 1;
+    } else {
+      this.mminute();
+    }
   }
   tick() {
-    if (this.isTimeUp) return;
-    if (this.second === 0) {
-      if (this.minute === 0) {
-        if (this.hour === 0) {
-          if (this.day === 0) {
-            this.isTimeUp = true;
-            return false;
-          }
-          this.hour = 23;
-          this.minute = 59;
-          this.second = 59;
-          this.day -= 1;
-          return true;
-        }
-        this.minute = 59;
-        this.second = 59;
-        this.hour -= 1;
-        return true;
-      }
-      this.second = 59;
-      this.minute -= 1;
-      return true;
+    this.msecond();
+    if (this.stopped) {
+      clearInterval(this.interval);
+      this.triggerCallback('stop');
     }
-    this.second -= 1;
-    return true;
+  }
+  stop() {
+    this.stopped = true;
+    clearInterval(this.interval);
+  }
+  on(str, cb) {
+    switch (str) {
+      case 'second':
+      case 'minute':
+      case 'hour':
+      case 'day':
+      case 'stop':
+        this.callbacks[str].push(cb);
+        break;
+      default:
+        throw new Error(`no ${str} type callback`);
+    }
+  }
+  triggerCallback(str) {
+    this.callbacks[str].forEach(cb => cb());
+  }
+  start() {
+    this.interval = setInterval(this.tick, 1000);
   }
   format() {
-    const day = (this.day > 9 ? '' : '0') + this.day.toString();
-    const hour = (this.hour > 9 ? '' : '0') + this.hour.toString();
-    const minute = (this.minute > 9 ? '' : '0') + this.minute.toString();
-    const second = (this.second > 9 ? '' : '0') + this.second.toString();
+    let { day, hour, minute, second } = this;
+    day = (day < 10 ? '0' : '') + day;
+    hour = (hour < 10 ? '0' : '') + hour;
+    minute = (minute < 10 ? '0' : '') + minute;
+    second = (second < 10 ? '0' : '') + second;
     return `${day}:${hour}:${minute}:${second}`;
   }
 }
