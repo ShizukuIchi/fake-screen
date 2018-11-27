@@ -116,7 +116,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getDay = getDay;
 exports.formatHintDay = formatHintDay;
-exports.Timer = void 0;
+exports.CountDowner = void 0;
 
 var _dayjs = _interopRequireDefault(require("dayjs"));
 
@@ -136,68 +136,139 @@ function formatHintDay(day) {
   return day.format('M/D/YYYY HH:mm:ss');
 }
 
-var Timer =
+var CountDowner =
 /*#__PURE__*/
 function () {
-  function Timer(day) {
-    _classCallCheck(this, Timer);
+  function CountDowner(time) {
+    _classCallCheck(this, CountDowner);
 
-    this.day = day;
-    this.hour = 0;
-    this.minute = 0;
-    this.second = 0;
-    this.isTimeUp = false;
+    this.day = time.day;
+    this.hour = time.hour;
+    this.minute = time.minute;
+    this.second = time.second;
+    this.stopped = false;
+    this.callbacks = {
+      day: [],
+      hour: [],
+      minute: [],
+      second: [],
+      stop: []
+    };
+    this.tick = this.tick.bind(this);
   }
 
-  _createClass(Timer, [{
+  _createClass(CountDowner, [{
+    key: "mday",
+    value: function mday() {
+      this.triggerCallback('day');
+
+      if (this.day) {
+        this.day -= 1;
+        this.hour = 23;
+        this.minute = 59;
+        this.second = 59;
+      } else {
+        this.stopped = true;
+      }
+    }
+  }, {
+    key: "mhour",
+    value: function mhour() {
+      this.triggerCallback('hour');
+
+      if (this.hour) {
+        this.hour -= 1;
+        this.minute = 59;
+        this.second = 59;
+      } else {
+        this.mday();
+      }
+    }
+  }, {
+    key: "mminute",
+    value: function mminute() {
+      this.triggerCallback('minute');
+
+      if (this.minute) {
+        this.minute -= 1;
+        this.second = 59;
+      } else {
+        this.mhour();
+      }
+    }
+  }, {
+    key: "msecond",
+    value: function msecond() {
+      this.triggerCallback('second');
+
+      if (this.second) {
+        this.second -= 1;
+      } else {
+        this.mminute();
+      }
+    }
+  }, {
     key: "tick",
     value: function tick() {
-      if (this.isTimeUp) return;
+      this.msecond();
 
-      if (this.second === 0) {
-        if (this.minute === 0) {
-          if (this.hour === 0) {
-            if (this.day === 0) {
-              this.isTimeUp = true;
-              return false;
-            }
-
-            this.hour = 23;
-            this.minute = 59;
-            this.second = 59;
-            this.day -= 1;
-            return true;
-          }
-
-          this.minute = 59;
-          this.second = 59;
-          this.hour -= 1;
-          return true;
-        }
-
-        this.second = 59;
-        this.minute -= 1;
-        return true;
+      if (this.stopped) {
+        clearInterval(this.interval);
+        this.triggerCallback('stop');
       }
+    }
+  }, {
+    key: "stop",
+    value: function stop() {
+      this.stopped = true;
+      clearInterval(this.interval);
+    }
+  }, {
+    key: "on",
+    value: function on(str, cb) {
+      switch (str) {
+        case 'second':
+        case 'minute':
+        case 'hour':
+        case 'day':
+        case 'stop':
+          this.callbacks[str].push(cb);
+          break;
 
-      this.second -= 1;
-      return true;
+        default:
+      }
+    }
+  }, {
+    key: "triggerCallback",
+    value: function triggerCallback(str) {
+      this.callbacks[str].forEach(function (cb) {
+        return cb();
+      });
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      this.interval = setInterval(this.tick, 1000);
     }
   }, {
     key: "format",
     value: function format() {
-      var day = (this.day > 9 ? '' : '0') + this.day.toString();
-      var hour = (this.hour > 9 ? '' : '0') + this.hour.toString();
-      var minute = (this.minute > 9 ? '' : '0') + this.minute.toString();
-      var second = (this.second > 9 ? '' : '0') + this.second.toString();
+      var day = this.day,
+          hour = this.hour,
+          minute = this.minute,
+          second = this.second;
+      day = (day < 10 ? '0' : '') + day;
+      hour = (hour < 10 ? '0' : '') + hour;
+      minute = (minute < 10 ? '0' : '') + minute;
+      second = (second < 10 ? '0' : '') + second;
       return "".concat(day, ":").concat(hour, ":").concat(minute, ":").concat(second);
     }
   }]);
 
-  return Timer;
+  return CountDowner;
 }();
 
-exports.Timer = Timer;
+exports.CountDowner = CountDowner;
 },{"dayjs":"node_modules/dayjs/dayjs.min.js"}],"src/wannacry/wannacry.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -233,18 +304,28 @@ function start() {
   document.querySelector('#lost-on').innerHTML = (0, _time.formatHintDay)((0, _time.getDay)(7));
   var pay = document.querySelector('#pay');
   var lost = document.querySelector('#lost');
-  var t3 = new _time.Timer(3);
+  var t3 = new _time.CountDowner({
+    day: 1,
+    hour: 21,
+    minute: 0,
+    second: 0
+  });
+  var t7 = new _time.CountDowner({
+    day: 30,
+    hour: 0,
+    minute: 0,
+    second: 0
+  });
   pay.innerHTML = t3.format();
-  var i3 = setInterval(function () {
-    if (t3.tick() && document.querySelector('.wannacry-wrapper')) {
-      pay.innerHTML = t3.format();
-    } else clearInterval(i3);
-  }, 1000);
-  var t7 = new _time.Timer(7);
+  t3.on('second', function () {
+    pay.innerHTML = t3.format();
+  });
+  t3.start();
   lost.innerHTML = t7.format();
-  var i7 = setInterval(function () {
-    if (t7.tick() && document.querySelector('.wannacry-wrapper')) lost.innerHTML = t7.format();else clearInterval(i7);
-  }, 1000);
+  t7.on('second', function () {
+    lost.innerHTML = t7.format();
+  });
+  t7.start();
 }
 },{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./time.js":"src/wannacry/time.js","./wannacry.scss":"src/wannacry/wannacry.scss","./wannacry.pug":"src/wannacry/wannacry.pug"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -273,7 +354,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33691" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37081" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
