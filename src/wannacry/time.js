@@ -1,103 +1,66 @@
-import dayjs from 'dayjs';
-
-export function getDay(d) {
-  return dayjs().add(d, 'day');
-}
-
-export function formatHintDay(day) {
-  return day.format('M/D/YYYY HH:mm:ss');
-}
-export class CountDowner {
-  constructor(time) {
-    this.day = time.day;
-    this.hour = time.hour;
-    this.minute = time.minute;
-    this.second = time.second;
-    this.stopped = false;
+class CountDowner {
+  constructor(till) {
+    till.setSeconds(till.getSeconds() + 1);
+    this.till = till;
     this.callbacks = {
-      day: [],
-      hour: [],
-      minute: [],
-      second: [],
       stop: [],
+      second: [],
     };
-    this.tick = this.tick.bind(this);
+    this.toFixStr = this.toFixStr.bind(this);
+    this.interval = null;
+    this.start();
   }
-
-  mday() {
-    this.triggerCallback('day');
-    if (this.day) {
-      this.day -= 1;
-      this.hour = 23;
-      this.minute = 59;
-      this.second = 59;
-    } else {
-      this.stopped = true;
-    }
+  formatTill() {
+    const year = this.till.getFullYear();
+    const month = this.till.getMonth() + 1;
+    const date = this.till.getDate();
+    const hour = this.till.getHours();
+    const minute = this.till.getMinutes();
+    const second = this.till.getSeconds();
+    return (
+      [month, date, year].map(s => this.toFixStr(s)).join('/') +
+      ' ' +
+      [hour, minute, second].map(s => this.toFixStr(s)).join(':')
+    );
   }
-  mhour() {
-    this.triggerCallback('hour');
-    if (this.hour) {
-      this.hour -= 1;
-      this.minute = 59;
-      this.second = 59;
-    } else {
-      this.mday();
-    }
+  toFixStr(s) {
+    return (s < 10 ? '0' : '') + s;
   }
-  mminute() {
-    this.triggerCallback('minute');
-    if (this.minute) {
-      this.minute -= 1;
-      this.second = 59;
-    } else {
-      this.mhour();
-    }
-  }
-  msecond() {
-    this.triggerCallback('second');
-    if (this.second) {
-      this.second -= 1;
-    } else {
-      this.mminute();
-    }
-  }
-  tick() {
-    this.msecond();
-    if (this.stopped) {
-      clearInterval(this.interval);
-      this.triggerCallback('stop');
-    }
-  }
-  stop() {
-    this.stopped = true;
-    clearInterval(this.interval);
-  }
-  on(str, cb) {
-    switch (str) {
-      case 'second':
-      case 'minute':
-      case 'hour':
-      case 'day':
-      case 'stop':
-        this.callbacks[str].push(cb);
-        break;
-      default:
-        throw new Error(`no ${str} type callback`);
-    }
-  }
-  triggerCallback(str) {
-    this.callbacks[str].forEach(cb => cb());
+  formatLast() {
+    const timeDiff = Math.abs(this.till.getTime() - new Date().getTime());
+    const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+    const diffHours = Math.floor(timeDiff / (1000 * 3600));
+    const diffMinutes = Math.floor(timeDiff / (1000 * 60));
+    const diffSeconds = Math.floor(timeDiff / 1000);
+    return [
+      diffDays,
+      diffHours - diffDays * 24,
+      diffMinutes - diffHours * 60,
+      diffSeconds - diffMinutes * 60,
+    ]
+      .map(e => this.toFixStr(e))
+      .join(':');
   }
   start() {
-    this.interval = setInterval(this.tick, 1000);
+    this.interval = setInterval(() => {
+      if (new Date().getTime() - this.till.getTime() > 0) {
+        this.stop();
+      } else {
+        this.callbacks.second.forEach(cb => cb());
+      }
+    }, 1000);
   }
-  format() {
-    let { day, hour, minute, second } = this;
-    day = (day < 10 ? '0' : '') + day;
-    hour = (hour < 10 ? '0' : '') + hour;
-    minute = (minute < 10 ? '0' : '') + minute;
-    second = (second < 10 ? '0' : '') + second;
-    return `${day}:${hour}:${minute}:${second}`;
+  stop() {
+    clearInterval(this.interval);
+    this.callbacks.stop.forEach(cb => cb());
+  }
+  on(str, cb) {
+    if (str in this.callbacks) {
+      this.callbacks[str].push(cb);
+    } else {
+      throw Error(`no ${str} type callback`);
+    }
   }
 }
+
+export default CountDowner;
