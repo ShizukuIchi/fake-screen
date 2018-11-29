@@ -8,6 +8,7 @@ class CountDowner {
     };
     this.toFixStr = this.toFixStr.bind(this);
     this.interval = null;
+    this.origin = new Date();
     this.start();
   }
   formatTill() {
@@ -26,12 +27,15 @@ class CountDowner {
   toFixStr(s) {
     return (s < 10 ? '0' : '') + s;
   }
+  progress() {
+    const percentage = this.timeDiff / (this.till.getTime() - this.origin);
+    return percentage < 0 ? 0 : percentage;
+  }
   formatLast() {
-    const timeDiff = Math.abs(this.till.getTime() - new Date().getTime());
-    const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
-    const diffHours = Math.floor(timeDiff / (1000 * 3600));
-    const diffMinutes = Math.floor(timeDiff / (1000 * 60));
-    const diffSeconds = Math.floor(timeDiff / 1000);
+    const diffDays = Math.floor(this.timeDiff / (1000 * 3600 * 24));
+    const diffHours = Math.floor(this.timeDiff / (1000 * 3600));
+    const diffMinutes = Math.floor(this.timeDiff / (1000 * 60));
+    const diffSeconds = Math.floor(this.timeDiff / 1000);
     return [
       diffDays,
       diffHours - diffDays * 24,
@@ -42,8 +46,10 @@ class CountDowner {
       .join(':');
   }
   start() {
+    this.timeDiff = this.till.getTime() - new Date().getTime();
     this.interval = setInterval(() => {
-      if (new Date().getTime() - this.till.getTime() > 0) {
+      this.timeDiff = this.till.getTime() - new Date().getTime();
+      if (this.timeDiff < 0) {
         this.stop();
       } else {
         this.callbacks.second.forEach(cb => cb());

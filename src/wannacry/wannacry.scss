@@ -119,6 +119,15 @@ header {
       border-right-color: lightgray;
       border-bottom-color: lightgray;
       background: linear-gradient(to bottom, #0ad700, red);
+      position: relative;
+      .cover {
+        transition: height 1s linear;
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 0;
+        background: darkred;
+      }
     }
   }
 }

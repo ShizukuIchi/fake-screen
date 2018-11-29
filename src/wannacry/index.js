@@ -10,35 +10,47 @@ export const render = () => {
 
 function start() {
   const pay = document.querySelector('#pay');
+  const payOn = document.querySelector('#pay-on');
+  const payProgress = document.querySelector('#pay-progress');
   const lost = document.querySelector('#lost');
+  const lostOn = document.querySelector('#lost-on');
+  const lostProgress = document.querySelector('#lost-progress');
 
   const now = new Date();
   const payDate = new Date(
     now.getFullYear(),
     now.getMonth(),
-    now.getDate() + 3,
+    now.getDate(),
     now.getHours(),
     now.getMinutes(),
-    now.getSeconds(),
+    now.getSeconds() + 10,
   );
   const lostDate = new Date(
     now.getFullYear(),
     now.getMonth(),
-    now.getDate() + 7,
-    now.getHours(),
+    now.getDate(),
+    now.getHours() + 1,
     now.getMinutes(),
     now.getSeconds(),
   );
   const payCountDowner = new CountDowner(payDate);
   pay.innerHTML = payCountDowner.formatLast();
-  document.querySelector('#pay-on').innerHTML = payCountDowner.formatTill();
+  payOn.innerHTML = payCountDowner.formatTill();
   payCountDowner.on('second', () => {
+    payProgress.style.height = `${(1 - payCountDowner.progress()) * 100}%`;
     pay.innerHTML = payCountDowner.formatLast();
+  });
+  payCountDowner.on('stop', () => {
+    payProgress.style.height = `${(1 - payCountDowner.progress()) * 100}%`;
   });
   const lostCountDowner = new CountDowner(lostDate);
   lost.innerHTML = lostCountDowner.formatLast();
-  document.querySelector('#lost-on').innerHTML = lostCountDowner.formatTill();
+  lostOn.innerHTML = lostCountDowner.formatTill();
   lostCountDowner.on('second', () => {
+    lostProgress.style.height = `${(1 - lostCountDowner.progress()) * 100}%`;
     lost.innerHTML = lostCountDowner.formatLast();
+  });
+  lostCountDowner.on('stop', () => {
+    lostProgress.style.height = `${(1 - lostCountDowner.progress()) * 100}%`;
   });
 }
