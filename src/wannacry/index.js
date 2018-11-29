@@ -19,7 +19,6 @@ function start() {
   const check = document.querySelector('#check');
   const decrypt = document.querySelector('#decrypt');
   const copy = document.querySelector('#copy');
-  const copyText = document.querySelector('#copy-text');
 
   const now = new Date();
   const payDate = new Date(
