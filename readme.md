@@ -14,7 +14,7 @@ Exit button is on the left-top corner.
 - Blue screen
 - Update for 10 mins (to 100%)
 
-![win10-update](https://i.imgur.com/9BcwA3O.png =600x)  
+![win10-update](https://i.imgur.com/9BcwA3O.png =480x270)  
 ![win10-blue](https://i.imgur.com/y3bBFm8.jpg =600x)
 
 ### WannaCry
