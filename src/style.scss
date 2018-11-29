@@ -15,7 +15,7 @@
     transition: all 0s;
     cursor: pointer;
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       left: 23px;
       top: 14px;
@@ -25,7 +25,7 @@
       background: rgb(22, 22, 22);
     }
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       left: 23px;
       top: 14px;
@@ -48,6 +48,10 @@
 .wrapper {
   padding: 50px;
 }
+.title {
+  text-align: center;
+  font-size: 4em;
+}
 .options {
   margin-top: 40px;
   display: flex;
@@ -57,14 +61,15 @@
   cursor: pointer;
   margin-right: 40px;
   margin-bottom: 40px;
-  .img {
+  video,
+  img {
     position: relative;
-    width: 200px;
-    height: 150px;
+    width: 288px;
+    height: 162px;
     background: #000;
     border-radius: 3px;
   }
   .title {
-    text-align: center;
+    font-size: 1.5rem;
   }
 }

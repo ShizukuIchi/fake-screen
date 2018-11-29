@@ -1,6 +1,7 @@
 # Fake Screen
 
-[Try to prank others now!](https://sh1zuku.csie.io/fake-screen)
+Choose a screen and press F11.  
+[Enjoy your screen now!](https://sh1zuku.csie.io/fake-screen)
 
 ## Themes
 
@@ -13,9 +14,14 @@ Exit button is on the left-top corner.
 - Blue screen
 - Update for 10 mins (to 100%)
 
+![win10-update](https://i.imgur.com/9BcwA3O.png =600x)  
+![win10-blue](https://i.imgur.com/y3bBFm8.jpg =600x)
+
 ### WannaCry
 
 - Please DO NOT actually pay.
+
+![WannaCry](https://i.imgur.com/xAnkGV6.png =600x)
 
 ### TODO
 
