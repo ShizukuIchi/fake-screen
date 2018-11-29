@@ -104,13 +104,13 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"src/wannacry/time.js":[function(require,module,exports) {
+})({"src/wannacry/CountDowner.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CountDowner = void 0;
+exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -132,6 +132,7 @@ function () {
     };
     this.toFixStr = this.toFixStr.bind(this);
     this.interval = null;
+    this.origin = new Date();
     this.start();
   }
 
@@ -158,15 +159,20 @@ function () {
       return (s < 10 ? '0' : '') + s;
     }
   }, {
+    key: "progress",
+    value: function progress() {
+      var percentage = this.timeDiff / (this.till.getTime() - this.origin);
+      return percentage < 0 ? 0 : percentage;
+    }
+  }, {
     key: "formatLast",
     value: function formatLast() {
       var _this2 = this;
 
-      var timeDiff = Math.abs(this.till.getTime() - new Date().getTime());
-      var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
-      var diffHours = Math.floor(timeDiff / (1000 * 3600));
-      var diffMinutes = Math.floor(timeDiff / (1000 * 60));
-      var diffSeconds = Math.floor(timeDiff / 1000);
+      var diffDays = Math.floor(this.timeDiff / (1000 * 3600 * 24));
+      var diffHours = Math.floor(this.timeDiff / (1000 * 3600));
+      var diffMinutes = Math.floor(this.timeDiff / (1000 * 60));
+      var diffSeconds = Math.floor(this.timeDiff / 1000);
       return [diffDays, diffHours - diffDays * 24, diffMinutes - diffHours * 60, diffSeconds - diffMinutes * 60].map(function (e) {
         return _this2.toFixStr(e);
       }).join(':');
@@ -176,8 +182,11 @@ function () {
     value: function start() {
       var _this3 = this;
 
+      this.timeDiff = this.till.getTime() - new Date().getTime();
       this.interval = setInterval(function () {
-        if (new Date().getTime() - _this3.till.getTime() > 0) {
+        _this3.timeDiff = _this3.till.getTime() - new Date().getTime();
+
+        if (_this3.timeDiff < 0) {
           _this3.stop();
         } else {
           _this3.callbacks.second.forEach(function (cb) {
@@ -208,7 +217,8 @@ function () {
   return CountDowner;
 }();
 
-exports.CountDowner = CountDowner;
+var _default = CountDowner;
+exports.default = _default;
 },{}],"src/wannacry/wannacry.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -224,7 +234,7 @@ exports.render = void 0;
 
 require("babel-polyfill");
 
-var _time = require("./time.js");
+var _CountDowner = _interopRequireDefault(require("./CountDowner.js"));
 
 require("./wannacry.scss");
 
@@ -241,24 +251,36 @@ exports.render = render;
 
 function start() {
   var pay = document.querySelector('#pay');
+  var payOn = document.querySelector('#pay-on');
+  var payProgress = document.querySelector('#pay-progress');
   var lost = document.querySelector('#lost');
+  var lostOn = document.querySelector('#lost-on');
+  var lostProgress = document.querySelector('#lost-progress');
   var now = new Date();
-  var payDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 3, now.getHours(), now.getMinutes(), now.getSeconds());
-  var lostDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 7, now.getHours(), now.getMinutes(), now.getSeconds());
-  var payCountDowner = new _time.CountDowner(payDate);
+  var payDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds() + 10);
+  var lostDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, now.getMinutes(), now.getSeconds());
+  var payCountDowner = new _CountDowner.default(payDate);
   pay.innerHTML = payCountDowner.formatLast();
-  document.querySelector('#pay-on').innerHTML = payCountDowner.formatTill();
+  payOn.innerHTML = payCountDowner.formatTill();
   payCountDowner.on('second', function () {
+    payProgress.style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
     pay.innerHTML = payCountDowner.formatLast();
   });
-  var lostCountDowner = new _time.CountDowner(lostDate);
+  payCountDowner.on('stop', function () {
+    payProgress.style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
+  });
+  var lostCountDowner = new _CountDowner.default(lostDate);
   lost.innerHTML = lostCountDowner.formatLast();
-  document.querySelector('#lost-on').innerHTML = lostCountDowner.formatTill();
+  lostOn.innerHTML = lostCountDowner.formatTill();
   lostCountDowner.on('second', function () {
+    lostProgress.style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
     lost.innerHTML = lostCountDowner.formatLast();
   });
+  lostCountDowner.on('stop', function () {
+    lostProgress.style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
+  });
 }
-},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./time.js":"src/wannacry/time.js","./wannacry.scss":"src/wannacry/wannacry.scss","./wannacry.pug":"src/wannacry/wannacry.pug"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./CountDowner.js":"src/wannacry/CountDowner.js","./wannacry.scss":"src/wannacry/wannacry.scss","./wannacry.pug":"src/wannacry/wannacry.pug"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -285,7 +307,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37173" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46359" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
