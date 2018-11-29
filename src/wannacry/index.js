@@ -12,9 +12,14 @@ function start() {
   const pay = document.querySelector('#pay');
   const payOn = document.querySelector('#pay-on');
   const payProgress = document.querySelector('#pay-progress');
+  const payment = document.querySelector('#payment');
   const lost = document.querySelector('#lost');
   const lostOn = document.querySelector('#lost-on');
   const lostProgress = document.querySelector('#lost-progress');
+  const check = document.querySelector('#check');
+  const decrypt = document.querySelector('#decrypt');
+  const copy = document.querySelector('#copy');
+  const copyText = document.querySelector('#copy-text');
 
   const now = new Date();
   const payDate = new Date(
@@ -22,8 +27,8 @@ function start() {
     now.getMonth(),
     now.getDate(),
     now.getHours(),
-    now.getMinutes(),
-    now.getSeconds() + 10,
+    now.getMinutes() + 10,
+    now.getSeconds(),
   );
   const lostDate = new Date(
     now.getFullYear(),
@@ -42,6 +47,7 @@ function start() {
   });
   payCountDowner.on('stop', () => {
     payProgress.style.height = `${(1 - payCountDowner.progress()) * 100}%`;
+    payment.innerHTML = '$600';
   });
   const lostCountDowner = new CountDowner(lostDate);
   lost.innerHTML = lostCountDowner.formatLast();
@@ -53,4 +59,29 @@ function start() {
   lostCountDowner.on('stop', () => {
     lostProgress.style.height = `${(1 - lostCountDowner.progress()) * 100}%`;
   });
+
+  check.onclick = () => {
+    alert(
+      `You didn't pay!\nYour files will be lost on ${lostCountDowner.formatTill()}!`,
+    );
+  };
+  decrypt.onclick = () => {
+    alert(`Decrypt failed!\nPlease click <Contact Us>!`);
+  };
+  copy.onclick = function(e) {
+    document.addEventListener('copy', setClipboardData);
+    document.execCommand('copy');
+    alert('Content copied Successfully!');
+  };
+}
+
+function setClipboardData(event) {
+  event.preventDefault();
+  if (event.clipboardData) {
+    event.clipboardData.setData(
+      'text/plain',
+      'Money! Give me Money! ლ(́◉◞౪◟◉‵ლ)',
+    );
+  }
+  document.removeEventListener('copy', setClipboardData);
 }

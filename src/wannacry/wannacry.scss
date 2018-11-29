@@ -121,7 +121,6 @@ header {
       background: linear-gradient(to bottom, #0ad700, red);
       position: relative;
       .cover {
-        transition: height 1s linear;
         position: absolute;
         content: '';
         width: 100%;
@@ -231,6 +230,7 @@ footer {
         padding: 3px 0 10px 5px;
         font-size: 1em;
         font-weight: 900;
+        pointer-events: none;
       }
       button {
         margin-right: 5px;

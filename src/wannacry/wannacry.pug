@@ -66,18 +66,18 @@
     footer
       .left
         .contacts
-          .contact.underline About bitcoin
-          .contact.underline How to buy bitcoins?
-          .contact.underline
+          a.contact.underline(href="https://github.com/ShizukuIchi" target="_blank") About bitcoin
+          a.contact.underline(href="https://github.com/ShizukuIchi" target="_blank") How to buy bitcoins?
+          a.contact.underline(href="https://github.com/ShizukuIchi" target="_blank")
             strong Contact Us
       .right
         .bitcoins
           img(src="./bitcoin.jpg")
           .text
-            .hint.yellow Send $300 worth of bitcoins to this address:
+            .hint.yellow Send <span id="payment">$300</span> worth of bitcoins to this address:
             .inputs
               input(type="text" value="115p7UMMngoj1pMvkpHijcRdfJNXj6LrLn" disabled)
-              button Copy
+              button#copy Copy
         .buttons 
-          button Check <span class="underline">P</span>ayment 
-          button <span class="underline">D</span>ecrypt
+          button#check Check <span class="underline">P</span>ayment 
+          button#decrypt <span class="underline">D</span>ecrypt
