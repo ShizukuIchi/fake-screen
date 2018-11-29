@@ -253,11 +253,15 @@ function start() {
   var pay = document.querySelector('#pay');
   var payOn = document.querySelector('#pay-on');
   var payProgress = document.querySelector('#pay-progress');
+  var payment = document.querySelector('#payment');
   var lost = document.querySelector('#lost');
   var lostOn = document.querySelector('#lost-on');
   var lostProgress = document.querySelector('#lost-progress');
+  var check = document.querySelector('#check');
+  var decrypt = document.querySelector('#decrypt');
+  var copy = document.querySelector('#copy');
   var now = new Date();
-  var payDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds() + 10);
+  var payDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 10, now.getSeconds());
   var lostDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, now.getMinutes(), now.getSeconds());
   var payCountDowner = new _CountDowner.default(payDate);
   pay.innerHTML = payCountDowner.formatLast();
@@ -268,6 +272,7 @@ function start() {
   });
   payCountDowner.on('stop', function () {
     payProgress.style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
+    payment.innerHTML = '$600';
   });
   var lostCountDowner = new _CountDowner.default(lostDate);
   lost.innerHTML = lostCountDowner.formatLast();
@@ -279,6 +284,30 @@ function start() {
   lostCountDowner.on('stop', function () {
     lostProgress.style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
   });
+
+  check.onclick = function () {
+    alert("You didn't pay!\nYour files will be lost on ".concat(lostCountDowner.formatTill(), "!"));
+  };
+
+  decrypt.onclick = function () {
+    alert("Decrypt failed!\nPlease click <Contact Us>!");
+  };
+
+  copy.onclick = function (e) {
+    document.addEventListener('copy', setClipboardData);
+    document.execCommand('copy');
+    alert('Content copied Successfully!');
+  };
+}
+
+function setClipboardData(event) {
+  event.preventDefault();
+
+  if (event.clipboardData) {
+    event.clipboardData.setData('text/plain', 'Money! Give me Money! ლ(́◉◞౪◟◉‵ლ)');
+  }
+
+  document.removeEventListener('copy', setClipboardData);
 }
 },{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./CountDowner.js":"src/wannacry/CountDowner.js","./wannacry.scss":"src/wannacry/wannacry.scss","./wannacry.pug":"src/wannacry/wannacry.pug"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

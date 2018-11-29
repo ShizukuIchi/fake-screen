@@ -84,25 +84,21 @@
     </div>
     <footer>
       <div class="left">
-        <div class="contacts">
-          <div class="contact underline">About bitcoin</div>
-          <div class="contact underline">How to buy bitcoins?</div>
-          <div class="contact underline"><strong>Contact Us</strong></div>
-        </div>
+        <div class="contacts"><a class="contact underline" href="https://github.com/ShizukuIchi" target="_blank">About bitcoin</a><a class="contact underline" href="https://github.com/ShizukuIchi" target="_blank">How to buy bitcoins?</a><a class="contact underline" href="https://github.com/ShizukuIchi" target="_blank"><strong>Contact Us</strong></a></div>
       </div>
       <div class="right">
         <div class="bitcoins"><img src="/bitcoin.3b1a4f4b.jpg">
           <div class="text">
-            <div class="hint yellow">Send $300 worth of bitcoins to this address:</div>
+            <div class="hint yellow">Send <span id="payment">$300</span> worth of bitcoins to this address:</div>
             <div class="inputs">
               <input type="text" value="115p7UMMngoj1pMvkpHijcRdfJNXj6LrLn" disabled="disabled">
-              <button>Copy</button>
+              <button id="copy">Copy</button>
             </div>
           </div>
         </div>
         <div class="buttons"> 
-          <button>Check <span class="underline">P</span>ayment </button>
-          <button><span class="underline">D</span>ecrypt</button>
+          <button id="check">Check <span class="underline">P</span>ayment </button>
+          <button id="decrypt"><span class="underline">D</span>ecrypt</button>
         </div>
       </div>
     </footer>

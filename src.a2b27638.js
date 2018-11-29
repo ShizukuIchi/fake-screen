@@ -7917,7 +7917,7 @@ function onAppClose() {
 function onAppOpen() {
   app.style.visibility = 'visible';
 }
-},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10/index.js":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["update.f9d857ef.html","src/win10/update.pug"],"src/win10/index.js"],"./win10-update/index.js":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue/index.js":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"],"./wannacry/index.js":[["wannacry.01b71242.js","src/wannacry/index.js"],"wannacry.01b71242.map",["calculate.8db2e330.wasm","src/wannacry/calculate.rs"],"wannacry.01b71242.css",["wannacry.dea1e955.html","src/wannacry/wannacry.pug"],"src/wannacry/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
+},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10/index.js":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["update.f9d857ef.html","src/win10/update.pug"],"src/win10/index.js"],"./win10-update/index.js":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue/index.js":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"],"./wannacry/index.js":[["wannacry.01b71242.js","src/wannacry/index.js"],"wannacry.01b71242.map","wannacry.01b71242.css",["wannacry.dea1e955.html","src/wannacry/wannacry.pug"],"src/wannacry/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -7954,7 +7954,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46359" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44621" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -8124,20 +8124,6 @@ module.exports = function loadJSBundle(bundle) {
     document.getElementsByTagName('head')[0].appendChild(script);
   });
 };
-},{}],"node_modules/parcel-bundler/src/builtins/loaders/browser/wasm-loader.js":[function(require,module,exports) {
-module.exports = function loadWASMBundle(bundle) {
-  return fetch(bundle).then(function (res) {
-    if (WebAssembly.instantiateStreaming) {
-      return WebAssembly.instantiateStreaming(res);
-    } else {
-      return res.arrayBuffer().then(function (data) {
-        return WebAssembly.instantiate(data);
-      });
-    }
-  }).then(function (wasmModule) {
-    return wasmModule.instance.exports;
-  });
-};
 },{}],"node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js":[function(require,module,exports) {
 module.exports = function loadCSSBundle(bundle) {
   return new Promise(function (resolve, reject) {
@@ -8159,6 +8145,6 @@ module.exports = function loadCSSBundle(bundle) {
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("html",require("node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js"));b.register("js",require("node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js"));b.register("wasm",require("node_modules/parcel-bundler/src/builtins/loaders/browser/wasm-loader.js"));b.register("css",require("node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js"));
+var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("html",require("node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js"));b.register("js",require("node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js"));b.register("css",require("node_modules/parcel-bundler/src/builtins/loaders/browser/css-loader.js"));
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0,"src/index.js"], null)
 //# sourceMappingURL=/src.a2b27638.map

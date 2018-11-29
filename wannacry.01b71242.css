@@ -122,7 +122,6 @@ header button:after {
   position: relative;
 }
 .info-container .bar .img .cover {
-  transition: height 1s linear;
   position: absolute;
   content: "";
   width: 100%;
@@ -239,6 +238,7 @@ footer {
   padding: 3px 0 10px 5px;
   font-size: 1em;
   font-weight: 900;
+  pointer-events: none;
 }
 .bitcoins .text .inputs button {
   margin-right: 5px;
