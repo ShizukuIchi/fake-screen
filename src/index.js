@@ -5,10 +5,10 @@ import './assets/font.css';
 import './style.scss';
 
 const themes = {
-  win10: import('./win10'),
-  'win10-update': import('./win10-update'),
-  'win10-blue': import('./win10-blue'),
-  wannacry: import('./wannacry'),
+  win10: import('./win10/index.js'),
+  'win10-update': import('./win10-update/index.js'),
+  'win10-blue': import('./win10-blue/index.js'),
+  wannacry: import('./wannacry/index.js'),
 };
 const app = document.querySelector('#app');
 const options = document.querySelector('.options');

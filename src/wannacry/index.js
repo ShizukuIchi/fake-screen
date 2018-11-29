@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import CountDowner from './time.js';
+import CountDowner from './CountDowner.js';
 import './wannacry.scss';
 import wannacry from './wannacry.pug';
 
