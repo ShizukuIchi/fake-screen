@@ -39,7 +39,7 @@ async function renderTheme(name) {
 }
 
 function onAppClose() {
-  history.replaceState(null, '', '');
+  history.replaceState(null, '', './');
   screenfull.enabled ? screenfull.exit() : undefined;
   app.style.visibility = 'hidden';
 }
