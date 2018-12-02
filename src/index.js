@@ -1,5 +1,5 @@
 import "babel-polyfill";
-
+import screenfull from "screenfull";
 import "./assets/clear.css";
 import "./assets/font.css";
 import "./style.scss";
@@ -19,6 +19,8 @@ options.onclick = e => {
 };
 
 function render(name) {
+  screenfull.enabled ? screenfull.request(app) : undefined;
+  // API can only be initiated by a user gesture.
   renderTheme(name)
     .then(content => {
       const container = app.querySelector(".content");
@@ -37,6 +39,7 @@ async function renderTheme(name) {
 }
 
 function onAppClose() {
+  screenfull.enabled ? screenfull.exit() : undefined;
   app.style.visibility = "hidden";
 }
 function onAppOpen() {
