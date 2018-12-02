@@ -15,12 +15,12 @@ const options = document.querySelector(".options");
 
 app.querySelector(".close").onclick = onAppClose;
 options.onclick = e => {
-  screenfull.enabled ? screenfull.request() : undefined;
-  //requestFullScreen API can only be initiated by a user gesture.
   if (e.target !== options) render(e.target.closest(".option").id);
 };
 
 function render(name) {
+  screenfull.enabled ? screenfull.request(app) : undefined;
+  // API can only be initiated by a user gesture.
   renderTheme(name)
     .then(content => {
       const container = app.querySelector(".content");
