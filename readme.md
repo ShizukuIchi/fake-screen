@@ -1,12 +1,12 @@
 # Fake Screen
 
-Choose a screen and press F11.  
 [Enjoy your screen now!](https://sh1zuku.csie.io/fake-screen)
 
 ## Themes
 
-You can choose whatever themes you like at home page.  
-Exit button is on the left-top corner.
+You can choose whatever themes you like at home page.
+Simply exit the screen by going back to previous page.
+Or you can click exit button on the left-top corner.
 
 ### Windows 10
 
