@@ -91,12 +91,13 @@ header button:after {
   border: 2px solid lightgray;
   margin: 10px;
   padding: 10px 3px;
-  font-weight: 900;
+  font-weight: 700;
 }
 .info-container .title {
   text-align: center;
   color: yellow;
   margin-bottom: 5px;
+  font-size: 1rem;
 }
 .info-container .infos {
   padding-top: 5px;
@@ -221,7 +222,7 @@ footer {
 }
 .bitcoins .text .hint {
   margin-bottom: 15px;
-  font-weight: 600;
+  font-weight: 700;
 }
 .bitcoins .text .inputs {
   height: 50%;
@@ -237,7 +238,7 @@ footer {
   flex-grow: 1;
   padding: 3px 0 10px 5px;
   font-size: 1em;
-  font-weight: 900;
+  font-weight: 700;
   pointer-events: none;
 }
 .bitcoins .text .inputs button {
@@ -251,7 +252,7 @@ footer {
 }
 .buttons button {
   background: lightgray;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 1.2em;
   height: 35px;
   flex: 1;

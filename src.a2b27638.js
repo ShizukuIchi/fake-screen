@@ -7678,7 +7678,132 @@ define(String.prototype, "padRight", "".padEnd);
 "pop,reverse,shift,keys,values,entries,indexOf,every,some,forEach,map,filter,find,findIndex,includes,join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill".split(",").forEach(function (key) {
   [][key] && define(Array, key, Function.call.bind([][key]));
 });
-},{"core-js/shim":"node_modules/core-js/shim.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","core-js/fn/regexp/escape":"node_modules/core-js/fn/regexp/escape.js"}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"core-js/shim":"node_modules/core-js/shim.js","regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","core-js/fn/regexp/escape":"node_modules/core-js/fn/regexp/escape.js"}],"node_modules/screenfull/dist/screenfull.js":[function(require,module,exports) {
+/*!
+* screenfull
+* v3.3.3 - 2018-09-04
+* (c) Sindre Sorhus; MIT License
+*/
+(function () {
+  'use strict';
+
+  var document = typeof window !== 'undefined' && typeof window.document !== 'undefined' ? window.document : {};
+  var isCommonjs = typeof module !== 'undefined' && module.exports;
+  var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
+
+  var fn = function () {
+    var val;
+    var fnMap = [['requestFullscreen', 'exitFullscreen', 'fullscreenElement', 'fullscreenEnabled', 'fullscreenchange', 'fullscreenerror'], // New WebKit
+    ['webkitRequestFullscreen', 'webkitExitFullscreen', 'webkitFullscreenElement', 'webkitFullscreenEnabled', 'webkitfullscreenchange', 'webkitfullscreenerror'], // Old WebKit (Safari 5.1)
+    ['webkitRequestFullScreen', 'webkitCancelFullScreen', 'webkitCurrentFullScreenElement', 'webkitCancelFullScreen', 'webkitfullscreenchange', 'webkitfullscreenerror'], ['mozRequestFullScreen', 'mozCancelFullScreen', 'mozFullScreenElement', 'mozFullScreenEnabled', 'mozfullscreenchange', 'mozfullscreenerror'], ['msRequestFullscreen', 'msExitFullscreen', 'msFullscreenElement', 'msFullscreenEnabled', 'MSFullscreenChange', 'MSFullscreenError']];
+    var i = 0;
+    var l = fnMap.length;
+    var ret = {};
+
+    for (; i < l; i++) {
+      val = fnMap[i];
+
+      if (val && val[1] in document) {
+        for (i = 0; i < val.length; i++) {
+          ret[fnMap[0][i]] = val[i];
+        }
+
+        return ret;
+      }
+    }
+
+    return false;
+  }();
+
+  var eventNameMap = {
+    change: fn.fullscreenchange,
+    error: fn.fullscreenerror
+  };
+  var screenfull = {
+    request: function (elem) {
+      var request = fn.requestFullscreen;
+      elem = elem || document.documentElement; // Work around Safari 5.1 bug: reports support for
+      // keyboard in fullscreen even though it doesn't.
+      // Browser sniffing, since the alternative with
+      // setTimeout is even worse.
+
+      if (/ Version\/5\.1(?:\.\d+)? Safari\//.test(navigator.userAgent)) {
+        elem[request]();
+      } else {
+        elem[request](keyboardAllowed ? Element.ALLOW_KEYBOARD_INPUT : {});
+      }
+    },
+    exit: function () {
+      document[fn.exitFullscreen]();
+    },
+    toggle: function (elem) {
+      if (this.isFullscreen) {
+        this.exit();
+      } else {
+        this.request(elem);
+      }
+    },
+    onchange: function (callback) {
+      this.on('change', callback);
+    },
+    onerror: function (callback) {
+      this.on('error', callback);
+    },
+    on: function (event, callback) {
+      var eventName = eventNameMap[event];
+
+      if (eventName) {
+        document.addEventListener(eventName, callback, false);
+      }
+    },
+    off: function (event, callback) {
+      var eventName = eventNameMap[event];
+
+      if (eventName) {
+        document.removeEventListener(eventName, callback, false);
+      }
+    },
+    raw: fn
+  };
+
+  if (!fn) {
+    if (isCommonjs) {
+      module.exports = false;
+    } else {
+      window.screenfull = false;
+    }
+
+    return;
+  }
+
+  Object.defineProperties(screenfull, {
+    isFullscreen: {
+      get: function () {
+        return Boolean(document[fn.fullscreenElement]);
+      }
+    },
+    element: {
+      enumerable: true,
+      get: function () {
+        return document[fn.fullscreenElement];
+      }
+    },
+    enabled: {
+      enumerable: true,
+      get: function () {
+        // Coerce to boolean in case of old WebKit
+        return Boolean(document[fn.fullscreenEnabled]);
+      }
+    }
+  });
+
+  if (isCommonjs) {
+    module.exports = screenfull;
+  } else {
+    window.screenfull = screenfull;
+  }
+})();
+},{}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -7845,11 +7970,15 @@ LazyPromise.prototype.catch = function (onError) {
 
 require("babel-polyfill");
 
+var _screenfull = _interopRequireDefault(require("screenfull"));
+
 require("./assets/clear.css");
 
 require("./assets/font.css");
 
 require("./style.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -7870,10 +7999,12 @@ options.onclick = function (e) {
 };
 
 function render(name) {
+  _screenfull.default.enabled ? _screenfull.default.request(app) : undefined; // API can only be initiated by a user gesture.
+
   renderTheme(name).then(function (content) {
     var container = app.querySelector('.content');
     container.innerHTML = content;
-    onAppOpen();
+    onAppOpen(name);
   }).catch(function (e) {
     onAppClose();
     console.log(e);
@@ -7911,13 +8042,24 @@ function _renderTheme() {
 }
 
 function onAppClose() {
+  history.replaceState(null, '', './');
+  _screenfull.default.enabled ? _screenfull.default.exit() : undefined;
   app.style.visibility = 'hidden';
 }
 
-function onAppOpen() {
+function onAppOpen(name) {
+  history.pushState({
+    app: name
+  }, name, name);
   app.style.visibility = 'visible';
 }
-},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10/index.js":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["update.f9d857ef.html","src/win10/update.pug"],"src/win10/index.js"],"./win10-update/index.js":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue/index.js":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"],"./wannacry/index.js":[["wannacry.01b71242.js","src/wannacry/index.js"],"wannacry.01b71242.map","wannacry.01b71242.css",["wannacry.dea1e955.html","src/wannacry/wannacry.pug"],"src/wannacry/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
+
+window.onpopstate = function (e) {
+  if (!e.state) {
+    onAppClose();
+  }
+};
+},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","screenfull":"node_modules/screenfull/dist/screenfull.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10/index.js":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["update.f9d857ef.html","src/win10/update.pug"],"src/win10/index.js"],"./win10-update/index.js":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue/index.js":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"],"./wannacry/index.js":[["wannacry.01b71242.js","src/wannacry/index.js"],"wannacry.01b71242.map","wannacry.01b71242.css",["wannacry.dea1e955.html","src/wannacry/wannacry.pug"],"src/wannacry/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -7954,7 +8096,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44621" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51972" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
