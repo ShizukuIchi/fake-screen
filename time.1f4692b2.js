@@ -104,28 +104,113 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"src/win10-blue/index.js":[function(require,module,exports) {
+})({"src/wannacry/time.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.render = void 0;
+exports.default = void 0;
 
-var _blueOnly = _interopRequireDefault(require("./blue-only.pug"));
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-require("../win10/update.scss");
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-require("../win10/blue.scss");
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var CountDowner =
+/*#__PURE__*/
+function () {
+  function CountDowner(till) {
+    _classCallCheck(this, CountDowner);
 
-var render = function render() {
-  return _blueOnly.default;
-};
+    till.setSeconds(till.getSeconds() + 1);
+    this.till = till;
+    this.callbacks = {
+      stop: [],
+      second: []
+    };
+    this.toFixStr = this.toFixStr.bind(this);
+    this.interval = null;
+    this.start();
+  }
 
-exports.render = render;
-},{"./blue-only.pug":"src/win10-blue/blue-only.pug","../win10/update.scss":"src/win10/update.scss","../win10/blue.scss":"src/win10/blue.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  _createClass(CountDowner, [{
+    key: "formatTill",
+    value: function formatTill() {
+      var _this = this;
+
+      var year = this.till.getFullYear();
+      var month = this.till.getMonth() + 1;
+      var date = this.till.getDate();
+      var hour = this.till.getHours();
+      var minute = this.till.getMinutes();
+      var second = this.till.getSeconds();
+      return [month, date, year].map(function (s) {
+        return _this.toFixStr(s);
+      }).join('/') + ' ' + [hour, minute, second].map(function (s) {
+        return _this.toFixStr(s);
+      }).join(':');
+    }
+  }, {
+    key: "toFixStr",
+    value: function toFixStr(s) {
+      return (s < 10 ? '0' : '') + s;
+    }
+  }, {
+    key: "formatLast",
+    value: function formatLast() {
+      var _this2 = this;
+
+      var timeDiff = Math.abs(this.till.getTime() - new Date().getTime());
+      var diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+      var diffHours = Math.floor(timeDiff / (1000 * 3600));
+      var diffMinutes = Math.floor(timeDiff / (1000 * 60));
+      var diffSeconds = Math.floor(timeDiff / 1000);
+      return [diffDays, diffHours - diffDays * 24, diffMinutes - diffHours * 60, diffSeconds - diffMinutes * 60].map(function (e) {
+        return _this2.toFixStr(e);
+      }).join(':');
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      var _this3 = this;
+
+      this.interval = setInterval(function () {
+        if (new Date().getTime() - _this3.till.getTime() > 0) {
+          _this3.stop();
+        } else {
+          _this3.callbacks.second.forEach(function (cb) {
+            return cb();
+          });
+        }
+      }, 1000);
+    }
+  }, {
+    key: "stop",
+    value: function stop() {
+      clearInterval(this.interval);
+      this.callbacks.stop.forEach(function (cb) {
+        return cb();
+      });
+    }
+  }, {
+    key: "on",
+    value: function on(str, cb) {
+      if (str in this.callbacks) {
+        this.callbacks[str].push(cb);
+      } else {
+        throw Error("no ".concat(str, " type callback"));
+      }
+    }
+  }]);
+
+  return CountDowner;
+}();
+
+var _default = CountDowner;
+exports.default = _default;
+},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -152,7 +237,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44621" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43489" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -294,5 +379,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/win10-blue.abec6cd6.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/wannacry/time.js"], null)
+//# sourceMappingURL=/time.1f4692b2.map

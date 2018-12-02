@@ -73,11 +73,6 @@ body {
   padding: 50px;
 }
 
-.title {
-  text-align: center;
-  font-size: 4em;
-}
-
 .options {
   margin-top: 40px;
   display: flex;
@@ -89,16 +84,15 @@ body {
   margin-right: 40px;
   margin-bottom: 40px;
 }
-.option video,
-.option img {
+.option .img {
   position: relative;
-  width: 288px;
-  height: 162px;
+  width: 200px;
+  height: 150px;
   background: #000;
   border-radius: 3px;
 }
 .option .title {
-  font-size: 1.5rem;
+  text-align: center;
 }.app-wrapper {
   height: 100%;
   background: #0065cc;
