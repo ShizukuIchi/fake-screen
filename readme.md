@@ -23,6 +23,10 @@ Or you can click exit button on the left-top corner.
 
 ![WannaCry](https://i.imgur.com/xAnkGV6.png)
 
+### Apple
+
+- Update for 10 mins (to 100%)
+
 ### TODO
 
 - ...
