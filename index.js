@@ -104,212 +104,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"src/wannacry/CountDowner.js":[function(require,module,exports) {
-"use strict";
+})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var CountDowner =
-/*#__PURE__*/
-function () {
-  function CountDowner(till) {
-    _classCallCheck(this, CountDowner);
-
-    till.setSeconds(till.getSeconds() + 1);
-    this.till = till;
-    this.callbacks = {
-      stop: [],
-      second: []
-    };
-    this.toFixStr = this.toFixStr.bind(this);
-    this.interval = null;
-    this.origin = new Date();
-    this.start();
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  _createClass(CountDowner, [{
-    key: "formatTill",
-    value: function formatTill() {
-      var _this = this;
+  return bundleURL;
+}
 
-      var year = this.till.getFullYear();
-      var month = this.till.getMonth() + 1;
-      var date = this.till.getDate();
-      var hour = this.till.getHours();
-      var minute = this.till.getMinutes();
-      var second = this.till.getSeconds();
-      return [month, date, year].map(function (s) {
-        return _this.toFixStr(s);
-      }).join('/') + ' ' + [hour, minute, second].map(function (s) {
-        return _this.toFixStr(s);
-      }).join(':');
-    }
-  }, {
-    key: "toFixStr",
-    value: function toFixStr(s) {
-      return (s < 10 ? '0' : '') + s;
-    }
-  }, {
-    key: "progress",
-    value: function progress() {
-      var percentage = this.timeDiff / (this.till.getTime() - this.origin);
-      return percentage < 0 ? 0 : percentage;
-    }
-  }, {
-    key: "formatLast",
-    value: function formatLast() {
-      var _this2 = this;
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
 
-      var diffDays = Math.floor(this.timeDiff / (1000 * 3600 * 24));
-      var diffHours = Math.floor(this.timeDiff / (1000 * 3600));
-      var diffMinutes = Math.floor(this.timeDiff / (1000 * 60));
-      var diffSeconds = Math.floor(this.timeDiff / 1000);
-      return [diffDays, diffHours - diffDays * 24, diffMinutes - diffHours * 60, diffSeconds - diffMinutes * 60].map(function (e) {
-        return _this2.toFixStr(e);
-      }).join(':');
+    if (matches) {
+      return getBaseURL(matches[0]);
     }
-  }, {
-    key: "start",
-    value: function start() {
-      var _this3 = this;
+  }
 
-      this.timeDiff = this.till.getTime() - new Date().getTime();
-      this.interval = setInterval(function () {
-        _this3.timeDiff = _this3.till.getTime() - new Date().getTime();
+  return '/';
+}
 
-        if (_this3.timeDiff < 0) {
-          _this3.stop();
-        } else {
-          _this3.callbacks.second.forEach(function (cb) {
-            return cb();
-          });
-        }
-      }, 1000);
-    }
-  }, {
-    key: "stop",
-    value: function stop() {
-      clearInterval(this.interval);
-      this.callbacks.stop.forEach(function (cb) {
-        return cb();
-      });
-    }
-  }, {
-    key: "on",
-    value: function on(str, cb) {
-      if (str in this.callbacks) {
-        this.callbacks[str].push(cb);
-      } else {
-        throw Error("no ".concat(str, " type callback"));
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
       }
     }
-  }]);
 
-  return CountDowner;
-}();
-
-var _default = CountDowner;
-exports.default = _default;
-},{}],"src/wannacry/wannacry.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/wannacry/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.render = void 0;
-
-require("babel-polyfill");
-
-var _CountDowner = _interopRequireDefault(require("./CountDowner.js"));
-
-require("./wannacry.scss");
-
-var _wannacry2 = _interopRequireDefault(require("./wannacry.pug"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var render = function render() {
-  setTimeout(start);
-  return _wannacry2.default;
-};
-
-exports.render = render;
-
-function start() {
-  var pay = document.querySelector('#pay');
-  var payOn = document.querySelector('#pay-on');
-  var payProgress = document.querySelector('#pay-progress');
-  var payment = document.querySelector('#payment');
-  var lost = document.querySelector('#lost');
-  var lostOn = document.querySelector('#lost-on');
-  var lostProgress = document.querySelector('#lost-progress');
-  var check = document.querySelector('#check');
-  var decrypt = document.querySelector('#decrypt');
-  var copy = document.querySelector('#copy');
-  var now = new Date();
-  var payDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 10, now.getSeconds());
-  var lostDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, now.getMinutes(), now.getSeconds());
-  var payCountDowner = new _CountDowner.default(payDate);
-  pay.innerHTML = payCountDowner.formatLast();
-  payOn.innerHTML = payCountDowner.formatTill();
-  payCountDowner.on('second', function () {
-    payProgress.style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
-    pay.innerHTML = payCountDowner.formatLast();
-  });
-  payCountDowner.on('stop', function () {
-    payProgress.style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
-    payment.innerHTML = '$600';
-  });
-  var lostCountDowner = new _CountDowner.default(lostDate);
-  lost.innerHTML = lostCountDowner.formatLast();
-  lostOn.innerHTML = lostCountDowner.formatTill();
-  lostCountDowner.on('second', function () {
-    lostProgress.style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
-    lost.innerHTML = lostCountDowner.formatLast();
-  });
-  lostCountDowner.on('stop', function () {
-    lostProgress.style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
-  });
-
-  check.onclick = function () {
-    alert("You didn't pay!\nYour files will be lost on ".concat(lostCountDowner.formatTill(), "!"));
-  };
-
-  decrypt.onclick = function () {
-    alert("Decrypt failed!\nPlease click <Contact Us>!");
-  };
-
-  copy.onclick = function (e) {
-    document.addEventListener('copy', setClipboardData);
-    document.execCommand('copy');
-    alert('Content copied Successfully!');
-  };
+    cssTimeout = null;
+  }, 50);
 }
 
-function setClipboardData(event) {
-  event.preventDefault();
-
-  if (event.clipboardData) {
-    event.clipboardData.setData('text/plain', 'Money! Give me Money! ლ(́◉◞౪◟◉‵ლ)');
-  }
-
-  document.removeEventListener('copy', setClipboardData);
-}
-},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./CountDowner.js":"src/wannacry/CountDowner.js","./wannacry.scss":"src/wannacry/wannacry.scss","./wannacry.pug":"src/wannacry/wannacry.pug"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -479,4 +341,3 @@ function hmrAccept(bundle, id) {
   });
 }
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/wannacry.01b71242.map

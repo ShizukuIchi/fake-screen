@@ -89,13 +89,19 @@ body {
   margin-right: 40px;
   margin-bottom: 40px;
 }
+.option .img-container {
+  background: #000;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 3px;
+  width: 288px;
+  height: 162px;
+}
 .option video,
 .option img {
   position: relative;
   width: 288px;
   height: 162px;
-  background: #000;
-  border-radius: 3px;
 }
 .option .title {
   font-size: 1.5rem;
