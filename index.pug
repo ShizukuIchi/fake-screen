@@ -11,19 +11,27 @@ html(lang="en")
       .title Fake Screens
       .options
         .option(id='win10')
-          video(autoplay loop muted inline)
-            source(src="src/assets/win10.mp4" type="video/mp4")
+          .img-container
+            video(autoplay loop muted inline)
+              source(src="src/assets/win10.mp4" type="video/mp4")
           .title Windows 10
         .option(id='win10-blue')
-          img(src="src/assets/win10-blue.jpg" alt="win10-blue")
+          .img-container
+            img(src="src/assets/win10-blue.jpg" alt="win10-blue")
           .title Win10 blue screen only
         .option(id='win10-update')
-          video(autoplay loop muted inline)
-            source(src="src/assets/win10-update.mp4" type="video/mp4")
+          .img-container
+            video(autoplay loop muted inline)
+              source(src="src/assets/win10-update.mp4" type="video/mp4")
           .title Win10 update 10 mins
         .option(id='wannacry')
-          img(src="src/assets/wannacry.png" alt="wannacry")
+          .img-container
+            img(src="src/assets/wannacry.png" alt="wannacry")
           .title Wanna Crypto
+        .option(id='macOS')
+          .img-container
+            img(src="src/macOS/apple.svg" alt="macOS" style="width: 50px")
+          .title macOS Mojave
 
     #app
       .close
