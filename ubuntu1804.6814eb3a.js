@@ -104,127 +104,12 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"src/wannacry/CountDowner.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var CountDowner =
-/*#__PURE__*/
-function () {
-  function CountDowner(till) {
-    _classCallCheck(this, CountDowner);
-
-    till.setSeconds(till.getSeconds() + 1);
-    this.till = till;
-    this.callbacks = {
-      stop: [],
-      second: []
-    };
-    this.toFixStr = this.toFixStr.bind(this);
-    this.interval = null;
-    this.origin = new Date();
-    this.start();
-  }
-
-  _createClass(CountDowner, [{
-    key: "formatTill",
-    value: function formatTill() {
-      var _this = this;
-
-      var year = this.till.getFullYear();
-      var month = this.till.getMonth() + 1;
-      var date = this.till.getDate();
-      var hour = this.till.getHours();
-      var minute = this.till.getMinutes();
-      var second = this.till.getSeconds();
-      return [month, date, year].map(function (s) {
-        return _this.toFixStr(s);
-      }).join('/') + ' ' + [hour, minute, second].map(function (s) {
-        return _this.toFixStr(s);
-      }).join(':');
-    }
-  }, {
-    key: "toFixStr",
-    value: function toFixStr(s) {
-      return (s < 10 ? '0' : '') + s;
-    }
-  }, {
-    key: "progress",
-    value: function progress() {
-      var percentage = this.timeDiff / (this.till.getTime() - this.origin);
-      return percentage < 0 ? 0 : percentage;
-    }
-  }, {
-    key: "formatLast",
-    value: function formatLast() {
-      var _this2 = this;
-
-      var diffDays = Math.floor(this.timeDiff / (1000 * 3600 * 24));
-      var diffHours = Math.floor(this.timeDiff / (1000 * 3600));
-      var diffMinutes = Math.floor(this.timeDiff / (1000 * 60));
-      var diffSeconds = Math.floor(this.timeDiff / 1000);
-      return [diffDays, diffHours - diffDays * 24, diffMinutes - diffHours * 60, diffSeconds - diffMinutes * 60].map(function (e) {
-        return _this2.toFixStr(e);
-      }).join(':');
-    }
-  }, {
-    key: "start",
-    value: function start() {
-      var _this3 = this;
-
-      this.timeDiff = this.till.getTime() - new Date().getTime();
-      this.interval = setInterval(function () {
-        _this3.timeDiff = _this3.till.getTime() - new Date().getTime();
-
-        if (_this3.timeDiff < 0) {
-          _this3.stop();
-        } else {
-          _this3.callbacks.second.forEach(function (cb) {
-            return cb();
-          });
-        }
-      }, 1000);
-    }
-  }, {
-    key: "stop",
-    value: function stop() {
-      clearInterval(this.interval);
-      this.callbacks.stop.forEach(function (cb) {
-        return cb();
-      });
-    }
-  }, {
-    key: "on",
-    value: function on(str, cb) {
-      if (str in this.callbacks) {
-        this.callbacks[str].push(cb);
-      } else {
-        throw Error("no ".concat(str, " type callback"));
-      }
-    }
-  }]);
-
-  return CountDowner;
-}();
-
-var _default = CountDowner;
-exports.default = _default;
-},{}],"src/wannacry/wannacry.scss":[function(require,module,exports) {
+})({"src/ubuntu1804/ubuntu1804.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/wannacry/index.js":[function(require,module,exports) {
+},{"./ubuntu18.jpg":[["ubuntu18.92039533.jpg","src/ubuntu1804/ubuntu18.jpg"],"src/ubuntu1804/ubuntu18.jpg"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/ubuntu1804/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -232,84 +117,90 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.render = void 0;
 
-require("babel-polyfill");
+var _ubuntu = _interopRequireDefault(require("./ubuntu1804.pug"));
 
-var _CountDowner = _interopRequireDefault(require("./CountDowner.js"));
-
-require("./wannacry.scss");
-
-var _wannacry2 = _interopRequireDefault(require("./wannacry.pug"));
+require("./ubuntu1804.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var render = function render() {
   setTimeout(start);
-  return _wannacry2.default;
+  return _ubuntu.default;
 };
 
 exports.render = render;
 
 function start() {
-  var pay = document.querySelector('#pay');
-  var payOn = document.querySelector('#pay-on');
-  var payProgress = document.querySelector('#pay-progress');
-  var payment = document.querySelector('#payment');
-  var lost = document.querySelector('#lost');
-  var lostOn = document.querySelector('#lost-on');
-  var lostProgress = document.querySelector('#lost-progress');
-  var check = document.querySelector('#check');
-  var decrypt = document.querySelector('#decrypt');
-  var copy = document.querySelector('#copy');
-  var now = new Date();
-  var payDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 10, now.getSeconds());
-  var lostDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, now.getMinutes(), now.getSeconds());
-  var payCountDowner = new _CountDowner.default(payDate);
-  pay.innerHTML = payCountDowner.formatLast();
-  payOn.innerHTML = payCountDowner.formatTill();
-  payCountDowner.on('second', function () {
-    payProgress.style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
-    pay.innerHTML = payCountDowner.formatLast();
-  });
-  payCountDowner.on('stop', function () {
-    payProgress.style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
-    payment.innerHTML = '$600';
-  });
-  var lostCountDowner = new _CountDowner.default(lostDate);
-  lost.innerHTML = lostCountDowner.formatLast();
-  lostOn.innerHTML = lostCountDowner.formatTill();
-  lostCountDowner.on('second', function () {
-    lostProgress.style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
-    lost.innerHTML = lostCountDowner.formatLast();
-  });
-  lostCountDowner.on('stop', function () {
-    lostProgress.style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
-  });
+  var wrapper = document.querySelector(".ubuntu1804-wrapper");
+  wrapper.addEventListener("mousemove", mousemove);
+  var timeModal = wrapper.querySelector(".ubuntu1804-time-modal");
+  var timeInterval = null;
+  var isIdle = false;
+  setTime();
+  var idleTimer = setTimeout(function () {
+    isIdle = true;
+    openTimeModal();
+  }, 3000);
 
-  check.onclick = function () {
-    alert("You didn't pay!\nYour files will be lost on ".concat(lostCountDowner.formatTill(), "!"));
-  };
+  function mousemove() {
+    clearTimeout(idleTimer);
 
-  decrypt.onclick = function () {
-    alert("Decrypt failed!\nPlease click <Contact Us>!");
-  };
+    if (!document.querySelector(".ubuntu1804-wrapper")) {
+      wrapper.removeEventListener("mousemove", mousemove);
+      return;
+    }
 
-  copy.onclick = function (e) {
-    document.addEventListener('copy', setClipboardData);
-    document.execCommand('copy');
-    alert('Content copied Successfully!');
-  };
-}
+    idleTimer = setTimeout(function () {
+      isIdle = true;
+      openTimeModal();
+    }, 3000);
 
-function setClipboardData(event) {
-  event.preventDefault();
-
-  if (event.clipboardData) {
-    event.clipboardData.setData('text/plain', 'Money! Give me Money! ლ(́◉◞౪◟◉‵ლ)');
+    if (isIdle) {
+      isIdle = false;
+      closeTimeModal();
+    }
   }
 
-  document.removeEventListener('copy', setClipboardData);
+  timeInterval = setInterval(setTime, 1000);
+
+  function openTimeModal() {
+    console.log("should open modal");
+  }
+
+  function closeTimeModal() {
+    console.log("should close modal");
+  }
+
+  function setTime() {
+    var time = timeModal.querySelector(".time");
+    var date = timeModal.querySelector(".date");
+
+    if (time && date) {
+      var now = new Date();
+      time.textContent = formatDate(now);
+      date.textContent = "".concat(getDayStr(now.getDay()), ", ").concat(getMonthStr(now.getMonth()), " ").concat(now.getDate());
+    } else {
+      clearInterval(timeInterval);
+    }
+  }
 }
-},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","./CountDowner.js":"src/wannacry/CountDowner.js","./wannacry.scss":"src/wannacry/wannacry.scss","./wannacry.pug":"src/wannacry/wannacry.pug"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function getDayStr(d) {
+  return "Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday".split(",")[d];
+}
+
+function getMonthStr(m) {
+  return "January,February,March,April,May,June,July,August,Septimber,October,November,Devember".split(",")[m];
+}
+
+function formatDate(d) {
+  var h = d.getHours();
+  var m = d.getMinutes();
+  h = h < 10 ? "0" : "" + h;
+  m = m < 10 ? "0" : "" + m;
+  return "".concat(h, ":").concat(m);
+}
+},{"./ubuntu1804.pug":"src/ubuntu1804/ubuntu1804.pug","./ubuntu1804.scss":"src/ubuntu1804/ubuntu1804.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -478,5 +369,119 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/wannacry.01b71242.map
+},{}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/bundle-loader.js":[function(require,module,exports) {
+var getBundleURL = require('./bundle-url').getBundleURL;
+
+function loadBundlesLazy(bundles) {
+  if (!Array.isArray(bundles)) {
+    bundles = [bundles];
+  }
+
+  var id = bundles[bundles.length - 1];
+
+  try {
+    return Promise.resolve(require(id));
+  } catch (err) {
+    if (err.code === 'MODULE_NOT_FOUND') {
+      return new LazyPromise(function (resolve, reject) {
+        loadBundles(bundles.slice(0, -1)).then(function () {
+          return require(id);
+        }).then(resolve, reject);
+      });
+    }
+
+    throw err;
+  }
+}
+
+function loadBundles(bundles) {
+  return Promise.all(bundles.map(loadBundle));
+}
+
+var bundleLoaders = {};
+
+function registerBundleLoader(type, loader) {
+  bundleLoaders[type] = loader;
+}
+
+module.exports = exports = loadBundlesLazy;
+exports.load = loadBundles;
+exports.register = registerBundleLoader;
+var bundles = {};
+
+function loadBundle(bundle) {
+  var id;
+
+  if (Array.isArray(bundle)) {
+    id = bundle[1];
+    bundle = bundle[0];
+  }
+
+  if (bundles[bundle]) {
+    return bundles[bundle];
+  }
+
+  var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
+  var bundleLoader = bundleLoaders[type];
+
+  if (bundleLoader) {
+    return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
+      if (resolved) {
+        module.bundle.register(id, resolved);
+      }
+
+      return resolved;
+    });
+  }
+}
+
+function LazyPromise(executor) {
+  this.executor = executor;
+  this.promise = null;
+}
+
+LazyPromise.prototype.then = function (onSuccess, onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.then(onSuccess, onError);
+};
+
+LazyPromise.prototype.catch = function (onError) {
+  if (this.promise === null) this.promise = new Promise(this.executor);
+  return this.promise.catch(onError);
+};
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],0:[function(require,module,exports) {
+var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.load([["ubuntu1804.d53e434e.html","src/ubuntu1804/ubuntu1804.pug"]]).then(function(){require("src/ubuntu1804/index.js");});
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0], null)
+//# sourceMappingURL=/ubuntu1804.6814eb3a.map
