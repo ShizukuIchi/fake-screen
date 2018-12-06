@@ -109,7 +109,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./ubuntu18.jpg":[["ubuntu18.92039533.jpg","src/ubuntu1804/ubuntu18.jpg"],"src/ubuntu1804/ubuntu18.jpg"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/ubuntu1804/index.js":[function(require,module,exports) {
+},{"./ubuntu1804.jpg":[["ubuntu1804.9e9ecd6f.jpg","src/ubuntu1804/ubuntu1804.jpg"],"src/ubuntu1804/ubuntu1804.jpg"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/ubuntu1804/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -132,54 +132,51 @@ exports.render = render;
 
 function start() {
   var wrapper = document.querySelector(".ubuntu1804-wrapper");
-  wrapper.addEventListener("mousemove", mousemove);
+  wrapper.addEventListener("mousemove", setIdleTimer);
   var timeModal = wrapper.querySelector(".ubuntu1804-time-modal");
-  var timeInterval = null;
-  var isIdle = false;
-  setTime();
-  var idleTimer = setTimeout(function () {
-    isIdle = true;
-    openTimeModal();
-  }, 3000);
+  var idleTimer = null;
+  setIdleTimer();
 
-  function mousemove() {
+  function setIdleTimer() {
     clearTimeout(idleTimer);
-
-    if (!document.querySelector(".ubuntu1804-wrapper")) {
-      wrapper.removeEventListener("mousemove", mousemove);
-      return;
-    }
-
     idleTimer = setTimeout(function () {
-      isIdle = true;
-      openTimeModal();
-    }, 3000);
-
-    if (isIdle) {
-      isIdle = false;
-      closeTimeModal();
-    }
+      try {
+        timeModal.addEventListener("click", onclick);
+        openTimeModal();
+      } catch (e) {
+        console.log(e);
+        wrapper.removeEventListener("mousemove", setIdleTimer);
+      }
+    }, 6000);
   }
 
+  function onclick() {
+    setIdleTimer();
+    closeTimeModal();
+    timeModal.removeEventListener("click", onclick);
+  }
+
+  var timeInterval = null;
+  setTime();
   timeInterval = setInterval(setTime, 1000);
 
   function openTimeModal() {
-    console.log("should open modal");
+    timeModal.style.transform = "translateY(0%)";
   }
 
   function closeTimeModal() {
-    console.log("should close modal");
+    timeModal.style.transform = "translateY(-100%)";
   }
 
   function setTime() {
-    var time = timeModal.querySelector(".time");
-    var date = timeModal.querySelector(".date");
-
-    if (time && date) {
+    try {
+      var time = timeModal.querySelector(".time");
+      var date = timeModal.querySelector(".date");
       var now = new Date();
       time.textContent = formatDate(now);
       date.textContent = "".concat(getDayStr(now.getDay()), ", ").concat(getMonthStr(now.getMonth()), " ").concat(now.getDate());
-    } else {
+    } catch (e) {
+      console.log(e);
       clearInterval(timeInterval);
     }
   }
@@ -190,14 +187,14 @@ function getDayStr(d) {
 }
 
 function getMonthStr(m) {
-  return "January,February,March,April,May,June,July,August,Septimber,October,November,Devember".split(",")[m];
+  return "January,February,March,April,May,June,July,August,September,October,November,December".split(",")[m];
 }
 
 function formatDate(d) {
   var h = d.getHours();
   var m = d.getMinutes();
-  h = h < 10 ? "0" : "" + h;
-  m = m < 10 ? "0" : "" + m;
+  h = (h < 10 ? "0" : "") + h;
+  m = (m < 10 ? "0" : "") + m;
   return "".concat(h, ":").concat(m);
 }
 },{"./ubuntu1804.pug":"src/ubuntu1804/ubuntu1804.pug","./ubuntu1804.scss":"src/ubuntu1804/ubuntu1804.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -227,7 +224,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55671" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54726" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

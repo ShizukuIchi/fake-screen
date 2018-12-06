@@ -19,25 +19,24 @@
   transform: scale(0.9);
   font-family: sans-serif;
 }
-
-header {
+.wannacry-wrapper header {
   height: 24px;
   border-bottom: lightgray 1px solid;
   background: linear-gradient(to right, #07126e, #a3c5ed);
   display: flex;
   align-items: center;
 }
-header img {
+.wannacry-wrapper header img {
   margin: 2px 4px;
   width: 15px;
   height: 15px;
 }
-header span {
+.wannacry-wrapper header span {
   flex-grow: 1;
   font-family: Arial;
   color: #fff;
 }
-header button {
+.wannacry-wrapper header button {
   background: lightgray;
   border: 2px gray solid;
   border-top-color: lightgray;
@@ -48,7 +47,7 @@ header button {
   height: 20px;
   position: relative;
 }
-header button:before {
+.wannacry-wrapper header button:before {
   content: "";
   position: absolute;
   transform: rotate(-45deg);
@@ -58,7 +57,7 @@ header button:before {
   height: 14px;
   background: #000;
 }
-header button:after {
+.wannacry-wrapper header button:after {
   content: "";
   position: absolute;
   transform: rotate(45deg);
@@ -68,16 +67,15 @@ header button:after {
   height: 14px;
   background: #000;
 }
-
-.left {
+.wannacry-wrapper .left {
   width: 280px;
 }
-.left .logo {
+.wannacry-wrapper .left .logo {
   width: 100%;
   padding-top: 7px;
   text-align: center;
 }
-.left .logo img {
+.wannacry-wrapper .left .logo img {
   border: 3px solid lightgray;
   border-right-color: #868788;
   border-bottom-color: darkgray;
@@ -86,34 +84,33 @@ header button:after {
   height: 150px;
   margin: auto;
 }
-
-.info-container {
+.wannacry-wrapper .info-container {
   border: 2px solid lightgray;
   margin: 10px;
   padding: 10px 3px;
   font-weight: 700;
 }
-.info-container .title {
+.wannacry-wrapper .info-container .title {
   text-align: center;
   color: yellow;
   margin-bottom: 5px;
   font-size: 1rem;
 }
-.info-container .infos {
+.wannacry-wrapper .info-container .infos {
   padding-top: 5px;
   flex-grow: 1;
 }
-.info-container .info {
+.wannacry-wrapper .info-container .info {
   text-align: center;
   color: #fff;
   min-height: 1em;
 }
-.info-container .time {
+.wannacry-wrapper .info-container .time {
   font-size: 2em;
   height: 40px;
   font-weight: 100;
 }
-.info-container .bar .img {
+.wannacry-wrapper .info-container .bar .img {
   height: 100%;
   width: 20px;
   border: 1px solid gray;
@@ -122,50 +119,44 @@ header button:after {
   background: linear-gradient(to bottom, #0ad700, red);
   position: relative;
 }
-.info-container .bar .img .cover {
+.wannacry-wrapper .info-container .bar .img .cover {
   position: absolute;
   content: "";
   width: 100%;
   height: 0;
   background: darkred;
 }
-
-footer {
+.wannacry-wrapper footer {
   display: flex;
 }
-
-.contacts {
+.wannacry-wrapper .contacts {
   margin: 10px;
   padding: 17px;
 }
-
-.contact {
+.wannacry-wrapper .contact {
   cursor: pointer;
   color: #7be2e2;
   display: block;
 }
-.contact strong {
+.wannacry-wrapper .contact strong {
   font-size: 1.1em;
   color: #7bdfdf;
 }
-
-.contact:not(:last-child) {
+.wannacry-wrapper .contact:not(:last-child) {
   margin-bottom: 20px;
 }
-
-.right {
+.wannacry-wrapper .right {
   display: flex;
   flex-direction: column;
   width: 600px;
 }
-.right .top-bar {
+.wannacry-wrapper .right .top-bar {
   position: relative;
   margin: 10px;
   margin-right: 0;
   display: flex;
 }
-
-.announcement {
+.wannacry-wrapper .announcement {
   color: #fff;
   line-height: 0.8em;
   font-size: 1.2em;
@@ -173,20 +164,18 @@ footer {
   text-align: center;
   font-weight: 700;
 }
-
-.lang {
+.wannacry-wrapper .lang {
   border: #5a5a5a 2px solid;
   border-right-color: lightgray;
   border-bottom-color: lightgray;
 }
-.lang select {
+.wannacry-wrapper .lang select {
   background: transparent;
   width: 150px;
   height: 22px;
   color: #fff;
 }
-
-.manuals {
+.wannacry-wrapper .manuals {
   font-family: "Times New Roman", Times, serif;
   background: #fff;
   flex-grow: 1;
@@ -196,40 +185,39 @@ footer {
   border-right: 0;
   margin-bottom: 10px;
 }
-
-.manual .title {
+.wannacry-wrapper .manual .title {
+  text-shadow: none;
+  color: black;
   text-align: left;
   font-size: 1.2em;
   font-weight: 900;
 }
-
-.manual:not(:last-child) {
+.wannacry-wrapper .manual:not(:last-child) {
   margin-bottom: 20px;
 }
-
-.bitcoins {
+.wannacry-wrapper .bitcoins {
   display: flex;
   border: 2px solid lightgray;
   padding: 10px 0;
 }
-.bitcoins img {
+.wannacry-wrapper .bitcoins img {
   border: 2px solid lightgray;
   width: 170px;
   height: 66px;
 }
-.bitcoins .text {
+.wannacry-wrapper .bitcoins .text {
   margin-left: 10px;
   flex-grow: 1;
 }
-.bitcoins .text .hint {
+.wannacry-wrapper .bitcoins .text .hint {
   margin-bottom: 15px;
   font-weight: 700;
 }
-.bitcoins .text .inputs {
+.wannacry-wrapper .bitcoins .text .inputs {
   height: 50%;
   display: flex;
 }
-.bitcoins .text .inputs input {
+.wannacry-wrapper .bitcoins .text .inputs input {
   border: #5a5a5a 3px solid;
   border-right-color: lightgray;
   border-bottom-color: lightgray;
@@ -242,34 +230,30 @@ footer {
   font-weight: 700;
   pointer-events: none;
 }
-.bitcoins .text .inputs button {
+.wannacry-wrapper .bitcoins .text .inputs button {
   margin-right: 5px;
   background: lightgray;
 }
-
-.buttons {
+.wannacry-wrapper .buttons {
   display: flex;
   margin: 10px 0;
 }
-.buttons button {
+.wannacry-wrapper .buttons button {
   background: lightgray;
   font-weight: 700;
   font-size: 1.2em;
   height: 35px;
   flex: 1;
 }
-.buttons button:not(:last-child) {
+.wannacry-wrapper .buttons button:not(:last-child) {
   margin-right: 40px;
 }
-
-.yellow {
+.wannacry-wrapper .yellow {
   color: yellow;
 }
-
-.red {
+.wannacry-wrapper .red {
   color: darkred;
 }
-
-.underline {
+.wannacry-wrapper .underline {
   text-decoration: underline;
 }
