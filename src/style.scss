@@ -6,6 +6,7 @@
   right: 0;
   bottom: 0;
   .close {
+    z-index: 2;
     position: absolute;
     height: 50px;
     width: 50px;
@@ -88,7 +89,8 @@
   height: 50px;
   border-right: 1px rgb(200, 200, 200) dashed;
   border-bottom: 1px rgb(200, 200, 200) dashed;
-  &:before, &:after {
+  &:before,
+  &:after {
     content: "";
     position: absolute;
     left: 23px;

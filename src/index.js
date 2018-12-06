@@ -9,7 +9,8 @@ const themes = {
   'win10-update': import('./win10-update/index.js'),
   'win10-blue': import('./win10-blue/index.js'),
   wannacry: import('./wannacry/index.js'),
-  macOS: import('./macOS/index.js')
+  macOS: import('./macOS/index.js'),
+  ubuntu1804: import('./ubuntu1804/index.js')
 };
 const app = document.querySelector('#app');
 const options = document.querySelector('.options');
