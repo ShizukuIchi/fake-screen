@@ -8,7 +8,7 @@ export const render = () => {
 async function startProgress() {
   const progress = await getProgress();
   let progressValue = 1;
-  while (true) {
+  while (document.querySelector('.win10-update-wrapper')) {
     await sleep(Math.random() * 5000 + 5000);
     progress.innerText = progressValue++;
   }
