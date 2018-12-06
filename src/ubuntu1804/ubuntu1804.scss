@@ -1,23 +1,53 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,500');
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:300,500");
 
 .ubuntu1804-wrapper {
+  position: relative;
   font-family: Ubuntu;
   height: 100%;
-}
-.ubuntu1804-time-modal {
-  height: 100%;
-  background: url(./ubuntu18.jpg);
-  background-size: cover;   
   header {
+    z-index: 2;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 20px;
+    border: 0;
     background: rgba(0, 0, 0, 0.2);
   }
+}
+
+.ubuntu1804-login-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(to top, rgb(70, 7, 70), rgb(30, 14, 32));
   .content {
-    text-shadow: -1px 2px 1px rgb(50,50,50);
+    text-shadow: -1px 2px 1px rgb(50, 50, 50);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    padding-bottom: 20px;
+  }
+  footer {
+    color: #fff;
+    position: fixed;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+}
+.ubuntu1804-time-modal {
+  transition: transform 1s;
+  height: 100%;
+  transform: translateY(-100%);
+  background: url(./ubuntu1804.jpg);
+  background-size: cover;
+
+  .content {
+    text-shadow: -1px 2px 1px rgb(50, 50, 50);
     height: 100%;
     display: flex;
     justify-content: center;
@@ -34,13 +64,6 @@
   .content .date {
     font-size: 1.9rem;
     font-weight: 100;
-    text-align: center;
-  }
-  footer {
-    position: fixed;
-    bottom: 10%;
-    left: 0;
-    right: 0;
     text-align: center;
   }
 }

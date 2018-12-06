@@ -8,48 +8,49 @@ export const render = () => {
 
 function start() {
   const wrapper = document.querySelector(".ubuntu1804-wrapper");
-  wrapper.addEventListener("mousemove", mousemove);
+  wrapper.addEventListener("mousemove", setIdleTimer);
   const timeModal = wrapper.querySelector(".ubuntu1804-time-modal");
 
-  let timeInterval = null;
-  let isIdle = false;
-  setTime();
-  let idleTimer = setTimeout(function() {
-    isIdle = true;
-    openTimeModal();
-  }, 3000);
-  function mousemove() {
+  let idleTimer = null;
+  setIdleTimer();
+  function setIdleTimer() {
     clearTimeout(idleTimer);
-    if (!document.querySelector(".ubuntu1804-wrapper")) {
-      wrapper.removeEventListener("mousemove", mousemove);
-      return;
-    }
     idleTimer = setTimeout(function() {
-      isIdle = true;
-      openTimeModal();
-    }, 3000);
-    if (isIdle) {
-      isIdle = false;
-      closeTimeModal();
-    }
+      try {
+        timeModal.addEventListener("click", onclick);
+        openTimeModal();
+      } catch (e) {
+        console.log(e);
+        wrapper.removeEventListener("mousemove", setIdleTimer);
+      }
+    }, 6000);
   }
+  function onclick() {
+    setIdleTimer();
+    closeTimeModal();
+    timeModal.removeEventListener("click", onclick);
+  }
+
+  let timeInterval = null;
+  setTime();
   timeInterval = setInterval(setTime, 1000);
   function openTimeModal() {
-    console.log("should open modal");
+    timeModal.style.transform = "translateY(0%)";
   }
   function closeTimeModal() {
-    console.log("should close modal");
+    timeModal.style.transform = "translateY(-100%)";
   }
   function setTime() {
-    const time = timeModal.querySelector(".time");
-    const date = timeModal.querySelector(".date");
-    if (time && date) {
+    try {
+      const time = timeModal.querySelector(".time");
+      const date = timeModal.querySelector(".date");
       const now = new Date();
       time.textContent = formatDate(now);
       date.textContent = `${getDayStr(now.getDay())}, ${getMonthStr(
         now.getMonth()
       )} ${now.getDate()}`;
-    } else {
+    } catch (e) {
+      console.log(e);
       clearInterval(timeInterval);
     }
   }
@@ -70,7 +71,7 @@ function getMonthStr(m) {
 function formatDate(d) {
   let h = d.getHours();
   let m = d.getMinutes();
-  h = h < 10 ? "0" : "" + h;
-  m = m < 10 ? "0" : "" + m;
+  h = (h < 10 ? "0" : "") + h;
+  m = (m < 10 ? "0" : "") + m;
   return `${h}:${m}`;
 }
