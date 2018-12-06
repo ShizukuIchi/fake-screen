@@ -1,3 +1,7 @@
+body {
+  background: #fff9c4;
+}
+
 #app {
   visibility: hidden;
   position: fixed;
@@ -50,25 +54,52 @@
   padding: 50px;
 }
 .title {
+  text-shadow: #3dc1d3 1px 1px 3px;
+  color: #63cdda;
   text-align: center;
-  font-size: 4em;
+  font-size: 2em;
 }
 .options {
-  margin-top: 40px;
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 288px);
+  grid-row-gap: 50px;
+  grid-column-gap: 60px;
+  justify-content: center;
 }
 .option {
   cursor: pointer;
-  margin-right: 40px;
-  margin-bottom: 40px;
+  width: 288px;
+  height: 162px;
   .img-container {
+    position: absolute;
+    box-shadow: 3px 3px 30px rgb(134, 130, 130);
     background: #000;
     text-align: center;
     overflow: hidden;
     border-radius: 3px;
     width: 288px;
     height: 162px;
+    &:after {
+      transition: background 0.2s;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0);
+    }
+    &:hover:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
   }
   video,
   img {
@@ -76,8 +107,19 @@
     width: 288px;
     height: 162px;
   }
+  &:hover .title {
+    opacity: 1;
+    top: 40%;
+  }
   .title {
+    pointer-events: none;
+    transition: all 0.5s;
+    opacity: 0;
+    top: 20%;
+    color: white;
+    position: relative;
     font-size: 1.5rem;
+    text-shadow: black 1px 1px 2px;
   }
 }
 
