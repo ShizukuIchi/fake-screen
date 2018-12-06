@@ -63,7 +63,7 @@ function getDayStr(d) {
 }
 
 function getMonthStr(m) {
-  return "January,February,March,April,May,June,July,August,Septimber,October,November,Devember".split(
+  return "January,February,March,April,May,June,July,August,September,October,November,December".split(
     ","
   )[m];
 }
