@@ -11,14 +11,18 @@ export const render = () => {
 const sleep = ms => new Promise(res => setTimeout(res, ms))
 
 async function start() {
-  const progressBar = document.querySelector('.progress-bar')
-  const text = document.querySelector('.hint')
+  let progressBar = document.querySelector('.macos-wrapper .progress-bar')
+  let text = document.querySelector('.macos-wrapper .hint')
   let value = 0;
   while(value < 101) {
     await sleep(Math.random()*4000+400)
     value += 0.4
     progressBar.style.width = `${value}%`;
     text.textContent = showText(value)
+  }
+  await sleep(10000)
+  if (document.querySelector('.macos-wrapper')) {
+    start()
   }
 }
 
