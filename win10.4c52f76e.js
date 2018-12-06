@@ -112,7 +112,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.render = void 0;
 
-var _update = _interopRequireDefault(require("./update.pug"));
+var _win = _interopRequireDefault(require("./win10.pug"));
 
 require("./update.scss");
 
@@ -125,8 +125,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var render = function render() {
-  startProgress();
-  return _update.default;
+  setTimeout(start);
+  return _win.default;
 };
 
 exports.render = render;
@@ -143,58 +143,68 @@ function setNext(second) {
   console.log("Add progress every ".concat(next, " milliseconds"));
 }
 
-function startProgress() {
-  return _startProgress.apply(this, arguments);
+function start() {
+  return _start.apply(this, arguments);
 }
 
-function _startProgress() {
-  _startProgress = _asyncToGenerator(
+function _start() {
+  _start = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee() {
-    var progress, progressValue, blue;
+    var originHTML, progress, progressValue, wrapper, blue;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            originHTML = document.querySelector('.win10-wrapper').innerHTML;
             setCrash(Math.floor(Math.random() * 40) + 61);
             setNext(1000);
-            _context.next = 4;
-            return getProgress();
-
-          case 4:
-            progress = _context.sent;
+            progress = document.querySelector('#progress');
             progressValue = 1;
 
-          case 6:
+          case 5:
             if (!(progressValue <= crash)) {
-              _context.next = 12;
+              _context.next = 11;
               break;
             }
 
-            _context.next = 9;
+            _context.next = 8;
             return sleep(Math.random() * 1000 + next);
 
-          case 9:
+          case 8:
             progress.innerText = progressValue++;
-            _context.next = 6;
+            _context.next = 5;
             break;
 
-          case 12:
-            _context.next = 14;
+          case 11:
+            wrapper = document.querySelector('.win10-wrapper');
+
+            if (!wrapper) {
+              _context.next = 21;
+              break;
+            }
+
+            _context.next = 15;
             return require("_bundle_loader")(require.resolve('./blue.pug'));
 
-          case 14:
+          case 15:
             blue = _context.sent;
-            document.querySelector('.app-wrapper').innerHTML = blue;
+            wrapper.innerHTML = blue;
+            _context.next = 19;
+            return sleep(10000);
 
-          case 16:
+          case 19:
+            wrapper.innerHTML = originHTML;
+            start();
+
+          case 21:
           case "end":
             return _context.stop();
         }
       }
     }, _callee, this);
   }));
-  return _startProgress.apply(this, arguments);
+  return _start.apply(this, arguments);
 }
 
 function sleep(ms) {
@@ -202,58 +212,7 @@ function sleep(ms) {
     return setTimeout(res, ms);
   });
 }
-
-function getProgress() {
-  return _getProgress.apply(this, arguments);
-}
-
-function _getProgress() {
-  _getProgress = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2() {
-    var progress;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            progress = null;
-
-          case 1:
-            if (progress) {
-              _context2.next = 7;
-              break;
-            }
-
-            _context2.next = 4;
-            return findProgress();
-
-          case 4:
-            progress = _context2.sent;
-            _context2.next = 1;
-            break;
-
-          case 7:
-            return _context2.abrupt("return", progress);
-
-          case 8:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, this);
-  }));
-  return _getProgress.apply(this, arguments);
-}
-
-function findProgress() {
-  return new Promise(function (res) {
-    setTimeout(function () {
-      var progress = document.querySelector('#progress');
-      res(progress);
-    });
-  });
-}
-},{"./update.pug":"src/win10/update.pug","./update.scss":"src/win10/update.scss","./blue.scss":"src/win10/blue.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./blue.pug":[["blue.3c81820e.html","src/win10/blue.pug"],"src/win10/blue.pug"]}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./win10.pug":"src/win10/win10.pug","./update.scss":"src/win10/update.scss","./blue.scss":"src/win10/blue.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./blue.pug":[["blue.3c81820e.html","src/win10/blue.pug"],"src/win10/blue.pug"]}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -280,7 +239,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61297" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34237" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -541,6 +500,6 @@ module.exports = function loadHTMLBundle(bundle) {
   });
 };
 },{}],0:[function(require,module,exports) {
-var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("html",require("node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js"));b.load([["update.f9d857ef.html","src/win10/update.pug"]]).then(function(){require("src/win10/index.js");});
+var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("html",require("node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js"));b.load([["win10.541c087a.html","src/win10/win10.pug"]]).then(function(){require("src/win10/index.js");});
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0], null)
 //# sourceMappingURL=/win10.4c52f76e.map

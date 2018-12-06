@@ -105,7 +105,32 @@ body {
 }
 .option .title {
   font-size: 1.5rem;
-}.app-wrapper {
+}
+
+.close-hint {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  border-right: 1px #c8c8c8 dashed;
+  border-bottom: 1px #c8c8c8 dashed;
+}
+.close-hint:before, .close-hint:after {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 14px;
+  height: 23px;
+  width: 2px;
+  background: #c8c8c8;
+}
+.close-hint:before {
+  transform: rotate(45deg);
+}
+.close-hint:after {
+  transform: rotate(-45deg);
+}.win10-wrapper, .win10-update-wrapper {
   height: 100%;
   background: #0065cc;
   display: flex;
@@ -113,7 +138,6 @@ body {
   justify-content: center;
   font-family: "Segoe UI light", Arial;
   word-break: break-word;
-  cursor: none;
 }
 
 .update-container {
@@ -200,7 +224,17 @@ body {
     transform: rotate(630deg);
     opacity: 0;
   }
-}.blue-container {
+}.win10-blue-wrapper {
+  height: 100%;
+  background: #0065cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI light", Arial;
+  word-break: break-word;
+}
+
+.blue-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

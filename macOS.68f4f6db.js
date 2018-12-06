@@ -155,8 +155,8 @@ function _start() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            progressBar = document.querySelector('.progress-bar');
-            text = document.querySelector('.hint');
+            progressBar = document.querySelector('.macos-wrapper .progress-bar');
+            text = document.querySelector('.macos-wrapper .hint');
             value = 0;
 
           case 3:
@@ -176,6 +176,15 @@ function _start() {
             break;
 
           case 11:
+            _context.next = 13;
+            return sleep(10000);
+
+          case 13:
+            if (document.querySelector('.macos-wrapper')) {
+              start();
+            }
+
+          case 14:
           case "end":
             return _context.stop();
         }
@@ -228,7 +237,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61297" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34237" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
