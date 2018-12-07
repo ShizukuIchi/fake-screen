@@ -7985,31 +7985,41 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var themes = {
-  win10: require("_bundle_loader")(require.resolve('./win10/index.js')),
-  'win10-update': require("_bundle_loader")(require.resolve('./win10-update/index.js')),
-  'win10-blue': require("_bundle_loader")(require.resolve('./win10-blue/index.js')),
-  wannacry: require("_bundle_loader")(require.resolve('./wannacry/index.js')),
-  macOS: require("_bundle_loader")(require.resolve('./macOS/index.js')),
-  ubuntu1804: require("_bundle_loader")(require.resolve('./ubuntu1804/index.js'))
+  win10: require("_bundle_loader")(require.resolve("./win10/index.js")),
+  "win10-update": require("_bundle_loader")(require.resolve("./win10-update/index.js")),
+  "win10-blue": require("_bundle_loader")(require.resolve("./win10-blue/index.js")),
+  wannacry: require("_bundle_loader")(require.resolve("./wannacry/index.js")),
+  macOS: require("_bundle_loader")(require.resolve("./macOS/index.js")),
+  ubuntu1804: require("_bundle_loader")(require.resolve("./ubuntu1804/index.js"))
 };
-var app = document.querySelector('#app');
-var options = document.querySelector('.options');
-app.querySelector('.close').onclick = onAppClose;
+var app = document.querySelector("#app");
+var options = document.querySelector(".options");
+app.querySelector(".close").onclick = onAppClose;
 
 options.onclick = function (e) {
-  if (e.target !== options) render(e.target.closest('.option').id);
+  var target = e.target.closest(".option");
+
+  if (target && target !== options) {
+    try {
+      render(e.target.closest(".option").id);
+    } catch (e) {
+      console.log(e);
+    }
+  } else {
+    console.log("please click on a theme");
+  }
 };
 
 function render(name) {
   _screenfull.default.enabled ? _screenfull.default.request(app) : undefined; // API can only be initiated by a user gesture.
 
   renderTheme(name).then(function (content) {
-    var container = app.querySelector('.content');
+    var container = app.querySelector(".content");
     container.innerHTML = content;
     onAppOpen(name);
   }).catch(function (e) {
     onAppClose();
-    console.log(e);
+    throw e;
   });
 }
 
@@ -8044,16 +8054,16 @@ function _renderTheme() {
 }
 
 function onAppClose() {
-  history.replaceState(null, '', './');
+  history.replaceState(null, "", "./");
   _screenfull.default.enabled ? _screenfull.default.exit() : undefined;
-  app.style.visibility = 'hidden';
+  app.style.visibility = "hidden";
 }
 
 function onAppOpen(name) {
   history.pushState({
     app: name
   }, name, name);
-  app.style.visibility = 'visible';
+  app.style.visibility = "visible";
 }
 
 window.onpopstate = function (e) {
@@ -8098,7 +8108,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54726" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59554" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

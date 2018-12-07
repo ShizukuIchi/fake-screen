@@ -132,7 +132,30 @@ exports.render = render;
 
 function start() {
   var wrapper = document.querySelector(".ubuntu1804-wrapper");
-  wrapper.addEventListener("mousemove", setIdleTimer);
+  var password = wrapper.querySelector("#password");
+  var signIn = wrapper.querySelector("#sign-in");
+  var cancel = wrapper.querySelector("#cancel");
+  var hint = wrapper.querySelector(".hint");
+  password.addEventListener("keydown", submit);
+  signIn.addEventListener("click", submit);
+  cancel.addEventListener("click", clear);
+
+  function submit(_ref) {
+    var key = _ref.key;
+    if (key && key !== "Enter") return;
+    hint.style.animation = ""; // a magic for replaying animation
+
+    void hint.offsetWidth;
+    hint.textContent = password.value.length ? "Wrong password." : "You must enter a password!";
+    hint.style.animation = "timeout 1.6s";
+  }
+
+  function clear() {
+    password.value = "";
+  }
+
+  password.addEventListener("mousemove", setIdleTimer);
+  document.addEventListener("keydown", setIdleTimer);
   var timeModal = wrapper.querySelector(".ubuntu1804-time-modal");
   var idleTimer = null;
   setIdleTimer();
@@ -141,19 +164,24 @@ function start() {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(function () {
       try {
-        timeModal.addEventListener("click", onclick);
+        timeModal.addEventListener("mousedown", onActive);
+        document.addEventListener("keydown", onActive);
         openTimeModal();
       } catch (e) {
         console.log(e);
         wrapper.removeEventListener("mousemove", setIdleTimer);
+        document.removeEventListener("keydown", setIdleTimer);
       }
     }, 6000);
   }
 
-  function onclick() {
+  function onActive(_ref2) {
+    var key = _ref2.key;
+    if (key && !["Enter", " "].includes(key)) return;
     setIdleTimer();
     closeTimeModal();
-    timeModal.removeEventListener("click", onclick);
+    timeModal.removeEventListener("mousedown", onActive);
+    document.removeEventListener("keydown", onActive);
   }
 
   var timeInterval = null;
@@ -224,7 +252,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54726" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59554" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
