@@ -1,14 +1,15 @@
-import ubuntu1804 from "./ubuntu1804.pug";
+import ubuntu from "./ubuntu1804.pug";
 import "./ubuntu1804.scss";
 
 export const render = () => {
   setTimeout(start);
-  return ubuntu1804;
+  return ubuntu;
 };
 
 function start() {
   const wrapper = document.querySelector(".ubuntu1804-wrapper");
   wrapper.addEventListener("mousemove", setIdleTimer);
+  document.addEventListener("keydown", setIdleTimer);
   const timeModal = wrapper.querySelector(".ubuntu1804-time-modal");
 
   let idleTimer = null;
@@ -17,18 +18,22 @@ function start() {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(function() {
       try {
-        timeModal.addEventListener("click", onclick);
+        timeModal.addEventListener("mousedown", onActive);
+        document.addEventListener("keydown", onActive);
         openTimeModal();
       } catch (e) {
         console.log(e);
         wrapper.removeEventListener("mousemove", setIdleTimer);
+        document.removeEventListener("keydown", setIdleTimer);
       }
     }, 6000);
   }
-  function onclick() {
+  function onActive({ key }) {
+    if (key && !["Enter", " "].includes(key)) return;
     setIdleTimer();
     closeTimeModal();
-    timeModal.removeEventListener("click", onclick);
+    timeModal.removeEventListener("mousedown", onActive);
+    document.removeEventListener("keydown", onActive);
   }
 
   let timeInterval = null;
