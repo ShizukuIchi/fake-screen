@@ -8,7 +8,28 @@ export const render = () => {
 
 function start() {
   const wrapper = document.querySelector(".ubuntu1804-wrapper");
-  wrapper.addEventListener("mousemove", setIdleTimer);
+
+  const password = wrapper.querySelector("#password");
+  const signIn = wrapper.querySelector("#sign-in");
+  const cancel = wrapper.querySelector("#cancel");
+  const hint = wrapper.querySelector(".hint");
+  password.addEventListener("keydown", submit);
+  signIn.addEventListener("click", submit);
+  cancel.addEventListener("click", clear);
+  function submit({ key }) {
+    if (key && key !== "Enter") return;
+    hint.style.animation = "";
+    // a magic for replaying animation
+    void hint.offsetWidth;
+    hint.textContent = password.value.length
+      ? "Wrong password."
+      : "You must enter a password!";
+    hint.style.animation = "timeout 1.6s";
+  }
+  function clear() {
+    password.value = "";
+  }
+  password.addEventListener("mousemove", setIdleTimer);
   document.addEventListener("keydown", setIdleTimer);
   const timeModal = wrapper.querySelector(".ubuntu1804-time-modal");
 

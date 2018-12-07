@@ -1,8 +1,31 @@
 .ubuntu1804-wrapper
   header
   .ubuntu1804-login-container
-    section.content login todo
-    footer ubuntu 18.04
+    section.content 
+      .user-detail
+        img.avatar(src="./user.svg")
+        .name User
+      .input-container
+        .label(for="password") Password:
+        input#password(type="password" name="password")
+      .buttons
+        .cancel
+          button#cancel Cancel
+        .sign
+          .settings
+            img(src="./settings.svg") 
+            .popup
+              .popup-item Ubuntu
+              .popup-item Ubuntu with communitheme snap
+              .popup-item Ubuntu on Wayland
+              .popup-item Ubuntu on Xorg
+              .popup-item Unity
+          button#sign-in Sign In
+        .hint
+    footer 
+      .text ubuntu
+      .img
+        img(src="./ubuntu.svg")
   .ubuntu1804-time-modal
     section.content
       div.time-container
