@@ -117,7 +117,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.render = void 0;
 
-var _ubuntu = _interopRequireDefault(require("./ubuntu1804.pug"));
+var _ubuntu2 = _interopRequireDefault(require("./ubuntu1804.pug"));
 
 require("./ubuntu1804.scss");
 
@@ -125,7 +125,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var render = function render() {
   setTimeout(start);
-  return _ubuntu.default;
+  return _ubuntu2.default;
 };
 
 exports.render = render;
@@ -252,7 +252,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59554" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52215" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

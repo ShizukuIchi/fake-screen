@@ -9,4 +9,4 @@ var r=require("./bundle-url").getBundleURL;function e(r){Array.isArray(r)||(r=[r
 },{"./bundle-url":"Bh1I"}],0:[function(require,module,exports) {
 var b=require("z1Am");b.load([["ubuntu1804.1c35ff47.html","abP/"]]).then(function(){require("9cLi");});
 },{}]},{},[0], null)
-//# sourceMappingURL=/fake-screen/ubuntu1804.a61192a6.map
+//# sourceMappingURL=/fake-screen/ubuntu1804.92bc3c20.map
