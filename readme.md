@@ -27,6 +27,12 @@ Or you can click exit button on the left-top corner.
 
 - Update for 10 mins (to 100%)
 
+### Ubuntu 18.04
+
+- Login & idle screen
+
+![ubuntu1804](https://i.imgur.com/eLGA5KO.jpg)
+
 ### TODO
 
 - ...
