@@ -5,8 +5,7 @@
 ## Themes
 
 Choose whatever themes you like at home page.  
-Simply exit the screen by going back to previous page.  
-Or you can click exit button on the left-top corner.
+use chrome for the best experience
 
 ### Windows 10
 

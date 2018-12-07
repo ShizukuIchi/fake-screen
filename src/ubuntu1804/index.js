@@ -1,9 +1,9 @@
-import ubuntu from "./ubuntu1804.pug";
+import _ubuntu from "./ubuntu1804.pug";
 import "./ubuntu1804.scss";
 
 export const render = () => {
   setTimeout(start);
-  return ubuntu;
+  return _ubuntu;
 };
 
 function start() {

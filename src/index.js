@@ -5,12 +5,12 @@ import "./assets/font.css";
 import "./style.scss";
 
 const themes = {
-  win10: import("./win10/index.js"),
-  "win10-update": import("./win10-update/index.js"),
-  "win10-blue": import("./win10-blue/index.js"),
-  wannacry: import("./wannacry/index.js"),
-  macOS: import("./macOS/index.js"),
-  ubuntu1804: import("./ubuntu1804/index.js")
+  win10: () => import("./win10/index.js"),
+  "win10-update": () => import("./win10-update/index.js"),
+  "win10-blue": () => import("./win10-blue/index.js"),
+  wannacry: () => import("./wannacry/index.js"),
+  macOS: () => import("./macOS/index.js"),
+  ubuntu1804: () => import("./ubuntu1804/index.js")
 };
 const app = document.querySelector("#app");
 const options = document.querySelector(".options");
@@ -45,7 +45,7 @@ function render(name) {
 }
 
 async function renderTheme(name) {
-  const theme = await themes[name];
+  const theme = await themes[name]();
   return theme.render();
 }
 
