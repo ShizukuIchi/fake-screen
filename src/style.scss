@@ -20,7 +20,7 @@ body {
     transition: all 0s;
     cursor: pointer;
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       left: 23px;
       top: 14px;
@@ -30,7 +30,7 @@ body {
       background: rgb(22, 22, 22);
     }
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       left: 23px;
       top: 14px;
@@ -86,7 +86,7 @@ body {
       position: absolute;
       top: 0;
       left: 0;
-      content: "";
+      content: '';
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0);
@@ -95,7 +95,7 @@ body {
       position: absolute;
       top: 0;
       left: 0;
-      content: "";
+      content: '';
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.6);
@@ -103,6 +103,7 @@ body {
   }
   video,
   img {
+    border-radius: 3px;
     position: relative;
     width: 288px;
     height: 162px;
@@ -133,7 +134,7 @@ body {
   border-bottom: 1px rgb(200, 200, 200) dashed;
   &:before,
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     left: 23px;
     top: 14px;
