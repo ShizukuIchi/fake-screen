@@ -131,6 +131,7 @@ body {
 }
 .option video,
 .option img {
+  border-radius: 3px;
   position: relative;
   width: 288px;
   height: 162px;

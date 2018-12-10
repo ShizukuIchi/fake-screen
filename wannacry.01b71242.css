@@ -6,6 +6,7 @@
   justify-content: center;
   cursor: auto;
   font-family: sans-serif;
+  overflow: scroll;
 }
 .wannacry-wrapper .content {
   display: flex;
@@ -256,4 +257,14 @@
 }
 .wannacry-wrapper .underline {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .wannacry-wrapper {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .wannacry-wrapper .wannacry-container {
+    transform: scale(1);
+  }
 }

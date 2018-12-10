@@ -131,32 +131,34 @@ var render = function render() {
 exports.render = render;
 
 function start() {
-  var wrapper = document.querySelector(".ubuntu1804-wrapper");
-  var password = wrapper.querySelector("#password");
-  var signIn = wrapper.querySelector("#sign-in");
-  var cancel = wrapper.querySelector("#cancel");
-  var hint = wrapper.querySelector(".hint");
-  password.addEventListener("keydown", submit);
-  signIn.addEventListener("click", submit);
-  cancel.addEventListener("click", clear);
+  var wrapper = document.querySelector('.ubuntu1804-wrapper');
+  var password = wrapper.querySelector('#password');
+  var signIn = wrapper.querySelector('#sign-in');
+  var cancel = wrapper.querySelector('#cancel');
+  var hint = wrapper.querySelector('.hint');
+  var timeModal = wrapper.querySelector('.ubuntu1804-time-modal');
+  var loginScreen = wrapper.querySelector('.ubuntu1804-login-container');
+  password.addEventListener('keydown', submit);
+  signIn.addEventListener('click', submit);
+  cancel.addEventListener('click', clear);
 
   function submit(_ref) {
     var key = _ref.key;
-    if (key && key !== "Enter") return;
-    hint.style.animation = ""; // a magic for replaying animation
+    if (key && key !== 'Enter') return;
+    hint.style.animation = ''; // a magic for replaying animation
 
     void hint.offsetWidth;
-    hint.textContent = password.value.length ? "Wrong password." : "You must enter a password!";
-    hint.style.animation = "timeout 1.6s";
+    hint.textContent = password.value.length ? 'Wrong password.' : 'You must enter a password!';
+    hint.style.animation = 'timeout 1.8s';
   }
 
   function clear() {
-    password.value = "";
+    password.value = '';
   }
 
-  password.addEventListener("mousemove", setIdleTimer);
-  document.addEventListener("keydown", setIdleTimer);
-  var timeModal = wrapper.querySelector(".ubuntu1804-time-modal");
+  password.addEventListener('mousemove', setIdleTimer);
+  document.addEventListener('keydown', setIdleTimer);
+  loginScreen.addEventListener('mousedown', setIdleTimer);
   var idleTimer = null;
   setIdleTimer();
 
@@ -164,24 +166,23 @@ function start() {
     clearTimeout(idleTimer);
     idleTimer = setTimeout(function () {
       try {
-        timeModal.addEventListener("mousedown", onActive);
-        document.addEventListener("keydown", onActive);
+        timeModal.addEventListener('mousedown', onActive);
+        document.addEventListener('keydown', onActive);
         openTimeModal();
       } catch (e) {
         console.log(e);
-        wrapper.removeEventListener("mousemove", setIdleTimer);
-        document.removeEventListener("keydown", setIdleTimer);
+        wrapper.removeEventListener('mousemove', setIdleTimer);
+        document.removeEventListener('keydown', setIdleTimer);
+        loginScreen.removeEventListener('mousedown', setIdleTimer);
       }
     }, 6000);
   }
 
-  function onActive(_ref2) {
-    var key = _ref2.key;
-    if (key && !["Enter", " "].includes(key)) return;
+  function onActive() {
     setIdleTimer();
     closeTimeModal();
-    timeModal.removeEventListener("mousedown", onActive);
-    document.removeEventListener("keydown", onActive);
+    timeModal.removeEventListener('mousedown', onActive);
+    document.removeEventListener('keydown', onActive);
   }
 
   var timeInterval = null;
@@ -189,17 +190,19 @@ function start() {
   timeInterval = setInterval(setTime, 1000);
 
   function openTimeModal() {
-    timeModal.style.transform = "translateY(0%)";
+    password.blur();
+    timeModal.style.transform = 'translateY(0%)';
   }
 
   function closeTimeModal() {
-    timeModal.style.transform = "translateY(-100%)";
+    password.focus();
+    timeModal.style.transform = 'translateY(-100%)';
   }
 
   function setTime() {
     try {
-      var time = timeModal.querySelector(".time");
-      var date = timeModal.querySelector(".date");
+      var time = timeModal.querySelector('.time');
+      var date = timeModal.querySelector('.date');
       var now = new Date();
       time.textContent = formatDate(now);
       date.textContent = "".concat(getDayStr(now.getDay()), ", ").concat(getMonthStr(now.getMonth()), " ").concat(now.getDate());
@@ -211,18 +214,18 @@ function start() {
 }
 
 function getDayStr(d) {
-  return "Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday".split(",")[d];
+  return 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'.split(',')[d];
 }
 
 function getMonthStr(m) {
-  return "January,February,March,April,May,June,July,August,September,October,November,December".split(",")[m];
+  return 'January,February,March,April,May,June,July,August,September,October,November,December'.split(',')[m];
 }
 
 function formatDate(d) {
   var h = d.getHours();
   var m = d.getMinutes();
-  h = (h < 10 ? "0" : "") + h;
-  m = (m < 10 ? "0" : "") + m;
+  h = (h < 10 ? '0' : '') + h;
+  m = (m < 10 ? '0' : '') + m;
   return "".concat(h, ":").concat(m);
 }
 },{"./ubuntu1804.pug":"src/ubuntu1804/ubuntu1804.pug","./ubuntu1804.scss":"src/ubuntu1804/ubuntu1804.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -252,7 +255,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52215" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46389" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
