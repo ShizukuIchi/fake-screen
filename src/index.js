@@ -11,7 +11,7 @@ const themes = {
   wannacry: () => import('./wannacry/index.js'),
   macOS: () => import('./macOS/index.js'),
   ubuntu1804: () => import('./ubuntu1804/index.js'),
-  mcdonald: () => import('./mcdonald/index.js'),
+  mcdonalds: () => import('./mcdonalds/index.js'),
 };
 const app = document.querySelector('#app');
 const options = document.querySelector('.options');
