@@ -32,6 +32,11 @@ use chrome for the best experience
 
 ![ubuntu1804](https://i.imgur.com/eLGA5KO.jpg)
 
+### McDonald's
+
+- Daily coupons
+- Please DO NOT do evil things with it.
+
 ### TODO
 
 - ...
