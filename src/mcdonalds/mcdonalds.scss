@@ -1,8 +1,10 @@
-.mcdonald-wrapper {
+.mcdonalds-wrapper {
   font-family: '微軟正黑體';
-  height: 100%;
-  overflow: scroll;
+  background: #d80000;
   header {
+    pointer-events: none;
+    -webkit-overflow-scrolling: touch;
+    z-index: 11;
     background: #d80000;
     height: 50px;
     position: fixed;
@@ -18,41 +20,89 @@
       justify-content: flex-start;
       align-items: center;
       padding-left: 18px;
-      width: 100px;
+      height: 20px;
+      width: 148px;
       img {
+        position: absolute;
+        pointer-events: none;
         width: 20px;
         height: 20px;
       }
+      * {
+        transition: all 0.5s;
+      }
     }
     .title {
-      text-align: center;
-      text-shadow: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: none;
       flex: 1;
+      height: 1em;
       font-weight: 600;
+      .title-text {
+        position: absolute;
+      }
+
+      * {
+        transition: all 0.5s;
+      }
     }
-    .how-to {
-      text-align: right;
+    .how {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       padding-right: 16px;
-      width: 100px;
+      pointer-events: none;
+      width: 150px;
+      height: 25px;
+      line-height: 20px;
+      .how-text {
+        position: absolute;
+      }
+
+      * {
+        transition: all 0.5s;
+      }
+    }
+    .next-hamburger {
+      opacity: 0;
+      position: absolute;
+      pointer-events: all;
+    }
+    .next-title-text {
+      opacity: 0;
+      position: absolute;
+      transform: translateX(200%);
+    }
+    .next-how-text {
+      opacity: 0;
+      position: absolute;
     }
   }
 
   .coupons {
+    background: rgb(245, 245, 245);
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+    overflow: scroll;
+    position: absolute;
     padding-top: 50px;
     padding-bottom: 60px;
-    overflow: scroll;
     .coupon {
       background: skyblue;
+      height: 65%;
       .img-container {
         width: 100%;
-        height: 310px;
+        height: 78%;
         overflow: hidden;
       }
       img {
         width: 100%;
-        transform: translateY(-205px);
+        transform: translateY(-27%);
       }
       .detail {
+        height: 7%;
         font-size: 0.93em;
         display: flex;
         padding: 5px 40px;
@@ -62,20 +112,48 @@
         background: #387d98;
       }
       .status {
-        height: 60px;
+        height: 15%;
         line-height: 60px;
         text-align: center;
         font-size: 1.25em;
         background: rgb(245, 245, 245);
         letter-spacing: 6px;
+        .no-letter-spacing {
+          letter-spacing: 0;
+        }
       }
-      // .underline {
-      //   text-decoration: underline;
-      // }
+      .underline {
+        text-decoration: underline;
+      }
+    }
+  }
+  .coupon-page {
+    transform: translateX(100%);
+    transition: transform 0.4s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    footer {
+      background: #ff820d;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.25em;
+      letter-spacing: 1px;
+    }
+    .exp {
+      color: white;
     }
   }
 
   footer {
+    pointer-events: none;
+    -webkit-overflow-scrolling: touch;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -83,6 +161,7 @@
     display: flex;
     background: rgb(245, 245, 245);
     border-top: 0.5px rgba(0, 0, 0, 0.2) solid;
+    height: 60px;
 
     .item {
       flex: 1;
