@@ -77,8 +77,7 @@ body {
 .wrapper {
   padding: 50px;
 }
-
-.title {
+.wrapper .title {
   text-shadow: #3dc1d3 1px 1px 3px;
   color: #63cdda;
   text-align: center;

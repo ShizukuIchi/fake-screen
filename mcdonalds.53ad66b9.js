@@ -104,7 +104,12 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"src/win10-update/index.js":[function(require,module,exports) {
+})({"src/mcdonalds/mcdonalds.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/mcdonalds/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -112,124 +117,79 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.render = void 0;
 
-var _updateOnly = _interopRequireDefault(require("./update-only.pug"));
+var _mcdonalds = _interopRequireDefault(require("./mcdonalds.pug"));
 
-require("../win10/update.scss");
+require("./mcdonalds.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 var render = function render() {
-  startProgress();
-  return _updateOnly.default;
+  setTimeout(start);
+  return _mcdonalds.default;
 };
 
 exports.render = render;
 
-function startProgress() {
-  return _startProgress.apply(this, arguments);
+function start() {
+  var wrapper = document.querySelector('.mcdonalds-wrapper');
+  var couponPage = wrapper.querySelector('.coupon-page');
+  var coupons = wrapper.querySelector('.coupons');
+  var header = wrapper.querySelector('header');
+  var hamburgerIcon = header.querySelector('.hamburger img');
+  var nextHamburgerIcon = header.querySelector('.next-hamburger');
+  var title = header.querySelector('.title-text');
+  var nextTitle = header.querySelector('.next-title-text');
+  var how = header.querySelector('.how-text');
+  var nextHow = header.querySelector('.next-how-text');
+  var hamburger = header.querySelector('.hamburger');
+  var exp = wrapper.querySelector('.exp');
+  coupons.addEventListener('click', handleExchange);
+
+  function handleExchange(e) {
+    e.preventDefault();
+    var target = e.target.closest('.status');
+
+    if (target && Array.from(target.classList).includes('status')) {
+      openCouponPage();
+    } else {
+      return;
+    }
+  }
+
+  exp.textContent = setExp();
+
+  function setExp() {
+    var date = new Date();
+    return "\u671F\u9650\uFF1A".concat(date.getFullYear(), " \u5E74 ").concat(date.getMonth() + 1, " \u6708 ").concat(date.getDate() + 3, " \u65E5");
+  }
+
+  function openCouponPage() {
+    hamburgerIcon.style.opacity = '0';
+    nextHamburgerIcon.style.opacity = '100';
+    title.style.transform = "translateX(-200%)";
+    title.style.opacity = '0';
+    nextTitle.style.transform = "translateX(0%)";
+    nextTitle.style.opacity = '100';
+    how.style.opacity = '0';
+    nextHow.style.opacity = '100';
+    couponPage.style.transform = 'translateX(0%)';
+    hamburger.addEventListener('click', closeCouponPage);
+  }
+
+  function closeCouponPage() {
+    couponPage.style.transform = 'translateX(100%)';
+    hamburgerIcon.style.opacity = '100';
+    nextHamburgerIcon.style.opacity = '0';
+    title.style.transform = "translateX(0%)";
+    title.style.opacity = '100';
+    nextTitle.style.transform = "translateX(200%)";
+    nextTitle.style.opacity = '0';
+    how.style.opacity = '100';
+    nextHow.style.opacity = '0';
+    hamburger.removeEventListener('click', closeCouponPage);
+  }
 }
-
-function _startProgress() {
-  _startProgress = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee() {
-    var progress, progressValue;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return getProgress();
-
-          case 2:
-            progress = _context.sent;
-            progressValue = 1;
-
-          case 4:
-            if (!document.querySelector('.win10-update-wrapper')) {
-              _context.next = 10;
-              break;
-            }
-
-            _context.next = 7;
-            return sleep(Math.random() * 5000 + 5000);
-
-          case 7:
-            progress.innerText = progressValue++;
-            _context.next = 4;
-            break;
-
-          case 10:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, this);
-  }));
-  return _startProgress.apply(this, arguments);
-}
-
-function sleep(ms) {
-  return new Promise(function (res) {
-    return setTimeout(res, ms);
-  });
-}
-
-function getProgress() {
-  return _getProgress.apply(this, arguments);
-}
-
-function _getProgress() {
-  _getProgress = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2() {
-    var progress;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            progress = null;
-
-          case 1:
-            if (progress) {
-              _context2.next = 7;
-              break;
-            }
-
-            _context2.next = 4;
-            return findProgress();
-
-          case 4:
-            progress = _context2.sent;
-            _context2.next = 1;
-            break;
-
-          case 7:
-            return _context2.abrupt("return", progress);
-
-          case 8:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, this);
-  }));
-  return _getProgress.apply(this, arguments);
-}
-
-function findProgress() {
-  return new Promise(function (res) {
-    setTimeout(function () {
-      var progress = document.querySelector('#progress');
-      res(progress);
-    });
-  });
-}
-},{"./update-only.pug":"src/win10-update/update-only.pug","../win10/update.scss":"src/win10/update.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./mcdonalds.pug":"src/mcdonalds/mcdonalds.pug","./mcdonalds.scss":"src/mcdonalds/mcdonalds.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -399,4 +359,4 @@ function hmrAccept(bundle, id) {
   });
 }
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/win10-update.61b83e2c.map
+//# sourceMappingURL=/mcdonalds.53ad66b9.map

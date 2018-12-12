@@ -104,7 +104,12 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"src/win10-update/index.js":[function(require,module,exports) {
+})({"src/mcdonald/mcdonald.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/mcdonald/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -112,124 +117,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.render = void 0;
 
-var _updateOnly = _interopRequireDefault(require("./update-only.pug"));
+var _mcdonald = _interopRequireDefault(require("./mcdonald.pug"));
 
-require("../win10/update.scss");
+require("./mcdonald.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 var render = function render() {
-  startProgress();
-  return _updateOnly.default;
+  setTimeout(start);
+  return _mcdonald.default;
 };
 
 exports.render = render;
 
-function startProgress() {
-  return _startProgress.apply(this, arguments);
-}
-
-function _startProgress() {
-  _startProgress = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee() {
-    var progress, progressValue;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return getProgress();
-
-          case 2:
-            progress = _context.sent;
-            progressValue = 1;
-
-          case 4:
-            if (!document.querySelector('.win10-update-wrapper')) {
-              _context.next = 10;
-              break;
-            }
-
-            _context.next = 7;
-            return sleep(Math.random() * 5000 + 5000);
-
-          case 7:
-            progress.innerText = progressValue++;
-            _context.next = 4;
-            break;
-
-          case 10:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, this);
-  }));
-  return _startProgress.apply(this, arguments);
-}
-
-function sleep(ms) {
-  return new Promise(function (res) {
-    return setTimeout(res, ms);
-  });
-}
-
-function getProgress() {
-  return _getProgress.apply(this, arguments);
-}
-
-function _getProgress() {
-  _getProgress = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2() {
-    var progress;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            progress = null;
-
-          case 1:
-            if (progress) {
-              _context2.next = 7;
-              break;
-            }
-
-            _context2.next = 4;
-            return findProgress();
-
-          case 4:
-            progress = _context2.sent;
-            _context2.next = 1;
-            break;
-
-          case 7:
-            return _context2.abrupt("return", progress);
-
-          case 8:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2, this);
-  }));
-  return _getProgress.apply(this, arguments);
-}
-
-function findProgress() {
-  return new Promise(function (res) {
-    setTimeout(function () {
-      var progress = document.querySelector('#progress');
-      res(progress);
-    });
-  });
-}
-},{"./update-only.pug":"src/win10-update/update-only.pug","../win10/update.scss":"src/win10/update.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+function start() {}
+},{"./mcdonald.pug":"src/mcdonald/mcdonald.pug","./mcdonald.scss":"src/mcdonald/mcdonald.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -256,7 +158,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43031" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44375" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
@@ -399,4 +301,4 @@ function hmrAccept(bundle, id) {
   });
 }
 },{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/win10-update.61b83e2c.map
+//# sourceMappingURL=/mcdonald.2e853032.map

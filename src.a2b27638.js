@@ -7986,39 +7986,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var themes = {
   win10: function win10() {
-    return require("_bundle_loader")(require.resolve("./win10/index.js"));
+    return require("_bundle_loader")(require.resolve('./win10/index.js'));
   },
-  "win10-update": function win10Update() {
-    return require("_bundle_loader")(require.resolve("./win10-update/index.js"));
+  'win10-update': function win10Update() {
+    return require("_bundle_loader")(require.resolve('./win10-update/index.js'));
   },
-  "win10-blue": function win10Blue() {
-    return require("_bundle_loader")(require.resolve("./win10-blue/index.js"));
+  'win10-blue': function win10Blue() {
+    return require("_bundle_loader")(require.resolve('./win10-blue/index.js'));
   },
   wannacry: function wannacry() {
-    return require("_bundle_loader")(require.resolve("./wannacry/index.js"));
+    return require("_bundle_loader")(require.resolve('./wannacry/index.js'));
   },
   macOS: function macOS() {
-    return require("_bundle_loader")(require.resolve("./macOS/index.js"));
+    return require("_bundle_loader")(require.resolve('./macOS/index.js'));
   },
   ubuntu1804: function ubuntu1804() {
-    return require("_bundle_loader")(require.resolve("./ubuntu1804/index.js"));
+    return require("_bundle_loader")(require.resolve('./ubuntu1804/index.js'));
+  },
+  mcdonalds: function mcdonalds() {
+    return require("_bundle_loader")(require.resolve('./mcdonalds/index.js'));
   }
 };
-var app = document.querySelector("#app");
-var options = document.querySelector(".options");
-app.querySelector(".close").onclick = onAppClose;
+var app = document.querySelector('#app');
+var options = document.querySelector('.options');
+app.querySelector('.close').onclick = onAppClose;
 
 options.onclick = function (e) {
-  var target = e.target.closest(".option");
+  var target = e.target.closest('.option');
 
   if (target && target !== options) {
     try {
-      render(e.target.closest(".option").id);
+      render(e.target.closest('.option').id);
     } catch (e) {
       console.log(e);
     }
   } else {
-    console.log("please click on a theme");
+    console.log('please click on a theme');
   }
 };
 
@@ -8026,7 +8029,7 @@ function render(name) {
   _screenfull.default.enabled ? _screenfull.default.request(app) : undefined; // API can only be initiated by a user gesture.
 
   renderTheme(name).then(function (content) {
-    var container = app.querySelector(".content");
+    var container = app.querySelector('.content');
     container.innerHTML = content;
     onAppOpen(name);
   }).catch(function (e) {
@@ -8066,16 +8069,16 @@ function _renderTheme() {
 }
 
 function onAppClose() {
-  history.replaceState(null, "", "./");
+  history.replaceState(null, '', './');
   _screenfull.default.enabled ? _screenfull.default.exit() : undefined;
-  app.style.visibility = "hidden";
+  app.style.visibility = 'hidden';
 }
 
 function onAppOpen(name) {
   history.pushState({
     app: name
   }, name, name);
-  app.style.visibility = "visible";
+  app.style.visibility = 'visible';
 }
 
 window.onpopstate = function (e) {
@@ -8083,7 +8086,7 @@ window.onpopstate = function (e) {
     onAppClose();
   }
 };
-},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","screenfull":"node_modules/screenfull/dist/screenfull.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10/index.js":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["win10.541c087a.html","src/win10/win10.pug"],"src/win10/index.js"],"./win10-update/index.js":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue/index.js":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"],"./wannacry/index.js":[["wannacry.01b71242.js","src/wannacry/index.js"],"wannacry.01b71242.map","wannacry.01b71242.css",["wannacry.dea1e955.html","src/wannacry/wannacry.pug"],"src/wannacry/index.js"],"./macOS/index.js":[["macOS.68f4f6db.js","src/macOS/index.js"],"macOS.68f4f6db.map",["macOS.930beb3b.html","src/macOS/macOS.pug"],"macOS.68f4f6db.css","src/macOS/index.js"],"./ubuntu1804/index.js":[["ubuntu1804.6814eb3a.js","src/ubuntu1804/index.js"],"ubuntu1804.6814eb3a.map",["ubuntu1804.d53e434e.html","src/ubuntu1804/ubuntu1804.pug"],"ubuntu1804.6814eb3a.css","src/ubuntu1804/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
+},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","screenfull":"node_modules/screenfull/dist/screenfull.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10/index.js":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["win10.541c087a.html","src/win10/win10.pug"],"src/win10/index.js"],"./win10-update/index.js":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue/index.js":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"],"./wannacry/index.js":[["wannacry.01b71242.js","src/wannacry/index.js"],"wannacry.01b71242.map","wannacry.01b71242.css",["wannacry.dea1e955.html","src/wannacry/wannacry.pug"],"src/wannacry/index.js"],"./macOS/index.js":[["macOS.68f4f6db.js","src/macOS/index.js"],"macOS.68f4f6db.map",["macOS.930beb3b.html","src/macOS/macOS.pug"],"macOS.68f4f6db.css","src/macOS/index.js"],"./ubuntu1804/index.js":[["ubuntu1804.6814eb3a.js","src/ubuntu1804/index.js"],"ubuntu1804.6814eb3a.map",["ubuntu1804.d53e434e.html","src/ubuntu1804/ubuntu1804.pug"],"ubuntu1804.6814eb3a.css","src/ubuntu1804/index.js"],"./mcdonalds/index.js":[["mcdonalds.53ad66b9.js","src/mcdonalds/index.js"],"mcdonalds.53ad66b9.map",["mcdonalds.c20d335a.html","src/mcdonalds/mcdonalds.pug"],"mcdonalds.53ad66b9.css","src/mcdonalds/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -8120,7 +8123,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46389" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43031" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
