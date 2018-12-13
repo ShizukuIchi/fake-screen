@@ -36,6 +36,7 @@ use chrome for the best experience
 
 - Daily coupons
 - Please DO NOT do evil things with it.
+- You can add this page to home page to hide url bar on iOS.
 
 ### TODO
 
