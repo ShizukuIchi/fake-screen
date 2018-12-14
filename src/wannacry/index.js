@@ -1,5 +1,5 @@
 import 'babel-polyfill';
-import CountDowner from './CountDowner.js';
+import CountDowner from '../assets/CountDowner.js';
 import './wannacry.scss';
 import wannacry from './wannacry.pug';
 
@@ -40,9 +40,13 @@ function start() {
   const payCountDowner = new CountDowner(payDate);
   pay.innerHTML = payCountDowner.formatLast();
   payOn.innerHTML = payCountDowner.formatTill();
+  const test = payCountDowner.formatFromCB(function(array) {
+    return array[3];
+  });
   payCountDowner.on('second', () => {
     payProgress.style.height = `${(1 - payCountDowner.progress()) * 100}%`;
     pay.innerHTML = payCountDowner.formatLast();
+    console.log(test());
   });
   payCountDowner.on('stop', () => {
     payProgress.style.height = `${(1 - payCountDowner.progress()) * 100}%`;

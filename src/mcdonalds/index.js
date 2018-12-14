@@ -1,5 +1,7 @@
 import mcdonalds from './mcdonalds.pug';
 import './mcdonalds.scss';
+import clock from './clock.svg';
+import CountDowner from '../assets/CountDowner.js';
 
 export const render = () => {
   setTimeout(start);
@@ -19,6 +21,9 @@ function start() {
   const nextHow = header.querySelector('.next-how-text');
   const hamburger = header.querySelector('.hamburger');
   const exp = wrapper.querySelector('.exp');
+  const couponFooter = couponPage.querySelector('footer');
+  const couponFooterText = couponFooter.querySelector('.exchange');
+
   coupons.addEventListener('click', handleExchange);
   function handleExchange(e) {
     e.preventDefault();
@@ -29,11 +34,20 @@ function start() {
       return;
     }
   }
+  console.log(couponFooter);
   exp.textContent = setExp();
+  couponFooter.onclick = () => {
+    confirm('確認兌換優惠');
+    onExchange();
+  };
   function setExp() {
     const date = new Date();
     return `期限：${date.getFullYear()} 年 ${date.getMonth() +
       1} 月 ${date.getDate() + 3} 日`;
+  }
+  function onExchange() {
+    couponFooter.style.height = '90px';
+    couponFooterText.innerHTML = `<img src=${clock} alt="clock"/>優惠倒數<span id="exchanged-exp">1:59</span>`;
   }
   function openCouponPage() {
     hamburgerIcon.style.opacity = '0';
