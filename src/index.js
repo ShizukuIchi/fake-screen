@@ -6,7 +6,6 @@ import './style.scss';
 
 // wierd module not found bug walk around
 import u from './ubuntu1804/ubuntu1804.pug';
-// history.replaceState(null, '', './');
 const themes = {
   win10: () => import('./win10/index.js'),
   'win10-update': () => import('./win10-update/index.js'),
@@ -19,7 +18,6 @@ const themes = {
 };
 const app = document.querySelector('#app');
 const options = document.querySelector('.options');
-
 app.querySelector('.close').onclick = onAppClose;
 options.onclick = e => {
   const target = e.target.closest('.option');

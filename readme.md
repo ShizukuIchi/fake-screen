@@ -7,6 +7,11 @@
 Choose whatever themes you like at home page.  
 use chrome for the best experience
 
+### Google Search
+
+- Get not match whatever you typed
+
+![Not match](https://i.imgur.com/FVIwkPq.png)
 ### Windows 10
 
 - Update and then blue screen
@@ -28,7 +33,7 @@ use chrome for the best experience
 
 ### Ubuntu 18.04
 
-- Login & idle screen
+- Login & Lock
 
 ![ubuntu1804](https://i.imgur.com/eLGA5KO.jpg)
 
@@ -38,12 +43,6 @@ use chrome for the best experience
 - Tested on iPhone. Add to home page to hide url bar.
 
 ![McDonalds's App](https://i.imgur.com/jLcNOuD.png)
-
-### Google Search
-
-- 99.9% into a real
-
-![Google Search](https://i.imgur.com/cm1uwzI.png)
 
 ### TODO
 
