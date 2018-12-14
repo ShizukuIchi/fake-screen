@@ -137,6 +137,8 @@
   height: 100%;
 }
 .mcdonalds-wrapper .coupon-page footer {
+  pointer-events: all;
+  transition: height 0.6s;
   background: #ff820d;
   color: white;
   display: flex;
@@ -145,8 +147,16 @@
   font-size: 1.25em;
   letter-spacing: 1px;
 }
-.mcdonalds-wrapper .coupon-page .exp {
+.mcdonalds-wrapper .coupon-page .exchange {
+  display: flex;
+  align-items: center;
   color: white;
+  line-height: 22px;
+}
+.mcdonalds-wrapper .coupon-page .exchange img {
+  margin: 10px;
+  width: 22px;
+  height: 22px;
 }
 .mcdonalds-wrapper footer {
   pointer-events: none;

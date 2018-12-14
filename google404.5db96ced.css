@@ -147,3 +147,25 @@
 .google-wrapper footer .right .item {
   padding-right: 27px;
 }
+@media (max-width: 768px) {
+  .google-wrapper header img {
+    width: 36px;
+  }
+  .google-wrapper .content .search-bar {
+    width: 90%;
+    margin-left: 0;
+  }
+  .google-wrapper .logo {
+    width: 204px;
+    height: 69px;
+  }
+  .google-wrapper footer .left .item {
+    padding-left: 14px;
+  }
+  .google-wrapper footer .right .item {
+    padding-right: 14px;
+  }
+  .google-wrapper footer .lower .item {
+    display: none;
+  }
+}

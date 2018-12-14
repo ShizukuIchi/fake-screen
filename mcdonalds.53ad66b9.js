@@ -109,7 +109,9 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/mcdonalds/index.js":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/mcdonalds/clock.svg":[function(require,module,exports) {
+module.exports = "/clock.5626f392.svg";
+},{}],"src/mcdonalds/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -120,6 +122,10 @@ exports.render = void 0;
 var _mcdonalds = _interopRequireDefault(require("./mcdonalds.pug"));
 
 require("./mcdonalds.scss");
+
+var _clock = _interopRequireDefault(require("./clock.svg"));
+
+var _CountDowner = _interopRequireDefault(require("../assets/CountDowner.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -143,6 +149,8 @@ function start() {
   var nextHow = header.querySelector('.next-how-text');
   var hamburger = header.querySelector('.hamburger');
   var exp = wrapper.querySelector('.exp');
+  var couponFooter = couponPage.querySelector('footer');
+  var couponFooterText = couponFooter.querySelector('.exchange');
   coupons.addEventListener('click', handleExchange);
 
   function handleExchange(e) {
@@ -156,11 +164,22 @@ function start() {
     }
   }
 
+  console.log(couponFooter);
   exp.textContent = setExp();
+
+  couponFooter.onclick = function () {
+    confirm('確認兌換優惠');
+    onExchange();
+  };
 
   function setExp() {
     var date = new Date();
     return "\u671F\u9650\uFF1A".concat(date.getFullYear(), " \u5E74 ").concat(date.getMonth() + 1, " \u6708 ").concat(date.getDate() + 3, " \u65E5");
+  }
+
+  function onExchange() {
+    couponFooter.style.height = '90px';
+    couponFooterText.innerHTML = "<img src=".concat(_clock.default, " alt=\"clock\"/>\u512A\u60E0\u5012\u6578<span id=\"exchanged-exp\">1:59</span>");
   }
 
   function openCouponPage() {
@@ -189,7 +208,7 @@ function start() {
     hamburger.removeEventListener('click', closeCouponPage);
   }
 }
-},{"./mcdonalds.pug":"src/mcdonalds/mcdonalds.pug","./mcdonalds.scss":"src/mcdonalds/mcdonalds.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./mcdonalds.pug":"src/mcdonalds/mcdonalds.pug","./mcdonalds.scss":"src/mcdonalds/mcdonalds.scss","./clock.svg":"src/mcdonalds/clock.svg","../assets/CountDowner.js":"src/assets/CountDowner.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -216,7 +235,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65010" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59450" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

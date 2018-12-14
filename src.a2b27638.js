@@ -7988,51 +7988,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var themes = {
   win10: function win10() {
-    return require("_bundle_loader")(require.resolve("./win10/index.js"));
+    return require("_bundle_loader")(require.resolve('./win10/index.js'));
   },
-  "win10-update": function win10Update() {
-    return require("_bundle_loader")(require.resolve("./win10-update/index.js"));
+  'win10-update': function win10Update() {
+    return require("_bundle_loader")(require.resolve('./win10-update/index.js'));
   },
-  "win10-blue": function win10Blue() {
-    return require("_bundle_loader")(require.resolve("./win10-blue/index.js"));
+  'win10-blue': function win10Blue() {
+    return require("_bundle_loader")(require.resolve('./win10-blue/index.js'));
   },
   wannacry: function wannacry() {
-    return require("_bundle_loader")(require.resolve("./wannacry/index.js"));
+    return require("_bundle_loader")(require.resolve('./wannacry/index.js'));
   },
   macOS: function macOS() {
-    return require("_bundle_loader")(require.resolve("./macOS/index.js"));
+    return require("_bundle_loader")(require.resolve('./macOS/index.js'));
   },
   ubuntu1804: function ubuntu1804() {
-    return require("_bundle_loader")(require.resolve("./ubuntu1804/index.js"));
+    return require("_bundle_loader")(require.resolve('./ubuntu1804/index.js'));
   },
   mcdonalds: function mcdonalds() {
-    return require("_bundle_loader")(require.resolve("./mcdonalds/index.js"));
+    return require("_bundle_loader")(require.resolve('./mcdonalds/index.js'));
   },
   google404: function google404() {
-    return require("_bundle_loader")(require.resolve("./google404/index.js"));
+    return require("_bundle_loader")(require.resolve('./google404/index.js'));
   }
 };
-var app = document.querySelector("#app");
-var options = document.querySelector(".options");
-app.querySelector(".close").onclick = onAppClose;
+var app = document.querySelector('#app');
+var options = document.querySelector('.options');
+app.querySelector('.close').onclick = onAppClose;
 
 options.onclick = function (e) {
-  var target = e.target.closest(".option");
+  var target = e.target.closest('.option');
 
   if (target && target !== options) {
     try {
-      renderTheme(e.target.closest(".option").id);
+      renderTheme(e.target.closest('.option').id);
     } catch (e) {
       console.log(e);
     }
   } else {
-    console.log("please click on a theme");
+    console.log('please click on a theme');
   }
 };
 
 function renderTheme(name) {
   _screenfull.default.enabled ? _screenfull.default.request(app) : undefined;
-  var container = app.querySelector(".content"); // API can only be initiated by a user gesture.
+  var container = app.querySelector('.content'); // API can only be initiated by a user gesture.
 
   loadThemeIn(name, container).then(function (content) {
     if (content) {
@@ -8065,7 +8065,7 @@ function _loadThemeIn() {
           case 2:
             theme = _context.sent;
 
-            if (!(typeof theme.render === "function")) {
+            if (!(typeof theme.render === 'function')) {
               _context.next = 7;
               break;
             }
@@ -8086,16 +8086,16 @@ function _loadThemeIn() {
 }
 
 function onAppClose() {
-  history.replaceState(null, "", "./");
+  history.replaceState(null, '', './');
   _screenfull.default.enabled && _screenfull.default.isFullscreen ? _screenfull.default.exit() : undefined;
-  app.style.visibility = "hidden";
+  app.style.visibility = 'hidden';
 }
 
 function onAppOpen(name) {
   history.pushState({
     app: name
   }, name, name);
-  app.style.visibility = "visible";
+  app.style.visibility = 'visible';
 }
 
 window.onpopstate = function (e) {
@@ -8103,7 +8103,7 @@ window.onpopstate = function (e) {
     onAppClose();
   }
 };
-},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","screenfull":"node_modules/screenfull/dist/screenfull.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","./ubuntu1804/ubuntu1804.pug":"src/ubuntu1804/ubuntu1804.pug","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10/index.js":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["win10.541c087a.html","src/win10/win10.pug"],"src/win10/index.js"],"./win10-update/index.js":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue/index.js":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"],"./wannacry/index.js":[["wannacry.01b71242.js","src/wannacry/index.js"],"wannacry.01b71242.map","wannacry.01b71242.css",["wannacry.dea1e955.html","src/wannacry/wannacry.pug"],"src/wannacry/index.js"],"./macOS/index.js":[["macOS.68f4f6db.js","src/macOS/index.js"],"macOS.68f4f6db.map",["macOS.930beb3b.html","src/macOS/macOS.pug"],"macOS.68f4f6db.css","src/macOS/index.js"],"./ubuntu1804/index.js":[["ubuntu1804.6814eb3a.js","src/ubuntu1804/index.js"],"ubuntu1804.6814eb3a.map","ubuntu1804.6814eb3a.css","src/ubuntu1804/index.js"],"./mcdonalds/index.js":[["mcdonalds.53ad66b9.js","src/mcdonalds/index.js"],"mcdonalds.53ad66b9.map",["mcdonalds.c20d335a.html","src/mcdonalds/mcdonalds.pug"],"mcdonalds.53ad66b9.css","src/mcdonalds/index.js"],"./google404/index.js":[["google404.5db96ced.js","src/google404/index.js"],"google404.5db96ced.map",["google.ef319dcf.html","src/google404/google.pug"],"google404.5db96ced.css","src/google404/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
+},{"babel-polyfill":"node_modules/babel-polyfill/lib/index.js","screenfull":"node_modules/screenfull/dist/screenfull.js","./assets/clear.css":"src/assets/clear.css","./assets/font.css":"src/assets/font.css","./style.scss":"src/style.scss","./ubuntu1804/ubuntu1804.pug":"src/ubuntu1804/ubuntu1804.pug","_bundle_loader":"node_modules/parcel-bundler/src/builtins/bundle-loader.js","./win10/index.js":[["win10.4c52f76e.js","src/win10/index.js"],"win10.4c52f76e.map",["win10.541c087a.html","src/win10/win10.pug"],"src/win10/index.js"],"./win10-update/index.js":[["win10-update.61b83e2c.js","src/win10-update/index.js"],"win10-update.61b83e2c.map",["update-only.784d5d29.html","src/win10-update/update-only.pug"],"src/win10-update/index.js"],"./win10-blue/index.js":[["win10-blue.abec6cd6.js","src/win10-blue/index.js"],"win10-blue.abec6cd6.map",["blue-only.c187e11d.html","src/win10-blue/blue-only.pug"],"src/win10-blue/index.js"],"./wannacry/index.js":[["wannacry.01b71242.js","src/wannacry/index.js"],"wannacry.01b71242.map","wannacry.01b71242.css",["wannacry.dea1e955.html","src/wannacry/wannacry.pug"],"src/wannacry/index.js"],"./macOS/index.js":[["macOS.68f4f6db.js","src/macOS/index.js"],"macOS.68f4f6db.map",["macOS.930beb3b.html","src/macOS/macOS.pug"],"macOS.68f4f6db.css","src/macOS/index.js"],"./ubuntu1804/index.js":[["ubuntu1804.6814eb3a.js","src/ubuntu1804/index.js"],"ubuntu1804.6814eb3a.map","ubuntu1804.6814eb3a.css","src/ubuntu1804/index.js"],"./mcdonalds/index.js":[["mcdonalds.53ad66b9.js","src/mcdonalds/index.js"],"mcdonalds.53ad66b9.map",["mcdonalds.c20d335a.html","src/mcdonalds/mcdonalds.pug"],"mcdonalds.53ad66b9.css",["clock.5626f392.svg","src/mcdonalds/clock.svg"],"src/mcdonalds/index.js"],"./google404/index.js":[["google404.5db96ced.js","src/google404/index.js"],"google404.5db96ced.map",["google.ef319dcf.html","src/google404/google.pug"],"google404.5db96ced.css","src/google404/index.js"]}],"src/win10/update.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -8113,7 +8113,136 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/assets/CountDowner.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CountDowner =
+/*#__PURE__*/
+function () {
+  function CountDowner(till) {
+    _classCallCheck(this, CountDowner);
+
+    till.setSeconds(till.getSeconds() + 1);
+    this.till = till;
+    this.callbacks = {
+      stop: [],
+      second: []
+    };
+    this.toFixStr = this.toFixStr.bind(this);
+    this.interval = null;
+    this.origin = new Date();
+    this.start();
+  }
+
+  _createClass(CountDowner, [{
+    key: "formatTill",
+    value: function formatTill() {
+      var _this = this;
+
+      var year = this.till.getFullYear();
+      var month = this.till.getMonth() + 1;
+      var date = this.till.getDate();
+      var hour = this.till.getHours();
+      var minute = this.till.getMinutes();
+      var second = this.till.getSeconds();
+      return [month, date, year].map(function (s) {
+        return _this.toFixStr(s);
+      }).join('/') + ' ' + [hour, minute, second].map(function (s) {
+        return _this.toFixStr(s);
+      }).join(':');
+    }
+  }, {
+    key: "toFixStr",
+    value: function toFixStr(s) {
+      return (s < 10 ? '0' : '') + s;
+    }
+  }, {
+    key: "progress",
+    value: function progress() {
+      var percentage = this.timeDiff / (this.till.getTime() - this.origin);
+      return percentage < 0 ? 0 : percentage;
+    }
+  }, {
+    key: "formatLast",
+    value: function formatLast() {
+      var _this2 = this;
+
+      return this.getLast().map(function (e) {
+        return _this2.toFixStr(e);
+      }).join(':');
+    }
+  }, {
+    key: "formatFromCB",
+    value: function formatFromCB(cb) {
+      var _this3 = this;
+
+      return function () {
+        return cb(_this3.getLast());
+      };
+    }
+  }, {
+    key: "getLast",
+    value: function getLast() {
+      var diffDays = Math.floor(this.timeDiff / (1000 * 3600 * 24));
+      var diffHours = Math.floor(this.timeDiff / (1000 * 3600));
+      var diffMinutes = Math.floor(this.timeDiff / (1000 * 60));
+      var diffSeconds = Math.floor(this.timeDiff / 1000);
+      return [diffDays, diffHours - diffDays * 24, diffMinutes - diffHours * 60, diffSeconds - diffMinutes * 60];
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      var _this4 = this;
+
+      this.timeDiff = this.till.getTime() - new Date().getTime();
+      this.interval = setInterval(function () {
+        _this4.timeDiff = _this4.till.getTime() - new Date().getTime();
+
+        if (_this4.timeDiff < 0) {
+          _this4.stop();
+        } else {
+          _this4.callbacks.second.forEach(function (cb) {
+            return cb();
+          });
+        }
+      }, 1000);
+    }
+  }, {
+    key: "stop",
+    value: function stop() {
+      clearInterval(this.interval);
+      this.callbacks.stop.forEach(function (cb) {
+        return cb();
+      });
+    }
+  }, {
+    key: "on",
+    value: function on(str, cb) {
+      if (str in this.callbacks) {
+        this.callbacks[str].push(cb);
+      } else {
+        throw Error("no ".concat(str, " type callback"));
+      }
+    }
+  }]);
+
+  return CountDowner;
+}();
+
+var _default = CountDowner;
+exports.default = _default;
+},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -8140,7 +8269,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65010" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59450" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
