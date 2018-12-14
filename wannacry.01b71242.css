@@ -6,7 +6,6 @@
   justify-content: center;
   cursor: auto;
   font-family: sans-serif;
-  overflow: scroll;
 }
 .wannacry-wrapper .content {
   display: flex;
@@ -262,6 +261,7 @@
 @media (max-width: 768px) {
   .wannacry-wrapper {
     justify-content: flex-start;
+    overflow: scroll;
     align-items: flex-start;
   }
   .wannacry-wrapper .wannacry-container {

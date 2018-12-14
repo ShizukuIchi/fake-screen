@@ -158,6 +158,13 @@ function start() {
     });
   };
 
+  enter.ontouchend = function () {
+    var text = search.value;
+    renderSearchPage(text).catch(function (e) {
+      throw e;
+    });
+  };
+
   function renderSearchPage(_x) {
     return _renderSearchPage.apply(this, arguments);
   }
@@ -171,14 +178,22 @@ function start() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return require("_bundle_loader")(require.resolve('./search.scss'));
+              if (text.length) {
+                _context.next = 2;
+                break;
+              }
+
+              return _context.abrupt("return");
 
             case 2:
               _context.next = 4;
-              return require("_bundle_loader")(require.resolve('./search.pug'));
+              return require("_bundle_loader")(require.resolve('./search.scss'));
 
             case 4:
+              _context.next = 6;
+              return require("_bundle_loader")(require.resolve('./search.pug'));
+
+            case 6:
               searchPageHtml = _context.sent;
               wrapper.innerHTML = searchPageHtml;
               searchText = wrapper.querySelector('#search-in-content');
@@ -193,7 +208,7 @@ function start() {
                 });
               };
 
-            case 11:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -230,7 +245,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59450" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53642" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
