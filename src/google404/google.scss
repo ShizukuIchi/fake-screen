@@ -147,4 +147,33 @@
       padding-right: 27px;
     }
   }
+
+  @media (max-width: 768px) {
+    header {
+      img {
+        width: 36px;
+      }
+    }
+    .content .search-bar {
+      width: 90%;
+      margin-left: 0;
+    }
+    .logo {
+      width: 204px;
+      height: 69px;
+    }
+    footer {
+      .left .item {
+        padding-left:  14px;
+      }
+      .right .item {
+        padding-right: 14px;
+      }
+      .lower {
+        .item {
+          display: none;
+        }
+      }
+    }
+  }
 }
