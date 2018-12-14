@@ -26,8 +26,15 @@ function start() {
       throw e;
     });
   }
+  enter.ontouchend = () => {
+    const text = search.value;
+    renderSearchPage(text).catch(e => {
+      throw e;
+    });
+  };
 
   async function renderSearchPage(text) {
+    if (!text.length) return;
     await import('./search.scss');
     const searchPageHtml = await import('./search.pug');
     wrapper.innerHTML = searchPageHtml;
