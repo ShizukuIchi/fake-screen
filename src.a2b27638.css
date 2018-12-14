@@ -105,6 +105,9 @@ body {
   background: #000;
   text-align: center;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 3px;
   width: 288px;
   height: 162px;

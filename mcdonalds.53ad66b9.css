@@ -28,7 +28,6 @@
 }
 .mcdonalds-wrapper header .hamburger img {
   position: absolute;
-  pointer-events: none;
   width: 20px;
   height: 20px;
 }
