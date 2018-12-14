@@ -32,11 +32,18 @@ use chrome for the best experience
 
 ![ubuntu1804](https://i.imgur.com/eLGA5KO.jpg)
 
-### McDonald's
+### McDonald's App
 
-- Daily coupons
 - Please DO NOT do evil things with it.
-- You can add this page to home page to hide url bar on iOS.
+- Tested on iPhone. Add to home page to hide url bar.
+
+![McDonalds's App](https://i.imgur.com/jLcNOuD.png)
+
+### Google Search
+
+- 99.9% into a real
+
+![Google Search](https://i.imgur.com/cm1uwzI.png)
 
 ### TODO
 
