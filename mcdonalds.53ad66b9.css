@@ -4,7 +4,6 @@
   background: #d80000;
 }
 .mcdonalds-wrapper header {
-  pointer-events: none;
   -webkit-overflow-scrolling: touch;
   z-index: 11;
   background: #d80000;
@@ -47,14 +46,13 @@
   position: absolute;
 }
 .mcdonalds-wrapper header .title * {
-  transition: all 0.5s;
+  transition: all 0.4s;
 }
 .mcdonalds-wrapper header .how {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding-right: 16px;
-  pointer-events: none;
   width: 150px;
   height: 25px;
   line-height: 20px;
@@ -68,7 +66,6 @@
 .mcdonalds-wrapper header .next-hamburger {
   opacity: 0;
   position: absolute;
-  pointer-events: all;
 }
 .mcdonalds-wrapper header .next-title-text {
   opacity: 0;
@@ -97,7 +94,7 @@
   height: 78%;
   overflow: hidden;
 }
-.mcdonalds-wrapper .coupons .coupon img {
+.mcdonalds-wrapper .coupons .coupon img.bg {
   width: 100%;
   transform: translateY(-27%);
 }
@@ -113,14 +110,12 @@
 }
 .mcdonalds-wrapper .coupons .coupon .status {
   height: 15%;
-  line-height: 60px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.25em;
   background: whitesmoke;
   letter-spacing: 6px;
-}
-.mcdonalds-wrapper .coupons .coupon .status .no-letter-spacing {
-  letter-spacing: 0;
 }
 .mcdonalds-wrapper .coupons .coupon .underline {
   text-decoration: underline;
@@ -137,7 +132,6 @@
   height: 100%;
 }
 .mcdonalds-wrapper .coupon-page footer {
-  pointer-events: all;
   transition: height 0.6s;
   background: #ff820d;
   color: white;
@@ -147,19 +141,7 @@
   font-size: 1.25em;
   letter-spacing: 1px;
 }
-.mcdonalds-wrapper .coupon-page .exchange {
-  display: flex;
-  align-items: center;
-  color: white;
-  line-height: 22px;
-}
-.mcdonalds-wrapper .coupon-page .exchange img {
-  margin: 10px;
-  width: 22px;
-  height: 22px;
-}
 .mcdonalds-wrapper footer {
-  pointer-events: none;
   -webkit-overflow-scrolling: touch;
   position: fixed;
   bottom: 0;
@@ -185,4 +167,25 @@
   width: 30px;
   height: 20px;
   margin-bottom: 3px;
+}
+.mcdonalds-wrapper .exchange {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  line-height: 22px;
+}
+.mcdonalds-wrapper .coupons .exchange {
+  color: black;
+}
+.mcdonalds-wrapper .coupon-page .clock,
+.mcdonalds-wrapper .coupons .coupon .clock {
+  margin-right: 10px;
+  width: 20px;
+}
+.mcdonalds-wrapper .no-letter-spacing {
+  letter-spacing: 1px !important;
+}
+.mcdonalds-wrapper .exchanged-exp {
+  padding-left: 8px;
 }

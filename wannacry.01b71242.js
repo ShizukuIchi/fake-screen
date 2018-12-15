@@ -135,7 +135,6 @@ var render = function render() {
 exports.render = render;
 
 function start() {
-  var pay = document.querySelector('#pay');
   var payOn = document.querySelector('#pay-on');
   var payProgress = document.querySelector('#pay-progress');
   var payment = document.querySelector('#payment');
@@ -151,13 +150,13 @@ function start() {
   var payCountDowner = new _CountDowner.default(payDate);
   pay.innerHTML = payCountDowner.formatLast();
   payOn.innerHTML = payCountDowner.formatTill();
-  var test = payCountDowner.formatFromCB(function (array) {
-    return array[3];
-  });
   payCountDowner.on('second', function () {
-    payProgress.style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
-    pay.innerHTML = payCountDowner.formatLast();
-    console.log(test());
+    try {
+      document.querySelector('#pay-progress').style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
+      document.querySelector('#pay').innerHTML = payCountDowner.formatLast();
+    } catch (e) {
+      payCountDowner.stop();
+    }
   });
   payCountDowner.on('stop', function () {
     payProgress.style.height = "".concat((1 - payCountDowner.progress()) * 100, "%");
@@ -167,8 +166,12 @@ function start() {
   lost.innerHTML = lostCountDowner.formatLast();
   lostOn.innerHTML = lostCountDowner.formatTill();
   lostCountDowner.on('second', function () {
-    lostProgress.style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
-    lost.innerHTML = lostCountDowner.formatLast();
+    try {
+      document.querySelector('#lost').innerHTML = lostCountDowner.formatLast();
+      document.querySelector('#lost-progress').style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
+    } catch (e) {
+      lostCountDowner.stop();
+    }
   });
   lostCountDowner.on('stop', function () {
     lostProgress.style.height = "".concat((1 - lostCountDowner.progress()) * 100, "%");
@@ -225,7 +228,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53642" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38689" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

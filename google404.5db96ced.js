@@ -158,13 +158,6 @@ function start() {
     });
   };
 
-  enter.ontouchend = function () {
-    var text = search.value;
-    renderSearchPage(text).catch(function (e) {
-      throw e;
-    });
-  };
-
   function renderSearchPage(_x) {
     return _renderSearchPage.apply(this, arguments);
   }
@@ -173,7 +166,7 @@ function start() {
     _renderSearchPage = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee(text) {
-      var searchPageHtml, searchText, searchPageSearch;
+      var searchPageHtml, searchText, searchPageSearch, logo;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -197,18 +190,23 @@ function start() {
               searchPageHtml = _context.sent;
               wrapper.innerHTML = searchPageHtml;
               searchText = wrapper.querySelector('#search-in-content');
-              searchText.textContent = text;
               searchPageSearch = wrapper.querySelector('#search');
+              logo = wrapper.querySelector('.logo');
+              searchText.textContent = text;
               searchPageSearch.value = text;
+              searchPageSearch.focus();
 
               searchPageSearch.onkeypress = function (e) {
                 if (e.keyCode !== 13) return;
-                renderSearchPage(searchPageSearch.value).catch(function (e) {
-                  throw e;
-                });
+                searchText.textContent = searchPageSearch.value;
               };
 
-            case 13:
+              logo.onclick = function () {
+                wrapper.outerHTML = _google.default;
+                start();
+              };
+
+            case 16:
             case "end":
               return _context.stop();
           }
@@ -245,7 +243,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53642" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38689" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

@@ -111,6 +111,8 @@ module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
 },{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/mcdonalds/clock.svg":[function(require,module,exports) {
 module.exports = "/clock.5626f392.svg";
+},{}],"src/mcdonalds/clock-b.svg":[function(require,module,exports) {
+module.exports = "/clock-b.d64f8aed.svg";
 },{}],"src/mcdonalds/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -124,6 +126,8 @@ var _mcdonalds = _interopRequireDefault(require("./mcdonalds.pug"));
 require("./mcdonalds.scss");
 
 var _clock = _interopRequireDefault(require("./clock.svg"));
+
+var _clockB = _interopRequireDefault(require("./clock-b.svg"));
 
 var _CountDowner = _interopRequireDefault(require("../assets/CountDowner.js"));
 
@@ -148,27 +152,20 @@ function start() {
   var how = header.querySelector('.how-text');
   var nextHow = header.querySelector('.next-how-text');
   var hamburger = header.querySelector('.hamburger');
-  var exp = wrapper.querySelector('.exp');
+  var status = coupons.querySelector('.status');
+  var exp = coupons.querySelector('.exp');
   var couponFooter = couponPage.querySelector('footer');
   var couponFooterText = couponFooter.querySelector('.exchange');
-  coupons.addEventListener('click', handleExchange);
+  status.onclick = handleExchange;
 
   function handleExchange(e) {
     e.preventDefault();
-    var target = e.target.closest('.status');
-
-    if (target && Array.from(target.classList).includes('status')) {
-      openCouponPage();
-    } else {
-      return;
-    }
+    openCouponPage();
   }
 
-  console.log(couponFooter);
   exp.textContent = setExp();
 
   couponFooter.onclick = function () {
-    confirm('確認兌換優惠');
     onExchange();
   };
 
@@ -179,7 +176,33 @@ function start() {
 
   function onExchange() {
     couponFooter.style.height = '90px';
-    couponFooterText.innerHTML = "<img src=".concat(_clock.default, " alt=\"clock\"/>\u512A\u60E0\u5012\u6578<span id=\"exchanged-exp\">1:59</span>");
+    couponFooterText.innerHTML = "<img class=\"clock\" src=".concat(_clock.default, " alt=\"clock\"/>\u512A\u60E0\u5012\u6578<span class=\"exchanged-exp\">2:00</span>");
+    status.className = 'status exchange no-letter-spacing';
+    status.innerHTML = "<img class=\"clock\" src=".concat(_clockB.default, " alt=\"clock\"/>\u512A\u60E0\u5012\u6578<span class=\"exchanged-exp\">2:00</span>");
+    var expTime = new Date();
+    expTime.setMinutes(expTime.getMinutes() + 2);
+    var countDowner = new _CountDowner.default(expTime);
+    var getLast = countDowner.formatFromCB(function (timeArray) {
+      return " ".concat(timeArray[2], ":").concat(countDowner.toFixStr(timeArray[3]));
+    });
+    countDowner.on('second', function setExpLast() {
+      try {
+        var exchangedExps = wrapper.querySelectorAll('.exchanged-exp');
+        Array.from(exchangedExps).forEach(function (exchangeExp) {
+          return exchangeExp.textContent = getLast();
+        });
+      } catch (e) {
+        countDowner.stop();
+      }
+    });
+    countDowner.on('stop', function onExpired() {
+      closeCouponPage();
+
+      status.onclick = function () {};
+
+      status.className = 'status';
+      status.textContent = '已兌換';
+    });
   }
 
   function openCouponPage() {
@@ -192,7 +215,7 @@ function start() {
     how.style.opacity = '0';
     nextHow.style.opacity = '100';
     couponPage.style.transform = 'translateX(0%)';
-    hamburger.addEventListener('click', closeCouponPage);
+    hamburger.onclick = closeCouponPage;
   }
 
   function closeCouponPage() {
@@ -205,10 +228,11 @@ function start() {
     nextTitle.style.opacity = '0';
     how.style.opacity = '100';
     nextHow.style.opacity = '0';
-    hamburger.removeEventListener('click', closeCouponPage);
+
+    hamburger.onclick = function () {};
   }
 }
-},{"./mcdonalds.pug":"src/mcdonalds/mcdonalds.pug","./mcdonalds.scss":"src/mcdonalds/mcdonalds.scss","./clock.svg":"src/mcdonalds/clock.svg","../assets/CountDowner.js":"src/assets/CountDowner.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./mcdonalds.pug":"src/mcdonalds/mcdonalds.pug","./mcdonalds.scss":"src/mcdonalds/mcdonalds.scss","./clock.svg":"src/mcdonalds/clock.svg","./clock-b.svg":"src/mcdonalds/clock-b.svg","../assets/CountDowner.js":"src/assets/CountDowner.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -235,7 +259,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53642" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38689" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
