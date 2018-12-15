@@ -1,5 +1,7 @@
 import google from './google.pug';
 import './google.scss';
+import './search.scss';
+import searchPage from './search.pug';
 
 export const render = container => {
   container.innerHTML = google;
@@ -22,16 +24,16 @@ function start() {
   };
   search.onkeypress = e => {
     if (e.keyCode !== 13) return;
-    renderSearchPage(search.value).catch(e => {
-      throw e;
-    });
+    renderSearchPage(search.value)
+      .then(() => console.log('what do you want?'))
+      .catch(e => {
+        throw e;
+      });
   };
 
   async function renderSearchPage(text) {
     if (!text.length) return;
-    await import('./search.scss');
-    const searchPageHtml = await import('./search.pug');
-    wrapper.innerHTML = searchPageHtml;
+    wrapper.innerHTML = searchPage;
 
     const searchText = wrapper.querySelector('#search-in-content');
     const searchPageSearch = wrapper.querySelector('#search');
