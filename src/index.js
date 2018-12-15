@@ -23,7 +23,7 @@ options.onclick = e => {
   const target = e.target.closest('.option');
   if (target && target !== options) {
     try {
-      renderTheme(e.target.closest('.option').id);
+      renderTheme(target.id, target.dataset.fullscreen !== 'no');
     } catch (e) {
       console.log(e);
     }
@@ -32,8 +32,8 @@ options.onclick = e => {
   }
 };
 
-function renderTheme(name) {
-  screenfull.enabled ? screenfull.request(app) : undefined;
+function renderTheme(name, isFullscreen = true) {
+  screenfull.enabled && isFullscreen ? screenfull.request(app) : undefined;
   const container = app.querySelector('.content');
   // API can only be initiated by a user gesture.
   loadThemeIn(name, container)

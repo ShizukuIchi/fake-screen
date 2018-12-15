@@ -34,10 +34,8 @@ function start() {
       return;
     }
   }
-  console.log(couponFooter);
   exp.textContent = setExp();
   couponFooter.onclick = () => {
-    confirm('確認兌換優惠');
     onExchange();
   };
   function setExp() {
