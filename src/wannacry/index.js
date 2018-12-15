@@ -9,7 +9,6 @@ export const render = () => {
 };
 
 function start() {
-  const pay = document.querySelector('#pay');
   const payOn = document.querySelector('#pay-on');
   const payProgress = document.querySelector('#pay-progress');
   const payment = document.querySelector('#payment');
@@ -40,13 +39,15 @@ function start() {
   const payCountDowner = new CountDowner(payDate);
   pay.innerHTML = payCountDowner.formatLast();
   payOn.innerHTML = payCountDowner.formatTill();
-  const test = payCountDowner.formatFromCB(function(array) {
-    return array[3];
-  });
   payCountDowner.on('second', () => {
-    payProgress.style.height = `${(1 - payCountDowner.progress()) * 100}%`;
-    pay.innerHTML = payCountDowner.formatLast();
-    console.log(test());
+    try {
+      document.querySelector('#pay-progress').style.height = `${(1 -
+        payCountDowner.progress()) *
+        100}%`;
+      document.querySelector('#pay').innerHTML = payCountDowner.formatLast();
+    } catch (e) {
+      payCountDowner.stop();
+    }
   });
   payCountDowner.on('stop', () => {
     payProgress.style.height = `${(1 - payCountDowner.progress()) * 100}%`;
@@ -56,8 +57,14 @@ function start() {
   lost.innerHTML = lostCountDowner.formatLast();
   lostOn.innerHTML = lostCountDowner.formatTill();
   lostCountDowner.on('second', () => {
-    lostProgress.style.height = `${(1 - lostCountDowner.progress()) * 100}%`;
-    lost.innerHTML = lostCountDowner.formatLast();
+    try {
+      document.querySelector('#lost').innerHTML = lostCountDowner.formatLast();
+      document.querySelector('#lost-progress').style.height = `${(1 -
+        lostCountDowner.progress()) *
+        100}%`;
+    } catch (e) {
+      lostCountDowner.stop();
+    }
   });
   lostCountDowner.on('stop', () => {
     lostProgress.style.height = `${(1 - lostCountDowner.progress()) * 100}%`;
