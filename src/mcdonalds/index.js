@@ -1,6 +1,7 @@
 import mcdonalds from './mcdonalds.pug';
 import './mcdonalds.scss';
 import clock from './clock.svg';
+import clockB from './clock-b.svg';
 import CountDowner from '../assets/CountDowner.js';
 
 export const render = () => {
@@ -20,19 +21,15 @@ function start() {
   const how = header.querySelector('.how-text');
   const nextHow = header.querySelector('.next-how-text');
   const hamburger = header.querySelector('.hamburger');
-  const exp = wrapper.querySelector('.exp');
+  const status = coupons.querySelector('.status');
+  const exp = coupons.querySelector('.exp');
   const couponFooter = couponPage.querySelector('footer');
   const couponFooterText = couponFooter.querySelector('.exchange');
 
-  coupons.addEventListener('click', handleExchange);
+  status.onclick = handleExchange;
   function handleExchange(e) {
     e.preventDefault();
-    const target = e.target.closest('.status');
-    if (target && Array.from(target.classList).includes('status')) {
-      openCouponPage();
-    } else {
-      return;
-    }
+    openCouponPage();
   }
   exp.textContent = setExp();
   couponFooter.onclick = () => {
@@ -45,7 +42,31 @@ function start() {
   }
   function onExchange() {
     couponFooter.style.height = '90px';
-    couponFooterText.innerHTML = `<img src=${clock} alt="clock"/>優惠倒數<span id="exchanged-exp">1:59</span>`;
+    couponFooterText.innerHTML = `<img class="clock" src=${clock} alt="clock"/>優惠倒數<span class="exchanged-exp">2:00</span>`;
+    status.className = 'status exchange no-letter-spacing';
+    status.innerHTML = `<img class="clock" src=${clockB} alt="clock"/>優惠倒數<span class="exchanged-exp">2:00</span>`;
+    const expTime = new Date();
+    expTime.setMinutes(expTime.getMinutes() + 2);
+    const countDowner = new CountDowner(expTime);
+    const getLast = countDowner.formatFromCB(
+      timeArray => ` ${timeArray[2]}:${countDowner.toFixStr(timeArray[3])}`,
+    );
+    countDowner.on('second', function setExpLast() {
+      try {
+        const exchangedExps = wrapper.querySelectorAll('.exchanged-exp');
+        Array.from(exchangedExps).forEach(
+          exchangeExp => (exchangeExp.textContent = getLast()),
+        );
+      } catch (e) {
+        countDowner.stop();
+      }
+    });
+    countDowner.on('stop', function onExpired() {
+      closeCouponPage();
+      status.onclick = () => {};
+      status.className = 'status';
+      status.textContent = '已兌換';
+    });
   }
   function openCouponPage() {
     hamburgerIcon.style.opacity = '0';
@@ -57,7 +78,7 @@ function start() {
     how.style.opacity = '0';
     nextHow.style.opacity = '100';
     couponPage.style.transform = 'translateX(0%)';
-    hamburger.addEventListener('click', closeCouponPage);
+    hamburger.onclick = closeCouponPage;
   }
   function closeCouponPage() {
     couponPage.style.transform = 'translateX(100%)';
@@ -69,6 +90,6 @@ function start() {
     nextTitle.style.opacity = '0';
     how.style.opacity = '100';
     nextHow.style.opacity = '0';
-    hamburger.removeEventListener('click', closeCouponPage);
+    hamburger.onclick = () => {};
   }
 }

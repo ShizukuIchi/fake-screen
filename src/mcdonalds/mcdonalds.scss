@@ -93,7 +93,7 @@
         height: 78%;
         overflow: hidden;
       }
-      img {
+      img.bg {
         width: 100%;
         transform: translateY(-27%);
       }
@@ -109,14 +109,12 @@
       }
       .status {
         height: 15%;
-        line-height: 60px;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 1.25em;
         background: rgb(245, 245, 245);
         letter-spacing: 6px;
-        .no-letter-spacing {
-          letter-spacing: 0;
-        }
       }
       .underline {
         text-decoration: underline;
@@ -142,17 +140,6 @@
       align-items: center;
       font-size: 1.25em;
       letter-spacing: 1px;
-    }
-    .exchange {
-      display: flex;
-      align-items: center;
-      color: white;
-      line-height: 22px;
-      img {
-        margin: 10px;
-        width: 22px;
-        height: 22px;
-      }
     }
   }
 
@@ -183,5 +170,28 @@
       height: 20px;
       margin-bottom: 3px;
     }
+  }
+  .exchange {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    line-height: 22px;
+  }
+  .coupons .exchange {
+    color: black;
+  }
+  .coupon-page,
+  .coupons .coupon {
+    .clock {
+      margin-right: 10px;
+      width: 20px;
+    }
+  }
+  .no-letter-spacing {
+    letter-spacing: 1px !important;
+  }
+  .exchanged-exp {
+    padding-left: 8px;
   }
 }
