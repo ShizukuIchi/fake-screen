@@ -6,14 +6,15 @@ export const render = container => {
   try {
     start();
   } catch (e) {
-    throw e
+    throw e;
   }
 };
 
 function start() {
   const wrapper = document.querySelector('.google-wrapper');
   const enter = wrapper.querySelector('#enter');
-  const search = wrapper.querySelector('#search')
+  const search = wrapper.querySelector('#search');
+  search.focus();
   enter.onclick = () => {
     const text = search.value;
     renderSearchPage(text).catch(e => {
@@ -21,14 +22,8 @@ function start() {
     });
   };
   search.onkeypress = e => {
-    if (e.keyCode !== 13) return
+    if (e.keyCode !== 13) return;
     renderSearchPage(search.value).catch(e => {
-      throw e;
-    });
-  }
-  enter.ontouchend = () => {
-    const text = search.value;
-    renderSearchPage(text).catch(e => {
       throw e;
     });
   };
@@ -40,13 +35,12 @@ function start() {
     wrapper.innerHTML = searchPageHtml;
     const searchText = wrapper.querySelector('#search-in-content');
     searchText.textContent = text;
-    const searchPageSearch = wrapper.querySelector('#search')
-    searchPageSearch.value = text
+    const searchPageSearch = wrapper.querySelector('#search');
+    searchPageSearch.value = text;
+    searchPageSearch.focus();
     searchPageSearch.onkeypress = e => {
-      if (e.keyCode !== 13) return
-      renderSearchPage(searchPageSearch.value).catch(e => {
-        throw e;
-      });
-    }
+      if (e.keyCode !== 13) return;
+      searchText.textContent = searchPageSearch.value;
+    };
   }
 }
