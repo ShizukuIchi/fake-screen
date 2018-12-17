@@ -1,6 +1,7 @@
 .mcdonalds-wrapper {
   font-family: '微軟正黑體';
   background: #d80000;
+  width: 100%;
   header {
     -webkit-overflow-scrolling: touch;
     z-index: 11;
@@ -81,6 +82,7 @@
     background: rgb(245, 245, 245);
     -webkit-overflow-scrolling: touch;
     height: 100%;
+    width: 100%;
     overflow: scroll;
     position: absolute;
     padding-top: 50px;
