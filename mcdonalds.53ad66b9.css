@@ -2,13 +2,16 @@
 .mcdonalds-wrapper {
   font-family: "微軟正黑體";
   background: #d80000;
-  width: 100%;
+  height: 100%;
+}
+.mcdonalds-wrapper .container {
+  height: 100%;
 }
 .mcdonalds-wrapper header {
   -webkit-overflow-scrolling: touch;
   z-index: 11;
   background: #d80000;
-  height: 50px;
+  height: 6.7%;
   position: fixed;
   top: 0;
   left: 0;
@@ -28,8 +31,8 @@
 }
 .mcdonalds-wrapper header .hamburger img {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 19px;
+  height: 19px;
 }
 .mcdonalds-wrapper header .hamburger * {
   transition: all 0.5s;
@@ -78,45 +81,50 @@
   position: absolute;
 }
 .mcdonalds-wrapper .coupons {
-  background: whitesmoke;
+  background: #eeeeee;
   -webkit-overflow-scrolling: touch;
   height: 100%;
-  width: 100%;
   overflow: scroll;
   position: absolute;
-  padding-top: 50px;
-  padding-bottom: 60px;
+}
+.mcdonalds-wrapper .coupons header {
+  z-index: 1;
+  position: relative;
+  background: #eeeeee;
+}
+.mcdonalds-wrapper .coupons footer {
+  position: relative;
+  border-color: transparent;
 }
 .mcdonalds-wrapper .coupons .coupon {
-  background: skyblue;
-  height: 65%;
+  height: 55%;
 }
 .mcdonalds-wrapper .coupons .coupon .img-container {
   width: 100%;
-  height: 78%;
+  height: 77%;
   overflow: hidden;
 }
 .mcdonalds-wrapper .coupons .coupon img.bg {
   width: 100%;
-  transform: translateY(-27%);
+  transform: translateY(-29%);
 }
 .mcdonalds-wrapper .coupons .coupon .detail {
-  height: 7%;
-  font-size: 0.93em;
+  height: 7.5%;
+  font-size: 0.95em;
   display: flex;
   padding: 5px 40px;
   justify-content: space-between;
   align-items: center;
   color: white;
-  background: #387d98;
+  background: #132f68;
 }
 .mcdonalds-wrapper .coupons .coupon .status {
-  height: 15%;
+  height: 15.5%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.25em;
-  background: whitesmoke;
+  background: #eeeeee;
   letter-spacing: 6px;
 }
 .mcdonalds-wrapper .coupons .coupon .underline {
@@ -132,6 +140,7 @@
 .mcdonalds-wrapper .coupon-page img {
   width: 100%;
   height: 100%;
+  transform: translateY(2.5%);
 }
 .mcdonalds-wrapper .coupon-page footer {
   transition: height 0.6s;
@@ -150,13 +159,13 @@
   left: 0;
   right: 0;
   display: flex;
-  background: whitesmoke;
+  background: #eeeeee;
   border-top: 0.5px rgba(0, 0, 0, 0.2) solid;
-  height: 60px;
+  height: 9%;
 }
 .mcdonalds-wrapper footer .item {
   flex: 1;
-  height: 60px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

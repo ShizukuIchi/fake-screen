@@ -166,6 +166,8 @@ function start() {
   exp.textContent = setExp();
 
   couponFooter.onclick = function () {
+    couponFooter.onclick = function () {};
+
     onExchange();
   };
 
@@ -175,7 +177,7 @@ function start() {
   }
 
   function onExchange() {
-    couponFooter.style.height = '90px';
+    couponFooter.style.height = '13.5%';
     couponFooterText.innerHTML = "<img class=\"clock\" src=".concat(_clock.default, " alt=\"clock\"/>\u512A\u60E0\u5012\u6578<span class=\"exchanged-exp\">2:00</span>");
     status.className = 'status exchange no-letter-spacing';
     status.innerHTML = "<img class=\"clock\" src=".concat(_clockB.default, " alt=\"clock\"/>\u512A\u60E0\u5012\u6578<span class=\"exchanged-exp\">2:00</span>");
@@ -183,9 +185,9 @@ function start() {
     expTime.setMinutes(expTime.getMinutes() + 2);
     var countDowner = new _CountDowner.default(expTime);
     var getLast = countDowner.formatFromCB(function (timeArray) {
-      return " ".concat(timeArray[2], ":").concat(countDowner.toFixStr(timeArray[3]));
+      return "".concat(timeArray[2], ":").concat(countDowner.toFixStr(timeArray[3]));
     });
-    countDowner.on('second', function setExpLast() {
+    countDowner.on('second', function onSecond() {
       try {
         var exchangedExps = wrapper.querySelectorAll('.exchanged-exp');
         Array.from(exchangedExps).forEach(function (exchangeExp) {
@@ -195,7 +197,7 @@ function start() {
         countDowner.stop();
       }
     });
-    countDowner.on('stop', function onExpired() {
+    countDowner.on('stop', function onStop() {
       closeCouponPage();
 
       status.onclick = function () {};
@@ -259,7 +261,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55960" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38123" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
