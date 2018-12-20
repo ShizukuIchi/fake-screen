@@ -20,7 +20,7 @@ body {
     transition: all 0s;
     cursor: pointer;
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       left: 23px;
       top: 14px;
@@ -30,7 +30,7 @@ body {
       background: rgb(22, 22, 22);
     }
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       left: 23px;
       top: 14px;
@@ -56,12 +56,23 @@ body {
     text-shadow: #3dc1d3 1px 1px 3px;
     color: #63cdda;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 2em;
+  }
+  a {
+    line-height: 0;
+    margin-left: 15px;
+    .logo {
+      width: 0.8em;
+      height: 0.8em;
+    }
   }
 }
 .options {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 288px);
   grid-row-gap: 50px;
@@ -89,7 +100,7 @@ body {
       position: absolute;
       top: 0;
       left: 0;
-      content: "";
+      content: '';
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0);
@@ -98,7 +109,7 @@ body {
       position: absolute;
       top: 0;
       left: 0;
-      content: "";
+      content: '';
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.6);
@@ -137,7 +148,7 @@ body {
   border-bottom: 1px rgb(200, 200, 200) dashed;
   &:before,
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     left: 23px;
     top: 14px;
