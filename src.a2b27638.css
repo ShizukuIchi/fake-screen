@@ -81,12 +81,23 @@ body {
   text-shadow: #3dc1d3 1px 1px 3px;
   color: #63cdda;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 2em;
+}
+.wrapper a {
+  line-height: 0;
+  margin-left: 15px;
+}
+.wrapper a .logo {
+  width: 0.8em;
+  height: 0.8em;
 }
 
 .options {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 288px);
   grid-row-gap: 50px;
