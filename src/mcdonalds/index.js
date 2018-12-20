@@ -33,6 +33,7 @@ function start() {
   }
   exp.textContent = setExp();
   couponFooter.onclick = () => {
+    couponFooter.onclick = () => {};
     onExchange();
   };
   function setExp() {
@@ -41,7 +42,7 @@ function start() {
       1} 月 ${date.getDate() + 3} 日`;
   }
   function onExchange() {
-    couponFooter.style.height = '90px';
+    couponFooter.style.height = '13.5%';
     couponFooterText.innerHTML = `<img class="clock" src=${clock} alt="clock"/>優惠倒數<span class="exchanged-exp">2:00</span>`;
     status.className = 'status exchange no-letter-spacing';
     status.innerHTML = `<img class="clock" src=${clockB} alt="clock"/>優惠倒數<span class="exchanged-exp">2:00</span>`;
@@ -49,9 +50,9 @@ function start() {
     expTime.setMinutes(expTime.getMinutes() + 2);
     const countDowner = new CountDowner(expTime);
     const getLast = countDowner.formatFromCB(
-      timeArray => ` ${timeArray[2]}:${countDowner.toFixStr(timeArray[3])}`,
+      timeArray => `${timeArray[2]}:${countDowner.toFixStr(timeArray[3])}`,
     );
-    countDowner.on('second', function setExpLast() {
+    countDowner.on('second', function onSecond() {
       try {
         const exchangedExps = wrapper.querySelectorAll('.exchanged-exp');
         Array.from(exchangedExps).forEach(
@@ -61,7 +62,7 @@ function start() {
         countDowner.stop();
       }
     });
-    countDowner.on('stop', function onExpired() {
+    countDowner.on('stop', function onStop() {
       closeCouponPage();
       status.onclick = () => {};
       status.className = 'status';
