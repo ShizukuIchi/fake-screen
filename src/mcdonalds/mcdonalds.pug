@@ -1,15 +1,5 @@
 .mcdonalds-wrapper
   .container
-    header
-      .hamburger 
-        img(src="./menu.svg")
-        img.next-hamburger(src="./arrow.svg" alt="123")
-      .title 
-        .title-text 優惠券
-        .next-title-text 優惠券
-      .how 
-        .how-text 使用說明 
-        .next-how-text 搜尋附近餐廳
     section.coupons
       header
       .coupon
@@ -34,7 +24,17 @@
           .remain 尚餘：0 天 0 小時
         .status 已截止
       footer
-    footer
+    header.coupons-header
+      .hamburger 
+        img(src="./menu.svg")
+        img.next-hamburger(src="./arrow.svg" alt="123")
+      .title 
+        .title-text 優惠券
+        .next-title-text 優惠券
+      .how 
+        .how-text 使用說明 
+        .next-how-text 搜尋附近餐廳
+    footer.coupons-footer
       .item
         img(src="./gift.svg")
         .item-label 優惠券

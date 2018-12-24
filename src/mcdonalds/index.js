@@ -1,3 +1,5 @@
+import BScroll from 'better-scroll';
+
 import mcdonalds from './mcdonalds.pug';
 import './mcdonalds.scss';
 import clock from './clock.svg';
@@ -10,10 +12,14 @@ export const render = () => {
 };
 
 function start() {
+  const scroll = new BScroll('.mcdonalds-wrapper .container', {
+    click: true,
+  });
+
   const wrapper = document.querySelector('.mcdonalds-wrapper');
   const couponPage = wrapper.querySelector('.coupon-page');
   const coupons = wrapper.querySelector('.coupons');
-  const header = wrapper.querySelector('header');
+  const header = wrapper.querySelector('header.coupons-header');
   const hamburgerIcon = header.querySelector('.hamburger img');
   const nextHamburgerIcon = header.querySelector('.next-hamburger');
   const title = header.querySelector('.title-text');

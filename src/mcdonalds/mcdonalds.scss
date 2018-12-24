@@ -1,8 +1,8 @@
 .mcdonalds-wrapper {
   font-family: '微軟正黑體';
-  background: #d80000;
   width: 100%;
   height: 100%;
+  background: rgb(238, 238, 238);
   .container {
     height: 100%;
   }
@@ -10,7 +10,7 @@
     -webkit-overflow-scrolling: touch;
     z-index: 11;
     background: #d80000;
-    height: 6.7%;
+    height: 6.7vh;
     position: fixed;
     top: 0;
     left: 0;
@@ -85,7 +85,6 @@
   .coupons {
     background: rgb(238, 238, 238);
     -webkit-overflow-scrolling: touch;
-    height: 100%;
     width: 100%;
     overflow: scroll;
     position: absolute;
@@ -99,7 +98,7 @@
       border-color: transparent;
     }
     .coupon {
-      height: 55%;
+      height: 55vh;
       .img-container {
         width: 100%;
         height: 77%;
@@ -165,7 +164,7 @@
     display: flex;
     background: rgb(238, 238, 238);
     border-top: 0.5px rgba(0, 0, 0, 0.2) solid;
-    height: 9%;
+    height: 9vh;
 
     .item {
       flex: 1;

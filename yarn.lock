@@ -654,6 +654,11 @@
   dependencies:
     "@types/babel-types" "*"
 
+"@types/better-scroll@^1.12.1":
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/@types/better-scroll/-/better-scroll-1.12.1.tgz#493d12ca4b5a23cf877bed2358cf0e0ca63cda98"
+  integrity sha512-jI/nmYl6+RbGsVIhJpqpoh09hC5Kf/OZiwYKCcfmoihpxxTPkeuNdz9DyRhdXf09Wgl1l9n/bOXXo9ucwgp4Lg==
+
 "@types/node@^10.11.7":
   version "10.12.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.10.tgz#4fa76e6598b7de3f0cb6ec3abacc4f59e5b3a2ce"
@@ -903,7 +908,7 @@ babel-polyfill@^6.26.0:
     core-js "^2.5.0"
     regenerator-runtime "^0.10.5"
 
-babel-runtime@^6.11.6, babel-runtime@^6.26.0:
+babel-runtime@^6.0.0, babel-runtime@^6.11.6, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -962,6 +967,13 @@ base@^0.11.1:
     isobject "^3.0.1"
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
+
+better-scroll@^1.13.2:
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/better-scroll/-/better-scroll-1.13.2.tgz#31e6e088cf2d23ce48e52fad6cc59134ffeb2f56"
+  integrity sha512-JUt5aQYuHMjHNOD5JpIvNT502MlHAPXZsHoA6P2rNgLKX6WPQIoHhpwo0gT9FHgm9uTJ8wEg1HN9ZmRFJYjZLg==
+  dependencies:
+    babel-runtime "^6.0.0"
 
 binary-extensions@^1.0.0:
   version "1.12.0"

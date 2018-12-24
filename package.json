@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "better-scroll": "^1.13.2",
     "screenfull": "^3.3.3"
   }
 }
