@@ -1,8 +1,9 @@
 @charset "UTF-8";
 .mcdonalds-wrapper {
   font-family: "微軟正黑體";
-  background: #d80000;
+  width: 100%;
   height: 100%;
+  background: #eeeeee;
 }
 .mcdonalds-wrapper .container {
   height: 100%;
@@ -11,7 +12,7 @@
   -webkit-overflow-scrolling: touch;
   z-index: 11;
   background: #d80000;
-  height: 6.7%;
+  height: 6.7vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -83,7 +84,7 @@
 .mcdonalds-wrapper .coupons {
   background: #eeeeee;
   -webkit-overflow-scrolling: touch;
-  height: 100%;
+  width: 100%;
   overflow: scroll;
   position: absolute;
 }
@@ -97,7 +98,7 @@
   border-color: transparent;
 }
 .mcdonalds-wrapper .coupons .coupon {
-  height: 55%;
+  height: 55vh;
 }
 .mcdonalds-wrapper .coupons .coupon .img-container {
   width: 100%;
@@ -161,7 +162,7 @@
   display: flex;
   background: #eeeeee;
   border-top: 0.5px rgba(0, 0, 0, 0.2) solid;
-  height: 9%;
+  height: 9vh;
 }
 .mcdonalds-wrapper footer .item {
   flex: 1;
