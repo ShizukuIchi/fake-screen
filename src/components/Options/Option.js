@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Theme = ({ className, imgUrl, name, displayName }) => (
+const Option = ({ className, imgUrl, name, displayName }) => (
   <div className={className}>
     <div className="img-container">
       <img src={imgUrl} alt={name} />
@@ -10,4 +10,4 @@ const Theme = ({ className, imgUrl, name, displayName }) => (
   </div>
 );
 
-export default styled(Theme)``;
+export default styled(Option)``;

@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import { Themes, ThemeContainer } from 'src/components';
+import styled from 'styled-components';
+import { ThemeContainer, Options, CloseButton } from 'src/components';
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <div className="app">
-          <div className="close">x</div>
-          <Route exact path="/" component={Themes} />
-          <ThemeContainer />
-        </div>
+        <Route
+          render={props => (
+            <div className={this.props.className}>
+              <CloseButton {...props} />
+              <Options {...props} />
+              <ThemeContainer {...props} />
+            </div>
+          )}
+        />
       </Router>
     );
   }
 }
 
-export default App;
+export default styled(App)`
+  height: 100%;
+  position: relative;
+`;
