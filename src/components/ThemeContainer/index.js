@@ -2,8 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
 import styled from 'styled-components';
-
-import Themes from 'src/themes';
+import { themes, Placeholder } from 'src/themes';
 
 const RoutesContainer = posed.div({
   enter: {
@@ -15,20 +14,21 @@ const RoutesContainer = posed.div({
 });
 
 const ThemeContainer = ({ location, className }) => {
+  function renderTheme(component) {
+    return component || Placeholder;
+  }
   return (
     <PoseGroup>
       <RoutesContainer className={className} key={location.pathname}>
         <Switch location={location}>
-          <Route exact path="/win10-crash" component={Themes.Win10Blue} />
-          {/* <Route exact path="/win-blue" component={lazy.Win10Blue} /> */}
-          {/* {themes.map(theme => (
+          {themes.map(theme => (
             <Route
               key={theme.id}
               exact
               path={`/${theme.name}`}
-              render={() => <C t={theme.displayName} />}
+              component={renderTheme(theme.component)}
             />
-          ))} */}
+          ))}
         </Switch>
       </RoutesContainer>
     </PoseGroup>

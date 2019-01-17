@@ -10,4 +10,6 @@ const Option = ({ className, imgUrl, name, displayName }) => (
   </div>
 );
 
-export default styled(Option)``;
+export default styled(Option)`
+  text-align: center;
+`;

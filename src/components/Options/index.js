@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import posed from 'react-pose';
 
-import { themes } from 'src/assets/data';
+import { themes } from 'src/themes';
 import Option from 'src/components/Options/Option';
 
 const Options = ({ location, className }) => {
@@ -12,9 +12,13 @@ const Options = ({ location, className }) => {
       className={className}
       pose={location.pathname === '/' ? 'enter' : 'exit'}
     >
-      <div className="content">
+      <div className="grid">
         {themes.map(({ id, fullScreen, name, ...rest }) => (
-          <Link key={id} to={{ pathname: `/${name}`, state: { fullScreen } }}>
+          <Link
+            className="area"
+            key={id}
+            to={{ pathname: `/${name}`, state: { fullScreen } }}
+          >
             <Option name={name} {...rest} />
           </Link>
         ))}
@@ -40,13 +44,21 @@ export default styled(Options)`
   width: 100%;
   overflow: hidden;
   z-index: 2;
-  .content {
+  .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 200px);
-    grid-template-rows: repeat(auto-fill, 200px);
-    align-items: center;
-    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-rows: repeat(auto-fill, 300px);
     overflow-y: auto;
     height: 100%;
+    grid-gap: 10px 10px;
+    justify-content: center;
+  }
+  .area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
   }
 `;
