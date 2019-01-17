@@ -24,4 +24,5 @@ class App extends Component {
 export default styled(App)`
   height: 100%;
   position: relative;
+  overflow: hidden;
 `;

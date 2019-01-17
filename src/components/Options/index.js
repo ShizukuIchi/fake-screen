@@ -42,14 +42,12 @@ export default styled(Options)`
   height: 100%;
   position: absolute;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   z-index: 2;
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
-    grid-template-rows: repeat(auto-fill, 300px);
-    overflow-y: auto;
-    height: 100%;
+    grid-auto-rows: 300px;
     grid-gap: 10px 10px;
     justify-content: center;
   }
