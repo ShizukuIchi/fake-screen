@@ -1,24 +1,38 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-import Component from './index';
+import CloseButton, { isDark, getColor } from './index';
 import { HashRouter, Route } from 'react-router-dom';
 
-it('render without crashing', () => {
+it('CloseButton render without crashing', () => {
   const { container } = render(
     <HashRouter>
-      <Route render={props => <Component {...props} />} />
+      <Route render={props => <CloseButton {...props} dark={true} />} />
     </HashRouter>,
   );
   container.querySelector('button').click();
   expect(container.style.opacity === 0.4);
 });
 
-it('render no match without crashing ', () => {
-  const { container, getByLabelText } = render(
+it('CloseButton render no match without crashing ', () => {
+  const { container } = render(
     <HashRouter>
-      <Route render={props => <Component {...props} location="/no" />} />
+      <Route
+        render={props => (
+          <CloseButton {...props} location={{ pathname: '/no-match' }} />
+        )}
+      />
     </HashRouter>,
   );
   container.querySelector('button').click();
   expect(container.style.opacity === 0);
+});
+
+it('define if bg is dark', () => {
+  expect(isDark('/macOS')).toBeTrue();
+  expect(isDark('/win10-crash')).toBeFalse();
+});
+
+it('get right background color', () => {
+  expect(getColor({ dark: true })).toBe('white');
+  expect(getColor({ dark: false })).toBe('rgb(22, 22, 22)');
 });

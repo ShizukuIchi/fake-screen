@@ -14,7 +14,11 @@ const Options = ({ location, className }) => {
       pose={location.pathname === '/' ? 'enter' : 'exit'}
     >
       <header>
-        <a href="https://github.com/ShizukuIchi/fake-screen" target="_blank">
+        <a
+          href="https://github.com/ShizukuIchi/fake-screen"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <span className="title">Fake Screen</span>
           <img className="logo" src={githubLogo} alt="github-logo" />
         </a>
@@ -26,7 +30,11 @@ const Options = ({ location, className }) => {
             key={id}
             to={{ pathname: `/${name}`, state: { fullScreen } }}
           >
-            <Option name={name} {...rest} />
+            <Option
+              name={name}
+              {...rest}
+              zoom={location.pathname === `/${name}` ? 'zoom' : 'init'}
+            />
           </Link>
         ))}
       </div>
@@ -36,12 +44,10 @@ const Options = ({ location, className }) => {
 
 const Div = posed.div({
   enter: {
-    applyAtStart: { display: 'block' },
-    opacity: 1,
+    zIndex: 1,
   },
   exit: {
-    opacity: 0,
-    applyAtEnd: { display: 'none' },
+    applyAtStart: { zIndex: 0 },
   },
 });
 
@@ -79,9 +85,7 @@ export default styled(Options)`
     justify-content: center;
   }
   .area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
     width: 100%;
     height: 100%;
   }

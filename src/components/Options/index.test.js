@@ -3,8 +3,6 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import { render } from 'react-testing-library';
 import Options from './index';
 import Option from 'src/components/Options/Option';
-import { themes } from 'src/assets/data';
-import { sleep } from 'src/lib';
 
 it('Options has content without crashing', () => {
   const { container } = render(
