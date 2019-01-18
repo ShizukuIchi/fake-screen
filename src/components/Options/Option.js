@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import posed from 'react-pose';
 
 const Option = ({ zoom, className, imgUrl, name, displayName }) => (
-  <Div pose={zoom} className={className}>
+  <Div pose={zoom ? 'zoom' : 'init'} className={className}>
     <div className="img-container">
       <img src={imgUrl} alt={name} />
     </div>

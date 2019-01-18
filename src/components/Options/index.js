@@ -33,7 +33,7 @@ const Options = ({ location, className }) => {
             <Option
               name={name}
               {...rest}
-              zoom={location.pathname === `/${name}` ? 'zoom' : 'init'}
+              zoom={location.pathname === `/${name}` ? true : false}
             />
           </Link>
         ))}
