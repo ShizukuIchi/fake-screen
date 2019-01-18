@@ -5,3 +5,5 @@ export const genID = () => {
   let id = 0;
   return () => id++;
 };
+
+export const isRoot = path => path === '/';

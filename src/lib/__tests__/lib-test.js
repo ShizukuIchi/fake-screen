@@ -1,4 +1,4 @@
-import { sleep, genID } from 'src/lib';
+import { sleep, genID, isRoot } from 'src/lib';
 
 it('sleep lib', async () => {
   const now = new Date();
@@ -9,4 +9,9 @@ it('sleep lib', async () => {
 it('genID', () => {
   const getID = genID();
   expect([getID(), getID(), getID()]).toEqual([0, 1, 2]);
+});
+
+it('isRoot', () => {
+  expect(isRoot('/123')).toBeFalse();
+  expect(isRoot('/')).toBeTrue();
 });

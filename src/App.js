@@ -25,4 +25,5 @@ export default styled(App)`
   height: 100%;
   position: relative;
   overflow: hidden;
+  background: #fff9c4;
 `;

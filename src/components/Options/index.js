@@ -5,6 +5,7 @@ import posed from 'react-pose';
 
 import { themes } from 'src/themes';
 import Option from 'src/components/Options/Option';
+import githubLogo from 'src/assets/github-logo.svg';
 
 const Options = ({ location, className }) => {
   return (
@@ -12,6 +13,12 @@ const Options = ({ location, className }) => {
       className={className}
       pose={location.pathname === '/' ? 'enter' : 'exit'}
     >
+      <header>
+        <a href="https://github.com/ShizukuIchi/fake-screen" target="_blank">
+          <span className="title">Fake Screen</span>
+          <img className="logo" src={githubLogo} alt="github-logo" />
+        </a>
+      </header>
       <div className="grid">
         {themes.map(({ id, fullScreen, name, ...rest }) => (
           <Link
@@ -44,11 +51,31 @@ export default styled(Options)`
   width: 100%;
   overflow: auto;
   z-index: 2;
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    filter: drop-shadow(rgba(61, 193, 211, 0.8) 1px 1px 1.5px);
+    .title {
+      color: #63cdda;
+      text-align: center;
+      font-size: 2em;
+    }
+    a {
+      text-decoration: none;
+    }
+  }
+  .logo {
+    width: 2em;
+    height: 2em;
+    margin-left: 10px;
+  }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
-    grid-auto-rows: 300px;
-    grid-gap: 10px 10px;
+    grid-template-columns: repeat(auto-fill, 288px);
+    grid-auto-rows: 162px;
+    grid-gap: 40px 40px;
     justify-content: center;
   }
   .area {
@@ -57,6 +84,5 @@ export default styled(Options)`
     align-items: center;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.1);
   }
 `;
