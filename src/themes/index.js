@@ -18,7 +18,7 @@ export const themes = [
     fullScreen: false,
     displayName: 'Google not found',
     name: 'google',
-    imgUrl: 'https://via.placeholder.com/500x300',
+    imgUrl: 'https://i.imgur.com/cm1uwzI.png',
     isBackgroundDark: false,
     component: Google,
     objectFit: 'cover',

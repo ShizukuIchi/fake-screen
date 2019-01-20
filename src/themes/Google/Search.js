@@ -21,9 +21,7 @@ function Search({ onSearch, className }) {
         <img
           className="logo"
           alt="Google"
-          height="92"
           src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-          width="272"
         />
         <div className="search-bar">
           <input
@@ -34,7 +32,10 @@ function Search({ onSearch, className }) {
             value={value}
           />
           <div className="icon">
-            <img src="https://www.gstatic.com/images/branding/googlemic/2x/googlemic_color_24dp.png" />
+            <img
+              src="https://www.gstatic.com/images/branding/googlemic/2x/googlemic_color_24dp.png"
+              alt="microphone"
+            />
           </div>
         </div>
         <div className="buttons">
@@ -98,6 +99,8 @@ export default styled(Search)`
     flex-direction: column;
     align-items: center;
     .logo {
+      height: 92px;
+      width: 272px;
       margin-top: 198px;
     }
     .search-bar {
