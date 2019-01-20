@@ -1,19 +1,73 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 import apple from 'src/assets/apple.svg';
 
-const MacOS = ({ className }) => {
+export const initState = {
+  value: 0,
+  hint: 'About an hour remaining',
+};
+export const progressReducer = (state = initState, action = {}) => {
+  switch (action.type) {
+    case 'NEXT':
+      const nextValue = state.value + 0.4;
+      return {
+        value: nextValue,
+        hint: getText(nextValue),
+      };
+    case 'CLEAR':
+      return initState;
+    default:
+      return state;
+  }
+};
+
+const MacOS = ({ className, initState }) => {
+  const [progress, dispatch] = useReducer(progressReducer, initState);
+  function next() {
+    dispatch({ type: 'NEXT' });
+  }
+  const clear = () => dispatch({ type: 'CLEAR' });
+  useEffect(() => {
+    let timer;
+    if (progress.value <= 100) {
+      timer = setTimeout(next, Math.random() * 4000 + 400);
+    } else {
+      timer = setTimeout(clear, 10000);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  });
+
   return (
     <div className={className}>
       <div className="content">
         <img src={apple} alt="apple" className="logo" />
         <div className="progress">
-          <div className="bar" />
+          <div className="bar" style={{ width: `${progress.value}%` }} />
         </div>
-        <span className="hint">About an hour remaining</span>
+        <span className="hint">{progress.hint}</span>
       </div>
     </div>
   );
+};
+
+export function getText(value) {
+  switch (true) {
+    case value < 3:
+      return 'About an hour remaining';
+    case value <= 5.2:
+      return 'Installation is in progress. Calculating time remaining...';
+    case value <= 6:
+      return 'About an hour remaining';
+    default:
+      let remainMin = Math.ceil(((100 - value) * 2.5 * 2.4) / 60);
+      return `About ${remainMin} minutes remaining`;
+  }
+}
+
+MacOS.defaultProps = {
+  initState,
 };
 
 export default styled(MacOS)`

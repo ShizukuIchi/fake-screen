@@ -6,4 +6,4 @@ export const genID = () => {
   return () => id++;
 };
 
-export const isRoot = path => path === '/';
+export const isStr = str => testStr => str === testStr;

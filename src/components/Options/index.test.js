@@ -29,4 +29,5 @@ it('Options no content without crashing', async () => {
 
 it('Option without crashing', () => {
   render(<Option />);
+  render(<Option zoom={true} />);
 });

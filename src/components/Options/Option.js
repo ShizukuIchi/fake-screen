@@ -2,14 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import posed from 'react-pose';
 
-const Option = ({ zoom, className, imgUrl, name, displayName }) => (
-  <Div pose={zoom ? 'zoom' : 'init'} className={className}>
-    <div className="img-container">
-      <img src={imgUrl} alt={name} />
-    </div>
-    <div className="title">{displayName}</div>
-  </Div>
-);
+const Option = ({ zoom, className, imgUrl, name, displayName }) => {
+  function getPose() {
+    return zoom ? 'zoom' : 'init';
+  }
+  return (
+    <Div pose={getPose()} className={className}>
+      <div className="img-container">
+        <img src={imgUrl} alt={name} />
+      </div>
+      <div className="title">{displayName}</div>
+    </Div>
+  );
+};
 
 const transition = {
   duration: 600,

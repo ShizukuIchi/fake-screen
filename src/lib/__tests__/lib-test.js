@@ -1,4 +1,4 @@
-import { sleep, genID, isRoot } from 'src/lib';
+import { sleep, genID, isStr } from 'src/lib';
 
 it('sleep lib', async () => {
   const now = new Date();
@@ -11,7 +11,8 @@ it('genID', () => {
   expect([getID(), getID(), getID()]).toEqual([0, 1, 2]);
 });
 
-it('isRoot', () => {
-  expect(isRoot('/123')).toBeFalse();
-  expect(isRoot('/')).toBeTrue();
+it('isPath', () => {
+  const isA = isStr('A');
+  expect(isA('A')).toBeTrue();
+  expect(isStr('A')('B')).toBeFalse();
 });

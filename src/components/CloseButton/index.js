@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { isRoot } from 'src/lib';
+import { isStr } from 'src/lib';
 import { themes } from 'src/themes';
+
+const isRoot = isStr('/');
 
 const CloseButton = ({ history, location }) => {
   function goRoot() {

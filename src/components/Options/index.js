@@ -6,6 +6,7 @@ import posed from 'react-pose';
 import { themes } from 'src/themes';
 import Option from 'src/components/Options/Option';
 import githubLogo from 'src/assets/github-logo.svg';
+import { isStr } from 'src/lib';
 
 const Options = ({ location, className }) => {
   return (
@@ -33,7 +34,7 @@ const Options = ({ location, className }) => {
             <Option
               name={name}
               {...rest}
-              zoom={location.pathname === `/${name}` ? true : false}
+              zoom={isStr(`/${name}`)(location.pathname)}
             />
           </Link>
         ))}
