@@ -12,7 +12,7 @@ const Options = ({ location, className }) => {
   return (
     <Div
       className={className}
-      pose={location.pathname === '/' ? 'enter' : 'exit'}
+      pose={isStr('/')(location.pathname) ? 'enter' : 'exit'}
     >
       <header>
         <a

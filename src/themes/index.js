@@ -2,6 +2,7 @@ import React from 'react';
 import { genID } from 'src/lib';
 import Win10Blue from './Win10Blue';
 import MacOS from './MacOS';
+import Google from './Google';
 
 export default {
   Win10Blue,
@@ -19,7 +20,7 @@ export const themes = [
     name: 'google',
     imgUrl: 'https://via.placeholder.com/500x300',
     isBackgroundDark: false,
-    component: null,
+    component: Google,
     objectFit: 'cover',
   },
   {
@@ -39,6 +40,7 @@ export const themes = [
     name: 'ubuntu',
     imgUrl: 'https://via.placeholder.com/500x300',
     isBackgroundDark: true,
+    component: null,
     objectFit: 'contain',
   },
   {
@@ -48,6 +50,7 @@ export const themes = [
     name: 'wannacry',
     imgUrl: 'https://via.placeholder.com/500x300',
     isBackgroundDark: true,
+    component: null,
     objectFit: 'contain',
   },
   {
@@ -57,6 +60,7 @@ export const themes = [
     name: 'win10',
     imgUrl: 'https://via.placeholder.com/500x300',
     isBackgroundDark: false,
+    component: null,
     objectFit: 'contain',
   },
   {
@@ -76,6 +80,7 @@ export const themes = [
     name: 'win10-update',
     imgUrl: 'https://via.placeholder.com/500x300',
     isBackgroundDark: false,
+    component: null,
     objectFit: 'contain',
   },
 ];

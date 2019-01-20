@@ -24,7 +24,6 @@ const ThemeContainer = ({ location, className }) => {
           {themes.map(theme => (
             <Route
               key={theme.id}
-              exact
               path={`/${theme.name}`}
               component={renderTheme(theme.component)}
             />
