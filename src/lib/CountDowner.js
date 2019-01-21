@@ -15,11 +15,6 @@ class CountDowner {
     const percentage = (now - this.origin) / total;
     return now > this.till ? 1 : percentage;
   }
-  formatFromCB(cb) {
-    return () => {
-      return cb(this.getLast());
-    };
-  }
   getLast() {
     const last = this.till - new Date();
     const diffDays = Math.floor(last / (1000 * 3600 * 24));
@@ -36,15 +31,19 @@ class CountDowner {
   start() {
     this.interval = setInterval(() => {
       const last = this.till - new Date();
-      this.callbacks.second.forEach(cb => cb());
       if (last < 0) {
         this.stop();
+      } else {
+        this.callbacks.second.forEach(cb => cb(this.getLast()));
       }
     }, 1000);
   }
   stop() {
-    clearInterval(this.interval);
+    this.clear();
     this.callbacks.stop.forEach(cb => cb());
+  }
+  clear() {
+    clearInterval(this.interval);
   }
   on(str, cb) {
     if (str in this.callbacks) {

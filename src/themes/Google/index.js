@@ -19,9 +19,7 @@ function Google(props) {
   }
   React.useEffect(() => {
     const q = getQuery(props.location.search);
-    // if (query !== q) {
     setQuery(q);
-    // }
   });
   return query.length === 0 ? (
     <Search onSearch={onSearch} />

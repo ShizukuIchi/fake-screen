@@ -3,6 +3,7 @@ import { genID } from 'src/lib';
 import Win10Blue from './Win10Blue';
 import MacOS from './MacOS';
 import Google from './Google';
+import WannaCry from './WannaCry';
 
 export default {
   Win10Blue,
@@ -40,7 +41,7 @@ export const themes = [
     name: 'ubuntu',
     imgUrl: 'https://via.placeholder.com/500x300',
     isBackgroundDark: true,
-    component: null,
+    component: WannaCry,
     objectFit: 'contain',
   },
   {
@@ -48,9 +49,9 @@ export const themes = [
     fullScreen: true,
     displayName: 'Wanna Crypto 2.0',
     name: 'wannacry',
-    imgUrl: 'https://via.placeholder.com/500x300',
+    imgUrl: 'https://i.imgur.com/pfF2PyS.png',
     isBackgroundDark: true,
-    component: null,
+    component: WannaCry,
     objectFit: 'contain',
   },
   {

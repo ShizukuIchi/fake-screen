@@ -6,10 +6,11 @@ it('countdowner count 3', async () => {
   const cd = new CountDowner(now);
   let count = 0;
   cd.on('second', () => count++);
+
   await new Promise(res => {
     cd.on('stop', res);
   });
-  expect(count).toEqual(3);
+  expect(count).toEqual(2);
 });
 
 it('countdowner progress', async () => {
@@ -42,16 +43,4 @@ it('countdowner get last times -1', async () => {
   const cd = new CountDowner(now);
   await sleep(900);
   expect(cd.getLast()).toEqual([0, 23, 59, 59]);
-});
-
-it('countdowner format', async () => {
-  const now = new Date();
-  now.setDate(now.getDate() + 1);
-  const cd = new CountDowner(now);
-  await sleep(900);
-  const formatter = time => {
-    const fixStr = c => (c < 10 ? '0' : '') + c;
-    return time.map(fixStr).join('-');
-  };
-  expect(cd.formatFromCB(formatter)()).toEqual(`00-23-59-59`);
 });

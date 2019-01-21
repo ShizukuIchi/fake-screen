@@ -7,3 +7,4 @@ export const genID = () => {
 };
 
 export const isStr = str => testStr => str === testStr;
+export const twoDigits = n => (n < 10 ? '0' : '') + n;
