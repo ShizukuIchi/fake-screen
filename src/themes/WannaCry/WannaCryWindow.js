@@ -213,7 +213,7 @@ function WannaCryWindow({
           </div>
           <div className="buttons">
             <button onClick={onCheck} id="check">
-              Check <span className="underline">P</span>ayment{' '}
+              Check <span className="underline">P</span>ayment
             </button>
             <button onClick={onDecrypt} id="decrypt">
               <span className="underline">D</span>ecrypt

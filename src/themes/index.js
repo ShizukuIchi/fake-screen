@@ -5,11 +5,6 @@ import MacOS from './MacOS';
 import Google from './Google';
 import WannaCry from './WannaCry';
 
-export default {
-  Win10Blue,
-  MacOS,
-};
-
 export const Placeholder = () => <div>placeholder</div>;
 
 const getThemeID = genID();
@@ -22,7 +17,7 @@ export const themes = [
     imgUrl: 'https://i.imgur.com/cm1uwzI.png',
     isBackgroundDark: false,
     component: Google,
-    objectFit: 'cover',
+    objectFit: 'contain',
   },
   {
     id: getThemeID(),
@@ -41,7 +36,7 @@ export const themes = [
     name: 'ubuntu',
     imgUrl: 'https://via.placeholder.com/500x300',
     isBackgroundDark: true,
-    component: WannaCry,
+    component: null,
     objectFit: 'contain',
   },
   {

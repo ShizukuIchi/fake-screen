@@ -91,7 +91,7 @@ export default styled(Option)`
     color: white;
     left: 0;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 2rem;
     text-shadow: black 1px 1px 2px;
     text-align: center;
   }
