@@ -4,6 +4,7 @@ import Win10Blue from './Win10Blue';
 import MacOS from './MacOS';
 import Google from './Google';
 import WannaCry from './WannaCry';
+import Ubuntu from './Ubuntu';
 
 export const Placeholder = () => <div>placeholder</div>;
 
@@ -36,7 +37,7 @@ export const themes = [
     name: 'ubuntu',
     imgUrl: 'https://via.placeholder.com/500x300',
     isBackgroundDark: true,
-    component: null,
+    component: Ubuntu,
     objectFit: 'contain',
   },
   {

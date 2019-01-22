@@ -21,8 +21,12 @@ function WannaCry({ raise, lose, history }) {
     alert(`Decrypt failed!\nPlease click <Contact Us>!`);
   }
   function onCopy() {
-    document.execCommand('copy');
-    alert('Content copied Successfully!');
+    try {
+      document.execCommand('copy');
+    } catch {
+    } finally {
+      alert('Content copied Successfully!');
+    }
   }
   function onExit() {
     history.push('/');
@@ -93,11 +97,11 @@ export function formatProgress(p) {
   return `${p * 100}%`;
 }
 export function offsetDate(now, array) {
-  const date = new Date(now);
-  date.setDate(date.getDate() + array[0]);
-  date.setHours(date.getHours() + array[1]);
-  date.setMinutes(date.getMinutes() + array[2]);
-  date.setSeconds(date.getSeconds() + array[3]);
+  const date = new Date();
+  date.setDate(now.getDate() + array[0]);
+  date.setHours(now.getHours() + array[1]);
+  date.setMinutes(now.getMinutes() + array[2]);
+  date.setSeconds(now.getSeconds() + array[3]);
   return date;
 }
 export function formatDeadline(date) {
@@ -112,7 +116,7 @@ export function formatDeadline(date) {
   return `${dateStr} ${timeStr}`;
 }
 
-function setClipboardData(event) {
+export function setClipboardData(event) {
   event.preventDefault();
   if (event.clipboardData) {
     event.clipboardData.setData(
