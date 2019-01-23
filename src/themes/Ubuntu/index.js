@@ -1,6 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import useTimeout from 'src/hooks/useTimeout';
+import Header from './Header';
 import Login from './Login';
-import Idle from './Idel';
+import Idle from './Idle';
+import './style.css';
 
 function Ubuntu() {
   const [password, setPassword] = useState('');
@@ -8,31 +12,34 @@ function Ubuntu() {
   const [time, setTime] = useState('');
   const [dateString, setDateString] = useState('');
   const [isIdle, setIdle] = useState(false);
-  const ref = useRef();
+  const resetIdleTimeout = useTimeout(5000, onIdle);
+  const resetHintTimeout = useTimeout(1500, clearHint);
   function onPasswordChange(e) {
     setPassword(e.target.value);
   }
   function onSubmit() {
+    if (!password.length) return;
     setHint('Wrong password!');
+    resetHintTimeout();
   }
   function onPasswordClear() {
     setPassword('');
   }
   function onActive() {
-    console.log('activate');
-    setIdle(!isIdle);
+    setIdle(false);
+    resetIdleTimeout();
   }
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.onclick = onActive;
-      ref.current.onkeydown = onActive;
-    }
-  });
+  function onIdle() {
+    setIdle(true);
+  }
+  function clearHint() {
+    setHint('');
+  }
   useEffect(() => {
     const timer = setInterval(() => {
       const date = new Date();
-      setDateString(date.toLocaleDateString());
-      setTime(date.getSeconds());
+      setDateString(formatDateStr(date));
+      setTime(`${date.getHours()}:${date.getMinutes()}`);
     }, 1000);
     return () => {
       clearInterval(timer);
@@ -40,13 +47,16 @@ function Ubuntu() {
   }, []);
   return (
     <div
-      ref={ref}
+      onClick={onActive}
+      onKeyDown={onActive}
+      onMouseMove={onActive}
       style={{
         position: 'relative',
         fontFamily: 'Ubuntu',
         height: '100%',
       }}
     >
+      <Header />
       <Login
         onPasswordChange={onPasswordChange}
         password={password}
@@ -57,6 +67,23 @@ function Ubuntu() {
       <Idle show={isIdle} time={time} dateString={dateString} />
     </div>
   );
+}
+
+export function formatDateStr(date) {
+  return `${getDayStr(date.getDay())}, ${getMonthStr(
+    date.getMonth(),
+  )} ${date.getDate()}`;
+}
+export function getDayStr(d) {
+  return 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'.split(',')[
+    d
+  ];
+}
+
+export function getMonthStr(m) {
+  return 'January,February,March,April,May,June,July,August,September,October,November,December'.split(
+    ',',
+  )[m];
 }
 
 export default Ubuntu;

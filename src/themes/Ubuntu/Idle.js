@@ -6,12 +6,12 @@ import ubuntuBackground from './ubuntu1804.jpg';
 function Idle({ className, time, dateString }) {
   return (
     <div className={className}>
-      <section className="content">
-        <div className="time-container">
+      <div className="time-container">
+        <div className="content">
           <div className="time">{time}</div>
           <div className="date">{dateString}</div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
@@ -23,28 +23,30 @@ Idle.defaultProps = {
 
 export default styled(Idle)`
   transition: transform 1s;
+  transform: ${({ show }) => (show ? 'translateY(0)' : 'translateY(-100%)')};
   height: 100%;
   width: 100%;
-  transform: ${({ show }) => (show ? 'translateY(0%)' : 'translateY(-100%)')};
   background: url(${ubuntuBackground});
   background-size: cover;
+  top: 0;
+  left: 0;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .content {
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: #fff;
     padding-bottom: 20px;
   }
-  .content .time {
+  .time {
     text-shadow: -1px 2px 4px rgb(50, 50, 50);
     text-align: center;
     font-size: 6rem;
     font-weight: 600;
     margin-bottom: 7px;
   }
-  .content .date {
+  .date {
     text-shadow: -1px 1px rgb(50, 50, 50);
     font-size: 2.3rem;
     font-weight: 100;
