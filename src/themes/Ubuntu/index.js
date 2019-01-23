@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react';
 
 import useTimeout from 'src/hooks/useTimeout';
 import Header from './Header';
-import Login from './Login';
+import LoginContainer from './LoginContainer';
 import Idle from './Idle';
 import './style.css';
 
-function Ubuntu() {
+Ubuntu.defaultProps = {
+  hintTimeout: 1500,
+  idleTimeout: 5000,
+};
+
+function Ubuntu({ hintTimeout, idleTimeout }) {
   const [password, setPassword] = useState('');
   const [hint, setHint] = useState('');
   const [time, setTime] = useState('');
   const [dateString, setDateString] = useState('');
   const [isIdle, setIdle] = useState(false);
-  const resetIdleTimeout = useTimeout(5000, onIdle);
-  const resetHintTimeout = useTimeout(1500, clearHint);
+  const resetIdleTimeout = useTimeout(idleTimeout, onIdle);
+  const resetHintTimeout = useTimeout(hintTimeout, clearHint);
   function onPasswordChange(e) {
     setPassword(e.target.value);
   }
@@ -57,7 +62,7 @@ function Ubuntu() {
       }}
     >
       <Header />
-      <Login
+      <LoginContainer
         onPasswordChange={onPasswordChange}
         password={password}
         hint={hint}

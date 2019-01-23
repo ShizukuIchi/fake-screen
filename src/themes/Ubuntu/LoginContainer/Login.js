@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Popup from './Popup';
+
 import user from './user.svg';
 import settings from './settings.svg';
 import ubuntu from './ubuntu.svg';
@@ -12,6 +14,11 @@ function Login({
   hint,
   onSubmit,
   onPasswordClear,
+  options,
+  openPopup,
+  closePopup,
+  showPopup,
+  onOptionClick,
 }) {
   return (
     <div className={className}>
@@ -34,30 +41,28 @@ function Login({
         </div>
         <div className="buttons">
           <div className="cancel">
-            <button class="form-button" id="cancel" onClick={onPasswordClear}>
+            <button
+              className="form-button"
+              id="cancel"
+              onClick={onPasswordClear}
+            >
               Cancel
             </button>
           </div>
           <div className="settings">
-            <div className="settings-icon">
+            <div className="settings-icon" onClick={openPopup}>
               <img src={settings} alt="settings" />
-              <ul className="popup">
-                {[
-                  'Ubuntu',
-                  'Ubuntu with communitheme snap',
-                  'Ubuntu on Wayland',
-                  'Ubuntu on Xorg',
-                  'Unity',
-                ].map(item => (
-                  <li className="popup-item">
-                    <div className="circle" />
-                    <span className="item-text">{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
+            <Popup
+              left="calc(100% - 32px)"
+              top="calc(100% + 10px)"
+              options={options}
+              show={showPopup}
+              onOptionClick={onOptionClick}
+              onClose={closePopup}
+            />
           </div>
-          <button class="form-button" id="sign-in" onClick={onSubmit}>
+          <button className="form-button" id="sign-in" onClick={onSubmit}>
             Sign In
           </button>
         </div>
@@ -148,53 +153,6 @@ export default styled(Login)`
     flex-grow: 1;
     position: relative;
     height: 100%;
-    .popup {
-      display: none;
-      position: absolute;
-      top: calc(100% + 10px);
-      left: calc(100% - 24px);
-      padding: 16px 0 14px;
-      width: 290px;
-      background-color: rgb(50, 50, 50);
-      border-radius: 2px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    }
-    .popup:before {
-      content: '';
-      position: absolute;
-      bottom: 100%;
-      left: 6px;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 10px solid rgb(50, 50, 50);
-    }
-    .popup-item {
-      display: flex;
-      align-items: center;
-      line-height: 2em;
-      height: 2em;
-      list-style: none;
-      font-size: 0.9em;
-      padding-left: 2px;
-      &:hover {
-        background: rgba(255, 255, 255, 0.3);
-      }
-    }
-    .circle {
-      width: 30px;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .circle:before {
-      content: '';
-      display: block;
-      width: 3.5px;
-      height: 3.5px;
-      background-color: white;
-      border-radius: 50%;
-    }
   }
   .settings-icon {
     position: absolute;
