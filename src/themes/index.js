@@ -76,7 +76,7 @@ export const themes = [
     fullScreen: true,
     displayName: 'Windows 10 update',
     name: 'win10-update',
-    imgUrl: 'https://via.placeholder.com/500x300',
+    imgUrl: 'https://i.imgur.com/vj1vLO7.png',
     isBackgroundDark: false,
     component: Win10Update,
     objectFit: 'contain',
