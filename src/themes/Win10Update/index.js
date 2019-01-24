@@ -5,13 +5,17 @@ export function getRandomTime() {
   return Math.random() * 5000 + 5000;
 }
 
-function Win10Update() {
+Win10Update.defaultProps = {
+  randomFn: getRandomTime,
+};
+
+function Win10Update({ randomFn }) {
   const [progress, setProgress] = useState(0);
   useEffect(
     () => {
       let timer = setTimeout(() => {
         setProgress(progress => progress + 1);
-      }, getRandomTime());
+      }, randomFn());
       return () => {
         clearTimeout(timer);
       };
