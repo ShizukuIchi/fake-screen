@@ -1,9 +1,9 @@
 import { useRef, useEffect } from 'react';
 
-const useTimeout = (ms, callback) => {
+const useTimeout = (ms = 0, fn = () => {}, args = []) => {
   const timeoutRef = useRef();
   function start() {
-    timeoutRef.current = setTimeout(callback, ms);
+    timeoutRef.current = setTimeout(fn.bind(null, args), ms);
   }
   function clear() {
     clearTimeout(timeoutRef.current);

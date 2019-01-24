@@ -55,6 +55,7 @@ export default styled(Popup)`
   background-color: rgb(50, 50, 50);
   border-radius: 2px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  cursor: default;
   &:before {
     content: '';
     position: absolute;

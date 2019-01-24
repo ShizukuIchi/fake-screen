@@ -35,7 +35,7 @@ export const themes = [
     fullScreen: true,
     displayName: 'Ubuntu 18.04',
     name: 'ubuntu',
-    imgUrl: 'https://via.placeholder.com/500x300',
+    imgUrl: 'https://i.imgur.com/XN599kK.png',
     isBackgroundDark: true,
     component: Ubuntu,
     objectFit: 'contain',

@@ -20,6 +20,10 @@ function Login({
   showPopup,
   onOptionClick,
 }) {
+  function submit(e) {
+    if (e.key !== 'Enter') return;
+    onSubmit();
+  }
   return (
     <div className={className}>
       <section className="content">
@@ -37,6 +41,7 @@ function Login({
             name="password"
             value={password}
             onChange={onPasswordChange}
+            onKeyDown={submit}
           />
         </div>
         <div className="buttons">

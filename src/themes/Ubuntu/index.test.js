@@ -18,7 +18,11 @@ it('Ubuntu without crashing', async () => {
       value: '123',
     },
   });
-  submit.click();
+  fireEvent.keyDown(input, {});
+  expect(container.innerHTML).not.toMatch(/Wrong/);
+  fireEvent.keyDown(input, {
+    key: 'Enter',
+  });
   expect(container.innerHTML).toMatch(/Wrong/);
   await sleep(200);
   expect(container.innerHTML).not.toMatch(/Wrong/);

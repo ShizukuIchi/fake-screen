@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import useTimeout from 'src/hooks/useTimeout';
+import { useTimeout } from 'src/hooks';
 import Header from './Header';
 import LoginContainer from './LoginContainer';
 import Idle from './Idle';
