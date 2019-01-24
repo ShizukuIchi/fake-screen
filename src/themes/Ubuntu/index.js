@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useTimeout } from 'src/hooks';
+import { twoDigits } from 'src/lib';
 import Header from './Header';
 import LoginContainer from './LoginContainer';
 import Idle from './Idle';
@@ -44,7 +45,7 @@ function Ubuntu({ hintTimeout, idleTimeout }) {
     const timer = setInterval(() => {
       const date = new Date();
       setDateString(formatDateStr(date));
-      setTime(`${date.getHours()}:${date.getMinutes()}`);
+      setTime([date.getHours(), date.getMinutes()].map(twoDigits).join(':'));
     }, 1000);
     return () => {
       clearInterval(timer);

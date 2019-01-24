@@ -5,6 +5,7 @@ import MacOS from './MacOS';
 import Google from './Google';
 import WannaCry from './WannaCry';
 import Ubuntu from './Ubuntu';
+import Win10Update from './Win10Update';
 
 export const Placeholder = () => <div>placeholder</div>;
 
@@ -77,7 +78,7 @@ export const themes = [
     name: 'win10-update',
     imgUrl: 'https://via.placeholder.com/500x300',
     isBackgroundDark: false,
-    component: null,
+    component: Win10Update,
     objectFit: 'contain',
   },
 ];
