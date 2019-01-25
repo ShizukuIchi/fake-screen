@@ -6,6 +6,7 @@ import Google from './Google';
 import WannaCry from './WannaCry';
 import Ubuntu from './Ubuntu';
 import Win10Update from './Win10Update';
+import DVDScreensaver from './DVDScreensaver';
 
 export const Placeholder = () => <div>placeholder</div>;
 
@@ -51,16 +52,7 @@ export const themes = [
     component: WannaCry,
     objectFit: 'contain',
   },
-  {
-    id: getThemeID(),
-    fullScreen: true,
-    displayName: 'Windows 10',
-    name: 'win10',
-    imgUrl: 'https://via.placeholder.com/500x300',
-    isBackgroundDark: false,
-    component: null,
-    objectFit: 'contain',
-  },
+
   {
     id: getThemeID(),
     fullScreen: true,
@@ -79,6 +71,26 @@ export const themes = [
     imgUrl: 'https://i.imgur.com/vj1vLO7.png',
     isBackgroundDark: false,
     component: Win10Update,
+    objectFit: 'contain',
+  },
+  {
+    id: getThemeID(),
+    fullScreen: true,
+    displayName: 'DVD Screensaver',
+    name: 'dvd-screensaver',
+    imgUrl: 'https://via.placeholder.com/192x108',
+    isBackgroundDark: true,
+    component: DVDScreensaver,
+    objectFit: 'contain',
+  },
+  {
+    id: getThemeID(),
+    fullScreen: true,
+    displayName: 'Placeholder',
+    name: 'placeholder',
+    imgUrl: 'https://via.placeholder.com/192x108',
+    isBackgroundDark: false,
+    component: null,
     objectFit: 'contain',
   },
 ];
