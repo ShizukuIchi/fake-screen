@@ -15,7 +15,8 @@ const RoutesContainer = posed.div({
 
 const ThemeContainer = ({ location, className }) => {
   function renderTheme(component) {
-    return component || Placeholder;
+    return component;
+    // return component || Placeholder;
   }
   return (
     <PoseGroup>
