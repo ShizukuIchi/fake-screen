@@ -1,4 +1,3 @@
-import React from 'react';
 import { genID } from 'src/lib';
 import Win10Blue from './Win10Blue';
 import MacOS from './MacOS';
@@ -7,8 +6,6 @@ import WannaCry from './WannaCry';
 import Ubuntu from './Ubuntu';
 import Win10Update from './Win10Update';
 import DVDScreensaver from './DVDScreensaver';
-
-export const Placeholder = () => <div>placeholder</div>;
 
 const getThemeID = genID();
 export const themes = [

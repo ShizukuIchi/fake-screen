@@ -1,7 +1,7 @@
 {
   "name": "fake-screen",
   "version": "1.0.0",
-  "homepage": "https://ShizukuIchi.github.io/fake-screen",
+  "homepage": "https://sh1zuku.csie.io/fake-screen",
   "scripts": {
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",

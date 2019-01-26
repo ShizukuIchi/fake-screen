@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import posed, { PoseGroup } from 'react-pose';
 import styled from 'styled-components';
-import { themes, Placeholder } from 'src/themes';
+import { themes } from 'src/themes';
 
 const RoutesContainer = posed.div({
   enter: {
@@ -16,7 +16,6 @@ const RoutesContainer = posed.div({
 const ThemeContainer = ({ location, className }) => {
   function renderTheme(component) {
     return component;
-    // return component || Placeholder;
   }
   return (
     <PoseGroup>
