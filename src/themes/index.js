@@ -78,7 +78,7 @@ export const themes = [
     fullScreen: true,
     displayName: 'DVD Screensaver',
     name: 'dvd-screensaver',
-    imgUrl: 'https://via.placeholder.com/192x108',
+    imgUrl: 'https://i.imgur.com/AaSkNGk.png',
     isBackgroundDark: true,
     component: DVDScreensaver,
     objectFit: 'contain',

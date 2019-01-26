@@ -2,36 +2,62 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import DVDLogo from './DVDLogo';
 
-const colors = [
-  'white',
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'blue',
-  'skyblue',
-  'purple',
-];
+DVDScreensaver.defaultProps = {
+  velocity: {
+    x: 1.5,
+    y: 1.5,
+  },
+  colors: [
+    'white',
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'blue',
+    'skyblue',
+    'purple',
+  ],
+  bounding: {
+    top: 0,
+    right: window.innerWidth,
+    bottom: window.innerHeight,
+    left: 0,
+  },
+};
 
-function DVDScreensaver({ className }) {
-  const [direction, setDirection] = useState({ dx: 1.5, dy: 1.5 });
+function DVDScreensaver({ className, velocity, colors, bounding }) {
+  const [direction, setDirection] = useState({
+    dx: velocity.x,
+    dy: velocity.y,
+  });
   const ref = useRef();
   const [color, setColor] = useState('#FFF');
-  function change(dx, dy) {
+  function change(dx, dy, color) {
     setDirection({ dx, dy });
-    setColor(colors[Math.floor(Math.random() * 5)]);
+    setColor(color);
   }
   function animate() {
     if (!ref.current) return requestAnimationFrame(animate);
     let { dx, dy } = direction;
     const { top, right, bottom, left } = ref.current.getBoundingClientRect();
-    ref.current.style.transform = `translate(${left + dx}px, ${top + dy}px)`;
-    if ((dx < 0 && left <= 0) || (dx > 0 && right >= window.innerWidth))
+
+    if (
+      (dx < 0 && left <= bounding.left) ||
+      (dx > 0 && right >= bounding.right)
+    )
       dx = -dx;
-    if ((dy < 0 && top <= 0) || (dy > 0 && bottom >= window.innerHeight))
+    if (
+      (dy < 0 && top <= bounding.top) ||
+      (dy > 0 && bottom >= bounding.bottom)
+    )
       dy = -dy;
-    if (dx !== direction.dx || dy !== direction.dy) change(dx, dy);
-    else requestAnimationFrame(animate);
+    if (dx !== direction.dx || dy !== direction.dy) {
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      change(dx, dy, color);
+    } else {
+      ref.current.style.transform = `translate(${left + dx}px, ${top + dy}px)`;
+      requestAnimationFrame(animate);
+    }
   }
   useEffect(
     () => {
