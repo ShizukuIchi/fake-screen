@@ -106,7 +106,7 @@ export function offsetDate(now, array) {
 }
 export function formatDeadline(date) {
   const y = date.getFullYear();
-  const M = date.getMonth();
+  const M = date.getMonth() + 1;
   const d = date.getDate();
   const h = date.getHours();
   const m = date.getMinutes();
