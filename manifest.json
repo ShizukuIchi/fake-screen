@@ -1,0 +1,16 @@
+{
+  "short_name": "Fake Screen",
+  "name": "Fake Screen",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#fff9c4",
+  "background_color": "#fff9c4",
+  "description": "Choose a theme.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
