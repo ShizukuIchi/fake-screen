@@ -1,0 +1,6 @@
+ignore:
+  - 'src/index.js'
+  - 'src/serviceWorker.js'
+  - 'src/assets'
+  - 'src/components/index.js'
+  - 'src/themes/index.js'

@@ -12,6 +12,7 @@ use chrome for the best experience
 - Get not match whatever you typed
 
 ![Not match](https://i.imgur.com/FVIwkPq.png)
+
 ### Windows 10
 
 - Update and then blue screen
