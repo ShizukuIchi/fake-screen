@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useIdle, useDebounce } from 'react-use';
+import { useIdle } from 'react-use';
 
 import { useResettableTimeout } from 'src/hooks';
 import { twoDigits, getDayStr, getMonthStr } from 'src/lib';

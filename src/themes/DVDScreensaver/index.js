@@ -37,7 +37,7 @@ function DVDScreensaver({ className, velocity, colors, bounding }) {
     setColor(color);
   }
   function animate() {
-    if (!ref.current) return requestAnimationFrame(animate);
+    if (!ref.current) return;
     let { dx, dy } = direction;
     const { top, right, bottom, left } = ref.current.getBoundingClientRect();
 
