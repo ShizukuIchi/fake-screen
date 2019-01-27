@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
+import { choose } from 'src/lib';
 import DVDLogo from './DVDLogo';
 
 DVDScreensaver.defaultProps = {
@@ -23,55 +24,64 @@ DVDScreensaver.defaultProps = {
     bottom: window.innerHeight,
     left: 0,
   },
+  start: {
+    x: 0,
+    y: 0,
+  },
+  size: {
+    width: 300,
+    height: 132,
+  },
 };
 
-function DVDScreensaver({ className, velocity, colors, bounding }) {
-  const [direction, setDirection] = useState({
-    dx: velocity.x,
-    dy: velocity.y,
-  });
+function DVDScreensaver({
+  className,
+  velocity,
+  colors,
+  bounding,
+  size,
+  start,
+}) {
   const ref = useRef();
-  const [color, setColor] = useState('#FFF');
-  function change(dx, dy, color) {
-    setDirection({ dx, dy });
-    setColor(color);
-  }
-  function animate() {
-    if (!ref.current) return;
-    let { dx, dy } = direction;
-    const { top, right, bottom, left } = ref.current.getBoundingClientRect();
-
-    if (
-      (dx < 0 && left <= bounding.left) ||
-      (dx > 0 && right >= bounding.right)
-    )
-      dx = -dx;
-    if (
-      (dy < 0 && top <= bounding.top) ||
-      (dy > 0 && bottom >= bounding.bottom)
-    )
-      dy = -dy;
-    if (dx !== direction.dx || dy !== direction.dy) {
-      const color = colors[Math.floor(Math.random() * colors.length)];
-      change(dx, dy, color);
-    } else {
-      ref.current.style.transform = `translate(${left + dx}px, ${top + dy}px)`;
-      requestAnimationFrame(animate);
+  const [color, setColor] = useState(choose(colors));
+  const { width, height } = size;
+  useEffect(() => {
+    let myRaf;
+    let vx = velocity.x;
+    let vy = velocity.y;
+    let left = start.x;
+    let top = start.y;
+    function animate() {
+      if (
+        (vx < 0 && left <= bounding.left) ||
+        (vx > 0 && left + width >= bounding.right)
+      ) {
+        setColor(choose(colors));
+        vx = -vx;
+      } else if (
+        (vy < 0 && top <= bounding.top) ||
+        (vy > 0 && top + height >= bounding.bottom)
+      ) {
+        setColor(choose(colors));
+        vy = -vy;
+      } else {
+        left += vx;
+        top += vy;
+        ref.current.style.transform = `translate(${left}px, ${top}px)`;
+      }
+      myRaf = requestAnimationFrame(animate);
     }
-  }
-  useEffect(
-    () => {
-      const myRaf = requestAnimationFrame(animate);
-      return () => cancelAnimationFrame(myRaf);
-    },
-    [direction],
-  );
+    myRaf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(myRaf);
+  }, []);
   return (
     <div className={className}>
       <div
         ref={ref}
         className="logo"
         style={{
+          width: `${width}px`,
+          height: `${height}px`,
           background: 'black',
         }}
       >
@@ -85,8 +95,6 @@ export default styled(DVDScreensaver)`
   background-color: #000;
   height: 100%;
   .logo {
-    width: 300px;
-    height: 132px;
     overflow: hidden;
     background: white;
   }

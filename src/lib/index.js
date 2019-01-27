@@ -19,3 +19,7 @@ export function getMonthStr(m) {
     ',',
   )[m];
 }
+
+export function choose(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
