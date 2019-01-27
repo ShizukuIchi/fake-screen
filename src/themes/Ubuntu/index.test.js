@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from 'react-testing-library';
-import Ubuntu from './index';
+import Ubuntu from 'src/themes/Ubuntu';
 
 import { sleep } from 'src/lib';
 

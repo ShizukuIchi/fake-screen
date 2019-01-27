@@ -1,1 +1,3 @@
-export { default as useTimeout } from './useTimeout';
+export {
+  default as useResettableTimeout,
+} from 'src/hooks/useResettableTimeout';

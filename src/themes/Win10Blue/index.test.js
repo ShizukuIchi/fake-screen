@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-import Win10Blue from './index';
+import Win10Blue from 'src/themes/Win10Blue';
 
 it('Win10Blue without crashing', () => {
   const { container } = render(<Win10Blue />);

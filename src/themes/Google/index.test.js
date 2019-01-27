@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import { render, fireEvent } from 'react-testing-library';
-import Google from './index';
+import Google from 'src/themes/Google';
 
 it('Result hello without crashing', () => {
   const { container, getByValue, getByAltText } = render(

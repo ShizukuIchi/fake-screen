@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { render } from 'react-testing-library';
 
-import { useTimeout } from 'src/hooks';
+import { useResettableTimeout } from 'src/hooks';
 import { sleep } from 'src/lib';
 
 function TestTimeout() {
-  const reset = useTimeout(1000, add, 2);
-  useTimeout();
+  const reset = useResettableTimeout(1000, add, 2);
+  useResettableTimeout();
   const [count, setCount] = useState(0);
   function add(n) {
     setCount(count => count + n);

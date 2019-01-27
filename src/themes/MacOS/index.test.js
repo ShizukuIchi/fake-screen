@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-import MacOS, { getText, progressReducer, initState } from './index';
+import MacOS, { getText, progressReducer, initState } from 'src/themes/MacOS';
 import { sleep } from 'src/lib';
 
 jest.setTimeout(12000);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import { render } from 'react-testing-library';
-import WannaCry, { setClipboardData } from './index';
+import WannaCry, { setClipboardData } from 'src/themes/WannaCry';
 import { sleep } from 'src/lib';
 
 it('WannaCry without crashing', async () => {
