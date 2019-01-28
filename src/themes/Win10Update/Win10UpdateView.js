@@ -29,6 +29,7 @@ export default styled(Win10UpdateView)`
   justify-content: center;
   font-family: 'Segoe UI light', Arial;
   word-break: break-word;
+  padding: 10px;
   .content {
     display: flex;
     flex-direction: column;

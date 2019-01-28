@@ -82,7 +82,6 @@ function DVDScreensaver({
         style={{
           width: `${width}px`,
           height: `${height}px`,
-          background: 'black',
         }}
       >
         <DVDLogo color={color} />
@@ -96,6 +95,5 @@ export default styled(DVDScreensaver)`
   height: 100%;
   .logo {
     overflow: hidden;
-    background: white;
   }
 `;
