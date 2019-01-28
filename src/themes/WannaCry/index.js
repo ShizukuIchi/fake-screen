@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { CountDowner, twoDigits } from 'src/lib';
 import WannaCryWindow from './WannaCryWindow';
+import { useMeta } from 'src/hooks';
 
 function WannaCry({ raise, lose, history }) {
   const [raiseDeadline] = useState(
@@ -13,6 +14,9 @@ function WannaCry({ raise, lose, history }) {
   const [payment, setPayment] = useState(300);
   const [raiseProgress, setRaiseProgress] = useState(formatProgress(0));
   const [loseProgress, setLoseProgress] = useState(formatProgress(0));
+  useMeta('viewport', {
+    content: '',
+  });
 
   function onCheck() {
     alert(`You didn't pay!\nYour files will be lost on ${loseDeadline}!`);

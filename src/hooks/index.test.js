@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { render } from 'react-testing-library';
 
-import { useResettableTimeout, useMediaStyles } from 'src/hooks';
+import { useResettableTimeout, useMediaStyles, useMeta } from 'src/hooks';
 import { sleep } from 'src/lib';
 
 function TestTimeout() {
@@ -21,6 +21,14 @@ function TestMediaStyles() {
   return style;
 }
 
+function TestMeta() {
+  useMeta('test', {
+    test: 'testtest',
+    noTest: 'noTest',
+  });
+  return 'test';
+}
+
 it('useTimeout', async () => {
   const { container } = render(<TestTimeout />);
   expect(container.innerHTML).toMatch(/0/);
@@ -34,4 +42,17 @@ it('useTimeout', async () => {
 
 it('useMediaStyles', () => {
   render(<TestMediaStyles />);
+});
+
+it('useMeta', () => {
+  const meta = document.createElement('meta');
+  document.head.appendChild(meta);
+  meta.setAttribute('test', 'test');
+  meta.setAttribute('name', 'test');
+  const { unmount } = render(<TestMeta />);
+  expect(meta.getAttribute('noTest')).toBe('noTest');
+  expect(meta.getAttribute('test')).toBe('testtest');
+  unmount();
+  expect(meta.getAttribute('noTest')).toBe(null);
+  expect(meta.getAttribute('test')).toBe('test');
 });
