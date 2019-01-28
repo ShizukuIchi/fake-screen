@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { render } from 'react-testing-library';
 
-import { useResettableTimeout } from 'src/hooks';
+import { useResettableTimeout, useMediaStyles } from 'src/hooks';
 import { sleep } from 'src/lib';
 
 function TestTimeout() {
@@ -14,6 +14,10 @@ function TestTimeout() {
   return <div onClick={reset}>{count}</div>;
 }
 
+function TestMediaStyles() {
+  const {} = useMediaStyles();
+}
+
 it('useTimeout', async () => {
   const { container } = render(<TestTimeout />);
   expect(container.innerHTML).toMatch(/0/);
@@ -24,3 +28,5 @@ it('useTimeout', async () => {
   await sleep(600);
   expect(container.innerHTML).toMatch(/2/);
 });
+
+it('useMediaStyles', () => {});

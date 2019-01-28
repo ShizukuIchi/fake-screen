@@ -10,5 +10,6 @@ it('DVDScreensaver render without crash', async () => {
       bounding={{ top: 0, right: 2, bottom: 2, left: 0 }}
     />,
   );
+  render(<DVDScreensaver />);
   await sleep(500);
 });
