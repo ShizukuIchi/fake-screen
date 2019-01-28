@@ -20,13 +20,9 @@ DVDScreensaver.defaultProps = {
     'skyblue',
     'purple',
   ],
-  start: {
-    x: 0,
-    y: 0,
-  },
 };
 
-function DVDScreensaver({ className, defaultVelocity, colors, start }) {
+function DVDScreensaver({ className, defaultVelocity, colors }) {
   const ref = useRef();
   const { width, height } = useMediaStyles({
     '(max-width: 768px)': {
@@ -55,16 +51,16 @@ function DVDScreensaver({ className, defaultVelocity, colors, start }) {
           (vx < 0 && logoLeft <= 0) ||
           (vx > 0 && logoLeft + width >= windowWidth)
         ) {
+          vx = -vx;
           setColor(choose(colors));
           setVelocity({ x: vx, y: vy });
-          vx = -vx;
         } else if (
           (vy < 0 && logoTop <= 0) ||
           (vy > 0 && logoTop + height >= windowHeight)
         ) {
+          vy = -vy;
           setColor(choose(colors));
           setVelocity({ x: vx, y: vy });
-          vy = -vy;
         } else {
           logoLeft += vx;
           logoTop += vy;

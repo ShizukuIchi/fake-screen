@@ -15,7 +15,10 @@ function TestTimeout() {
 }
 
 function TestMediaStyles() {
-  const {} = useMediaStyles();
+  const style = useMediaStyles({
+    test: 'test',
+  });
+  return style;
 }
 
 it('useTimeout', async () => {
@@ -29,4 +32,6 @@ it('useTimeout', async () => {
   expect(container.innerHTML).toMatch(/2/);
 });
 
-it('useMediaStyles', () => {});
+it('useMediaStyles', () => {
+  render(<TestMediaStyles />);
+});

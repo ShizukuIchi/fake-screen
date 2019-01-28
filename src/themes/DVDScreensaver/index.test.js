@@ -4,12 +4,7 @@ import { sleep } from 'src/lib';
 import DVDScreensaver from 'src/themes/DVDScreensaver';
 
 it('DVDScreensaver render without crash', async () => {
-  render(
-    <DVDScreensaver
-      size={{ width: 1, height: 1 }}
-      bounding={{ top: 0, right: 2, bottom: 2, left: 0 }}
-    />,
-  );
-  render(<DVDScreensaver />);
+  render(<DVDScreensaver defaultVelocity={{ x: 1000, y: 0 }} />);
+  render(<DVDScreensaver defaultVelocity={{ x: 0, y: 1000 }} />);
   await sleep(500);
 });
