@@ -19,7 +19,10 @@ const ThemeContainer = ({ location, className }) => {
   }
   return (
     <PoseGroup>
-      <RoutesContainer className={className} key={location.pathname}>
+      <RoutesContainer
+        className={className}
+        key={location.pathname.split('/')[1]}
+      >
         <Switch location={location}>
           {themes.map(theme => (
             <Route

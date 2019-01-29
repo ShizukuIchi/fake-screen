@@ -1,66 +1,98 @@
 import React, { useState } from 'react';
+import queryString from 'query-string';
 import styled from 'styled-components';
+
+import find from './find.svg';
 import smile from './smile.svg';
 
-function Search({ onSearch, className }) {
-  const [value, setValue] = useState('');
+function Search({ location, className, goMain, onSearch }) {
+  const [value, setValue] = useState(getQuery());
   function onChange(e) {
     setValue(e.target.value);
   }
+  function getQuery() {
+    const qsObj = queryString.parse(location.search);
+    return qsObj.query || '';
+  }
+
   function onClick() {
     if (value.length) onSearch(value);
   }
   return (
     <div className={className}>
-      <header>
-        <div className="text">Gmail</div>
-        <div className="text">Images</div>
-        <img src={smile} alt="avatar" />
-      </header>
-      <section className="content">
-        <img
-          className="logo"
-          alt="Google"
-          src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-        />
-        <div className="search-bar">
-          <input
-            id="search"
-            type="text"
-            name="search"
-            onChange={onChange}
-            value={value}
-          />
-          <div className="icon">
+      <section className="top-bars">
+        <div className="top-bar">
+          <div className="bar-items left">
             <img
-              src="https://www.gstatic.com/images/branding/googlemic/2x/googlemic_color_24dp.png"
-              alt="microphone"
+              onClick={goMain}
+              className="logo"
+              src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+              alt="Google"
             />
+            <div className="search-bar">
+              <input
+                id="search"
+                type="text"
+                name="search"
+                value={value}
+                onChange={onChange}
+              />
+              <div className="icon">
+                <img
+                  src="https://www.gstatic.com/images/branding/googlemic/2x/googlemic_color_24dp.png"
+                  alt="microphone"
+                />
+              </div>
+              <div className="icon" onClick={onClick}>
+                <img src={find} alt="find" />
+              </div>
+            </div>
+          </div>
+          <div className="bar-items right">
+            <div className="functions">
+              <img src={smile} alt="smile" />
+            </div>
           </div>
         </div>
-        <div className="buttons">
-          <button onClick={onClick} id="enter">
-            Google Search
-          </button>
-          <button>I'm Feeling Lucky</button>
+        <div className="app-bar">
+          <div className="tags left">
+            <div className="tag active">All</div>
+            <div className="tag">Maps</div>
+            <div className="tag">Images</div>
+            <div className="tag">News</div>
+            <div className="tag">Videos</div>
+            <div className="tag">More</div>
+          </div>
+          <div className="tags right">
+            <div className="tag">Settings</div>
+            <div className="tag">Tools</div>
+          </div>
         </div>
+      </section>
+      <section className="content">
+        <p>
+          Your search - <span id="search-in-content">{getQuery()}</span> - did
+          not match any documents.
+        </p>
+        <p>Suggestions</p>
+        <ul>
+          <li>Make sure that all words are spelled correctly.</li>
+          <li>Try different keywords.</li>
+          <li>Try more general keywords.</li>
+        </ul>
       </section>
       <footer>
         <section className="upper">
-          <div className="items left">
+          <div className="footer-items left">
             <div className="item">Taiwan</div>
           </div>
         </section>
         <section className="lower">
-          <div className="items left">
-            <div className="item">Advertising</div>
-            <div className="item">Business</div>
-            <div className="item">About</div>
-          </div>
-          <div className="items right">
+          <div className="footer-items left">
+            <div className="item">Help</div>
+            <div className="item">Send feedback</div>
             <div className="item">Privacy</div>
             <div className="item">Terms</div>
-            <div className="item">Settings</div>
           </div>
         </section>
       </footer>
@@ -71,103 +103,110 @@ function Search({ onSearch, className }) {
 export default styled(Search)`
   height: 100%;
   background: white;
-  header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 30px;
-    padding: 30px 15px;
+  padding-top: 22px;
+  .top-bars {
+    border-bottom: 1px rgb(235, 235, 235) solid;
+  }
+  .top-bar {
+    height: 44px;
+  }
+  .app-bar {
+    height: 58px;
+    margin-left: 154px;
+    position: relative;
+    width: 584px;
+  }
+  .bar-items {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    font-size: 13px;
-    color: rgb(80, 80, 80);
-    * {
-      padding-right: 15px;
-      cursor: pointer;
-    }
-    .text:hover {
-      text-decoration: underline;
+    position: relative;
+    height: 44px;
+  }
+  .left {
+    position: absolute;
+    left: 0;
+  }
+  .right {
+    position: absolute;
+    right: 4px;
+  }
+  .logo {
+    width: 150px;
+    height: 34px;
+    padding: 4px 28px 0 30px;
+    cursor: pointer;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    border-radius: 22px;
+    width: 586px;
+    height: 46px;
+    border: 1px rgb(223, 225, 229) solid;
+    padding: 5px 0 0 20px;
+    input {
+      outline: 0;
+      border: 0;
+      flex: 1;
+      font-size: 16px;
     }
     img {
-      width: 48px;
+      width: 24px;
+      height: 24px;
+    }
+    .icon {
+      width: 40px;
+    }
+    .icon:nth-of-type(1) {
+      cursor: pointer;
+    }
+    .icon:nth-of-type(2) {
+      fill: rgb(66, 133, 244);
+      color: rgb(66, 133, 244);
     }
   }
-  .content {
+  .functions {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    .logo {
-      height: 92px;
-      width: 272px;
-      margin-top: 198px;
+    height: 100%;
+    padding-right: 14px;
+    img {
+      margin: 8px;
+      width: 24px;
+      cursor: pointer;
+      height: 24px;
     }
-    .search-bar {
-      margin-left: 11px;
-      margin-top: 26px;
-      width: 586px;
-      height: 46px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2);
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      padding: 0 8px 0 16px;
-      &:hover {
-        box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.3);
-      }
-      input {
-        border: none;
-        color: rgb(0, 0, 0, 0.87);
-        height: 100%;
-        flex: 1;
-        height: 34px;
-        margin-top: 5px;
-        font-size: 16px;
-        border: 0;
-        outline: 0;
-      }
+  }
+  .tags {
+    height: 100%;
+    display: flex;
+    font-size: 13px;
+    align-items: center;
+    color: rgb(119, 119, 119);
+  }
+  .tag.active {
+    color: rgb(26, 115, 232);
+    border-bottom: 3px rgb(26, 115, 232) solid;
+    font-weight: 700;
+  }
+  .tag {
+    height: 100%;
+    cursor: pointer;
+    padding: 28px 16px 0;
+    &:hover:not(.active) {
+      color: rgb(34, 34, 34);
+    }
+  }
 
-      .icon {
-        width: 40px;
-        padding: 0 8px;
-        height: 44px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        img {
-          height: 24px;
-          width: 24px;
-        }
-      }
+  .content {
+    color: rgb(34, 34, 34);
+    padding: 55px 0 0 170px;
+    p {
+      margin: 16px 0;
     }
-    .buttons {
-      width: 584px;
-      height: 36px;
-      margin-top: 31px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      button {
-        padding: 0 16px;
-        height: 36px;
-        margin: 0 6px;
-        border: 0;
-        font-weight: 700;
-        font-size: 13px;
-        color: rgb(120, 120, 120);
-        border: 1px transparent solid;
-        background: rgb(242, 242, 242);
-      }
-      button:hover {
-        border-radius: 2px;
-        color: rgb(34, 34, 34);
-        background: rgb(248, 248, 248);
-        border: 1px rgb(198, 198, 198) solid;
-        box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
-      }
-    }
+  }
+  #search-in-content {
+    font-weight: 700;
   }
   footer {
     position: fixed;
@@ -199,52 +238,67 @@ export default styled(Search)`
         text-decoration: underline;
       }
     }
-    .items {
-      position: absolute;
+    .footer-items {
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
-    .left {
-      left: 3px;
-    }
-    .right {
-      right: 3px;
+      padding-left: 150px;
+      position: relative;
     }
     .left .item {
-      padding-left: 27px;
-    }
-    .right .item {
-      padding-right: 27px;
+      margin-right: 27px;
     }
   }
-
   @media (max-width: 768px) {
-    header {
-      img {
-        width: 36px;
-      }
+    .top-bar {
+      height: auto;
     }
-    .content .search-bar {
+    .items.left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+      width: 100%;
+      position: relative;
+    }
+    .items.right {
+      display: none;
+    }
+    .search-bar {
+      margin-top: 15px;
       width: 90%;
-      margin-left: 0;
+      height: 40px;
+      border-radius: 3px;
     }
-    .logo {
-      width: 204px;
-      height: 69px;
+    .app-bar {
+      margin: 0 15px;
+      width: 100%;
+      height: 40px;
+    }
+    .tags {
+      display: flex;
+      width: 90%;
+    }
+    .tags.right {
+      display: none;
+    }
+    .tag {
+      text-align: center;
+      padding: 16px 0 0 0;
+      flex: 1;
+    }
+    .content {
+      padding: 10px 40px;
     }
     footer {
-      .left .item {
-        padding-left: 14px;
+      .items.left {
+        justify-content: flex-start;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
       }
-      .right .item {
-        padding-right: 14px;
-      }
-      .lower {
-        .item {
-          display: none;
-        }
+      .item:first-child {
+        padding-left: 15px;
       }
     }
   }

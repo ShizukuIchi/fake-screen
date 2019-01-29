@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import posed from 'react-pose';
 
 import { themes } from 'src/themes';
 import Option from 'src/components/Options/Option';
@@ -10,16 +9,9 @@ import { isStr } from 'src/lib';
 
 const Options = ({ location, className }) => {
   return (
-    <Div
-      className={className}
-      pose={isStr('/')(location.pathname) ? 'enter' : 'exit'}
-    >
+    <div className={className}>
       <header>
-        <a
-          href="https://github.com/ShizukuIchi/fake-screen"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://github.com/ShizukuIchi/fake-screen">
           <span className="title">Fake Screen</span>
           <img className="logo" src={githubLogo} alt="github-logo" />
         </a>
@@ -34,30 +26,21 @@ const Options = ({ location, className }) => {
             <Option
               name={name}
               {...rest}
-              zoom={isStr(`/${name}`)(location.pathname)}
+              zoom={location.pathname.startsWith(`/${name}`)}
             />
           </Link>
         ))}
       </div>
-    </Div>
+    </div>
   );
 };
-
-const Div = posed.div({
-  enter: {
-    zIndex: 1,
-  },
-  exit: {
-    applyAtStart: { zIndex: 0 },
-  },
-});
 
 export default styled(Options)`
   height: 100%;
   position: absolute;
   width: 100%;
   overflow: auto;
-  z-index: 2;
+  z-index: ${({ location }) => (isStr('/')(location.pathname) ? 1 : 0)};
   header {
     display: flex;
     align-items: center;
