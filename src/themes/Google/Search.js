@@ -253,15 +253,15 @@ export default styled(Search)`
     .top-bar {
       height: auto;
     }
-    .items.left {
+    .bar-items.left {
       display: flex;
       flex-direction: column;
       align-items: center;
-      height: auto;
       width: 100%;
+      height: auto;
       position: relative;
     }
-    .items.right {
+    .bar-items.right {
       display: none;
     }
     .search-bar {
@@ -269,6 +269,13 @@ export default styled(Search)`
       width: 90%;
       height: 40px;
       border-radius: 3px;
+      padding: 0px 5px 0 10px;
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+      }
     }
     .app-bar {
       margin: 0 15px;
@@ -290,16 +297,11 @@ export default styled(Search)`
     .content {
       padding: 10px 40px;
     }
-    footer {
-      .items.left {
-        justify-content: flex-start;
-        flex-direction: row;
-        align-items: center;
-        height: 100%;
-      }
-      .item:first-child {
-        padding-left: 15px;
-      }
+    .footer-items.left {
+      padding-left: 25px;
+    }
+    footer .left .item {
+      margin-right: 15px;
     }
   }
 `;
