@@ -14,9 +14,6 @@ function WannaCry({ raise, lose, history }) {
   const [payment, setPayment] = useState(300);
   const [raiseProgress, setRaiseProgress] = useState(formatProgress(0));
   const [loseProgress, setLoseProgress] = useState(formatProgress(0));
-  useMeta('viewport', {
-    content: '',
-  });
 
   function onCheck() {
     alert(`You didn't pay!\nYour files will be lost on ${loseDeadline}!`);
@@ -70,10 +67,7 @@ function WannaCry({ raise, lose, history }) {
     <div
       style={{
         height: '100%',
-        backgroundColor: '#000',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        background: '#000',
       }}
     >
       <WannaCryWindow

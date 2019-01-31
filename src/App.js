@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { ThemeContainer, Options, CloseButton } from 'src/components';
+import { useSafariNoScale } from 'src/hooks';
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <Route
-          render={props => (
-            <div className={this.props.className}>
-              <CloseButton {...props} />
-              <Options {...props} />
-              <ThemeContainer {...props} />
-            </div>
-          )}
-        />
-      </Router>
-    );
-  }
-}
+const App = props => {
+  useSafariNoScale();
+  return (
+    <Router>
+      <Route
+        render={routerProps => (
+          <div className={props.className}>
+            <CloseButton {...routerProps} />
+            <Options {...routerProps} />
+            <ThemeContainer {...routerProps} />
+          </div>
+        )}
+      />
+    </Router>
+  );
+};
 
 export default styled(App)`
   height: 100%;

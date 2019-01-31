@@ -21,7 +21,7 @@ const useSafariNoScale = () => {
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchend', handleTouchEnd);
     };
-  });
+  }, []);
 };
 
 export default useSafariNoScale;

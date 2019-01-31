@@ -6,6 +6,7 @@ import { themes } from 'src/themes';
 import Option from 'src/components/Options/Option';
 import githubLogo from 'src/assets/github-logo.svg';
 import { isStr } from 'src/lib';
+import GithubCorner from './GithubCorner';
 
 const Options = ({ location, className }) => {
   return (
@@ -13,8 +14,8 @@ const Options = ({ location, className }) => {
       <header>
         <a href="https://github.com/ShizukuIchi/fake-screen">
           <span className="title">Fake Screen</span>
-          <img className="logo" src={githubLogo} alt="github-logo" />
         </a>
+        <GithubCorner />
       </header>
       <div className="grid">
         {themes.map(({ id, fullScreen, name, ...rest }) => (
@@ -26,7 +27,7 @@ const Options = ({ location, className }) => {
             <Option
               name={name}
               {...rest}
-              zoom={location.pathname.startsWith(`/${name}`)}
+              zoom={location.pathname.split('/')[1] === name}
             />
           </Link>
         ))}
@@ -42,13 +43,14 @@ export default styled(Options)`
   overflow: auto;
   z-index: ${({ location }) => (isStr('/')(location.pathname) ? 1 : 0)};
   header {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 150px;
     filter: drop-shadow(rgba(61, 193, 211, 0.8) 1px 1px 1.5px);
     .title {
-      color: #63cdda;
+      color: #64ceaa;
       text-align: center;
       font-size: 2em;
     }
@@ -67,6 +69,7 @@ export default styled(Options)`
     grid-auto-rows: 162px;
     grid-gap: 40px 40px;
     justify-content: center;
+    padding-bottom: 60px;
   }
   .area {
     position: relative;
