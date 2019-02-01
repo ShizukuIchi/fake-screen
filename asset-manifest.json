@@ -1,9 +1,9 @@
 {
-  "main.css": "/fake-screen/static/css/main.a7f4bc69.chunk.css",
-  "main.js": "/fake-screen/static/js/main.32d39324.chunk.js",
-  "main.js.map": "/fake-screen/static/js/main.32d39324.chunk.js.map",
-  "static/js/1.2c3c8ec6.chunk.js": "/fake-screen/static/js/1.2c3c8ec6.chunk.js",
-  "static/js/1.2c3c8ec6.chunk.js.map": "/fake-screen/static/js/1.2c3c8ec6.chunk.js.map",
+  "main.css": "/fake-screen/static/css/main.4e536883.chunk.css",
+  "main.js": "/fake-screen/static/js/main.1ad2e036.chunk.js",
+  "main.js.map": "/fake-screen/static/js/main.1ad2e036.chunk.js.map",
+  "static/js/1.25f8456a.chunk.js": "/fake-screen/static/js/1.25f8456a.chunk.js",
+  "static/js/1.25f8456a.chunk.js.map": "/fake-screen/static/js/1.25f8456a.chunk.js.map",
   "runtime~main.js": "/fake-screen/static/js/runtime~main.b33e56f1.js",
   "runtime~main.js.map": "/fake-screen/static/js/runtime~main.b33e56f1.js.map",
   "static/media/smile.svg": "/fake-screen/static/media/smile.28ff52a8.svg",
@@ -13,10 +13,9 @@
   "static/media/settings.svg": "/fake-screen/static/media/settings.13128bd7.svg",
   "static/media/ubuntu.svg": "/fake-screen/static/media/ubuntu.88ee9aa8.svg",
   "static/media/ubuntu1804.jpg": "/fake-screen/static/media/ubuntu1804.cc54965e.jpg",
-  "static/media/github-logo.svg": "/fake-screen/static/media/github-logo.c4345139.svg",
   "static/media/apple.svg": "/fake-screen/static/media/apple.6046f0c7.svg",
-  "static/css/main.a7f4bc69.chunk.css.map": "/fake-screen/static/css/main.a7f4bc69.chunk.css.map",
+  "static/css/main.4e536883.chunk.css.map": "/fake-screen/static/css/main.4e536883.chunk.css.map",
   "index.html": "/fake-screen/index.html",
-  "precache-manifest.3768da9783e540552213b745572d5dbf.js": "/fake-screen/precache-manifest.3768da9783e540552213b745572d5dbf.js",
+  "precache-manifest.6c5e331a5aa59f857a481fab24f0fa33.js": "/fake-screen/precache-manifest.6c5e331a5aa59f857a481fab24f0fa33.js",
   "service-worker.js": "/fake-screen/service-worker.js"
 }

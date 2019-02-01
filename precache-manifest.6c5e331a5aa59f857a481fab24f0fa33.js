@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "7a96c7d635e55db9000deaf8f22eb035",
-    "url": "/fake-screen/static/media/doge.7a96c7d6.ico"
+    "revision": "cfc00209c2e6a9df522c90e356be6241",
+    "url": "/fake-screen/static/media/find.cfc00209.svg"
   },
   {
-    "revision": "32d3932425ad5ee4a5f4",
-    "url": "/fake-screen/static/css/main.a7f4bc69.chunk.css"
+    "revision": "1ad2e03691e75a5d651f",
+    "url": "/fake-screen/static/css/main.4e536883.chunk.css"
   },
   {
-    "revision": "2c3c8ec6dbfa83abce72",
-    "url": "/fake-screen/static/js/1.2c3c8ec6.chunk.js"
+    "revision": "25f8456a8718925175e7",
+    "url": "/fake-screen/static/js/1.25f8456a.chunk.js"
   },
   {
     "revision": "b33e56f1db5c3bfe316a",
@@ -24,12 +24,12 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/apple.6046f0c7.svg"
   },
   {
-    "revision": "cfc00209c2e6a9df522c90e356be6241",
-    "url": "/fake-screen/static/media/find.cfc00209.svg"
+    "revision": "1ad2e03691e75a5d651f",
+    "url": "/fake-screen/static/js/main.1ad2e036.chunk.js"
   },
   {
-    "revision": "32d3932425ad5ee4a5f4",
-    "url": "/fake-screen/static/js/main.32d39324.chunk.js"
+    "revision": "7a96c7d635e55db9000deaf8f22eb035",
+    "url": "/fake-screen/static/media/doge.7a96c7d6.ico"
   },
   {
     "revision": "6d0f501b52c9235cd5933ba61983317a",
@@ -48,11 +48,7 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/ubuntu1804.cc54965e.jpg"
   },
   {
-    "revision": "c4345139685e9390878f0a9daf91858e",
-    "url": "/fake-screen/static/media/github-logo.c4345139.svg"
-  },
-  {
-    "revision": "39f79e60b74ef0ddad04244ed4d55692",
+    "revision": "9ea4850fa133229ebc96778184ba1f9d",
     "url": "/fake-screen/index.html"
   }
 ];
