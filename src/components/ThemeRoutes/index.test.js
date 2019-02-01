@@ -1,14 +1,14 @@
 import React from 'react';
 import { withRouter, HashRouter } from 'react-router-dom';
 import { render } from 'react-testing-library';
-import ThemeContainer from './index';
+import ThemeRoutes from 'src/components/ThemeRoutes';
 
-const ThemeContainerWithRouter = withRouter(ThemeContainer);
+const ThemeRoutesWithRouter = withRouter(ThemeRoutes);
 
-it('ThemesContainer without crashing', () => {
+it('ThemesRoutes without crashing', () => {
   render(
     <HashRouter>
-      <ThemeContainerWithRouter />
+      <ThemeRoutesWithRouter />
     </HashRouter>,
   );
 });

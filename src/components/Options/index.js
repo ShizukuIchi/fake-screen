@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 
 import { themes } from 'src/themes';
 import Option from 'src/components/Options/Option';
-import githubLogo from 'src/assets/github-logo.svg';
-import { isStr } from 'src/lib';
 import GithubCorner from './GithubCorner';
 
-const Options = ({ location, className }) => {
+const Options = ({ className }) => {
   return (
     <div className={className}>
       <header>
@@ -24,11 +22,7 @@ const Options = ({ location, className }) => {
             key={id}
             to={{ pathname: `/${name}`, state: { fullScreen } }}
           >
-            <Option
-              name={name}
-              {...rest}
-              zoom={location.pathname.split('/')[1] === name}
-            />
+            <Option name={name} {...rest} />
           </Link>
         ))}
       </div>
@@ -38,10 +32,10 @@ const Options = ({ location, className }) => {
 
 export default styled(Options)`
   height: 100%;
+  background: #fff9c4;
   position: absolute;
   width: 100%;
   overflow: auto;
-  z-index: ${({ location }) => (isStr('/')(location.pathname) ? 1 : 0)};
   header {
     position: relative;
     display: flex;

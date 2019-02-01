@@ -1,20 +1,20 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route, Redirect } from 'react-router-dom';
 import { render, fireEvent } from 'react-testing-library';
 import Google from 'src/themes/Google';
 
 it('Result hello without crashing', () => {
-  const { container, getByValue, getByAltText } = render(
+  const { container, getByAltText } = render(
     <HashRouter>
       <Route
-        render={props => (
-          <Google {...props} location={{ search: '?query=Hello' }} />
-        )}
+        exact
+        path="/"
+        render={() => <Redirect to="/google/search?query=" />}
       />
+      <Route component={Google} />
     </HashRouter>,
   );
-  expect(container.innerHTML).toMatch(/Hello/);
-  const input = getByValue('Hello');
+  const input = container.querySelector('input');
 
   fireEvent.change(input, { target: { value: '' } });
   const button = getByAltText('find');

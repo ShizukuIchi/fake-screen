@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 
-import { useResettableTimeout, useMediaStyles, useMeta } from 'src/hooks';
+import {
+  useResettableTimeout,
+  useMediaStyles,
+  useMeta,
+  useSafariNotScale,
+} from 'src/hooks';
 import { sleep } from 'src/lib';
 
 function TestTimeout() {
@@ -55,4 +60,6 @@ it('useMeta', () => {
   unmount();
   expect(meta.getAttribute('noTest')).toBe(null);
   expect(meta.getAttribute('test')).toBe('test');
+  meta.remove();
+  render(<TestMeta />);
 });

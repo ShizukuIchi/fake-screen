@@ -1,50 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import posed from 'react-pose';
 
-const Option = ({ zoom, className, imgUrl, name, displayName }) => {
-  function getPose() {
-    return zoom ? 'zoom' : 'init';
-  }
+const Option = ({ className, imgUrl, name, displayName }) => {
   return (
-    <Div pose={getPose()} className={className}>
+    <div className={className}>
       <div className="img-container">
         <img src={imgUrl} alt={name} />
       </div>
       <div className="title">{displayName}</div>
-    </Div>
+    </div>
   );
 };
-
-const transition = {
-  duration: 600,
-  ease: [0.08, 0.69, 0.2, 0.99],
-};
-
-const Div = posed.div({
-  init: {
-    applyAtEnd: {
-      zIndex: 1,
-    },
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    transition,
-    flip: true,
-  },
-  zoom: {
-    applyAtStart: {
-      zIndex: 2,
-    },
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    transition,
-    flip: true,
-  },
-});
 
 export default styled(Option)`
   text-align: center;

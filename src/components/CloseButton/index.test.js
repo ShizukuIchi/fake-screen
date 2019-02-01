@@ -1,26 +1,23 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import CloseButton, { isDark, getColor } from './index';
-import { HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route, Redirect } from 'react-router-dom';
 
 it('CloseButton render without crashing', () => {
   const { container } = render(
     <HashRouter>
-      <Route render={props => <CloseButton {...props} dark={true} />} />
+      <CloseButton location={{ pathname: '/' }} />
     </HashRouter>,
   );
-  container.querySelector('button').click();
-  expect(container.style.opacity === 0.4);
+  const button = container.querySelector('button');
+  button.click();
 });
 
 it('CloseButton render no match without crashing ', () => {
   const { container } = render(
     <HashRouter>
-      <Route
-        render={props => (
-          <CloseButton {...props} location={{ pathname: '/no-match' }} />
-        )}
-      />
+      <Route exact path="/" render={() => <Redirect to="/no-match" />} />
+      <CloseButton location={{ pathname: '/no-match' }} />
     </HashRouter>,
   );
   container.querySelector('button').click();

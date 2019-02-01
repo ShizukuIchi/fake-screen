@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import { isStr } from 'src/lib';
 import { themes } from 'src/themes';
@@ -18,7 +19,8 @@ const CloseButton = ({ history, location }) => {
 };
 
 export function isDark(name) {
-  const theme = themes.find(theme => `/${theme.name}` === name);
+  const path = name.split('/')[1];
+  const theme = themes.find(theme => theme.name === path);
   return theme && theme.isBackgroundDark;
 }
 
@@ -66,4 +68,4 @@ const Div = styled.div`
   }
 `;
 
-export default CloseButton;
+export default withRouter(CloseButton);

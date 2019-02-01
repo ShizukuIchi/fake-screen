@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import { CountDowner, twoDigits } from 'src/lib';
 import WannaCryWindow from './WannaCryWindow';
-import { useMeta } from 'src/hooks';
 
 function WannaCry({ raise, lose, history }) {
   const [raiseDeadline] = useState(
