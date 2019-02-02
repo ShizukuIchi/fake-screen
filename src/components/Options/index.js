@@ -8,21 +8,18 @@ import GithubCorner from './GithubCorner';
 import ScrollTop from './ScrollTop';
 
 const Options = ({ className }) => {
-  const [inView, setInView] = useState(true);
+  const [nearTop, setNearTop] = useState(true);
   useEffect(() => {
     const onScroll = () => {
-      const top = document.documentElement.scrollTop + document.body.scrollTop;
-      if (top >= 130) setInView(false);
-      else setInView(true);
+      setNearTop(window.pageYOffset < 130);
     };
-    document.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll);
     return () => {
-      document.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', onScroll);
     };
   }, []);
   function onScrollTop() {
-    document.documentElement.scroll({ top: 0, behavior: 'smooth' });
-    document.body.scroll({ top: 0, behavior: 'smooth' });
+    window.scroll({ top: 0, behavior: 'smooth' });
   }
   return (
     <div className={className}>
@@ -45,7 +42,7 @@ const Options = ({ className }) => {
           ))}
         </div>
       </div>
-      <ScrollTop onClick={onScrollTop} show={!inView} />
+      <ScrollTop onClick={onScrollTop} show={!nearTop} />
     </div>
   );
 };
