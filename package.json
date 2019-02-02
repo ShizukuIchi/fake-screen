@@ -12,7 +12,8 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
-    "better-scroll": "^1.13.2",
+    "better-scroll": "^1.14.1",
+    "intersection-observer": "^0.5.1",
     "react": "^16.8.0-alpha.0",
     "react-dom": "^16.8.0-alpha.0",
     "react-pose": "^4.0.5",
