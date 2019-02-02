@@ -1,57 +1,33 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import BScroll from 'better-scroll';
+
 import { themes } from 'src/themes';
 import Option from 'src/components/Options/Option';
 import GithubCorner from './GithubCorner';
 import ScrollTop from './ScrollTop';
-require('intersection-observer');
 
 const Options = ({ className }) => {
-  const wrapper = useRef();
-  const scroll = useRef();
-  const header = useRef();
-  const [inView, set] = useState(false);
+  const [inView, setInView] = useState(true);
   useEffect(() => {
-    const ratio = 0.2;
-    const options = {
-      threshold: ratio,
+    const onScroll = () => {
+      const top = document.documentElement.scrollTop + document.body.scrollTop;
+      if (top >= 130) setInView(false);
+      else setInView(true);
     };
-    const callback = entries => {
-      entries.forEach(entry => {
-        if (entry.intersectionRatio >= ratio) set(true);
-        else set(false);
-      });
-    };
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(header.current);
+    document.addEventListener('scroll', onScroll);
     return () => {
-      observer.disconnect();
+      document.removeEventListener('scroll', onScroll);
     };
   }, []);
-  useEffect(() => {
-    scroll.current = new BScroll(wrapper.current, {
-      bounce: {
-        top: false,
-        bottom: false,
-      },
-      click: true,
-      tap: true,
-    });
-
-    return () => {
-      scroll.current.destroy();
-    };
-  }, []);
-  function onClick() {
-    scroll.current.scrollTo(0, 0, 300);
-    wrapper.current.scrollTop = 0;
+  function onScrollTop() {
+    document.documentElement.scroll({ top: 0, behavior: 'smooth' });
+    document.body.scroll({ top: 0, behavior: 'smooth' });
   }
   return (
-    <div className={className} ref={wrapper}>
+    <div className={className}>
       <div className="container">
-        <header ref={header}>
+        <header>
           <a href="https://github.com/ShizukuIchi/fake-screen">
             <span className="title">Fake Screen</span>
           </a>
@@ -69,7 +45,7 @@ const Options = ({ className }) => {
           ))}
         </div>
       </div>
-      <ScrollTop onClick={onClick} show={!inView} />
+      <ScrollTop onClick={onScrollTop} show={!inView} />
     </div>
   );
 };
@@ -78,8 +54,6 @@ export default styled(Options)`
   height: 100%;
   position: relative;
   width: 100%;
-  overflow: auto;
-  scroll-behavior: smooth;
   .container {
     background-color: #fff9c4;
     min-height: 100%;
