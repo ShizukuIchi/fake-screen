@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useReducer } from 'react';
+import React, { useEffect, useRef, useReducer } from 'react';
 import styled from 'styled-components';
 import { useWindowSize } from 'react-use';
 import { choose } from 'src/lib';
@@ -17,7 +17,7 @@ const colors = [
 
 export const initState = {
   color: 'white',
-  velocity: { x: 1.5, y: 1.5 },
+  velocity: { x: 1, y: 1 },
 };
 
 export const reducer = (state = initState, action = {}) => {
@@ -102,6 +102,7 @@ function DVDScreensaver({ className }) {
 export default styled(DVDScreensaver)`
   background-color: #000;
   height: 100%;
+  overflow: hidden;
   .logo {
     overflow: hidden;
     width: 300px;
