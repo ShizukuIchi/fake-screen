@@ -1711,7 +1711,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@^6.0.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+babel-runtime@^6.22.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -1794,13 +1794,6 @@ bcrypt-pbkdf@^1.0.0:
   integrity sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
   dependencies:
     tweetnacl "^0.14.3"
-
-better-scroll@^1.14.1:
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/better-scroll/-/better-scroll-1.14.1.tgz#65109c502a750d49543ffbb4208f421b33705c2f"
-  integrity sha512-WWNkxiJgzwl8ITIH9pmU7D00QJaJRB59nDED+UrLPPASMj9sISpNLTgYrh+LsOOpGB9xezzKy0Bklw1K1vorHQ==
-  dependencies:
-    babel-runtime "^6.0.0"
 
 bfj@6.1.1:
   version "6.1.1"
@@ -5103,11 +5096,6 @@ internal-ip@^3.0.1:
   dependencies:
     default-gateway "^2.6.0"
     ipaddr.js "^1.5.2"
-
-intersection-observer@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.5.1.tgz#e340fc56ce74290fe2b2394d1ce88c4353ac6dfa"
-  integrity sha512-Zd7Plneq82kiXFixs7bX62YnuZ0BMRci9br7io88LwDyF3V43cQMI+G5IiTlTNTt+LsDUppl19J/M2Fp9UkH6g==
 
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
