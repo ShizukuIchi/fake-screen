@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/find.cfc00209.svg"
   },
   {
-    "revision": "8a5e994763b640d9e9bf",
+    "revision": "3a8e9cd2ca97cce2a551",
     "url": "/fake-screen/static/css/main.d4923c36.chunk.css"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/apple.13b72f8e.svg"
   },
   {
-    "revision": "8a5e994763b640d9e9bf",
-    "url": "/fake-screen/static/js/main.8a5e9947.chunk.js"
+    "revision": "3a8e9cd2ca97cce2a551",
+    "url": "/fake-screen/static/js/main.3a8e9cd2.chunk.js"
   },
   {
     "revision": "7a96c7d635e55db9000deaf8f22eb035",
@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/ubuntu1804.cc54965e.jpg"
   },
   {
-    "revision": "d010209c50ddc64a75995b1cd45fbe96",
+    "revision": "01a1c890637f9a68d797e3d235e87703",
     "url": "/fake-screen/index.html"
   }
 ];
