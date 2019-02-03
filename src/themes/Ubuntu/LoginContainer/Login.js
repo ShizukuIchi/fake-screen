@@ -187,10 +187,10 @@ export default styled(Login)`
     display: flex;
     justify-content: center;
     .text {
-      color: rgb(255, 255, 255, 0.8);
-      font-weight: 200;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 300;
       font-size: 2.5em;
-      text-shadow: 0px 0px 10px rgb(255, 255, 255, 0.8);
+      text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
     }
     .img {
       margin-top: 10px;
@@ -201,7 +201,7 @@ export default styled(Login)`
       width: 15px;
       height: 15px;
       border-radius: 50%;
-      box-shadow: 0px 0px 10px rgb(255, 255, 255, 0.8);
+      box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
       background: rgba(255, 255, 255, 0.8);
       img {
         transform: translate(-1px, -1px);

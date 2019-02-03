@@ -7,11 +7,11 @@ import Option from 'src/components/Options/Option';
 import GithubCorner from './GithubCorner';
 import ScrollTop from './ScrollTop';
 
-const Options = ({ className }) => {
+function Options({ className }) {
   const [nearTop, setNearTop] = useState(true);
   useEffect(() => {
     const onScroll = () => {
-      setNearTop(window.pageYOffset < 130);
+      setNearTop(window.pageYOffset < 150);
     };
     window.addEventListener('scroll', onScroll);
     return () => {
@@ -45,7 +45,7 @@ const Options = ({ className }) => {
       <ScrollTop onClick={onScrollTop} show={!nearTop} />
     </div>
   );
-};
+}
 
 export default styled(Options)`
   height: 100%;

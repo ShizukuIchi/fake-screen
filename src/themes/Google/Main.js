@@ -119,7 +119,7 @@ export default styled(Main)`
       }
       input {
         border: none;
-        color: rgb(0, 0, 0, 0.87);
+        color: rgba(0, 0, 0, 0.87);
         height: 100%;
         flex: 1;
         height: 34px;
