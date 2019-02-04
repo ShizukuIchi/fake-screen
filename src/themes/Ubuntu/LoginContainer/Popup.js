@@ -1,15 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-function Popup({
-  className,
-  left,
-  top,
-  options,
-  onOptionClick,
-  onClose,
-  show,
-}) {
+function Popup({ className, options, onOptionClick, onClose, show }) {
   const ref = useRef();
   function close(e) {
     if (!ref.current.contains(e.target)) {
@@ -23,7 +15,7 @@ function Popup({
     return () => window.removeEventListener('click', close);
   });
   return (
-    <ul ref={ref} className={className} style={{ left, top }}>
+    <ul ref={ref} className={className}>
       {options.map(item => (
         <li
           className="item"
@@ -43,12 +35,13 @@ function Popup({
 
 Popup.defaultProps = {
   options: [],
-  left: '0',
-  top: '0',
 };
 
 export default styled(Popup)`
+  z-index: 2;
   display: ${({ show }) => (show ? 'block' : 'none')};
+  left: calc(100% - 32px);
+  top: calc(100% + 10px);
   position: absolute;
   padding: 16px 0 14px;
   width: 290px;
@@ -91,5 +84,15 @@ export default styled(Popup)`
     height: 3.5px;
     background-color: white;
     border-radius: 50%;
+  }
+  @media (max-width: 600px) {
+    & {
+      left: auto;
+      right: -80px;
+    }
+    &:before {
+      left: auto;
+      right: 86px;
+    }
   }
 `;

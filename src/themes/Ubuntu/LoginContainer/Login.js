@@ -59,8 +59,6 @@ function Login({
               <img src={settings} alt="settings" />
             </div>
             <Popup
-              left="calc(100% - 32px)"
-              top="calc(100% + 10px)"
               options={options}
               show={showPopup}
               onOptionClick={onOptionClick}
