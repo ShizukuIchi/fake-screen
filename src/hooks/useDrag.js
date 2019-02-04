@@ -1,19 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 function useDrag(ref) {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
   useEffect(() => {
     const target = ref.current;
     if (!target) return;
-    let previousOffset = { ...offset };
+    let previousOffset = { x: 0, y: 0 };
     let originMouseX;
     let originMouseY;
     function onMousemove(e) {
       const { pageX, pageY } = e;
-      setOffset({
-        x: pageX - originMouseX + previousOffset.x,
-        y: pageY - originMouseY + previousOffset.y,
-      });
+      const x = pageX - originMouseX + previousOffset.x;
+      const y = pageY - originMouseY + previousOffset.y;
+      ref.current.style.transform = `translate(${x}px, ${y}px)`;
     }
     function onMousedown(e) {
       originMouseX = e.pageX;
@@ -34,7 +32,6 @@ function useDrag(ref) {
       window.removeEventListener('mousemove', onMousemove);
     };
   }, []);
-  return offset;
 }
 
 export default useDrag;

@@ -4,16 +4,10 @@ import MineSweeperView from './MineSweeperView';
 
 function MineSweeper() {
   const ref = useRef();
-  const offset = useDrag(ref);
-  const { x, y } = offset;
+  useDrag(ref);
   return (
-    <div
-      style={{
-        display: 'inline-block',
-        transform: `translate(${x}px, ${y}px)`,
-      }}
-    >
-      <MineSweeperView ref={ref} />
+    <div style={{ display: 'inline-block' }} ref={ref}>
+      <MineSweeperView />
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-function MineSweeperView(props, ref) {
+function MineSweeperView() {
   return (
     <Div>
-      <header ref={ref} />
+      <header />
     </Div>
   );
 }
@@ -19,4 +19,4 @@ const Div = styled.div`
   }
 `;
 
-export default forwardRef(MineSweeperView);
+export default MineSweeperView;

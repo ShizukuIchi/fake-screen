@@ -1,12 +1,12 @@
 import React from 'react';
-import Win10View from './Win10View';
+import Footer from './Win10View';
 import MineSweeper from './MineSweeper';
 import styled from 'styled-components';
 
 function Win10() {
   return (
     <StyledWin10>
-      <Win10View />
+      <Footer />
       <MineSweeper />
     </StyledWin10>
   );
