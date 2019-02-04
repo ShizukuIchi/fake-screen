@@ -6,6 +6,7 @@ import WannaCry from './WannaCry';
 import Ubuntu from './Ubuntu';
 import Win10Update from './Win10Update';
 import DVDScreensaver from './DVDScreensaver';
+import Win10 from './Win10';
 
 const getThemeID = genID();
 export const themes = [
@@ -78,6 +79,16 @@ export const themes = [
     imgUrl: 'https://i.imgur.com/AaSkNGk.png',
     isBackgroundDark: true,
     component: DVDScreensaver,
+    objectFit: 'contain',
+  },
+  {
+    id: getThemeID(),
+    fullScreen: true,
+    displayName: 'Windows 10 desktop',
+    name: 'win10',
+    imgUrl: 'https://via.placeholder.com/192x108',
+    isBackgroundDark: true,
+    component: Win10,
     objectFit: 'contain',
   },
   // {

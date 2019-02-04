@@ -175,7 +175,6 @@ export default styled(Login)`
     bottom: -60px;
     color: red;
     opacity: 0.7;
-    text-shadow: none;
   }
   footer {
     position: fixed;
