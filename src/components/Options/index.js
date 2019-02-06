@@ -82,7 +82,7 @@ export default styled(Options)`
     grid-auto-rows: 162px;
     grid-gap: 40px 40px;
     justify-content: center;
-    padding-bottom: 60px;
+    padding: 0 40px 60px;
   }
   .area {
     position: relative;

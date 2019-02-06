@@ -243,6 +243,7 @@ export default styled(WannaCryWindow)`
   @media (max-width: 800px) {
     & {
       justify-content: flex-start;
+      align-items: flex-start;
     }
   }
   .container {
