@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 
 import { isStr } from 'src/lib';
-import { themes } from 'src/themes';
+import themes from 'src/themes';
 
 const isRoot = isStr('/');
 

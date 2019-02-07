@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { themes } from 'src/themes';
+import themes from 'src/themes';
 
 const ThemeContainer = () => {
   return (

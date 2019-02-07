@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from 'react';
 import Footer from './Win10View';
 import MineSweeper from './MineSweeper';
+import IE from './InternetExplorer';
 import styled from 'styled-components';
 
 const initState = {
@@ -42,7 +43,7 @@ function Win10() {
     <StyledWin10>
       <button
         onClick={() => {
-          dispatch({ type: 'ADD_APP', payload: MineSweeper });
+          dispatch({ type: 'ADD_APP', payload: IE });
         }}
       >
         add window

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { themes } from 'src/themes';
+import themes from 'src/themes';
 import Option from 'src/components/Options/Option';
 import GithubCorner from './GithubCorner';
 import ScrollTop from './ScrollTop';
