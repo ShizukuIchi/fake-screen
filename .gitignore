@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/_src
 /node_modules
 /.pnp
 .pnp.js
@@ -24,4 +23,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.cache
+/.cache
+/_src
+
+# code editor
+/.vscode

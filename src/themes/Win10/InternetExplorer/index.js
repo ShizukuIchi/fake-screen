@@ -6,7 +6,7 @@ function InternetExplorer() {
     <div style={{ height: '500px', width: '500px' }}>
       <Div>
         <header>url</header>
-        <div className="content" />
+        <div className="content">ie</div>
       </Div>
     </div>
   );

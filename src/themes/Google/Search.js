@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import queryString from 'query-string';
 import styled from 'styled-components';
 
 import find from './find.svg';
 import smile from './smile.svg';
 
-function Search({ location, className, goMain, onSearch }) {
-  const [value, setValue] = useState(getQuery());
+function Search({ className, goMain, onSearch, query }) {
+  const [value, setValue] = useState(query);
   function onChange(e) {
     setValue(e.target.value);
   }
-  function getQuery() {
-    const qsObj = queryString.parse(location.search);
-    return qsObj.query || '';
-  }
-
   function onClick() {
-    if (value.length) onSearch(value);
+    onSearch(value);
+  }
+  function onKeyDown(e) {
+    if (e.key !== 'Enter') return;
+    onSearch(value);
   }
   return (
     <div className={className}>
@@ -36,6 +34,7 @@ function Search({ location, className, goMain, onSearch }) {
                 name="search"
                 value={value}
                 onChange={onChange}
+                onKeyDown={onKeyDown}
               />
               <div className="icon">
                 <img
@@ -71,8 +70,8 @@ function Search({ location, className, goMain, onSearch }) {
       </section>
       <section className="content">
         <p>
-          Your search - <span id="search-in-content">{getQuery()}</span> - did
-          not match any documents.
+          Your search - <span id="search-in-content">{query}</span> - did not
+          match any documents.
         </p>
         <p>Suggestions</p>
         <ul>

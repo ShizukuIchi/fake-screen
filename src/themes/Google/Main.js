@@ -8,7 +8,11 @@ function Main({ onSearch, className }) {
     setValue(e.target.value);
   }
   function onClick() {
-    if (value.length) onSearch(value);
+    onSearch(value);
+  }
+  function onKeyDown(e) {
+    if (e.key !== 'Enter') return;
+    onSearch(value);
   }
   return (
     <div className={className}>
@@ -30,6 +34,7 @@ function Main({ onSearch, className }) {
             name="search"
             onChange={onChange}
             value={value}
+            onKeyDown={onKeyDown}
           />
           <div className="icon">
             <img

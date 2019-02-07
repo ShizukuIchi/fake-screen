@@ -1,29 +1,29 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
 import Search from './Search';
 import Main from './Main';
 
-function Google(props) {
+function Google() {
+  const [state, setState] = useState({
+    route: 'main',
+    query: '',
+  });
   function onSearch(str) {
-    props.history.push(`/google/search?query=${str}`);
+    if (str.length) {
+      setState({
+        route: 'search',
+        query: str,
+      });
+    }
   }
   function goMain() {
-    props.history.push('/google');
+    setState({
+      route: 'main',
+      query: '',
+    });
   }
-  return (
-    <Switch>
-      <Route
-        path="/google/search"
-        render={props => (
-          <Search goMain={goMain} onSearch={onSearch} {...props} />
-        )}
-      />
-      <Route
-        path="/google"
-        render={props => <Main {...props} onSearch={onSearch} />}
-      />
-    </Switch>
-  );
+  if (state.route === 'main') return <Main onSearch={onSearch} />;
+  else
+    return <Search goMain={goMain} onSearch={onSearch} query={state.query} />;
 }
 
 export default Google;
