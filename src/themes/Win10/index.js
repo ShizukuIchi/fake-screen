@@ -1,8 +1,9 @@
-import React, { useState, useReducer } from 'react';
-import Footer from './Win10View';
+import React, { useReducer } from 'react';
+import Footer from './Footer';
 import MineSweeper from './MineSweeper';
-import IE from './InternetExplorer';
+// import IE from './InternetExplorer';
 import styled from 'styled-components';
+import Windows from './Windows';
 
 const initState = {
   apps: [],
@@ -40,33 +41,24 @@ function Win10() {
     dispatch({ type: 'FOCUS_APP', payload: id });
   }
   return (
-    <StyledWin10>
+    <Container>
       <button
         onClick={() => {
-          dispatch({ type: 'ADD_APP', payload: IE });
+          dispatch({ type: 'ADD_APP', payload: MineSweeper });
         }}
       >
         add window
       </button>
       <Footer />
-      {state.apps.map(app => (
-        <Window onMouseDown={() => onClickApp(app.id)} key={app.id}>
-          {<app.component />}
-        </Window>
-      ))}
-    </StyledWin10>
+      <Windows apps={state.apps} onMouseDown={onClickApp} />
+    </Container>
   );
 }
 
-const Window = styled.div`
-  position: 'absolute';
-  width: 0;
-  height: 0;
-`;
-
-const StyledWin10 = styled.div`
+const Container = styled.div`
   height: 100%;
   overflow: hidden;
+  position: relative;
   * {
     user-select: none;
   }

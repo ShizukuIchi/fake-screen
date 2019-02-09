@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Win10View({ className }) {
+function Footer() {
   return (
-    <footer className={className}>
-      <div className="footer__items left">
+    <Container>
+      <div className="Container__items left">
         <div className="footer__item" />
         <div className="footer__item" />
         <div className="footer__item" />
@@ -13,14 +13,14 @@ function Win10View({ className }) {
         <div className="footer__item" />
         <div className="footer__item" />
       </div>
-    </footer>
+    </Container>
   );
 }
 
-export default styled(Win10View)`
+const Container = styled.footer`
   height: 40px;
   background: rgba(0, 0, 0, 0.8);
-  position: fixed;
+  position: absolute;
   bottom: 0;
   right: 0;
   left: 0;
@@ -46,3 +46,5 @@ export default styled(Win10View)`
     background-color: blue;
   }
 `;
+
+export default Footer;
