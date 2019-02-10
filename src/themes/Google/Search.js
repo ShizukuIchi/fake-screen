@@ -6,6 +6,7 @@ import smile from './smile.svg';
 
 function Search({ className, goMain, onSearch, query }) {
   const [value, setValue] = useState(query);
+  const [tag, setTag] = useState('All');
   function onChange(e) {
     setValue(e.target.value);
   }
@@ -15,6 +16,16 @@ function Search({ className, goMain, onSearch, query }) {
   function onKeyDown(e) {
     if (e.key !== 'Enter') return;
     onSearch(value);
+  }
+  function renderTags() {
+    return 'All,Maps,Images,News,Videos,More'.split(',').map(tagName => (
+      <div
+        onClick={() => setTag(tagName)}
+        className={`tag ${tagName === tag ? 'active' : ''}`}
+      >
+        {tagName}
+      </div>
+    ));
   }
   return (
     <div className={className}>
@@ -54,14 +65,7 @@ function Search({ className, goMain, onSearch, query }) {
           </div>
         </div>
         <div className="app-bar">
-          <div className="tags left">
-            <div className="tag active">All</div>
-            <div className="tag">Maps</div>
-            <div className="tag">Images</div>
-            <div className="tag">News</div>
-            <div className="tag">Videos</div>
-            <div className="tag">More</div>
-          </div>
+          <div className="tags left">{renderTags()}</div>
           <div className="tags right">
             <div className="tag">Settings</div>
             <div className="tag">Tools</div>
@@ -103,6 +107,7 @@ export default styled(Search)`
   height: 100%;
   background: white;
   padding-top: 22px;
+  position: relative;
   .top-bars {
     border-bottom: 1px rgb(235, 235, 235) solid;
   }
@@ -208,10 +213,9 @@ export default styled(Search)`
     font-weight: 700;
   }
   footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
     height: 83px;
     border-top: 1px solid rgba(0, 0, 0, 0.07);
     background-color: rgba(0, 0, 0, 0.05);

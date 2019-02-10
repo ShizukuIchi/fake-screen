@@ -76,13 +76,13 @@ function Main({ onSearch, className }) {
 export default styled(Main)`
   height: 100%;
   background: white;
+  position: relative;
   header {
-    position: fixed;
+    position: absolute;
     top: 0;
-    right: 0;
-    left: 0;
-    height: 30px;
-    padding: 30px 15px;
+    width: 100%;
+    height: 60px;
+    padding: 0 15px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -175,10 +175,9 @@ export default styled(Main)`
     }
   }
   footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
     height: 83px;
     border-top: 1px solid rgba(0, 0, 0, 0.07);
     background-color: rgba(0, 0, 0, 0.05);
