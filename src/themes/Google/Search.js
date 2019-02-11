@@ -22,6 +22,7 @@ function Search({ className, goMain, onSearch, query }) {
       <div
         onClick={() => setTag(tagName)}
         className={`tag ${tagName === tag ? 'active' : ''}`}
+        key={tagName}
       >
         {tagName}
       </div>
@@ -252,7 +253,7 @@ export default styled(Search)`
       margin-right: 27px;
     }
   }
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     .top-bar {
       height: auto;
     }

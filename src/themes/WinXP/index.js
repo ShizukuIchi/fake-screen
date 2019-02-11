@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import Footer from './Footer';
 import MineSweeper from './MineSweeper';
-// import IE from './InternetExplorer';
+import IE from './InternetExplorer';
 import styled from 'styled-components';
 import Windows from './Windows';
 
@@ -35,22 +35,38 @@ const reducer = (state = initState, action = {}) => {
   }
 };
 
-function Win10() {
+function WinXP() {
   const [state, dispatch] = useReducer(reducer, initState);
   function onClickApp(id) {
     dispatch({ type: 'FOCUS_APP', payload: id });
   }
+  function onCloseApp(id) {
+    dispatch({ type: 'DEL_APP', payload: id });
+  }
   return (
     <Container>
       <button
+        className="button__test"
         onClick={() => {
           dispatch({ type: 'ADD_APP', payload: MineSweeper });
         }}
       >
-        add window
+        Mine
+      </button>
+      <button
+        className="button__test"
+        onClick={() => {
+          dispatch({ type: 'ADD_APP', payload: IE });
+        }}
+      >
+        IE
       </button>
       <Footer />
-      <Windows apps={state.apps} onMouseDown={onClickApp} />
+      <Windows
+        apps={state.apps}
+        onMouseDown={onClickApp}
+        onCloseWindow={onCloseApp}
+      />
     </Container>
   );
 }
@@ -63,9 +79,9 @@ const Container = styled.div`
     user-select: none;
   }
 
-  button {
+  .button__test {
     margin-top: 50px;
   }
 `;
 
-export default Win10;
+export default WinXP;

@@ -6,7 +6,7 @@ import WannaCry from './WannaCry';
 import Ubuntu from './Ubuntu';
 import Win10Update from './Win10Update';
 import DVDScreensaver from './DVDScreensaver';
-import Win10 from './Win10';
+import WinXP from './WinXP';
 
 const getThemeID = genID();
 const themes = [
@@ -84,11 +84,11 @@ const themes = [
   {
     id: getThemeID(),
     fullScreen: true,
-    displayName: 'Windows 10 desktop',
-    name: 'win10',
+    displayName: 'Windows XP desktop',
+    name: 'winXP',
     imgUrl: 'https://via.placeholder.com/192x108',
     isBackgroundDark: true,
-    component: Win10,
+    component: WinXP,
     objectFit: 'contain',
   },
   // {
@@ -113,5 +113,5 @@ export {
   Ubuntu,
   Win10Update,
   DVDScreensaver,
-  Win10,
+  WinXP,
 };
