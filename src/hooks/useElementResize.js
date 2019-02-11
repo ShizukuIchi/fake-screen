@@ -27,8 +27,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onDragEnd);
     }
     function onDragStart(e) {
-      originMouseX = e.pageX;
-      originMouseY = e.pageY;
       window.addEventListener('mousemove', onDragging);
       window.addEventListener('mouseup', onDragEnd);
     }
@@ -44,7 +42,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onDragEndTop);
     }
     function onDragStartTop(e) {
-      originMouseY = e.pageY;
       window.addEventListener('mousemove', onDraggingTop);
       window.addEventListener('mouseup', onDragEndTop);
     }
@@ -60,7 +57,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onDragEndLeft);
     }
     function onDragStartLeft(e) {
-      originMouseX = e.pageX;
       window.addEventListener('mousemove', onDraggingLeft);
       window.addEventListener('mouseup', onDragEndLeft);
     }
@@ -76,8 +72,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onResizeEndRight);
     }
     function onResizeStartRight(e) {
-      originMouseX = e.pageX;
-      originMouseY = e.pageY;
       window.addEventListener('mousemove', onResizingRight);
       window.addEventListener('mouseup', onResizeEndRight);
     }
@@ -93,7 +87,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onResizeEndBottom);
     }
     function onResizeStartBottom(e) {
-      originMouseY = e.pageY;
       window.addEventListener('mousemove', onResizingBottom);
       window.addEventListener('mouseup', onResizeEndBottom);
     }
@@ -109,7 +102,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onResizeEndLeft);
     }
     function onResizeStartLeft(e) {
-      originMouseX = e.pageX;
       window.addEventListener('mousemove', onResizingLeft);
       window.addEventListener('mouseup', onResizeEndLeft);
     }
@@ -125,7 +117,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onResizeEndTop);
     }
     function onResizeStartTop(e) {
-      originMouseY = e.pageY;
       window.addEventListener('mousemove', onResizingTop);
       window.addEventListener('mouseup', onResizeEndTop);
     }
@@ -142,8 +133,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onResizeEndTopLeft);
     }
     function onResizeStartTopLeft(e) {
-      originMouseX = e.pageX;
-      originMouseY = e.pageY;
       window.addEventListener('mousemove', onResizingTopLeft);
       window.addEventListener('mouseup', onResizeEndTopLeft);
     }
@@ -160,8 +149,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onResizeEndTopRight);
     }
     function onResizeStartTopRight(e) {
-      originMouseX = e.pageX;
-      originMouseY = e.pageY;
       window.addEventListener('mousemove', onResizingTopRight);
       window.addEventListener('mouseup', onResizeEndTopRight);
     }
@@ -178,8 +165,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onResizeEndBottomLeft);
     }
     function onResizeStartBottomLeft(e) {
-      originMouseX = e.pageX;
-      originMouseY = e.pageY;
       window.addEventListener('mousemove', onResizingBottomLeft);
       window.addEventListener('mouseup', onResizeEndBottomLeft);
     }
@@ -196,8 +181,6 @@ function useDrag(ref, dragRef, initSize) {
       window.removeEventListener('mouseup', onResizeEndBottomRight);
     }
     function onResizeStartBottomRight(e) {
-      originMouseX = e.pageX;
-      originMouseY = e.pageY;
       window.addEventListener('mousemove', onResizingBottomRight);
       window.addEventListener('mouseup', onResizeEndBottomRight);
     }
@@ -232,6 +215,8 @@ function useDrag(ref, dragRef, initSize) {
       }
     }
     function onMouseDown(e) {
+      originMouseX = e.pageX;
+      originMouseY = e.pageY;
       if (e.target === dragTarget) return onDragStart(e);
       const { offsetX, offsetY } = e;
       const { width, height } = target.getBoundingClientRect();
@@ -262,15 +247,35 @@ function useDrag(ref, dragRef, initSize) {
       }
     }
 
-    target.addEventListener('mouseleave', onHoverEnd);
     target.addEventListener('mousedown', onMouseDown);
+    target.addEventListener('mouseleave', onHoverEnd);
     target.addEventListener('mousemove', onHover);
     return () => {
       target.removeEventListener('mousedown', onMouseDown);
-      target.removeEventListener('mouseleave', onHoverEnd);
       target.removeEventListener('mousemove', onHover);
-      window.removeEventListener('mouseup', onDragEnd);
+      target.removeEventListener('mouseleave', onHoverEnd);
+      window.removeEventListener('mousemove', onDraggingLeft);
+      window.removeEventListener('mousemove', onDraggingTop);
       window.removeEventListener('mousemove', onDragging);
+      window.removeEventListener('mouseup', onDragEndTop);
+      window.removeEventListener('mouseup', onDragEndLeft);
+      window.removeEventListener('mouseup', onDragEnd);
+      window.removeEventListener('mousemove', onResizingTop);
+      window.removeEventListener('mousemove', onResizingRight);
+      window.removeEventListener('mousemove', onResizingBottom);
+      window.removeEventListener('mousemove', onResizingLeft);
+      window.removeEventListener('mousemove', onResizingBottomLeft);
+      window.removeEventListener('mousemove', onResizingTopLeft);
+      window.removeEventListener('mousemove', onResizingTopRight);
+      window.removeEventListener('mousemove', onResizingBottomRight);
+      window.removeEventListener('mouseup', onResizeEndTop);
+      window.removeEventListener('mouseup', onResizeEndRight);
+      window.removeEventListener('mouseup', onResizeEndBottom);
+      window.removeEventListener('mouseup', onResizeEndLeft);
+      window.removeEventListener('mouseup', onResizeEndBottomLeft);
+      window.removeEventListener('mouseup', onResizeEndTopLeft);
+      window.removeEventListener('mouseup', onResizeEndTopRight);
+      window.removeEventListener('mouseup', onResizeEndBottomRight);
     };
   }, []);
   return { offset, size };
