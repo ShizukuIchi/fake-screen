@@ -4,7 +4,7 @@ import styled from 'styled-components';
 function Footer() {
   return (
     <Container>
-      <div className="Container__items left">
+      <div className="container__items left">
         <div className="footer__item" />
         <div className="footer__item" />
         <div className="footer__item" />
@@ -25,13 +25,13 @@ const Container = styled.footer`
   right: 0;
   left: 0;
   display: flex;
-  & .left {
+  .container__items.left {
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
   }
-  & .right {
+  .container__items.right {
     position: absolute;
     right: 0;
     top: 0;

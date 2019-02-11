@@ -67,13 +67,14 @@ function WinXP() {
         onMouseDown={onClickApp}
         onCloseWindow={onCloseApp}
       />
+      <div className="dummy" style={{ height: '200%' }} />
     </Container>
   );
 }
 
 const Container = styled.div`
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   * {
     user-select: none;

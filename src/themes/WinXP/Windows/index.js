@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
-import useDrag from 'src/hooks/useDrag';
+// import useDrag from 'src/hooks/useDrag';
+import useDrag from 'src/hooks/useElementResize';
+
 import styled from 'styled-components';
 
 function Windows({ apps, onMouseDown, onCloseWindow }) {
@@ -15,14 +17,20 @@ function Windows({ apps, onMouseDown, onCloseWindow }) {
 }
 
 function Window({ children, onCloseWindow, ...rest }) {
+  const dragRef = useRef(null);
   const ref = useRef(null);
-  const offset = useDrag(ref);
+  const { offset, size } = useDrag(ref, dragRef, { width: 600, height: 600 });
   return (
     <StyledWindow
+      ref={ref}
       {...rest}
-      style={{ transform: `translate(${offset.x}px,${offset.y}px)` }}
+      style={{
+        transform: `translate(${offset.x}px,${offset.y}px)`,
+        width: `${size.width}px`,
+        height: `${size.height}px`,
+      }}
     >
-      <header className="app__header" ref={ref}>
+      <header className="app__header" ref={dragRef}>
         <button className="app__header__close" onClick={onCloseWindow}>
           x
         </button>
@@ -36,8 +44,9 @@ function Window({ children, onCloseWindow, ...rest }) {
 const StyledWindow = styled.div`
   display: inline-block;
   position: absolute;
-  height: 600px;
-  width: 600px;
+  /* height: 600px; */
+  /* width: 600px; */
+  padding: 10px;
   border: 1px black solid;
   display: flex;
   flex-direction: column;
