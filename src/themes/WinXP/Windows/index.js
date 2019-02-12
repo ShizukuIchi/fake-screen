@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-// import useDrag from 'src/hooks/useDrag';
-import useDrag from 'src/hooks/useElementResize';
+import useElementResize from 'src/hooks/useElementResize';
 
 import styled from 'styled-components';
 
@@ -19,7 +18,10 @@ function Windows({ apps, onMouseDown, onCloseWindow }) {
 function Window({ children, onCloseWindow, ...rest }) {
   const dragRef = useRef(null);
   const ref = useRef(null);
-  const { offset, size } = useDrag(ref, dragRef, { width: 600, height: 600 });
+  const { offset, size } = useElementResize(ref, dragRef, {
+    width: 600,
+    height: 600,
+  });
   return (
     <StyledWindow
       ref={ref}
@@ -44,8 +46,6 @@ function Window({ children, onCloseWindow, ...rest }) {
 const StyledWindow = styled.div`
   display: inline-block;
   position: absolute;
-  /* height: 600px; */
-  /* width: 600px; */
   padding: 10px;
   border: 1px black solid;
   display: flex;

@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 
-function useDrag(ref, dragRef, initSize) {
+function useElementResize(ref, dragRef, initSize) {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [size, setSize] = useState(initSize);
-  const [hoverPosition, setHoverPosition] = useState('none');
-  console.log(hoverPosition);
+  useCursor(ref);
   useEffect(() => {
     const target = ref.current;
     const dragTarget = dragRef.current;
@@ -184,40 +183,11 @@ function useDrag(ref, dragRef, initSize) {
       window.addEventListener('mousemove', onResizingBottomRight);
       window.addEventListener('mouseup', onResizeEndBottomRight);
     }
-    function onHoverEnd(e) {
-      setHoverPosition('none');
-    }
-    function onHover(e) {
-      if (e.target === dragTarget) return setHoverPosition('header');
-      const { offsetX, offsetY } = e;
-      const { width, height } = target.getBoundingClientRect();
-      if (offsetX < 10) {
-        if (offsetY < 10) {
-          setHoverPosition('top left');
-        } else if (height - offsetY < 10) {
-          setHoverPosition('bottom left');
-        } else {
-          setHoverPosition('left');
-        }
-      } else if (offsetY < 10) {
-        if (width - offsetX < 10) {
-          setHoverPosition('top right');
-        } else {
-          setHoverPosition('top');
-        }
-      } else if (width - offsetX < 10) {
-        if (height - offsetY < 10) setHoverPosition('bottom right');
-        else setHoverPosition('right');
-      } else if (height - offsetY < 10) {
-        setHoverPosition('bottom');
-      } else {
-        setHoverPosition('none');
-      }
-    }
     function onMouseDown(e) {
       originMouseX = e.pageX;
       originMouseY = e.pageY;
       if (e.target === dragTarget) return onDragStart(e);
+      if (e.target !== target) return;
       const { offsetX, offsetY } = e;
       const { width, height } = target.getBoundingClientRect();
       if (offsetX < 10) {
@@ -248,12 +218,8 @@ function useDrag(ref, dragRef, initSize) {
     }
 
     target.addEventListener('mousedown', onMouseDown);
-    target.addEventListener('mouseleave', onHoverEnd);
-    target.addEventListener('mousemove', onHover);
     return () => {
       target.removeEventListener('mousedown', onMouseDown);
-      target.removeEventListener('mousemove', onHover);
-      target.removeEventListener('mouseleave', onHoverEnd);
       window.removeEventListener('mousemove', onDraggingLeft);
       window.removeEventListener('mousemove', onDraggingTop);
       window.removeEventListener('mousemove', onDragging);
@@ -281,4 +247,101 @@ function useDrag(ref, dragRef, initSize) {
   return { offset, size };
 }
 
-export default useDrag;
+function useCursor(ref) {
+  useEffect(() => {
+    const target = ref.current;
+    if (!target) return;
+    const gai = document.createElement('div');
+    gai.style.position = 'fixed';
+    gai.style.top = 0;
+    gai.style.left = 0;
+    gai.style.right = 0;
+    gai.style.bottom = 0;
+    gai.style.display = 'none';
+    document.body.appendChild(gai);
+    let lock = false;
+    let position = '';
+    function setPosition(p) {
+      position = p;
+      target.style.cursor = getCursorStyle(position);
+    }
+    function onMouseDown(e) {
+      if (e.target !== target) return;
+      onHover(e);
+      lock = true;
+      gai.style.cursor = getCursorStyle(position);
+      gai.style.display = 'block';
+      window.addEventListener('mouseup', onMouseUp);
+    }
+    function onMouseUp(e) {
+      lock = false;
+      gai.style.display = 'none';
+      window.removeEventListener('mouseup', onMouseUp);
+    }
+    function onHoverEnd(e) {
+      if (lock) return;
+      setPosition('');
+    }
+    function onHover(e) {
+      if (lock) return;
+      if (e.target !== target) return setPosition('');
+      const { offsetX, offsetY } = e;
+      const { width, height } = target.getBoundingClientRect();
+      if (offsetX < 10) {
+        if (offsetY < 10) {
+          setPosition('topLeft');
+        } else if (height - offsetY < 10) {
+          setPosition('bottomLeft');
+        } else {
+          setPosition('left');
+        }
+      } else if (offsetY < 10) {
+        if (width - offsetX < 10) {
+          setPosition('topRight');
+        } else {
+          setPosition('top');
+        }
+      } else if (width - offsetX < 10) {
+        if (height - offsetY < 10) setPosition('bottomRight');
+        else setPosition('right');
+      } else if (height - offsetY < 10) {
+        setPosition('bottom');
+      } else {
+        setPosition('');
+      }
+    }
+    target.addEventListener('mouseleave', onHoverEnd);
+    target.addEventListener('mousemove', onHover);
+    target.addEventListener('mousedown', onMouseDown);
+    return () => {
+      gai.remove();
+      target.removeEventListener('mouseleave', onHoverEnd);
+      target.removeEventListener('mousemove', onHover);
+      target.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, []);
+}
+function getCursorStyle(pos) {
+  switch (pos) {
+    case 'top':
+      return 'n-resize';
+    case 'topRight':
+      return 'ne-resize';
+    case 'right':
+      return 'e-resize';
+    case 'bottomRight':
+      return 'se-resize';
+    case 'bottom':
+      return 's-resize';
+    case 'bottomLeft':
+      return 'sw-resize';
+    case 'left':
+      return 'w-resize';
+    case 'topLeft':
+      return 'nw-resize';
+    default:
+      return 'auto';
+  }
+}
+export default useElementResize;
