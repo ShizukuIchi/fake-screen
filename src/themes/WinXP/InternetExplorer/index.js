@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Google } from 'src/themes';
+import ie from '../ie.png';
 
 function InternetExplorer() {
   return (
@@ -24,7 +25,7 @@ function InternetExplorer() {
       <section className="ie__address_bar">
         <div className="ie__address_bar__title">Address</div>
         <div className="ie__address_bar__content">
-          <div className="ie__address_bar__content__img" />
+          <img src={ie} alt="ie" className="ie__address_bar__content__img" />
           <div className="ie__address_bar__content__text">
             https://www.google.com.tw
           </div>
@@ -103,8 +104,9 @@ const Div = styled.div`
     align-items: center;
     background-color: white;
     &__img {
-      width: 18px;
-      height: 18px;
+      width: 15px;
+      height: 15px;
+      margin-right: 1px;
     }
   }
   .ie__address_bar__buttons {

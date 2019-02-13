@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import startButton from './start_button.png';
 function Footer() {
   return (
     <Container>
       <div className="footer__items left">
-        <div className="footer__item" style={{ backgroundColor: 'green' }} />
+        <img src={startButton} alt="" className="footer__item" />
       </div>
       <div className="footer__items right">
         <div
@@ -22,8 +22,20 @@ function Footer() {
 }
 
 const Container = styled.footer`
-  height: 40px;
-  background: #1a3fd4;
+  height: 30px;
+  background: linear-gradient(
+    to bottom,
+    #0058ee 0%,
+    #3f87ff 3%,
+    #2b80ff 7%,
+    #0352ff 10%,
+    #0345f1 14%,
+    #003ce9 17%,
+    #0634e3 24%,
+    #0635e5 48%,
+    #063af5 66%,
+    #164afe 100%
+  );
   position: absolute;
   bottom: 0;
   right: 0;
@@ -45,8 +57,6 @@ const Container = styled.footer`
   }
   .footer__item {
     height: 100%;
-    width: 50px;
-    background-color: blue;
   }
 `;
 

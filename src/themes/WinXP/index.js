@@ -46,13 +46,16 @@ function WinXP() {
   }
   return (
     <Container>
-      <button
-        className="button__test"
-        style={{ backgroundImage: `url(${ie})` }}
-        onClick={() => {
-          dispatch({ type: 'ADD_APP', payload: IE });
-        }}
-      />
+      <div className="icon__test">
+        <button
+          className="button__test"
+          style={{ backgroundImage: `url(${ie})` }}
+          onClick={() => {
+            dispatch({ type: 'ADD_APP', payload: IE });
+          }}
+        />
+        <div className="icon__test__text">Internet Explorer</div>
+      </div>
       <Footer />
       <Windows
         apps={state.apps}
@@ -72,9 +75,21 @@ const Container = styled.div`
   * {
     user-select: none;
   }
-
+  .icon__test {
+    width: 60px;
+    margin: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__text {
+      width: 100%;
+      font-size: 10px;
+      color: white;
+      text-shadow: 0.5px 0.5px 1px black;
+      text-align: center;
+    }
+  }
   .button__test {
-    margin-top: 50px;
     width: 30px;
     height: 30px;
     background-color: transparent;
