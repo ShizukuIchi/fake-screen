@@ -4,10 +4,11 @@ import MineSweeper from './MineSweeper';
 import IE from './InternetExplorer';
 import styled from 'styled-components';
 import Windows from './Windows';
+import ie from './ie.png';
 
 const initState = {
-  apps: [],
-  nextID: 0,
+  apps: [{ component: IE, id: 0 }],
+  nextID: 1,
 };
 const reducer = (state = initState, action = {}) => {
   switch (action.type) {
@@ -47,27 +48,17 @@ function WinXP() {
     <Container>
       <button
         className="button__test"
-        onClick={() => {
-          dispatch({ type: 'ADD_APP', payload: MineSweeper });
-        }}
-      >
-        Mine
-      </button>
-      <button
-        className="button__test"
+        style={{ backgroundImage: `url(${ie})` }}
         onClick={() => {
           dispatch({ type: 'ADD_APP', payload: IE });
         }}
-      >
-        IE
-      </button>
+      />
       <Footer />
       <Windows
         apps={state.apps}
         onMouseDown={onClickApp}
         onCloseWindow={onCloseApp}
       />
-      <div className="dummy" style={{ height: '200%' }} />
     </Container>
   );
 }
@@ -76,12 +67,18 @@ const Container = styled.div`
   height: 100%;
   overflow: auto;
   position: relative;
+  background: url(https://i.imgur.com/Zk6TR5k.jpg) no-repeat center center fixed;
+  background-size: cover;
   * {
     user-select: none;
   }
 
   .button__test {
     margin-top: 50px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 0;
   }
 `;
 
