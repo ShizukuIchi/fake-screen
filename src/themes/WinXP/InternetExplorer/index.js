@@ -15,11 +15,15 @@ function InternetExplorer() {
       </section>
       <section className="ie__function_bar">
         {'Back,Forward,Cancel,Refresh,Home'.split(',').map(name => (
-          <div className="ie__function_bar__item">{name}</div>
+          <div key={name} className="ie__function_bar__item">
+            {name}
+          </div>
         ))}
         <div className="ie__function_bar__separate" />
         {'Search,Favorites'.split(',').map(name => (
-          <div className="ie__function_bar__item">{name}</div>
+          <div key={name} className="ie__function_bar__item">
+            {name}
+          </div>
         ))}
       </section>
       <section className="ie__address_bar">
@@ -103,6 +107,7 @@ const Div = styled.div`
     flex: 1;
     align-items: center;
     background-color: white;
+    padding-left: 1px;
     &__img {
       width: 15px;
       height: 15px;
@@ -125,7 +130,6 @@ const Div = styled.div`
   .ie__content {
     flex: 1;
     overflow: auto;
-    border-right: 1px solid rgb(180, 180, 180);
     border-left: 1px solid rgb(160, 160, 160);
   }
   .ie__content__inner {

@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import Footer from './Footer';
-import MineSweeper from './MineSweeper';
+// import MineSweeper from './MineSweeper';
 import IE from './InternetExplorer';
 import styled from 'styled-components';
 import Windows from './Windows';

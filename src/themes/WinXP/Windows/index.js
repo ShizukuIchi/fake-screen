@@ -21,12 +21,18 @@ function Window({ children, onCloseWindow, ...rest }) {
   const { offset, size } = useElementResize(ref, {
     dragRef,
     offset: {
-      x: 0,
-      y: 0,
+      x: Math.floor(Math.random() * 200) + 100,
+      y: Math.floor(Math.random() * 50),
     },
     size: {
-      width: 600,
-      height: 600,
+      width: 700,
+      height: 500,
+    },
+    boundary: {
+      top: 1,
+      right: window.innerWidth - 1,
+      bottom: window.innerHeight - 31,
+      left: 1,
     },
     resizable: true,
     resizeThreshold: 10,
