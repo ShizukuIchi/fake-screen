@@ -1,22 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import startButton from './start_button.png';
-function Footer() {
+function Footer({ onMouseDown }) {
   return (
-    <Container>
+    <Container onMouseDown={onMouseDown}>
       <div className="footer__items left">
         <img src={startButton} alt="" className="footer__item" />
       </div>
-      <div className="footer__items right">
-        <div
-          className="footer__item"
-          style={{ backgroundColor: 'lightblue' }}
-        />
-        <div
-          className="footer__item"
-          style={{ backgroundColor: 'lightblue' }}
-        />
-      </div>
+      <div className="footer__items right" />
     </Container>
   );
 }

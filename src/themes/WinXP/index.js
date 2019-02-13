@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect, useRef } from 'react';
 import Footer from './Footer';
 // import MineSweeper from './MineSweeper';
 import IE from './InternetExplorer';
@@ -6,22 +6,46 @@ import styled from 'styled-components';
 import Windows from './Windows';
 import ie from './ie.png';
 
+// focusing enum: window, icon, desktop
+
+// when close window, if an icon was focused and there is no windows, icon will be focus, otherwise desktop
+// there should be a config (icons, apps), app should have multiInstance, isFullScreen, resizable property
+
 const initState = {
   apps: [{ component: IE, id: 0 }],
-  nextID: 1,
+  nextAppID: 1,
+  focusing: 'window',
+  icons: [
+    {
+      image: ie,
+      isFocus: false,
+      name: 'Internet Explorer',
+      component: IE,
+    },
+  ],
 };
 const reducer = (state = initState, action = {}) => {
   switch (action.type) {
     case 'ADD_APP':
       return {
         ...state,
-        apps: [...state.apps, { component: action.payload, id: state.nextID }],
-        nextID: state.nextID + 1,
+        apps: [
+          ...state.apps,
+          { component: action.payload, id: state.nextAppID },
+        ],
+        nextAppID: state.nextAppID + 1,
+        focusing: 'window',
       };
     case 'DEL_APP':
       return {
         ...state,
         apps: state.apps.filter(app => app.id !== action.payload),
+        focusing:
+          state.apps.length > 1
+            ? 'window'
+            : state.icons.find(icon => icon.isFocus)
+            ? 'icon'
+            : 'desktop',
       };
     case 'FOCUS_APP':
       return {
@@ -30,6 +54,34 @@ const reducer = (state = initState, action = {}) => {
           ...state.apps.filter(app => app.id !== action.payload),
           state.apps.find(app => app.id === action.payload),
         ],
+        focusing: 'window',
+      };
+    case 'FOCUS_ICON':
+      const icons = state.icons.map(icon => {
+        if (icon.name === action.payload)
+          return {
+            ...icon,
+            isFocus: true,
+          };
+        else
+          return {
+            ...icon,
+            isFocus: false,
+          };
+      });
+      return {
+        ...state,
+        focusing: 'icon',
+        icons,
+      };
+    case 'FOCUS_DESKTOP':
+      return {
+        ...state,
+        focusing: 'desktop',
+        icons: state.icons.map(icon => ({
+          ...icon,
+          isFocus: false,
+        })),
       };
     default:
       return state;
@@ -37,6 +89,7 @@ const reducer = (state = initState, action = {}) => {
 };
 
 function WinXP() {
+  const ref = useRef(null);
   const [state, dispatch] = useReducer(reducer, initState);
   function onClickApp(id) {
     dispatch({ type: 'FOCUS_APP', payload: id });
@@ -44,19 +97,47 @@ function WinXP() {
   function onCloseApp(id) {
     dispatch({ type: 'DEL_APP', payload: id });
   }
+  useEffect(() => {
+    const target = ref.current;
+    if (!target) return;
+    function onMouseDown(e) {
+      if (e.target !== target) return;
+      dispatch({ type: 'FOCUS_DESKTOP' });
+    }
+    window.addEventListener('mousedown', onMouseDown);
+    return () => {
+      window.removeEventListener('mousedown', onMouseDown);
+    };
+  }, []);
+  console.log(state.focusing);
   return (
-    <Container>
-      <div className="icon__test">
-        <button
-          className="button__test"
-          style={{ backgroundImage: `url(${ie})` }}
-          onClick={() => {
-            dispatch({ type: 'ADD_APP', payload: IE });
+    <Container ref={ref}>
+      {state.icons.map(icon => (
+        <div
+          key={icon.name}
+          className="icon__test"
+          onMouseDown={() => {
+            dispatch({ type: 'FOCUS_ICON', payload: icon.name });
           }}
-        />
-        <div className="icon__test__text">Internet Explorer</div>
-      </div>
-      <Footer />
+          onMouseUp={() => {
+            dispatch({ type: 'ADD_APP', payload: icon.component });
+          }}
+        >
+          <img src={icon.image} alt="ie" className="button__test" />
+          <div
+            style={{
+              backgroundColor:
+                icon.isFocus && state.focusing === 'icon'
+                  ? '#005aff'
+                  : 'transparent',
+            }}
+            className="icon__test__text"
+          >
+            {icon.name}
+          </div>
+        </div>
+      ))}
+      <Footer onMouseDown={() => dispatch({ type: 'FOCUS_DESKTOP' })} />
       <Windows
         apps={state.apps}
         onMouseDown={onClickApp}
@@ -78,7 +159,7 @@ const Container = styled.div`
   .icon__test {
     width: 60px;
     margin: 60px;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     &__text {
