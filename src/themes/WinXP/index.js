@@ -68,7 +68,7 @@ function WinXP() {
 
 const Container = styled.div`
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
   background: url(https://i.imgur.com/Zk6TR5k.jpg) no-repeat center center fixed;
   background-size: cover;
