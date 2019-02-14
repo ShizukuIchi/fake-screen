@@ -148,7 +148,7 @@ export default styled(Main)`
       }
     }
     .buttons {
-      width: 584px;
+      width: 100%;
       height: 36px;
       margin-top: 31px;
       display: flex;

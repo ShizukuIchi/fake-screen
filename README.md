@@ -2,14 +2,15 @@
 
 Prank your friends with fake screens.
 
-![](https://i.imgur.com/Anc1aTJ.png)
+![overview](https://i.imgur.com/a0t0Ad0.png)
 
 ## Themes
 
 - [Google Search](https://sh1zuku.csie.io/fake-screen/#/google)
-- [MacOS update](https://sh1zuku.csie.io/fake-screen/#/macOS)
-- [Ubuntu 18.04](https://sh1zuku.csie.io/fake-screen/#/ubuntu)
+- [MacOS Update](https://sh1zuku.csie.io/fake-screen/#/macOS)
+- [Ubuntu 18.04 Login](https://sh1zuku.csie.io/fake-screen/#/ubuntu)
 - [WannaCry](https://sh1zuku.csie.io/fake-screen/#/wannacry)
-- [Windows 10 crash](https://sh1zuku.csie.io/fake-screen/#/win10-crash)
-- [Windows 10 update](https://sh1zuku.csie.io/fake-screen/#/win10-update)
-- [DVD screensaver](https://sh1zuku.csie.io/fake-screen/#/dvd-screensaver)
+- [Windows 10 Crash](https://sh1zuku.csie.io/fake-screen/#/win10-crash)
+- [Windows 10 Update](https://sh1zuku.csie.io/fake-screen/#/win10-update)
+- [DVD Screensaver](https://sh1zuku.csie.io/fake-screen/#/dvd-screensaver)
+- [Windows XP](https://sh1zuku.csie.io/fake-screen/#/winXP)

@@ -153,6 +153,7 @@ export default styled(Search)`
       outline: 0;
       border: 0;
       flex: 1;
+      width: 30px;
       font-size: 16px;
     }
     img {
@@ -283,12 +284,12 @@ export default styled(Search)`
     }
     .app-bar {
       margin: 0 15px;
-      width: 100%;
+      width: calc(100% - 30px);
       height: 40px;
     }
     .tags {
       display: flex;
-      width: 90%;
+      width: 100%;
     }
     .tags.right {
       display: none;
