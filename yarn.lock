@@ -6333,6 +6333,11 @@ lodash.memoize@^4.1.2:
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
 
+lodash.samplesize@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.samplesize/-/lodash.samplesize-4.2.0.tgz#460762fbb2b342290517499e90d51586db465ff9"
+  integrity sha1-Rgdi+7KzQikFF0mekNUVhttGX/k=
+
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"

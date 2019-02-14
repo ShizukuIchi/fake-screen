@@ -9,13 +9,14 @@ function Windows({ apps, onMouseDown, onCloseWindow }) {
       key={app.id}
       onMouseDown={onMouseDown.bind(null, app.id)}
       onCloseWindow={onCloseWindow.bind(null, app.id)}
+      title={app.title}
     >
       <app.component />
     </Window>
   ));
 }
 
-function Window({ children, onCloseWindow, onMouseDown }) {
+function Window({ children, onCloseWindow, onMouseDown, title }) {
   const dragRef = useRef(null);
   const ref = useRef(null);
   const { offset, size } = useElementResize(ref, {
@@ -51,7 +52,7 @@ function Window({ children, onCloseWindow, onMouseDown }) {
       <header className="app__header" ref={dragRef}>
         <img src={ie} alt="ie" className="app__header__icon" />
         <button className="app__header__close" onMouseUp={onCloseWindow} />
-        <span className="app__header__title">Internet Explorer</span>
+        <span className="app__header__title">{title}</span>
       </header>
       <div className="app__content">{children}</div>
     </StyledWindow>

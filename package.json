@@ -12,6 +12,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "lodash.samplesize": "^4.2.0",
     "react": "^16.8.0-alpha.0",
     "react-dom": "^16.8.0-alpha.0",
     "react-pose": "^4.0.5",

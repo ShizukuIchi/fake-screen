@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect, useRef } from 'react';
 import Footer from './Footer';
-// import MineSweeper from './MineSweeper';
+import MineSweeper from './MineSweeper';
 import IE from './InternetExplorer';
 import styled from 'styled-components';
 import Windows from './Windows';
@@ -9,7 +9,7 @@ import ie from './ie.png';
 // there should be a config (icons, apps), app should have multiInstance, isFullScreen, resizable, defaultPosition property
 
 const initState = {
-  apps: [{ component: IE, id: 0 }],
+  apps: [{ component: MineSweeper, title: 'Mine Sweeper', id: 0 }],
   nextAppID: 1,
   focusing: 'window',
   icons: [
@@ -22,20 +22,18 @@ const initState = {
     {
       image: ie,
       isFocus: false,
-      name: 'Internet Explorer2',
-      component: IE,
+      name: 'Mine Sweeper',
+      component: MineSweeper,
     },
   ],
 };
 const reducer = (state = initState, action = {}) => {
   switch (action.type) {
     case 'ADD_APP':
+      const { component, title } = action.payload;
       return {
         ...state,
-        apps: [
-          ...state.apps,
-          { component: action.payload, id: state.nextAppID },
-        ],
+        apps: [...state.apps, { component, id: state.nextAppID, title }],
         nextAppID: state.nextAppID + 1,
         focusing: 'window',
       };
@@ -125,7 +123,8 @@ function WinXP() {
             dispatch({ type: 'FOCUS_ICON', payload: icon.name });
           }}
           onDoubleClick={() => {
-            dispatch({ type: 'ADD_APP', payload: icon.component });
+            const { component, name } = icon;
+            dispatch({ type: 'ADD_APP', payload: { component, title: name } });
           }}
         >
           <img src={icon.image} alt="ie" className="button__test" />
