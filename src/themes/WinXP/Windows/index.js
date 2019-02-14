@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import useElementResize from 'src/hooks/useElementResize';
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ function Windows({ apps, onMouseDown, onCloseWindow }) {
   ));
 }
 
-function Window({ children, onCloseWindow, ...rest }) {
+function Window({ children, onCloseWindow, onMouseDown }) {
   const dragRef = useRef(null);
   const ref = useRef(null);
   const { offset, size } = useElementResize(ref, {
@@ -40,7 +40,7 @@ function Window({ children, onCloseWindow, ...rest }) {
   return (
     <StyledWindow
       ref={ref}
-      {...rest}
+      onMouseDown={onMouseDown}
       style={{
         transform: `translate(${offset.x}px,${offset.y}px)`,
         width: `${size.width}px`,
@@ -50,7 +50,7 @@ function Window({ children, onCloseWindow, ...rest }) {
       <div className="header__bg" />
       <header className="app__header" ref={dragRef}>
         <img src={ie} alt="ie" className="app__header__icon" />
-        <button className="app__header__close" onClick={onCloseWindow} />
+        <button className="app__header__close" onMouseUp={onCloseWindow} />
         <span className="app__header__title">Internet Explorer</span>
       </header>
       <div className="app__content">{children}</div>

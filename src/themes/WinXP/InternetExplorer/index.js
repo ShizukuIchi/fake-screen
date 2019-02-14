@@ -101,7 +101,7 @@ const Div = styled.div`
     padding: 5px;
   }
   .ie__address_bar__content {
-    border: 0.5px blue solid;
+    border: rgba(52, 52, 255, 0.6) 1px solid;
     height: 100%;
     display: flex;
     flex: 1;
