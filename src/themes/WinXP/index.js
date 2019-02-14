@@ -6,10 +6,7 @@ import styled from 'styled-components';
 import Windows from './Windows';
 import ie from './ie.png';
 
-// focusing enum: window, icon, desktop
-
-// when close window, if an icon was focused and there is no windows, icon will be focus, otherwise desktop
-// there should be a config (icons, apps), app should have multiInstance, isFullScreen, resizable property
+// there should be a config (icons, apps), app should have multiInstance, isFullScreen, resizable, defaultPosition property
 
 const initState = {
   apps: [{ component: IE, id: 0 }],
@@ -20,6 +17,12 @@ const initState = {
       image: ie,
       isFocus: false,
       name: 'Internet Explorer',
+      component: IE,
+    },
+    {
+      image: ie,
+      isFocus: false,
+      name: 'Internet Explorer2',
       component: IE,
     },
   ],
@@ -95,7 +98,10 @@ function WinXP() {
     dispatch({ type: 'FOCUS_APP', payload: id });
   }
   function onCloseApp(id) {
-    dispatch({ type: 'DEL_APP', payload: id });
+    // delete if is focus
+    if (state.apps[state.apps.length - 1].id === id) {
+      dispatch({ type: 'DEL_APP', payload: id });
+    }
   }
   useEffect(() => {
     const target = ref.current;
@@ -109,7 +115,6 @@ function WinXP() {
       window.removeEventListener('mousedown', onMouseDown);
     };
   }, []);
-  console.log(state.focusing);
   return (
     <Container ref={ref}>
       {state.icons.map(icon => (
@@ -119,7 +124,7 @@ function WinXP() {
           onMouseDown={() => {
             dispatch({ type: 'FOCUS_ICON', payload: icon.name });
           }}
-          onMouseUp={() => {
+          onDoubleClick={() => {
             dispatch({ type: 'ADD_APP', payload: icon.component });
           }}
         >
