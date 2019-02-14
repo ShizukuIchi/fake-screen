@@ -25,15 +25,25 @@ function reducer(state = initState, action = {}) {
         ...gameConfig,
         first: false,
       };
+    case 'OPEN_CEIL':
+      const indexes = openCeils(state, action.payload);
+      const ceils2 = [...state.ceils];
+      indexes.forEach(i => {
+        const ceil = ceils2[i];
+        ceils2[i] = { ...ceil, state: 'open' };
+      });
+      return {
+        ...state,
+        ceils: ceils2,
+      };
     case 'CHANGE_CEIL_STATE':
-      const { index, state: newState } = action.payload;
+      const { index, ceilState: newState } = action.payload;
       const ceil = state.ceils[index];
       const ceils = [...state.ceils];
       ceils[index] = { ...ceil, state: newState };
       return {
         ...state,
         ceils,
-        first: false,
       };
     case 'CHANGE_DIFFICULTY':
       return {
@@ -48,21 +58,24 @@ function reducer(state = initState, action = {}) {
 function MineSweeper() {
   const [state, dispatch] = useReducer(reducer, initState);
   function onChangeCeilState(index, ceilState) {
-    if (state.first) return dispatch({ type: 'START_GAME', payload: index });
-    dispatch({ type: 'CHANGE_CEIL_STATE', payload: { index, ceilState } });
+    if (state.first) {
+      dispatch({ type: 'START_GAME', payload: index });
+      dispatch({ type: 'OPEN_CEIL', payload: index });
+    } else if (ceilState === 'open') {
+      dispatch({ type: 'OPEN_CEIL', payload: index });
+    } else {
+      dispatch({ type: 'CHANGE_CEIL_STATE', payload: { index, ceilState } });
+    }
   }
   function onClear() {
-    dispatch({ type: 'RESET_GAME' });
+    dispatch({ type: 'CLEAR_MAP' });
   }
   function onChangeDifficulty(difficulty) {
     dispatch({ type: 'CHANGE_DIFFICULTY', payload: difficulty });
   }
-  useEffect(() => {
-    dispatch({ type: 'RESET_GAME' });
-  }, []);
   return (
     <MineSweeperView
-      state={state}
+      ceils={state.ceils}
       onChangeCeilState={onChangeCeilState}
       onReset={onClear}
       onChangeDifficulty={onChangeDifficulty}
@@ -78,7 +91,6 @@ function genGameConfig(difficulty, exclude) {
     state: 'cover',
     minesAround: 0,
   }));
-  if (exclude) ceils[exclude].state = 'open';
   sampleSize(emptyArray.filter(i => i !== exclude), 20).forEach(chosen => {
     const chosenCeil = ceils[chosen];
     chosenCeil.minesAround = -100;
@@ -94,16 +106,15 @@ function genGameConfig(difficulty, exclude) {
       chosen + columns,
       chosen + columns + 1,
     ]
-      .map((ceilIndex, arrayIndex) => {
-        if (_row === 0 && arrayIndex < 3) return -1;
-        if (_row === rows - 1 && arrayIndex > 4) return -1;
-        if (_column === 0 && [0, 3, 5].includes(arrayIndex)) return -1;
+      .filter((_, arrayIndex) => {
+        if (_row === 0 && arrayIndex < 3) return false;
+        if (_row === rows - 1 && arrayIndex > 4) return false;
+        if (_column === 0 && [0, 3, 5].includes(arrayIndex)) return false;
         if (_column === columns - 1 && [2, 4, 7].includes(arrayIndex))
-          return -1;
-        return ceilIndex;
+          return false;
+        return true;
       })
       .forEach(ceilIndex => {
-        if (ceilIndex === -1) return;
         ceils[ceilIndex].minesAround += 1;
       });
   });
@@ -112,6 +123,47 @@ function genGameConfig(difficulty, exclude) {
     columns,
     ceils,
   };
+}
+
+function openCeils(state, index) {
+  const { rows, columns } = state;
+  const ceils = state.ceils.map(ceil => ({
+    minesAround: ceil.minesAround,
+    walked: false,
+  }));
+  return walkCeils(index);
+  function walkCeils(index, indexes = []) {
+    const ceil = ceils[index];
+    if (ceil.walked || ceil.minesAround < 0) return indexes;
+    ceil.walked = true;
+    if (ceil.minesAround > 0) return [...indexes, index];
+    const _row = Math.floor(index / rows);
+    const _column = index % columns;
+    return [
+      index,
+      ...[
+        index - columns - 1,
+        index - columns,
+        index - columns + 1,
+        index - 1,
+        index + 1,
+        index + columns - 1,
+        index + columns,
+        index + columns + 1,
+      ]
+        .filter((_, arrayIndex) => {
+          if (_row === 0 && arrayIndex < 3) return false;
+          if (_row === rows - 1 && arrayIndex > 4) return false;
+          if (_column === 0 && [0, 3, 5].includes(arrayIndex)) return false;
+          if (_column === columns - 1 && [2, 4, 7].includes(arrayIndex))
+            return false;
+          return true;
+        })
+        .reduce((lastIndexes, ceilIndex) => {
+          return [...lastIndexes, ...walkCeils(ceilIndex)];
+        }, indexes),
+    ];
+  }
 }
 
 export default MineSweeper;
