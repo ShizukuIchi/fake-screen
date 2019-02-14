@@ -7,37 +7,33 @@ const initState = {
   difficulty: 'easy',
   rows: 10,
   columns: 10,
-  ceils: [],
+  ceils: Array(100)
+    .fill()
+    .map(_ => ({ state: 'cover', minesAround: 0 })),
+  first: true,
 };
 
 function reducer(state = initState, action = {}) {
   switch (action.type) {
-    case 'RESET_GAME':
-      const difficulty = action.payload;
-      const gameConfig = genGameConfig(difficulty);
+    case 'CLEAR_MAP':
+      return initState;
+    case 'START_GAME':
+      const excludeIndex = action.payload;
+      const gameConfig = genGameConfig(state.difficulty, excludeIndex);
       return {
         ...state,
-        difficulty,
         ...gameConfig,
+        first: false,
       };
     case 'CHANGE_CEIL_STATE':
-      const {
-        position: { x, y },
-        state: newState,
-      } = action.payload;
-      const { columns } = state;
-      const index = y * columns + x;
+      const { index, state: newState } = action.payload;
       const ceil = state.ceils[index];
+      const ceils = [...state.ceils];
+      ceils[index] = { ...ceil, state: newState };
       return {
         ...state,
-        ceils: [
-          ...state.ceils.slice(0, index),
-          {
-            ...ceil,
-            state: newState,
-          },
-          ...state.ceils.slice(index + 1, state.ceils.length),
-        ],
+        ceils,
+        first: false,
       };
     case 'CHANGE_DIFFICULTY':
       return {
@@ -51,10 +47,11 @@ function reducer(state = initState, action = {}) {
 
 function MineSweeper() {
   const [state, dispatch] = useReducer(reducer, initState);
-  function onChangeCeilState(position, state) {
-    dispatch({ type: 'CHANGE_CEIL_STATE', payload: { position, state } });
+  function onChangeCeilState(index, ceilState) {
+    if (state.first) return dispatch({ type: 'START_GAME', payload: index });
+    dispatch({ type: 'CHANGE_CEIL_STATE', payload: { index, ceilState } });
   }
-  function onReset() {
+  function onClear() {
     dispatch({ type: 'RESET_GAME' });
   }
   function onChangeDifficulty(difficulty) {
@@ -67,13 +64,13 @@ function MineSweeper() {
     <MineSweeperView
       state={state}
       onChangeCeilState={onChangeCeilState}
-      onReset={onReset}
+      onReset={onClear}
       onChangeDifficulty={onChangeDifficulty}
     />
   );
 }
 
-function genGameConfig(difficulty) {
+function genGameConfig(difficulty, exclude) {
   const rows = 10;
   const columns = 10;
   const emptyArray = [...Array(rows * columns).keys()];
@@ -81,7 +78,8 @@ function genGameConfig(difficulty) {
     state: 'cover',
     minesAround: 0,
   }));
-  sampleSize(emptyArray, 20).forEach(chosen => {
+  if (exclude) ceils[exclude].state = 'open';
+  sampleSize(emptyArray.filter(i => i !== exclude), 20).forEach(chosen => {
     const chosenCeil = ceils[chosen];
     chosenCeil.minesAround = -100;
     const _row = Math.floor(chosen / rows);

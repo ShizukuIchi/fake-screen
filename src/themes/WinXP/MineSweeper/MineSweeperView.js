@@ -9,20 +9,31 @@ function MineSweeperView({
 }) {
   return (
     <Div>
-      <header className="mine__header" />
+      <header className="mine__header" onClick={onReset} />
       <section className="mine__content">
         <div className="mine__content__inner">
-          <Ceils ceils={state.ceils} />
+          <Ceils ceils={state.ceils} onClick={onChangeCeilState} />
         </div>
       </section>
     </Div>
   );
 }
 
-function Ceils({ ceils }) {
+function Ceils({ ceils, onClick }) {
   return ceils.map((ceil, index) => {
     return (
-      <div key={index}>{ceil.minesAround >= 0 ? ceil.minesAround : 'x'}</div>
+      <div
+        className="mine__ceil"
+        style={{ background: ceil.state === 'cover' ? 'gray' : 'pink' }}
+        onClick={onClick.bind(null, index, 'open')}
+        key={index}
+      >
+        {ceil.state === 'cover'
+          ? ''
+          : ceil.minesAround >= 0
+          ? ceil.minesAround
+          : 'x'}
+      </div>
     );
   });
 }
@@ -36,9 +47,8 @@ const Div = styled.div`
     display: grid;
     grid-template-columns: repeat(10, 40px);
     grid-template-rows: repeat(10, 40px);
-    div {
-      background: gray;
-    }
+    background-color: white;
+    grid-gap: 2px;
   }
 `;
 
