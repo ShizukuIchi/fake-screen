@@ -22,7 +22,7 @@ const initState = {
     {
       image: ie,
       isFocus: false,
-      name: 'Mine Sweeper',
+      name: 'Minesweeper',
       component: MineSweeper,
     },
   ],

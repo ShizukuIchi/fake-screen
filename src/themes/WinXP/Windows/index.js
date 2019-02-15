@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import useElementResize from 'src/hooks/useElementResize';
 import styled from 'styled-components';
 
