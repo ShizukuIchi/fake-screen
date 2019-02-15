@@ -12,7 +12,7 @@ const initState = {
   focusing: 'window',
   icons: defaultAppSettings,
 };
-const reducer = (state = initState, action = {}) => {
+const reducer = (state, action = {}) => {
   switch (action.type) {
     case 'ADD_APP':
       return {
@@ -105,6 +105,9 @@ function WinXP() {
     return () => {
       window.removeEventListener('mousedown', onMouseDown);
     };
+  }, []);
+  useEffect(() => {
+    dispatch({ type: 'ADD_APP', payload: defaultAppSettings[1] });
   }, []);
   return (
     <Container ref={ref}>
