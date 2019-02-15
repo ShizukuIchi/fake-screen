@@ -4,6 +4,18 @@ import sampleSize from 'lodash.samplesize';
 import { Config } from './config';
 import MineSweeperView from './MineSweeperView';
 
+// state: {
+//   difficulty: 'Beginner' || 'Intermediate' || 'Expert',
+//   started: Boolean,
+//   rows: Number,
+//   columns: Number,
+//   mines: Number,
+//   ceils: Array {
+//     state: 'cover' || 'flag' || 'unknown' || 'open',
+//     minesAround: Number (negative for mine itself)
+//   }
+// }
+
 function getInitState(difficulty = 'Beginner') {
   return {
     difficulty,
@@ -16,12 +28,7 @@ function reducer(state, action = {}) {
   switch (action.type) {
     case 'CLEAR_MAP':
       const difficulty = action.payload || state.difficulty;
-      return {
-        ...state,
-        difficulty,
-        ...genGameConfig({ ...Config[difficulty], empty: true }),
-        started: false,
-      };
+      return getInitState(difficulty);
     case 'START_GAME':
       const exclude = action.payload;
       return {
@@ -137,18 +144,18 @@ function autoCeils(state, index) {
     walked: false,
   }));
   return walkCeils(index);
-  function walkCeils(index, indexes = []) {
+  function walkCeils(index) {
     const ceil = ceils[index];
-    if (ceil.walked || ceil.minesAround < 0) return indexes;
+    if (ceil.walked || ceil.minesAround < 0) return [];
     ceil.walked = true;
-    if (ceil.minesAround > 0) return [...indexes, index];
+    if (ceil.minesAround > 0) return [index];
     return [
       index,
       ...getNearIndexes(index, rows, columns).reduce(
         (lastIndexes, ceilIndex) => {
           return [...lastIndexes, ...walkCeils(ceilIndex)];
         },
-        indexes,
+        [],
       ),
     ];
   }
