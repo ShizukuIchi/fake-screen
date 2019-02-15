@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Google } from 'src/themes';
-import ie from '../ie.png';
+import ie from 'src/assets/ie.png';
 
 function InternetExplorer() {
   return (

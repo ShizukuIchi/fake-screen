@@ -2,55 +2,59 @@ import React, { useRef } from 'react';
 import useElementResize from 'src/hooks/useElementResize';
 import styled from 'styled-components';
 
-import ie from '../ie.png';
 function Windows({ apps, onMouseDown, onCloseWindow }) {
   return apps.map(app => (
     <Window
       key={app.id}
       onMouseDown={onMouseDown.bind(null, app.id)}
       onCloseWindow={onCloseWindow.bind(null, app.id)}
-      title={app.title}
+      {...app}
     >
       <app.component />
     </Window>
   ));
 }
 
-function Window({ children, onCloseWindow, onMouseDown, title }) {
+function Window({
+  children,
+  onCloseWindow,
+  onMouseDown,
+  title,
+  defaultSize,
+  defaultOffset,
+  resizable,
+  image,
+}) {
   const dragRef = useRef(null);
   const ref = useRef(null);
   const { offset, size } = useElementResize(ref, {
     dragRef,
-    offset: {
-      x: Math.floor(Math.random() * 200) + 100,
-      y: Math.floor(Math.random() * 50),
-    },
-    size: {
-      width: 700,
-      height: 500,
-    },
+    offset: defaultOffset,
+    size: defaultSize,
     boundary: {
       top: 1,
       right: window.innerWidth - 1,
       bottom: window.innerHeight - 31,
       left: 1,
     },
-    resizable: true,
+    resizable,
     resizeThreshold: 10,
   });
+  const { width, height } = size;
+  const { x, y } = offset;
   return (
     <StyledWindow
       ref={ref}
       onMouseDown={onMouseDown}
       style={{
-        transform: `translate(${offset.x}px,${offset.y}px)`,
-        width: `${size.width}px`,
-        height: `${size.height}px`,
+        transform: `translate(${x}px,${y}px)`,
+        width: width ? `${width}px` : 'auto',
+        height: height ? `${height}px` : 'auto',
       }}
     >
       <div className="header__bg" />
       <header className="app__header" ref={dragRef}>
-        <img src={ie} alt="ie" className="app__header__icon" />
+        <img src={image} alt={title} className="app__header__icon" />
         <button className="app__header__close" onMouseUp={onCloseWindow} />
         <span className="app__header__title">{title}</span>
       </header>

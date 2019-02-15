@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import styled from 'styled-components';
-import apple from 'src/assets/apple.svg';
+import apple from './apple.svg';
 
 export const initState = {
   value: 0,

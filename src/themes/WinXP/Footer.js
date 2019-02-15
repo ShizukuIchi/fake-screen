@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import startButton from './start_button.png';
+import startButton from 'src/assets/start_button.png';
 function Footer({ onMouseDown }) {
   return (
     <Container onMouseDown={onMouseDown}>

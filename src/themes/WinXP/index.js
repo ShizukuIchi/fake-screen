@@ -1,39 +1,23 @@
 import React, { useReducer, useEffect, useRef } from 'react';
 import Footer from './Footer';
-import MineSweeper from './MineSweeper';
-import IE from './InternetExplorer';
 import styled from 'styled-components';
-import Windows from './Windows';
-import ie from './ie.png';
 
-// there should be a config (icons, apps), app should have multiInstance, isFullScreen, resizable, defaultPosition property
+import { defaultAppSettings } from './apps';
+import Windows from './Windows';
+import Icons from './Icons';
 
 const initState = {
-  apps: [{ component: MineSweeper, title: 'Mine Sweeper', id: 0 }],
-  nextAppID: 1,
+  apps: [],
+  nextAppID: 0,
   focusing: 'window',
-  icons: [
-    {
-      image: ie,
-      isFocus: false,
-      name: 'Internet Explorer',
-      component: IE,
-    },
-    {
-      image: ie,
-      isFocus: false,
-      name: 'Minesweeper',
-      component: MineSweeper,
-    },
-  ],
+  icons: defaultAppSettings,
 };
 const reducer = (state = initState, action = {}) => {
   switch (action.type) {
     case 'ADD_APP':
-      const { component, title } = action.payload;
       return {
         ...state,
-        apps: [...state.apps, { component, id: state.nextAppID, title }],
+        apps: [...state.apps, { ...action.payload, id: state.nextAppID }],
         nextAppID: state.nextAppID + 1,
         focusing: 'window',
       };
@@ -59,7 +43,7 @@ const reducer = (state = initState, action = {}) => {
       };
     case 'FOCUS_ICON':
       const icons = state.icons.map(icon => {
-        if (icon.name === action.payload)
+        if (icon.component === action.payload)
           return {
             ...icon,
             isFocus: true,
@@ -101,6 +85,15 @@ function WinXP() {
       dispatch({ type: 'DEL_APP', payload: id });
     }
   }
+  function onMouseDownIcon(payload) {
+    dispatch({ type: 'FOCUS_ICON', payload });
+  }
+  function onDoubleClickIcon(payload) {
+    const app = state.apps.find(app => app.component === payload.component);
+
+    if (payload.multiInstance || !app) dispatch({ type: 'ADD_APP', payload });
+    else dispatch({ type: 'FOCUS_APP', payload: app.id });
+  }
   useEffect(() => {
     const target = ref.current;
     if (!target) return;
@@ -115,32 +108,12 @@ function WinXP() {
   }, []);
   return (
     <Container ref={ref}>
-      {state.icons.map(icon => (
-        <div
-          key={icon.name}
-          className="icon__test"
-          onMouseDown={() => {
-            dispatch({ type: 'FOCUS_ICON', payload: icon.name });
-          }}
-          onDoubleClick={() => {
-            const { component, name } = icon;
-            dispatch({ type: 'ADD_APP', payload: { component, title: name } });
-          }}
-        >
-          <img src={icon.image} alt="ie" className="button__test" />
-          <div
-            style={{
-              backgroundColor:
-                icon.isFocus && state.focusing === 'icon'
-                  ? '#005aff'
-                  : 'transparent',
-            }}
-            className="icon__test__text"
-          >
-            {icon.name}
-          </div>
-        </div>
-      ))}
+      <Icons
+        icons={state.icons}
+        onMouseDown={onMouseDownIcon}
+        onDoubleClick={onDoubleClickIcon}
+        displayFocus={state.focusing === 'icon'}
+      />
       <Footer onMouseDown={() => dispatch({ type: 'FOCUS_DESKTOP' })} />
       <Windows
         apps={state.apps}
