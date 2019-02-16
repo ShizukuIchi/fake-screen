@@ -182,6 +182,7 @@ export default styled(MineSweeperView)`
     border-color: #fff;
     font-size: 22px;
     line-height: 22px;
+    text-align: right;
   }
   .mine__face {
     width: 25px;

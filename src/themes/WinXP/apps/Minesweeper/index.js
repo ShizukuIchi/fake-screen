@@ -11,7 +11,7 @@ import MineSweeperView from './MineSweeperView';
 //   columns: Number,
 //   mines: Number,
 //   ceils: Array {
-//     state: 'cover' || 'flag' || 'unknown' || 'open',
+//     state: 'cover' || 'flag' || 'unknown' || 'open' || 'die',
 //     minesAround: Number (negative for mine itself)
 //   }
 // }
@@ -20,7 +20,7 @@ function getInitState(difficulty = 'Beginner') {
   return {
     difficulty,
     status: 'new',
-    ...genGameConfig({ ...Config[difficulty], empty: true }),
+    ...genGameConfig(Config[difficulty]),
   };
 }
 
@@ -33,7 +33,7 @@ function reducer(state, action = {}) {
       const exclude = action.payload;
       return {
         ...state,
-        ...genGameConfig({ ...Config[state.difficulty], exclude }),
+        ...insertMines({ ...Config[state.difficulty], exclude }, state.ceils),
         status: 'started',
       };
     case 'OPEN_CEIL': {
@@ -169,21 +169,33 @@ function MineSweeper({ defaultDifficulty }) {
 }
 
 function genGameConfig(config) {
-  const { rows, columns, mines, exclude, empty } = config;
-  const emptyArray = [...Array(rows * columns).keys()];
-  const ceils = emptyArray.map(_ => ({
-    state: 'cover',
-    minesAround: 0,
-  }));
-  if (!empty) {
-    sampleSize(emptyArray.filter(i => i !== exclude), mines).forEach(chosen => {
-      const chosenCeil = ceils[chosen];
-      chosenCeil.minesAround = -10;
-      getNearIndexes(chosen, rows, columns).forEach(ceilIndex => {
-        ceils[ceilIndex].minesAround += 1;
-      });
+  const { rows, columns, mines } = config;
+  const ceils = Array(rows * columns)
+    .fill()
+    .map(_ => ({
+      state: 'cover',
+      minesAround: 0,
+    }));
+  return {
+    rows,
+    columns,
+    ceils,
+    mines,
+  };
+}
+
+function insertMines(config, originCeils) {
+  const { rows, columns, mines, exclude } = config;
+  const ceils = originCeils.map(ceil => ({ ...ceil }));
+  if (rows * columns !== ceils.length)
+    throw new Error('rows and columns not equal to ceils');
+  const indexArray = [...Array(rows * columns).keys()];
+  sampleSize(indexArray.filter(i => i !== exclude), mines).forEach(chosen => {
+    ceils[chosen].minesAround = -10;
+    getNearIndexes(chosen, rows, columns).forEach(nearIndex => {
+      ceils[nearIndex].minesAround += 1;
     });
-  }
+  });
   return {
     rows,
     columns,
