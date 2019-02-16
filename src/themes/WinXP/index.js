@@ -89,10 +89,7 @@ function WinXP() {
     dispatch({ type: 'FOCUS_ICON', payload });
   }
   function onDoubleClickIcon(payload) {
-    const app = state.apps.find(app => app.component === payload.component);
-
-    if (payload.multiInstance || !app) dispatch({ type: 'ADD_APP', payload });
-    else dispatch({ type: 'FOCUS_APP', payload: app.id });
+    dispatch({ type: 'ADD_APP', payload });
   }
   useEffect(() => {
     const target = ref.current;

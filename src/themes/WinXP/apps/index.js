@@ -15,7 +15,6 @@ export const defaultAppSettings = [
       x: 200,
       y: 200,
     },
-    multiInstance: true,
     resizable: true,
     isFocus: false,
   },
@@ -29,9 +28,8 @@ export const defaultAppSettings = [
     },
     defaultOffset: {
       x: 300,
-      y: 300,
+      y: 100,
     },
-    multiInstance: false,
     resizable: false,
     isFocus: false,
   },
