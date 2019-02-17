@@ -17,7 +17,7 @@ const colors = [
 
 export const initState = {
   color: 'white',
-  velocity: { x: 1, y: 1 },
+  velocity: { x: 2, y: 2 },
 };
 
 export const reducer = (state = initState, action = {}) => {
@@ -34,62 +34,59 @@ function DVDScreensaver({ className }) {
   const ref = useRef();
   const { width: windowWidth, height: windowHeight } = useWindowSize();
   const [state, dispatch] = useReducer(reducer, initState);
-  useEffect(
-    () => {
-      const { velocity } = state;
-      let myRaf;
-      let canceled = false;
-      let vx = velocity.x;
-      let vy = velocity.y;
-      let {
-        left: logoLeft,
-        top: logoTop,
-        width: logoWidth,
-        height: logoHeight,
-      } = ref.current.getBoundingClientRect();
-      function animate() {
-        if (canceled) return;
-        let shouldUpdate = true;
-        if (logoLeft < 0) {
-          logoLeft = 0;
-          vx = Math.abs(vx);
-        } else if (logoLeft + logoWidth > windowWidth) {
-          logoLeft = windowWidth - logoWidth;
-          vx = -Math.abs(vx);
-        } else if (logoTop < 0) {
-          logoTop = 0;
-          vy = Math.abs(vy);
-        } else if (logoTop + logoHeight > windowHeight) {
-          logoTop = windowHeight - logoHeight;
-          vy = -Math.abs(vy);
-        } else {
-          shouldUpdate = false;
-          logoLeft += vx;
-          logoTop += vy;
-          ref.current.style.transform = `translate(${logoLeft}px, ${logoTop}px)`;
-        }
-        if (shouldUpdate) {
-          dispatch({
-            type: 'SET',
-            payload: {
-              velocity: {
-                x: vx,
-                y: vy,
-              },
-              color: choose(colors),
+  useEffect(() => {
+    const { velocity } = state;
+    let myRaf;
+    let canceled = false;
+    let vx = velocity.x;
+    let vy = velocity.y;
+    let {
+      left: logoLeft,
+      top: logoTop,
+      width: logoWidth,
+      height: logoHeight,
+    } = ref.current.getBoundingClientRect();
+    function animate() {
+      if (canceled) return;
+      let shouldUpdate = true;
+      if (logoLeft < 0) {
+        logoLeft = 0;
+        vx = Math.abs(vx);
+      } else if (logoLeft + logoWidth > windowWidth) {
+        logoLeft = windowWidth - logoWidth;
+        vx = -Math.abs(vx);
+      } else if (logoTop < 0) {
+        logoTop = 0;
+        vy = Math.abs(vy);
+      } else if (logoTop + logoHeight > windowHeight) {
+        logoTop = windowHeight - logoHeight;
+        vy = -Math.abs(vy);
+      } else {
+        shouldUpdate = false;
+        logoLeft += vx;
+        logoTop += vy;
+        ref.current.style.transform = `translate(${logoLeft}px, ${logoTop}px)`;
+      }
+      if (shouldUpdate) {
+        dispatch({
+          type: 'SET',
+          payload: {
+            velocity: {
+              x: vx,
+              y: vy,
             },
-          });
-        }
-        myRaf = requestAnimationFrame(animate);
+            color: choose(colors),
+          },
+        });
       }
       myRaf = requestAnimationFrame(animate);
-      return () => {
-        canceled = true;
-        cancelAnimationFrame(myRaf);
-      };
-    },
-    [windowWidth, windowHeight],
-  );
+    }
+    myRaf = requestAnimationFrame(animate);
+    return () => {
+      canceled = true;
+      cancelAnimationFrame(myRaf);
+    };
+  }, [windowWidth, windowHeight]);
   return (
     <div className={className}>
       <div ref={ref} className="logo">

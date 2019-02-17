@@ -38,7 +38,6 @@ Popup.defaultProps = {
 };
 
 export default styled(Popup)`
-  z-index: 2;
   display: ${({ show }) => (show ? 'block' : 'none')};
   left: calc(100% - 32px);
   top: calc(100% + 10px);
