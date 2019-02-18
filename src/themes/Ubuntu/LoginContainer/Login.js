@@ -26,6 +26,12 @@ function Login({
   }
   return (
     <div className={className}>
+      <footer>
+        <div className="text">ubuntu</div>
+        <div className="img">
+          <img src={ubuntu} alt="ubuntu" />
+        </div>
+      </footer>
       <section className="content">
         <div className="user-detail">
           <img className="avatar" src={user} alt="avatar" />
@@ -71,12 +77,6 @@ function Login({
         </div>
         <div className="hint">{hint}</div>
       </section>
-      <footer>
-        <div className="text">ubuntu</div>
-        <div className="img">
-          <img src={ubuntu} alt="ubuntu" />
-        </div>
-      </footer>
     </div>
   );
 }
@@ -89,6 +89,7 @@ export default styled(Login)`
   justify-content: center;
   align-items: center;
   font-size: 15px;
+  position: relative;
   .content {
     position: relative;
     width: 340px;
@@ -177,7 +178,7 @@ export default styled(Login)`
     opacity: 0.7;
   }
   footer {
-    position: fixed;
+    position: absolute;
     bottom: 5%;
     left: 0;
     right: 0;
