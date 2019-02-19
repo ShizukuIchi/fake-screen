@@ -1,10 +1,13 @@
 import InternetExplorer from './InternetExplorer';
 import Minesweeper from './Minesweeper';
-import ie from 'src/assets/ie.png';
+import iePaper from 'src/assets/ie-paper.png';
+import ie from 'src/assets/ie.ico';
+import mine from 'src/assets/mine.png';
 
 export const defaultAppSettings = [
   {
-    image: ie,
+    icon: ie,
+    headerIcon: iePaper,
     title: 'Internet Explorer',
     component: InternetExplorer,
     defaultSize: {
@@ -19,7 +22,8 @@ export const defaultAppSettings = [
     isFocus: false,
   },
   {
-    image: ie,
+    icon: mine,
+    headerIcon: mine,
     title: 'Minesweeper',
     component: Minesweeper,
     defaultSize: {

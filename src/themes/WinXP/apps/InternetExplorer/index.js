@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Google } from 'src/themes';
-import ie from 'src/assets/ie.png';
+import ie from 'src/assets/ie-paper.png';
 
 function InternetExplorer() {
   return (
@@ -109,9 +109,9 @@ const Div = styled.div`
     background-color: white;
     padding-left: 1px;
     &__img {
-      width: 15px;
-      height: 15px;
-      margin-right: 1px;
+      width: 14px;
+      height: 14px;
+      margin-right: 2px;
     }
     &__text {
       line-height: 100%;

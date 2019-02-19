@@ -24,7 +24,7 @@ function Window({
   defaultSize,
   defaultOffset,
   resizable,
-  image,
+  headerIcon,
 }) {
   const dragRef = useRef(null);
   const ref = useRef(null);
@@ -56,7 +56,7 @@ function Window({
     >
       <div className="header__bg" />
       <header className="app__header" ref={dragRef}>
-        <img src={image} alt={title} className="app__header__icon" />
+        <img src={headerIcon} alt={title} className="app__header__icon" />
         <button className="app__header__close" onMouseUp={onCloseWindow} />
         <span className="app__header__title">{title}</span>
       </header>
@@ -112,8 +112,8 @@ const StyledWindow = styled.div`
   }
   .app__header__icon {
     pointer-events: none;
-    width: 18px;
-    height: 18px;
+    width: 15px;
+    height: 15px;
     margin-left: 1px;
     margin-right: 3px;
   }

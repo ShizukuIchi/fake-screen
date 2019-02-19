@@ -1,5 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import dead from 'src/assets/dead.png';
+import smile from 'src/assets/smile.png';
+import win from 'src/assets/win.png';
+import empty from 'src/assets/empty.png';
+import open1 from 'src/assets/open1.png';
+import open2 from 'src/assets/open2.png';
+import open3 from 'src/assets/open3.png';
+import open4 from 'src/assets/open4.png';
+import open5 from 'src/assets/open5.png';
+import open6 from 'src/assets/open6.png';
+import open7 from 'src/assets/open7.png';
+import open8 from 'src/assets/open8.png';
+import flag from 'src/assets/flag.png';
+import mine from 'src/assets/mine2.png';
+import misFlagged from 'src/assets/misflagged.png';
+import question from 'src/assets/question.png';
 
 function MineSweeperView({
   ceils,
@@ -17,11 +33,11 @@ function MineSweeperView({
   function statusFace() {
     switch (status) {
       case 'died':
-        return <span>{'😵'}</span>;
+        return <img alt="dead" src={dead} />;
       case 'won':
-        return <span>{'😎'}</span>;
+        return <img alt="win" src={win} />;
       default:
-        return <span>{'🙂'}</span>;
+        return <img alt="smile" src={smile} />;
     }
   }
   return (
@@ -45,51 +61,67 @@ function MineSweeperView({
           <div className="mine__digits__outer">{seconds}</div>
         </div>
         <div className="mine__content__inner">
-          <Ceils
-            ceils={ceils}
-            onLeftClickCeil={openCeil}
-            onRightClickCeil={changeCeilState}
-          />
+          {status === 'died' ? (
+            <DeadCeils ceils={ceils} />
+          ) : (
+            <Ceils
+              ceils={ceils}
+              onLeftClickCeil={openCeil}
+              onRightClickCeil={changeCeilState}
+            />
+          )}
         </div>
       </section>
     </div>
   );
 }
-function getTextColor(index) {
-  return ',blue,green,red,darkblue,darkred,darkgreen,black,lightgray'.split(
-    ',',
-  )[index];
+function getTextImg(index) {
+  return [empty, open1, open2, open3, open4, open5, open6, open7, open8][index];
 }
 function Ceils({ ceils, onLeftClickCeil, onRightClickCeil }) {
-  function ceilContent(ceil) {
+  function renderContent(ceil) {
     const { state, minesAround } = ceil;
     switch (state) {
       case 'open':
-        switch (true) {
-          case minesAround === 0:
-            return null;
-          case minesAround < 0:
-            return 'x';
-          default:
-            return (
-              <span style={{ color: getTextColor(minesAround) }}>
-                {minesAround}
-              </span>
-            );
-        }
+        return <img alt="mines-around" src={getTextImg(minesAround)} />;
       case 'unknown':
-        return '?';
+        return <img alt="question" src={question} />;
       case 'flag':
-        return (
-          <>
-            <div className="mine__flag__top" />
-            <div className="mine__flag__bar" />
-            <div className="mine__flag__bottom" />
-            <div className="mine__flag__bottom2" />
-          </>
-        );
+        return <img alt="flag" src={flag} />;
       case 'die':
-        return <div className="mine__die">x</div>;
+        return <img className="mine__die" alt="mine" src={mine} />;
+      default:
+        return null;
+    }
+  }
+
+  return ceils.map((ceil, index) => (
+    <Ceil
+      key={index}
+      state={ceil.state}
+      index={index}
+      onLeftClick={onLeftClickCeil}
+      onRightClick={onRightClickCeil}
+    >
+      {renderContent(ceil)}
+    </Ceil>
+  ));
+}
+
+function DeadCeils({ ceils }) {
+  function noop() {}
+  function renderContent(ceil) {
+    const { state, minesAround } = ceil;
+    switch (state) {
+      case 'open':
+        if (minesAround < 0) return <img alt="mine" src={mine} />;
+        else return <img alt="mines-around" src={getTextImg(minesAround)} />;
+      case 'unknown':
+        return <img alt="question" src={question} />;
+      case 'flag':
+        return <img alt="misFlagged" src={misFlagged} />;
+      case 'die':
+        return <img className="mine__die" alt="mine" src={mine} />;
       default:
         return null;
     }
@@ -99,10 +131,10 @@ function Ceils({ ceils, onLeftClickCeil, onRightClickCeil }) {
       key={index}
       state={ceil.state}
       index={index}
-      onLeftClick={onLeftClickCeil}
-      onRightClick={onRightClickCeil}
+      onLeftClick={noop}
+      onRightClick={noop}
     >
-      {ceilContent(ceil)}
+      {renderContent(ceil)}
     </Ceil>
   ));
 }
@@ -217,39 +249,5 @@ export default styled(MineSweeperView)`
     width: 100%;
     height: 100%;
     line-height: 13px;
-  }
-  .mine__flag {
-    &__top {
-      position: absolute;
-      top: 1px;
-      left: 2px;
-      border-style: solid;
-      border-width: 3px 5px 3px 0;
-      border-color: transparent #df0000 transparent transparent;
-    }
-    &__bar {
-      position: absolute;
-      left: 6px;
-      top: 7px;
-      width: 1px;
-      height: 3px;
-      background-color: black;
-    }
-    &__bottom {
-      position: absolute;
-      width: 3px;
-      height: 1px;
-      background-color: black;
-      top: 8px;
-      left: 5px;
-    }
-    &__bottom2 {
-      position: absolute;
-      width: 7px;
-      height: 2px;
-      background-color: black;
-      top: 9px;
-      left: 3px;
-    }
   }
 `;

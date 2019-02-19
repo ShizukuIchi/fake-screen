@@ -18,7 +18,8 @@ function Icon({
   component,
   onMouseDown,
   onDoubleClick,
-  image,
+  icon,
+  headerIcon,
   className,
   defaultSize,
   resizable,
@@ -36,7 +37,7 @@ function Icon({
       defaultSize,
       resizable,
       multiInstance,
-      image,
+      headerIcon,
     });
   }
   return (
@@ -45,7 +46,7 @@ function Icon({
       onMouseDown={_onMouseDown}
       onDoubleClick={_onDoubleClick}
     >
-      <img src={image} alt={title} className={`${className}__img`} />
+      <img src={icon} alt={title} className={`${className}__img`} />
       <div className={`${className}__text`}>{title}</div>
     </div>
   );

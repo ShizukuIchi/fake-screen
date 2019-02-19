@@ -74,11 +74,14 @@ function reducer(state, action = {}) {
     }
     case 'GAME_OVER': {
       const ceils = state.ceils.map(ceil => {
-        if (ceil.minesAround >= 0) return ceil;
-        return {
-          ...ceil,
-          state: 'open',
-        };
+        if (ceil.minesAround < 0) {
+          return {
+            ...ceil,
+            state: 'open',
+          };
+        } else {
+          return ceil;
+        }
       });
       ceils[action.payload].state = 'die';
       return {
