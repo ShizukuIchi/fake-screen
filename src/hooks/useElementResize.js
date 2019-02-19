@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react';
 
 function useElementResize(ref, options) {
-  const [offset, setOffset] = useState(options.offset);
-  const [size, setSize] = useState(options.size);
-  useCursor(ref, options.resizeThreshold, options.resizable);
+  const {
+    defaultOffset,
+    defaultSize,
+    boundary,
+    resizable = true,
+    resizeThreshold = 10,
+  } = options;
+  const [offset, setOffset] = useState(defaultOffset);
+  const [size, setSize] = useState(defaultSize);
+  useCursor(ref, resizeThreshold, resizable);
   useEffect(() => {
     const target = ref.current;
     if (!target) return;
-    const { resizable = true, resizeThreshold = 10, boundary } = options;
     const dragTarget = options.dragRef && options.dragRef.current;
     const previousOffset = { ...offset };
     const previousSize = { ...size };
@@ -256,11 +262,11 @@ function useElementResize(ref, options) {
       window.removeEventListener('mouseup', onResizeEndTopRight);
       window.removeEventListener('mouseup', onResizeEndBottomRight);
     };
-  }, []);
+  }, [boundary.top, boundary.right, boundary.bottom, boundary.left]);
   return { offset, size };
 }
 
-function useCursor(ref, threshold = 10, resizable = true) {
+function useCursor(ref, threshold, resizable) {
   useEffect(() => {
     const target = ref.current;
     if (!target || !resizable) return;

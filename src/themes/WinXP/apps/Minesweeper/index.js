@@ -84,11 +84,11 @@ function reducer(state, action = {}) {
       return {
         ...state,
         status: 'died',
-        ceils: ceils,
+        ceils,
       };
     }
     case 'WON': {
-      const ___ceils = state.ceils.map(ceil => {
+      const ceils = state.ceils.map(ceil => {
         if (ceil.minesAround >= 0) {
           return {
             ...ceil,
@@ -104,7 +104,7 @@ function reducer(state, action = {}) {
       return {
         ...state,
         status: 'won',
-        ceils: ___ceils,
+        ceils,
       };
     }
     default:

@@ -113,6 +113,9 @@ const Div = styled.div`
       height: 15px;
       margin-right: 1px;
     }
+    &__text {
+      line-height: 100%;
+    }
   }
   .ie__address_bar__buttons {
     display: flex;
@@ -131,6 +134,7 @@ const Div = styled.div`
     flex: 1;
     overflow: auto;
     border-left: 1px solid rgb(160, 160, 160);
+    background-color: #f1f1f1;
   }
   .ie__content__inner {
     min-height: 800px;

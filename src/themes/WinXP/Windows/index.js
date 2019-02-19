@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useWindowSize } from 'react-use';
 import useElementResize from 'src/hooks/useElementResize';
 import styled from 'styled-components';
 
@@ -27,14 +28,15 @@ function Window({
 }) {
   const dragRef = useRef(null);
   const ref = useRef(null);
+  const { width: windowWidth, height: windowHeight } = useWindowSize();
   const { offset, size } = useElementResize(ref, {
     dragRef,
-    offset: defaultOffset,
-    size: defaultSize,
+    defaultOffset,
+    defaultSize,
     boundary: {
       top: 1,
-      right: window.innerWidth - 1,
-      bottom: window.innerHeight - 31,
+      right: windowWidth - 1,
+      bottom: windowHeight - 31,
       left: 1,
     },
     resizable,
@@ -154,7 +156,7 @@ const StyledWindow = styled.div`
   .app__content {
     flex: 1;
     position: relative;
-    overflow: auto;
+    overflow: hidden;
   }
 `;
 
