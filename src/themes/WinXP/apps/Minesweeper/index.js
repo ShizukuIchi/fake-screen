@@ -11,7 +11,7 @@ import MineSweeperView from './MineSweeperView';
 //   columns: Number,
 //   mines: Number,
 //   ceils: Array {
-//     state: 'cover' || 'flag' || 'unknown' || 'open' || 'die',
+//     state: 'cover' || 'flag' || 'unknown' || 'open' || 'die' || 'misflagged',
 //     minesAround: Number (negative for mine itself)
 //   }
 // }
@@ -77,11 +77,14 @@ function reducer(state, action = {}) {
         if (ceil.minesAround < 0) {
           return {
             ...ceil,
-            state: 'open',
+            state: 'mine',
           };
-        } else {
-          return ceil;
-        }
+        } else if (ceil.state === 'flag') {
+          return {
+            ...ceil,
+            state: 'misflagged',
+          };
+        } else return ceil;
       });
       ceils[action.payload].state = 'die';
       return {

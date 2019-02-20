@@ -13,7 +13,8 @@ import open6 from 'src/assets/open6.png';
 import open7 from 'src/assets/open7.png';
 import open8 from 'src/assets/open8.png';
 import flag from 'src/assets/flag.png';
-import mine from 'src/assets/mine2.png';
+import mine from 'src/assets/mine-ceil.png';
+import mineDeath from 'src/assets/mine-death.png';
 import misFlagged from 'src/assets/misflagged.png';
 import question from 'src/assets/question.png';
 
@@ -55,21 +56,14 @@ function MineSweeperView({
           <button className="mine__face" onClick={() => onReset()}>
             {statusFace()}
           </button>
-          {/* <button onClick={() => onReset('Beginner')}>Be</button>
-          <button onClick={() => onReset('Intermediate')}>In</button>
-          <button onClick={() => onReset('Expert')}>Ex</button> */}
           <div className="mine__digits__outer">{seconds}</div>
         </div>
         <div className="mine__content__inner">
-          {status === 'died' ? (
-            <DeadCeils ceils={ceils} />
-          ) : (
-            <Ceils
-              ceils={ceils}
-              onLeftClickCeil={openCeil}
-              onRightClickCeil={changeCeilState}
-            />
-          )}
+          <Ceils
+            ceils={ceils}
+            onLeftClickCeil={openCeil}
+            onRightClickCeil={changeCeilState}
+          />
         </div>
       </section>
     </div>
@@ -83,15 +77,19 @@ function Ceils({ ceils, onLeftClickCeil, onRightClickCeil }) {
     const { state, minesAround } = ceil;
     switch (state) {
       case 'open':
-        return <img alt="mines-around" src={getTextImg(minesAround)} />;
+        return <MinesAround mines={minesAround} />;
       case 'unknown':
-        return <img alt="question" src={question} />;
+        return <Question />;
       case 'flag':
-        return <img alt="flag" src={flag} />;
+        return <Flag />;
+      case 'misflagged':
+        return <MisFlagged />;
+      case 'mine':
+        return <Mine />;
       case 'die':
-        return <img className="mine__die" alt="mine" src={mine} />;
+        return <Die />;
       default:
-        return null;
+        return <Cover />;
     }
   }
 
@@ -108,38 +106,44 @@ function Ceils({ ceils, onLeftClickCeil, onRightClickCeil }) {
   ));
 }
 
-function DeadCeils({ ceils }) {
-  function noop() {}
-  function renderContent(ceil) {
-    const { state, minesAround } = ceil;
-    switch (state) {
-      case 'open':
-        if (minesAround < 0) return <img alt="mine" src={mine} />;
-        else return <img alt="mines-around" src={getTextImg(minesAround)} />;
-      case 'unknown':
-        return <img alt="question" src={question} />;
-      case 'flag':
-        return <img alt="misFlagged" src={misFlagged} />;
-      case 'die':
-        return <img className="mine__die" alt="mine" src={mine} />;
-      default:
-        return null;
-    }
-  }
-  return ceils.map((ceil, index) => (
-    <Ceil
-      key={index}
-      state={ceil.state}
-      index={index}
-      onLeftClick={noop}
-      onRightClick={noop}
-    >
-      {renderContent(ceil)}
-    </Ceil>
-  ));
-}
-
-function Ceil({ state, children, index, onLeftClick, onRightClick }) {
+const Die = () => (
+  <>
+    <CeilBackgroundOpen />
+    <img alt="death" src={mineDeath} />
+  </>
+);
+const Cover = () => <CeilBackgroundCover />;
+const MisFlagged = () => (
+  <>
+    <CeilBackgroundOpen />
+    <img alt="misFlagged" src={misFlagged} />
+  </>
+);
+const Flag = () => (
+  <>
+    <CeilBackgroundCover />
+    <img alt="flag" src={flag} />
+  </>
+);
+const MinesAround = ({ mines }) => (
+  <>
+    <CeilBackgroundOpen />
+    <img alt="mines-around" src={getTextImg(mines)} />
+  </>
+);
+const Question = () => (
+  <>
+    <CeilBackgroundCover />
+    <img alt="question" src={question} />
+  </>
+);
+const Mine = () => (
+  <>
+    <CeilBackgroundOpen />
+    <img alt="mine" src={mine} />
+  </>
+);
+function Ceil({ children, index, onLeftClick, onRightClick }) {
   function _onLeftClick() {
     onLeftClick(index);
   }
@@ -147,31 +151,33 @@ function Ceil({ state, children, index, onLeftClick, onRightClick }) {
     e.preventDefault();
     onRightClick(index);
   }
-  function getLeftTopBorderStyle() {
-    if (state === 'open' || state === 'die')
-      return 'rgb(120, 120, 120) solid 1px';
-    return 'rgb(245, 245, 245) solid 2px';
-  }
-  function getBottomRightBorderStyle() {
-    if (state === 'open' || state === 'die') return 'transparent solid 0px';
-    return 'rgb(120, 120, 120) solid 2px';
-  }
   return (
     <div
       className="mine__ceil"
       onClick={_onLeftClick}
-      style={{
-        borderLeft: getLeftTopBorderStyle(),
-        borderTop: getLeftTopBorderStyle(),
-        borderRight: getBottomRightBorderStyle(),
-        borderBottom: getBottomRightBorderStyle(),
-      }}
       onContextMenu={_onRightClick}
     >
       {children}
     </div>
   );
 }
+
+const CeilBackgroundCover = styled.div`
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-left: rgb(245, 245, 245) solid 2px;
+  border-top: rgb(245, 245, 245) solid 2px;
+  border-right: rgb(120, 120, 120) solid 2px;
+  border-bottom: rgb(120, 120, 120) solid 2px;
+`;
+const CeilBackgroundOpen = styled.div`
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-left: rgb(120, 120, 120) solid 1px;
+  border-top: rgb(120, 120, 120) solid 1px;
+`;
 
 export default styled(MineSweeperView)`
   .mine__top-bar {
@@ -219,6 +225,9 @@ export default styled(MineSweeperView)`
   .mine__face {
     width: 25px;
     height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgb(180, 180, 180);
     outline: none;
   }
@@ -230,24 +239,13 @@ export default styled(MineSweeperView)`
     border-left: rgb(120, 120, 120) solid 3px;
     border-right: rgb(245, 245, 245) solid 3px;
     border-bottom: rgb(245, 245, 245) solid 3px;
-    font-size: 14px;
   }
   .mine__ceil {
-    text-align: center;
-    border-bottom: rgb(120, 120, 120) solid 2px;
-    border-right: rgb(120, 120, 120) solid 2px;
-    border-top: rgb(245, 245, 245) solid 2px;
-    border-left: rgb(245, 245, 245) solid 2px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
     position: relative;
-  }
-  .mine__die {
-    background-color: red;
-    width: 100%;
-    height: 100%;
-    line-height: 13px;
+    img {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+    }
   }
 `;
