@@ -74,12 +74,12 @@ function reducer(state, action = {}) {
     }
     case 'GAME_OVER': {
       const ceils = state.ceils.map(ceil => {
-        if (ceil.minesAround < 0) {
+        if (ceil.minesAround < 0 && ceil.state !== 'flag') {
           return {
             ...ceil,
             state: 'mine',
           };
-        } else if (ceil.state === 'flag') {
+        } else if (ceil.state === 'flag' && ceil.minesAround >= 0) {
           return {
             ...ceil,
             state: 'misflagged',

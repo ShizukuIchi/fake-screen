@@ -29,7 +29,11 @@ function MineSweeperView({
   seconds,
 }) {
   function remainMines() {
-    return mines - ceils.filter(ceil => ceil.state === 'flag').length;
+    return (
+      mines -
+      ceils.filter(ceil => ceil.state === 'flag' || ceil.state === 'misflagged')
+        .length
+    );
   }
   function statusFace() {
     switch (status) {
@@ -53,9 +57,11 @@ function MineSweeperView({
       <section className="mine__content">
         <div className="mine__score-bar">
           <div className="mine__digits__outer">{remainMines()}</div>
-          <button className="mine__face" onClick={() => onReset()}>
-            {statusFace()}
-          </button>
+          <div className="mine__face__outer">
+            <button className="mine__face" onClick={() => onReset()}>
+              {statusFace()}
+            </button>
+          </div>
           <div className="mine__digits__outer">{seconds}</div>
         </div>
         <div className="mine__content__inner">
@@ -168,15 +174,15 @@ const CeilBackgroundCover = styled.div`
   height: 16px;
   border-left: rgb(245, 245, 245) solid 2px;
   border-top: rgb(245, 245, 245) solid 2px;
-  border-right: rgb(120, 120, 120) solid 2px;
-  border-bottom: rgb(120, 120, 120) solid 2px;
+  border-right: rgb(128, 128, 128) solid 2px;
+  border-bottom: rgb(128, 128, 128) solid 2px;
 `;
 const CeilBackgroundOpen = styled.div`
   position: absolute;
   width: 16px;
   height: 16px;
-  border-left: rgb(120, 120, 120) solid 1px;
-  border-top: rgb(120, 120, 120) solid 1px;
+  border-left: rgb(128, 128, 128) solid 1px;
+  border-top: rgb(128, 128, 128) solid 1px;
 `;
 
 export default styled(MineSweeperView)`
@@ -184,7 +190,7 @@ export default styled(MineSweeperView)`
     display: flex;
     height: 20px;
     padding: 5px;
-    background-color: #dfded5;
+    background-color: rgb(236, 233, 216);
   }
   .mine__top-bar__text {
     line-height: 100%;
@@ -193,15 +199,15 @@ export default styled(MineSweeperView)`
   }
   .mine__content {
     border-left: rgb(245, 245, 245) solid 3px;
-    border-top: rgb(245, 245, 245) solid 3.5px;
-    background-color: rgb(180, 180, 180);
+    border-top: rgb(245, 245, 245) solid 3px;
+    background-color: rgb(192, 192, 192);
     padding: 5px;
   }
   .mine__score-bar {
     height: 34px;
     border-radius: 1px;
-    border-top: rgb(120, 120, 120) solid 2px;
-    border-left: rgb(120, 120, 120) solid 2px;
+    border-top: rgb(128, 128, 128) solid 2px;
+    border-left: rgb(128, 128, 128) solid 2px;
     border-right: rgb(245, 245, 245) solid 2px;
     border-bottom: rgb(245, 245, 245) solid 2px;
     margin-bottom: 5px;
@@ -222,21 +228,33 @@ export default styled(MineSweeperView)`
     line-height: 22px;
     text-align: right;
   }
+  .mine__face__outer {
+    width: 24px;
+    height: 24px;
+    border-top: 1px solid rgb(128, 128, 128);
+    border-left: 1px solid rgb(128, 128, 128);
+    border-radius: 2px;
+  }
   .mine__face {
-    width: 25px;
-    height: 25px;
+    border-radius: 2px;
+    height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(180, 180, 180);
+    background-color: rgb(192, 192, 192);
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(245, 245, 245) rgb(128, 128, 128) rgb(128, 128, 128)
+      rgb(245, 245, 245);
     outline: none;
   }
   .mine__content__inner {
     display: grid;
     grid-template-columns: repeat(${({ columns }) => columns}, 16px);
     grid-template-rows: repeat(${({ rows }) => rows}, 16px);
-    border-top: rgb(120, 120, 120) solid 3px;
-    border-left: rgb(120, 120, 120) solid 3px;
+    border-top: rgb(128, 128, 128) solid 3px;
+    border-left: rgb(128, 128, 128) solid 3px;
     border-right: rgb(245, 245, 245) solid 3px;
     border-bottom: rgb(245, 245, 245) solid 3px;
   }
