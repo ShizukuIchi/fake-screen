@@ -41,9 +41,11 @@ function InternetExplorer() {
         </div>
       </section>
       <div className="ie__content">
-        <div className="ie__content__inner">
-          <Google />
-        </div>
+        <iframe
+          className="ie__content__inner"
+          src={`${window.location.origin}/#/google`}
+          title="embed"
+        />
       </div>
       <footer className="ie__footer" />
     </Div>
@@ -135,13 +137,16 @@ const Div = styled.div`
     overflow: auto;
     border-left: 1px solid rgb(160, 160, 160);
     background-color: #f1f1f1;
+    position: relative;
   }
   .ie__content__inner {
-    min-height: 800px;
     position: relative;
+    min-height: 800px;
     min-width: 800px;
     width: 100%;
     height: 100%;
+    display: block;
+    border: 0;
   }
   .ie__footer {
     height: 20px;

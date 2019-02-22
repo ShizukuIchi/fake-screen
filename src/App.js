@@ -11,7 +11,7 @@ const App = () => {
   }, []);
   return (
     <Router>
-      <CloseButton />
+      {!window.frameElement && <CloseButton />}
       <Route exact path="/" component={Options} />
       <ThemeRoutes />
     </Router>
