@@ -118,7 +118,7 @@ function reducer(state, action = {}) {
   }
 }
 
-function MineSweeper({ defaultDifficulty }) {
+function MineSweeper({ defaultDifficulty, onClose }) {
   const [state, dispatch] = useReducer(
     reducer,
     getInitState(defaultDifficulty),
@@ -166,6 +166,7 @@ function MineSweeper({ defaultDifficulty }) {
   return (
     <MineSweeperView
       {...state}
+      onClose={onClose}
       changeCeilState={changeCeilState}
       openCeil={openCeil}
       onReset={onReset}

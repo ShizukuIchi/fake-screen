@@ -4,16 +4,19 @@ import useElementResize from 'src/hooks/useElementResize';
 import styled from 'styled-components';
 
 function Windows({ apps, onMouseDown, onCloseWindow }) {
-  return apps.map(app => (
-    <Window
-      key={app.id}
-      onMouseDown={onMouseDown.bind(null, app.id)}
-      onCloseWindow={onCloseWindow.bind(null, app.id)}
-      {...app}
-    >
-      <app.component />
-    </Window>
-  ));
+  return apps.map(
+    app =>
+      app && (
+        <Window
+          key={app.id}
+          onMouseDown={onMouseDown.bind(null, app.id)}
+          onCloseWindow={onCloseWindow.bind(null, app.id)}
+          {...app}
+        >
+          <app.component onClose={onCloseWindow.bind(null, app.id)} />
+        </Window>
+      ),
+  );
 }
 
 function Window({
@@ -72,7 +75,7 @@ const StyledWindow = styled.div`
   background-color: #0831d9;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   .header__bg {
@@ -98,6 +101,8 @@ const StyledWindow = styled.div`
     width: 100%;
     height: 30px;
     pointer-events: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
   .app__header {
     height: 27px;
@@ -130,7 +135,7 @@ const StyledWindow = styled.div`
     border-radius: 3px;
     background-color: #ff4701;
     &:hover {
-      background-color: #ff652a;
+      filter: brightness(150%);
     }
     &:before {
       content: '';
@@ -156,7 +161,7 @@ const StyledWindow = styled.div`
   .app__content {
     flex: 1;
     position: relative;
-    overflow: hidden;
+    height: calc(100% - 27px);
   }
 `;
 

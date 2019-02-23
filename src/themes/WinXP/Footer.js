@@ -48,6 +48,9 @@ const Container = styled.footer`
   }
   .footer__item {
     height: 100%;
+    &:hover {
+      filter: brightness(105%);
+    }
   }
 `;
 

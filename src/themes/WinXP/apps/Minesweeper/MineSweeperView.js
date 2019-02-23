@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import dead from 'src/assets/dead.png';
 import smile from 'src/assets/smile.png';
 import win from 'src/assets/win.png';
+import ohh from 'src/assets/ohh.png';
 import empty from 'src/assets/empty.png';
 import open1 from 'src/assets/open1.png';
 import open2 from 'src/assets/open2.png';
@@ -17,6 +18,7 @@ import mine from 'src/assets/mine-ceil.png';
 import mineDeath from 'src/assets/mine-death.png';
 import misFlagged from 'src/assets/misflagged.png';
 import question from 'src/assets/question.png';
+import checked from 'src/assets/checked.png';
 
 function MineSweeperView({
   ceils,
@@ -27,7 +29,13 @@ function MineSweeperView({
   mines,
   status,
   seconds,
+  onClose,
+  difficulty,
 }) {
+  const face = useRef(null);
+  const [mouseDown, setMouseDown] = useState(false);
+  const [openOption, setOpenOption] = useState(null);
+
   function remainMines() {
     return (
       mines -
@@ -36,6 +44,7 @@ function MineSweeperView({
     );
   }
   function statusFace() {
+    if (mouseDown) return <img alt="ohh" src={ohh} />;
     switch (status) {
       case 'died':
         return <img alt="dead" src={dead} />;
@@ -45,20 +54,182 @@ function MineSweeperView({
         return <img alt="smile" src={smile} />;
     }
   }
+  function onMouseDown(e) {
+    if (face.current.contains(e.target)) return;
+    setMouseDown(true);
+  }
+  function onMouseUp() {
+    setMouseDown(false);
+  }
+  function closeOption(e) {
+    if (e.target.closest('.mine__top-bar__text')) return;
+    setOpenOption(null);
+  }
+  function hoverOption(option) {
+    if (openOption) setOpenOption(option);
+  }
+  useEffect(() => {
+    window.addEventListener('mouseup', onMouseUp);
+    window.addEventListener('click', closeOption);
+    return () => {
+      window.removeEventListener('mouseup', onMouseUp);
+      window.removeEventListener('click', closeOption);
+    };
+  }, []);
   return (
     <div className={className}>
-      <div className="mine__top-bar">
-        {['Game', 'Help'].map(text => (
-          <div key={text} className="mine__top-bar__text">
-            {text}
+      <div className="mine__drop-downs">
+        <div
+          style={{ visibility: openOption === 'game' ? 'visible' : 'hidden' }}
+          className="mine__drop-down"
+        >
+          <div className="mine__drop-down__title">Game</div>
+          <div className="mine__drop-down__menu">
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check" />
+              <div className="mine__drop-down__text">New</div>
+              <span className="mine__drop-down__hot-key">F2</span>
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__separator" />
+            <div
+              className="mine__drop-down__row"
+              onClick={() => onReset('Beginner')}
+            >
+              <div className="mine__drop-down__check">
+                {difficulty === 'Beginner' && (
+                  <img src={checked} alt="checked" />
+                )}
+              </div>
+              <span>Beginner</span>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div
+              className="mine__drop-down__row"
+              onClick={() => onReset('Intermediate')}
+            >
+              <div className="mine__drop-down__check">
+                {difficulty === 'Intermediate' && (
+                  <img src={checked} alt="checked" />
+                )}
+              </div>
+              <span>Intermediate</span>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div
+              className="mine__drop-down__row"
+              onClick={() => onReset('Expert')}
+            >
+              <div className="mine__drop-down__check">
+                {difficulty === 'Expert' && <img src={checked} alt="checked" />}
+              </div>
+              <span>Expert</span>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check" />
+              <span>Custom...</span>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__separator" />
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check">
+                <img src={checked} alt="checked" />
+              </div>
+              <span>Marks (?)</span>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check">
+                <img src={checked} alt="checked" />
+              </div>
+              <span>Color</span>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check" />
+              <span>Sound</span>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__separator" />
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check" />
+              <span>Best Times...</span>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__separator" />
+
+            <div className="mine__drop-down__row" onClick={onClose}>
+              <div className="mine__drop-down__check" />
+              <span>Exit</span>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
           </div>
-        ))}
+        </div>
+        <div
+          style={{ visibility: openOption === 'help' ? 'visible' : 'hidden' }}
+          className="mine__drop-down"
+        >
+          <div className="mine__drop-down__title">Help</div>
+          <div className="mine__drop-down__menu">
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check" />
+              <div className="mine__drop-down__text">Contents</div>
+              <span className="mine__drop-down__hot-key">F1</span>
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check" />
+              <div className="mine__drop-down__text">Search for Help on...</div>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check" />
+              <div className="mine__drop-down__text">Using Help</div>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+            <div className="mine__drop-down__separator" />
+            <div className="mine__drop-down__row">
+              <div className="mine__drop-down__check" />
+              <div className="mine__drop-down__text">About Minesweeper...</div>
+              <span className="mine__drop-down__hot-key" />
+              <div className="mine__drop-down__arrow" />
+            </div>
+          </div>
+        </div>
       </div>
-      <section className="mine__content">
+      <div className="mine__top-bar">
+        <div
+          onClick={() => setOpenOption('game')}
+          onMouseOver={() => hoverOption('game')}
+          className="mine__top-bar__text"
+        >
+          Game
+        </div>
+        <div
+          onClick={() => setOpenOption('help')}
+          onMouseOver={() => hoverOption('help')}
+          className="mine__top-bar__text"
+        >
+          Help
+        </div>
+      </div>
+      <section className="mine__content" onMouseDown={onMouseDown}>
         <div className="mine__score-bar">
           <div className="mine__digits__outer">{remainMines()}</div>
           <div className="mine__face__outer">
-            <button className="mine__face" onClick={() => onReset()}>
+            <button ref={face} className="mine__face" onClick={() => onReset()}>
               {statusFace()}
             </button>
           </div>
@@ -186,16 +357,75 @@ const CeilBackgroundOpen = styled.div`
 `;
 
 export default styled(MineSweeperView)`
-  .mine__top-bar {
+  .mine__drop-downs {
+    position: absolute;
     display: flex;
     height: 20px;
-    padding: 5px;
+  }
+  .mine__drop-down {
+    position: relative;
+    z-index: 1;
+  }
+  .mine__drop-down__title {
+    padding: 0 5px;
+    height: 100%;
+    line-height: 20px;
+    font-size: 11px;
+    color: white;
+    background-color: #1660e8;
+  }
+  .mine__drop-down__menu {
+    background-color: white;
+    position: absolute;
+    box-shadow: 2px 2px 1px rgb(100, 100, 100);
+    border: 1px solid gray;
+    padding: 2px;
+    display: grid;
+    grid-template-columns: 18px auto auto 15px;
+    line-height: 18px;
+    font-size: 11px;
+  }
+  .mine__drop-down__row {
+    display: contents;
+    &:hover > * {
+      background: #e99f17;
+      filter: invert(100%);
+    }
+  }
+  .mine__drop-down__separator {
+    grid-column: 1 / 5;
+    height: 1px;
+    background-color: gray;
+    margin: 3px 1px;
+  }
+  .mine__drop-down__check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .mine__drop-down__arrow {
+  }
+  .mine__drop-down__hot-key {
+    padding-left: 5px;
+  }
+  .mine__drop-down__text {
+    white-space: nowrap;
+  }
+  .mine__top-bar {
+    position: relative;
+    display: flex;
+    height: 20px;
     background-color: rgb(236, 233, 216);
   }
   .mine__top-bar__text {
-    line-height: 100%;
+    padding: 0 5px;
+    height: 100%;
+    line-height: 20px;
     font-size: 11px;
-    margin-right: 8px;
+    &:hover {
+      color: white;
+      background-color: #0b61ff;
+    }
   }
   .mine__content {
     border-left: rgb(245, 245, 245) solid 3px;
@@ -248,6 +478,13 @@ export default styled(MineSweeperView)`
     border-color: rgb(245, 245, 245) rgb(128, 128, 128) rgb(128, 128, 128)
       rgb(245, 245, 245);
     outline: none;
+    &:active {
+      border-width: 1px;
+      border-color: rgb(128, 128, 128);
+      img {
+        transform: translate(1px, 1px);
+      }
+    }
   }
   .mine__content__inner {
     display: grid;

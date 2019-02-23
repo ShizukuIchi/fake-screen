@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Google } from 'src/themes';
 import ie from 'src/assets/ie-paper.png';
 
 function InternetExplorer() {
@@ -57,6 +56,7 @@ const Div = styled.div`
   width: 100%;
   position: relative;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   .ie__toolbar {
     background: rgb(200, 200, 200);

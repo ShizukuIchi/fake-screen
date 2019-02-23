@@ -33,12 +33,11 @@ const reducer = (state, action = {}) => {
             : 'desktop',
       };
     case 'FOCUS_APP':
+      const app = state.apps.find(app => app.id === action.payload);
+      const apps = [...state.apps.filter(app => app.id !== action.payload)];
       return {
         ...state,
-        apps: [
-          ...state.apps.filter(app => app.id !== action.payload),
-          state.apps.find(app => app.id === action.payload),
-        ],
+        apps: app ? [...apps, app] : apps,
         focusing: 'window',
       };
     case 'FOCUS_ICON':

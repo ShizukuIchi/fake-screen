@@ -82,9 +82,9 @@ const StyledIcon = styled(Icon)`
     }
   }
   &__text {
-    padding: 0 3px 3px;
+    padding: 0 3px 2px;
     background-color: ${({ isFocus, displayFocus }) =>
-      isFocus && displayFocus ? '#005aff' : 'transparent'};
+      isFocus && displayFocus ? '#0b61ff' : 'transparent'};
   }
   &__img__container {
     width: 30px;
