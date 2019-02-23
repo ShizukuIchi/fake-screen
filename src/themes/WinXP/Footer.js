@@ -13,7 +13,6 @@ function Footer({ onMouseDown }) {
 }
 
 const Container = styled.footer`
-  z-index: 2;
   height: 30px;
   background: linear-gradient(
     to bottom,

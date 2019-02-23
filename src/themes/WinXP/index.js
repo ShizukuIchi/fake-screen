@@ -114,12 +114,12 @@ function WinXP() {
         onDoubleClick={onDoubleClickIcon}
         displayFocus={state.focusing === 'icon'}
       />
-      <Footer onMouseDown={() => dispatch({ type: 'FOCUS_DESKTOP' })} />
       <Windows
         apps={state.apps}
         onMouseDown={onClickApp}
         onCloseWindow={onCloseApp}
       />
+      <Footer onMouseDown={() => dispatch({ type: 'FOCUS_DESKTOP' })} />
     </Container>
   );
 }

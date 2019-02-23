@@ -46,32 +46,57 @@ function Icon({
       onMouseDown={_onMouseDown}
       onDoubleClick={_onDoubleClick}
     >
-      <img src={icon} alt={title} className={`${className}__img`} />
-      <div className={`${className}__text`}>{title}</div>
+      <div className={`${className}__img__container`}>
+        <img src={icon} alt={title} className={`${className}__img`} />
+      </div>
+      <div className={`${className}__text__container`}>
+        <div className={`${className}__text`}>{title}</div>
+      </div>
     </div>
   );
 }
 
 const StyledIcon = styled(Icon)`
-  width: 60px;
-  margin: 60px;
+  width: 70px;
+  margin-top: 60px;
+  margin-left: 60px;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  &__text {
+  &__text__container {
     width: 100%;
     font-size: 10px;
     color: white;
-    text-shadow: 0.5px 0.5px 1px black;
-    text-align: center;
+    text-shadow: 0 1px 1px black;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+
+    &:before {
+      content: '';
+      width: 50%;
+    }
+    &:after {
+      content: '';
+      width: 50%;
+    }
+  }
+  &__text {
+    padding: 0 3px 3px;
     background-color: ${({ isFocus, displayFocus }) =>
       isFocus && displayFocus ? '#005aff' : 'transparent'};
+  }
+  &__img__container {
+    width: 30px;
+    height: 30px;
+    filter: ${({ isFocus, displayFocus }) =>
+      isFocus && displayFocus
+        ? 'sepia(100%) hue-rotate(170deg) brightness(60%) saturate(500%);'
+        : ''};
   }
   &__img {
     width: 30px;
     height: 30px;
-    background-color: transparent;
-    border: 0;
   }
 `;
 
