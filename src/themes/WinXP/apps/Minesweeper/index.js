@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useState } from 'react';
 import sampleSize from 'lodash.samplesize';
 
 import { Config } from './config';
-import MineSweeperView from './MineSweeperView';
+import MinesweeperView from './MinesweeperView';
 
 // state: {
 //   difficulty: 'Beginner' || 'Intermediate' || 'Expert',
@@ -12,7 +12,8 @@ import MineSweeperView from './MineSweeperView';
 //   mines: Number,
 //   ceils: Array {
 //     state: 'cover' || 'flag' || 'unknown' || 'open' || 'die' || 'misflagged',
-//     minesAround: Number (negative for mine itself)
+//     minesAround: Number (negative for mine itself),
+//     opening: true || false
 //   }
 // }
 
@@ -210,13 +211,15 @@ function MineSweeper({ defaultDifficulty, onClose }) {
     return safeCeils.length;
   }
   function openingCeil(index) {
+    if (['died', 'won'].includes(state.status)) return;
     dispatch({ type: 'OPENING_CEIL', payload: index });
   }
   function openingCeils(index) {
+    if (['died', 'won'].includes(state.status)) return;
     dispatch({ type: 'OPENING_CEILS', payload: index });
   }
   return (
-    <MineSweeperView
+    <MinesweeperView
       {...state}
       onClose={onClose}
       changeCeilState={changeCeilState}

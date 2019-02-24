@@ -93,16 +93,14 @@ function MineSweeperView({
       e.currentTarget.children,
       e.target.closest('.mine__ceil'),
     );
-    if (e.button === 2 && e.buttons === 2) {
+    if (e.button === 2 && e.buttons === 2 && index >= 0) {
       changeCeilState(index);
-    }
-    if (e.button === 0 && e.buttons === 1) {
+    } else if (e.button === 0 && e.buttons === 1) {
       setOpenBehavior({
         index,
         behavior: 'single',
       });
-    }
-    if (e.buttons === 3) {
+    } else if (e.buttons === 3) {
       setOpenBehavior({
         index,
         behavior: 'multi',
@@ -130,10 +128,10 @@ function MineSweeperView({
   }
   useEffect(() => {
     window.addEventListener('mouseup', onMouseUpContent);
-    window.addEventListener('click', closeOption);
+    window.addEventListener('mouseup', closeOption);
     return () => {
       window.removeEventListener('mouseup', onMouseUpContent);
-      window.removeEventListener('click', closeOption);
+      window.removeEventListener('mouseup', closeOption);
     };
   }, []);
   return (
