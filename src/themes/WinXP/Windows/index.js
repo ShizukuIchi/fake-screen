@@ -4,19 +4,16 @@ import useElementResize from 'src/hooks/useElementResize';
 import styled from 'styled-components';
 
 function Windows({ apps, onMouseDown, onCloseWindow }) {
-  return apps.map(
-    app =>
-      app && (
-        <Window
-          key={app.id}
-          onMouseDown={onMouseDown.bind(null, app.id)}
-          onCloseWindow={onCloseWindow.bind(null, app.id)}
-          {...app}
-        >
-          <app.component onClose={onCloseWindow.bind(null, app.id)} />
-        </Window>
-      ),
-  );
+  return apps.map(app => (
+    <Window
+      key={app.id}
+      onMouseDown={onMouseDown.bind(null, app.id)}
+      onCloseWindow={onCloseWindow.bind(null, app.id)}
+      {...app}
+    >
+      <app.component onClose={onCloseWindow.bind(null, app.id)} />
+    </Window>
+  ));
 }
 
 function Window({

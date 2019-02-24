@@ -55,7 +55,12 @@ function MineSweeperView({
     }
   }
   function onMouseDown(e) {
-    if (face.current.contains(e.target)) return;
+    if (
+      face.current.contains(e.target) ||
+      status === 'won' ||
+      status === 'died'
+    )
+      return;
     setMouseDown(true);
   }
   function onMouseUp() {
@@ -85,7 +90,7 @@ function MineSweeperView({
         >
           <div className="mine__drop-down__title">Game</div>
           <div className="mine__drop-down__menu">
-            <div className="mine__drop-down__row">
+            <div className="mine__drop-down__row" onClick={() => onReset()}>
               <div className="mine__drop-down__check" />
               <div className="mine__drop-down__text">New</div>
               <span className="mine__drop-down__hot-key">F2</span>
@@ -231,6 +236,7 @@ function MineSweeperView({
           <div className="mine__face__outer">
             <button ref={face} className="mine__face" onClick={() => onReset()}>
               {statusFace()}
+              <img alt="smile" src={smile} />
             </button>
           </div>
           <div className="mine__digits__outer">{seconds}</div>
@@ -357,6 +363,7 @@ const CeilBackgroundOpen = styled.div`
 `;
 
 export default styled(MineSweeperView)`
+  display: inline-block;
   .mine__drop-downs {
     position: absolute;
     display: flex;
@@ -478,12 +485,22 @@ export default styled(MineSweeperView)`
     border-color: rgb(245, 245, 245) rgb(128, 128, 128) rgb(128, 128, 128)
       rgb(245, 245, 245);
     outline: none;
-    &:active {
+    &:active:hover {
       border-width: 1px;
       border-color: rgb(128, 128, 128);
       img {
+        pointer-events: none;
         transform: translate(1px, 1px);
       }
+      img:nth-child(1) {
+        display: none;
+      }
+      img:nth-child(2) {
+        display: block;
+      }
+    }
+    img:nth-child(2) {
+      display: none;
     }
   }
   .mine__content__inner {
