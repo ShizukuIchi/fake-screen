@@ -113,6 +113,34 @@ function reducer(state, action = {}) {
         ceils,
       };
     }
+    case 'OPENING_CEIL': {
+      const ceil = state.ceils[action.payload];
+      const ceils = state.ceils.map(ceil => ({
+        ...ceil,
+        opening: false,
+      }));
+      ceils[action.payload] = { ...ceil, opening: true };
+      return {
+        ...state,
+        ceils,
+      };
+    }
+    case 'OPENING_CEILS': {
+      const indexes = getNearIndexes(action.payload, state.rows, state.columns);
+      const ceils = state.ceils.map(ceil => ({
+        ...ceil,
+        opening: false,
+      }));
+      [...indexes, action.payload].forEach(index => {
+        const ceil = { ...ceils[index] };
+        ceil.opening = true;
+        ceils[index] = ceil;
+      });
+      return {
+        ...state,
+        ceils,
+      };
+    }
     default:
       return state;
   }
@@ -149,6 +177,24 @@ function MineSweeper({ defaultDifficulty, onClose }) {
         console.log(state.status);
     }
   }
+  function openCeils(index) {
+    if (state.status !== 'started') return;
+    const indexes = getNearIndexes(index, state.rows, state.columns);
+    const nearCeils = indexes.map(i => state.ceils[i]);
+    if (
+      nearCeils.filter(ceil => ceil.state === 'flag').length !==
+      state.ceils[index].minesAround
+    )
+      return;
+    const mineIndex = indexes.find(
+      i => state.ceils[i].minesAround < 0 && state.ceils[i].state !== 'flag',
+    );
+    if (mineIndex) {
+      dispatch({ type: 'GAME_OVER', payload: mineIndex });
+    } else {
+      indexes.forEach(i => dispatch({ type: 'OPEN_CEIL', payload: i }));
+    }
+  }
   useEffect(() => {
     if (state.status === 'started' && checkRemains() === 0) {
       dispatch({ type: 'WON' });
@@ -163,14 +209,23 @@ function MineSweeper({ defaultDifficulty, onClose }) {
       .filter(ceil => ceil.minesAround >= 0);
     return safeCeils.length;
   }
+  function openingCeil(index) {
+    dispatch({ type: 'OPENING_CEIL', payload: index });
+  }
+  function openingCeils(index) {
+    dispatch({ type: 'OPENING_CEILS', payload: index });
+  }
   return (
     <MineSweeperView
       {...state}
       onClose={onClose}
       changeCeilState={changeCeilState}
       openCeil={openCeil}
+      openCeils={openCeils}
       onReset={onReset}
       seconds={seconds}
+      openingCeil={openingCeil}
+      openingCeils={openingCeils}
     />
   );
 }
@@ -182,6 +237,7 @@ function genGameConfig(config) {
     .map(_ => ({
       state: 'cover',
       minesAround: 0,
+      opening: false,
     }));
   return {
     rows,
@@ -236,6 +292,7 @@ function autoCeils(state, index) {
 }
 
 function getNearIndexes(index, rows, columns) {
+  if (index < 0 || index >= rows * columns) return [];
   const row = Math.floor(index / columns);
   const column = index % columns;
   return [
