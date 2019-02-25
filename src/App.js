@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
-import {
-  ThemeRoutes,
-  Options,
-  CloseButton,
-  GoogleAnalytics,
-} from 'src/components';
+import { Options, CloseButton, GoogleAnalytics, NoMatch } from 'src/components';
+import themes from 'src/themes';
 import { useNoScale } from 'src/hooks';
 
 const App = () => {
@@ -20,7 +16,14 @@ const App = () => {
       <Route component={GoogleAnalytics} />
       <Switch>
         <Route exact path="/" component={Options} />
-        <ThemeRoutes />
+        {themes.map(theme => (
+          <Route
+            key={theme.id}
+            path={`/${theme.name}`}
+            component={theme.component}
+          />
+        ))}
+        <Route component={NoMatch} />
       </Switch>
     </Router>
   );
