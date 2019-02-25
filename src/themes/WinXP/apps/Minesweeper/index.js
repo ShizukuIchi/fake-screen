@@ -276,6 +276,7 @@ function autoCeils(state, index) {
     ...ceil,
     walked: false,
   }));
+  if (index >= ceils.length || index < 0) return [];
   return walkCeils(index);
   function walkCeils(index) {
     const ceil = ceils[index];
