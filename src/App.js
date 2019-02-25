@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
-import { ThemeRoutes, Options, CloseButton } from 'src/components';
+import {
+  ThemeRoutes,
+  Options,
+  CloseButton,
+  GoogleAnalytics,
+} from 'src/components';
 import { useNoScale } from 'src/hooks';
 
 const App = () => {
@@ -12,8 +17,11 @@ const App = () => {
   return (
     <Router>
       {!window.frameElement && <CloseButton />}
-      <Route exact path="/" component={Options} />
-      <ThemeRoutes />
+      <Route component={GoogleAnalytics} />
+      <Switch>
+        <Route exact path="/" component={Options} />
+        <ThemeRoutes />
+      </Switch>
     </Router>
   );
 };
