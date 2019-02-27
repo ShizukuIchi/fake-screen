@@ -96,14 +96,14 @@ const StyledWindow = styled.div`
     left: 0px;
     top: 0px;
     width: 100%;
-    height: 30px;
+    height: 28px;
     pointer-events: none;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
   }
   .app__header {
-    height: 27px;
-    line-height: 27px;
+    height: 25px;
+    line-height: 25px;
     font-weight: 700;
     font-size: 12px;
     text-shadow: 1px 1px #000;
@@ -124,10 +124,10 @@ const StyledWindow = styled.div`
   }
   .app__header__close {
     position: absolute;
-    right: 2px;
-    top: 2px;
-    width: 22px;
-    height: 22px;
+    right: 1px;
+    top: 1px;
+    width: 21px;
+    height: 21px;
     border: 1px solid #fff;
     border-radius: 3px;
     background-color: #ff4701;

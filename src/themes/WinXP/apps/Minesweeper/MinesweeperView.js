@@ -19,6 +19,58 @@ import mineDeath from 'src/assets/mine-death.png';
 import misFlagged from 'src/assets/misflagged.png';
 import question from 'src/assets/question.png';
 import checked from 'src/assets/checked.png';
+import digit0 from 'src/assets/digit0.png';
+import digit1 from 'src/assets/digit1.png';
+import digit2 from 'src/assets/digit2.png';
+import digit3 from 'src/assets/digit3.png';
+import digit4 from 'src/assets/digit4.png';
+import digit5 from 'src/assets/digit5.png';
+import digit6 from 'src/assets/digit6.png';
+import digit7 from 'src/assets/digit7.png';
+import digit8 from 'src/assets/digit8.png';
+import digit9 from 'src/assets/digit9.png';
+import digit_ from 'src/assets/digit-.png';
+
+const digits = [
+  digit0,
+  digit1,
+  digit2,
+  digit3,
+  digit4,
+  digit5,
+  digit6,
+  digit7,
+  digit8,
+  digit9,
+];
+function renderDigits(number) {
+  let numberStr;
+  if (number < 0) {
+    const _number = -number % 100;
+    if (_number === 0) {
+      numberStr = '00';
+    } else if (_number < 10) {
+      numberStr = '0' + _number;
+    } else {
+      numberStr = String(_number);
+    }
+    return (
+      <>
+        <img src={digit_} alt="-" />
+        {numberStr.split('').map((n, i) => (
+          <img src={digits[n]} key={i} alt={n} />
+        ))}
+      </>
+    );
+  }
+
+  numberStr = number < 999 ? String(number) : '999';
+  if (number < 10) numberStr = '00' + numberStr;
+  else if (number < 100) numberStr = '0' + numberStr;
+  return numberStr
+    .split('')
+    .map((n, i) => <img key={i} src={digits[n]} alt={n} />);
+}
 
 function MineSweeperView({
   ceils,
@@ -282,14 +334,16 @@ function MineSweeperView({
       </div>
       <section className="mine__content" onMouseDown={onMouseDownContent}>
         <div className="mine__score-bar">
-          <div className="mine__digits__outer">{remainMines()}</div>
+          <div className="mine__digits__outer">
+            {renderDigits(remainMines())}
+          </div>
           <div className="mine__face__outer">
             <button ref={face} className="mine__face" onClick={() => onReset()}>
               {statusFace()}
               <img alt="smile" src={smile} />
             </button>
           </div>
-          <div className="mine__digits__outer">{seconds}</div>
+          <div className="mine__digits__outer">{renderDigits(seconds)}</div>
         </div>
         <div
           className="mine__content__inner"
@@ -489,15 +543,11 @@ export default styled(MineSweeperView)`
     padding: 3px 7px 3px 4px;
   }
   .mine__digits__outer {
-    background: black;
-    width: 42px;
-    height: 100%;
-    color: red;
+    width: 40px;
+    height: 24px;
     border-width: 0 1px 1px 0;
     border-style: solid;
     border-color: #fff;
-    font-size: 22px;
-    line-height: 22px;
     text-align: right;
   }
   .mine__face__outer {
