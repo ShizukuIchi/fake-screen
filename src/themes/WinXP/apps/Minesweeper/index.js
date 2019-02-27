@@ -85,7 +85,12 @@ function reducer(state, action = {}) {
             ...ceil,
             state: 'misflagged',
           };
-        } else return ceil;
+        } else {
+          return {
+            ...ceil,
+            opening: false,
+          };
+        }
       });
       ceils[action.payload].state = 'die';
       return {
@@ -182,9 +187,11 @@ function MineSweeper({ defaultDifficulty, onClose }) {
     if (state.status !== 'started') return;
     const indexes = getNearIndexes(index, state.rows, state.columns);
     const nearCeils = indexes.map(i => state.ceils[i]);
+    const ceil = state.ceils[index];
     if (
+      ceil.minesAround <= 0 ||
       nearCeils.filter(ceil => ceil.state === 'flag').length !==
-      state.ceils[index].minesAround
+        ceil.minesAround
     )
       return;
     const mineIndex = indexes.find(
@@ -276,7 +283,6 @@ function autoCeils(state, index) {
     ...ceil,
     walked: false,
   }));
-  if (index >= ceils.length || index < 0) return [];
   return walkCeils(index);
   function walkCeils(index) {
     const ceil = ceils[index];
