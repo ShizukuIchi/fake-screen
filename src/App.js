@@ -12,8 +12,12 @@ const App = () => {
   }, []);
   return (
     <Router>
-      {!window.frameElement && <CloseButton />}
-      <Route component={GoogleAnalytics} />
+      {!window.frameElement && (
+        <>
+          <CloseButton />
+          <Route component={GoogleAnalytics} />
+        </>
+      )}
       <Switch>
         <Route exact path="/" component={Options} />
         {themes.map(theme => (

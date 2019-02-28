@@ -118,7 +118,7 @@ function WinXP() {
         onMouseDown={onClickApp}
         onCloseWindow={onCloseApp}
       />
-      <Footer onMouseDown={() => dispatch({ type: 'FOCUS_DESKTOP' })} />
+      <Footer apps={state.apps} onClickApp={onClickApp} />
     </Container>
   );
 }

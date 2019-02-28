@@ -1,7 +1,10 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
 
 body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
 }
 
 *,

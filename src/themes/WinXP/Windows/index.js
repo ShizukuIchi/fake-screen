@@ -72,30 +72,31 @@ const StyledWindow = styled.div`
   background-color: #0831d9;
   display: flex;
   flex-direction: column;
-  /* overflow: hidden; */
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   .header__bg {
     background: linear-gradient(
       to bottom,
       #0058ee 0%,
-      #3f87ff 3%,
-      #2b80ff 7%,
-      #0352ff 10%,
-      #0345f1 14%,
-      #003ce9 17%,
-      #0634e3 24%,
-      #0635e5 48%,
-      #063af5 66%,
-      #164afe 76%,
-      #164afe 86%,
-      #0630fc 93%,
-      #0831d9 100%
+      #3593ff 4%,
+      #288eff 6%,
+      #127dff 8%,
+      #036ffc 10%,
+      #0262ee 14%,
+      #0057e5 20%,
+      #0054e3 24%,
+      #0055eb 56%,
+      #005bf5 66%,
+      #026afe 76%,
+      #026afe 86%,
+      #0061fc 92%,
+      #005cf7 94%,
+      #0044d1 100%
     );
     position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
     height: 28px;
     pointer-events: none;
     border-top-left-radius: 8px;
