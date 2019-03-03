@@ -18,8 +18,9 @@ const getTime = () => {
 };
 
 function Footer({ onClickApp, apps }) {
-  const length = apps.length;
-  const lastId = length ? apps[length - 1].id : -1;
+  const openedAppIds = apps.filter(app => !app.minimized).map(app => app.id);
+  const length = openedAppIds.length;
+  const lastId = length ? openedAppIds[length - 1] : -1;
   const [time, setTime] = useState(getTime());
   useEffect(() => {
     const timer = setInterval(() => setTime(getTime()));
@@ -32,15 +33,14 @@ function Footer({ onClickApp, apps }) {
         {[...apps]
           .sort((a, b) => a.id - b.id)
           .map(app => (
-            <div
-              onMouseDown={() => onClickApp(app.id)}
+            <FooterWindow
               key={app.id}
-              className={`footer__window ${
-                lastId === app.id ? 'focus' : 'cover'
-              }`}
-            >
-              {app.title}
-            </div>
+              id={app.id}
+              icon={app.headerIcon}
+              title={app.title}
+              onClick={onClickApp}
+              isFocus={lastId === app.id}
+            />
           ))}
       </div>
 
@@ -48,6 +48,21 @@ function Footer({ onClickApp, apps }) {
         <div className="footer__time">{time}</div>
       </div>
     </Container>
+  );
+}
+
+function FooterWindow({ id, icon, title, onClick, isFocus }) {
+  function _onClick() {
+    onClick(id);
+  }
+  return (
+    <div
+      onClick={_onClick}
+      className={`footer__window ${isFocus ? 'focus' : 'cover'}`}
+    >
+      <img className="footer__window__icon" src={icon} alt={title} />
+      {title}
+    </div>
   );
 }
 
@@ -95,15 +110,16 @@ const Container = styled.footer`
     border-radius: 2px;
     margin-right: 1px;
     margin-top: 2px;
-    padding-left: 10px;
+    padding-left: 8px;
     height: 22px;
-    line-height: 22px;
     font-size: 11px;
     background-color: #296bd8;
     box-shadow: 0 0 1px rgb(0, 0, 0, 0.5),
       inset 1px 1px 1px rgb(255, 255, 255, 0.2);
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
     /* border-top: 1px solid #2456b9; */
   }
   .footer__window.cover:hover {
@@ -120,12 +136,24 @@ const Container = styled.footer`
     border-bottom-right-radius: 50%;
     box-shadow: 2px 2px 3px rgb(255, 255, 255, 0.5);
   }
+  .footer__window.cover:hover:active {
+    background-color: #0f3d97;
+    box-shadow: inset 0 0 3px 1px rgb(0, 0, 0, 0.3);
+  }
   .footer__window.focus:hover {
     background-color: #2456b9;
+  }
+  .footer__window.focus:hover:active {
+    background-color: #0f3d97;
   }
   .footer__window.focus {
     background-color: #0f3d97;
     box-shadow: inset 0 0 3px 1px rgb(0, 0, 0, 0.3);
+  }
+  .footer__window__icon {
+    height: 15px;
+    width: 15px;
+    margin-right: 4px;
   }
   .footer__time {
     margin: 0 15px 0 20px;

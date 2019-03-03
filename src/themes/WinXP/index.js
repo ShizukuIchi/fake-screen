@@ -2,15 +2,15 @@ import React, { useReducer, useEffect, useRef } from 'react';
 import Footer from './Footer';
 import styled from 'styled-components';
 
-import { defaultAppSettings } from './apps';
+import { defaultIconState, defaultAppState } from './apps';
 import Windows from './Windows';
 import Icons from './Icons';
 
 const initState = {
-  apps: [],
-  nextAppID: 0,
+  apps: defaultAppState,
+  nextAppID: 1,
   focusing: 'window',
-  icons: defaultAppSettings,
+  icons: defaultIconState,
 };
 const reducer = (state, action = {}) => {
   switch (action.type) {
@@ -32,12 +32,31 @@ const reducer = (state, action = {}) => {
             ? 'icon'
             : 'desktop',
       };
-    case 'FOCUS_APP':
+    case 'FOCUS_APP': {
       const app = state.apps.find(app => app.id === action.payload);
-      const apps = [...state.apps.filter(app => app.id !== action.payload)];
+      const restApps = [...state.apps.filter(app => app.id !== action.payload)];
       return {
         ...state,
-        apps: app ? [...apps, app] : apps,
+        apps: app ? [...restApps, app] : restApps,
+        focusing: 'window',
+      };
+    }
+    case 'TOGGLE_APP':
+      const app = state.apps.find(app => app.id === action.payload);
+      const openedApps = state.apps.filter(app => !app.minimized);
+      const focusedApp = openedApps[openedApps.length - 1];
+      const restApps = [...state.apps.filter(app => app.id !== action.payload)];
+      return {
+        ...state,
+        apps: app
+          ? [
+              ...restApps,
+              {
+                ...app,
+                minimized: focusedApp && focusedApp.id === action.payload,
+              },
+            ]
+          : restApps,
         focusing: 'window',
       };
     case 'FOCUS_ICON':
@@ -78,17 +97,20 @@ function WinXP() {
   function onClickApp(id) {
     dispatch({ type: 'FOCUS_APP', payload: id });
   }
+  function onClickFooterApp(id) {
+    dispatch({ type: 'TOGGLE_APP', payload: id });
+  }
   function onCloseApp(id) {
     // delete if is focus
     if (state.apps[state.apps.length - 1].id === id) {
       dispatch({ type: 'DEL_APP', payload: id });
     }
   }
-  function onMouseDownIcon(payload) {
-    dispatch({ type: 'FOCUS_ICON', payload });
+  function onMouseDownIcon(component) {
+    dispatch({ type: 'FOCUS_ICON', payload: component });
   }
-  function onDoubleClickIcon(payload) {
-    dispatch({ type: 'ADD_APP', payload });
+  function onDoubleClickIcon(appSetting) {
+    dispatch({ type: 'ADD_APP', payload: appSetting });
   }
   useEffect(() => {
     const target = ref.current;
@@ -101,9 +123,6 @@ function WinXP() {
     return () => {
       window.removeEventListener('mousedown', onMouseDown);
     };
-  }, []);
-  useEffect(() => {
-    dispatch({ type: 'ADD_APP', payload: defaultAppSettings[1] });
   }, []);
   return (
     <Container ref={ref}>
@@ -118,7 +137,7 @@ function WinXP() {
         onMouseDown={onClickApp}
         onCloseWindow={onCloseApp}
       />
-      <Footer apps={state.apps} onClickApp={onClickApp} />
+      <Footer apps={state.apps} onClickApp={onClickFooterApp} />
     </Container>
   );
 }

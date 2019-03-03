@@ -25,6 +25,7 @@ function Window({
   defaultOffset,
   resizable,
   headerIcon,
+  minimized,
 }) {
   const dragRef = useRef(null);
   const ref = useRef(null);
@@ -48,6 +49,7 @@ function Window({
     <StyledWindow
       ref={ref}
       onMouseDown={onMouseDown}
+      show={!minimized}
       style={{
         transform: `translate(${x}px,${y}px)`,
         width: width ? `${width}px` : 'auto',
@@ -66,11 +68,10 @@ function Window({
 }
 
 const StyledWindow = styled.div`
-  display: inline-block;
+  display: ${({ show }) => (show ? 'flex' : 'none')};
   position: absolute;
   padding: 3px;
   background-color: #0831d9;
-  display: flex;
   flex-direction: column;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { appSettings } from 'src/themes/WinXP/apps';
+
 function Icons({ icons, onMouseDown, onDoubleClick, displayFocus }) {
   return icons.map(icon => (
     <StyledIcon
@@ -19,26 +21,14 @@ function Icon({
   onMouseDown,
   onDoubleClick,
   icon,
-  headerIcon,
   className,
-  defaultSize,
-  resizable,
-  defaultOffset,
-  multiInstance,
 }) {
   function _onMouseDown() {
     onMouseDown(component);
   }
   function _onDoubleClick() {
-    onDoubleClick({
-      component,
-      title,
-      defaultOffset,
-      defaultSize,
-      resizable,
-      multiInstance,
-      headerIcon,
-    });
+    const setting = appSettings.find(s => s.component === component);
+    onDoubleClick(setting);
   }
   return (
     <div
