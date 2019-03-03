@@ -71,10 +71,10 @@ const Container = styled.footer`
     flex: 1;
   }
   .footer__items.right {
-    background-color: #278fe3;
+    background-color: #0b77e9;
     flex-shrink: 0;
     box-shadow: inset 1px 1px #245edb, inset 0px -1px #245edb,
-      inset 2px 4px 2px #00bfe5, inset 0px -10px 10px #14a3bf;
+      inset 2px 4px 2px #45abe9, inset 0px -10px 10px #1e77c4;
   }
   .footer__items {
     display: flex;
@@ -93,16 +93,18 @@ const Container = styled.footer`
     flex-basis: 150px;
     color: #fff;
     border-radius: 2px;
+    margin-right: 1px;
+    margin-top: 2px;
     padding-left: 10px;
     height: 22px;
+    line-height: 22px;
     font-size: 11px;
-    line-height: 20px;
     background-color: #296bd8;
-    box-shadow: inset -1px -1px rgb(0, 0, 0, 0.5),
+    box-shadow: 0 0 1px rgb(0, 0, 0, 0.5),
       inset 1px 1px 1px rgb(255, 255, 255, 0.2);
     position: relative;
     overflow: hidden;
-    border-top: 1px solid #2456b9;
+    /* border-top: 1px solid #2456b9; */
   }
   .footer__window.cover:hover {
     background-color: #3a7ff1;
@@ -123,8 +125,7 @@ const Container = styled.footer`
   }
   .footer__window.focus {
     background-color: #0f3d97;
-    box-shadow: inset 1px 1px 2px rgb(0, 0, 0, 0.5),
-      inset -1px -1px rgb(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 3px 1px rgb(0, 0, 0, 0.3);
   }
   .footer__time {
     margin: 0 15px 0 20px;

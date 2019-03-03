@@ -84,7 +84,7 @@ const themes = [
   {
     id: getThemeID(),
     fullScreen: true,
-    displayName: 'Windows XP desktop',
+    displayName: 'Windows XP',
     name: 'winXP',
     imgUrl: 'https://i.imgur.com/qwPV3GW.jpg',
     isBackgroundDark: false,

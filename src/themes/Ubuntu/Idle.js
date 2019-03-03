@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ubuntuBackground from './ubuntu1804.jpg';
+import ubuntuBackground from 'src/assets/ubuntu1804.jpg';
 
 function Idle({ className, time, dateString }) {
   return (
