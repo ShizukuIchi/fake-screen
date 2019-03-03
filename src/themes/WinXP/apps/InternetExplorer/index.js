@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ie from 'src/assets/ie-paper.png';
+import { Google } from 'src/themes';
 
 function InternetExplorer() {
   return (
@@ -40,11 +41,9 @@ function InternetExplorer() {
         </div>
       </section>
       <div className="ie__content">
-        <iframe
-          className="ie__content__inner"
-          src={`${window.location.origin}/#/google`}
-          title="embed"
-        />
+        <div className="ie__content__inner">
+          <Google />
+        </div>
       </div>
       <footer className="ie__footer" />
     </Div>
@@ -145,8 +144,6 @@ const Div = styled.div`
     min-width: 800px;
     width: 100%;
     height: 100%;
-    display: block;
-    border: 0;
   }
   .ie__footer {
     height: 20px;
