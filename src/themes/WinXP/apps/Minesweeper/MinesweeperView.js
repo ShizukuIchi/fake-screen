@@ -449,7 +449,6 @@ const CeilBackgroundOpen = styled.div`
 `;
 
 export default styled(MineSweeperView)`
-  display: inline-block;
   img {
     pointer-events: none;
   }
@@ -514,7 +513,6 @@ export default styled(MineSweeperView)`
     background-color: rgb(236, 233, 216);
   }
   .mine__top-bar__text {
-    letter-spacing: -0.5px;
     padding: 0 5px;
     height: 100%;
     line-height: 20px;

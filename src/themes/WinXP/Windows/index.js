@@ -59,8 +59,12 @@ function Window({
       <div className="header__bg" />
       <header className="app__header" ref={dragRef}>
         <img src={headerIcon} alt={title} className="app__header__icon" />
-        <button className="app__header__close" onMouseUp={onCloseWindow} />
-        <span className="app__header__title">{title}</span>
+        <div className="app__header__title">{title}</div>
+        <div className="app__header__buttons">
+          <button className="app__header__minimize" />
+          <button className="app__header__maximize" />
+          <button className="app__header__close" onMouseUp={onCloseWindow} />
+        </div>
       </header>
       <div className="app__content">{children}</div>
     </StyledWindow>
@@ -110,7 +114,9 @@ const StyledWindow = styled.div`
     font-size: 12px;
     text-shadow: 1px 1px #000;
     color: white;
-    position: relative;
+    position: absolute;
+    left: 3px;
+    right: 3px;
     display: flex;
     align-items: center;
   }
@@ -123,19 +129,82 @@ const StyledWindow = styled.div`
   }
   .app__header__title {
     pointer-events: none;
+    width: calc(100% - 88px);
+    padding-right: 5px;
+    letter-spacing: 0.5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .app__header__buttons {
+    height: 22px;
+    display: flex;
+    align-items: center;
+    margin-top: -1px;
+    margin-right: 1px;
+    button {
+      margin-right: 1px;
+      position: relative;
+      width: 22px;
+      height: 22px;
+      border: 1px solid #fff;
+      border-radius: 3px;
+      &:hover {
+        filter: brightness(120%);
+      }
+    }
+  }
+  .app__header__minimize {
+    box-shadow: inset 0 -1px 2px 1px #4646ff;
+    background-image: radial-gradient(
+      circle at 90% 90%,
+      #0054e9 0%,
+      #2263d5 55%,
+      #4479e4 70%,
+      #a3bbec 90%,
+      white 100%
+    );
+    &:before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 13px;
+      height: 3px;
+      width: 8px;
+      background-color: white;
+    }
+  }
+  .app__header__maximize {
+    box-shadow: inset 0 -1px 2px 1px #4646ff;
+    background-image: radial-gradient(
+      circle at 90% 90%,
+      #0054e9 0%,
+      #2263d5 55%,
+      #4479e4 70%,
+      #a3bbec 90%,
+      white 100%
+    );
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 4px;
+      top: 4px;
+      box-shadow: inset 0 3px white, inset 0 0 0 1px white;
+      height: 12px;
+      width: 12px;
+    }
   }
   .app__header__close {
-    position: absolute;
-    right: 1px;
-    top: 1px;
-    width: 21px;
-    height: 21px;
-    border: 1px solid #fff;
-    border-radius: 3px;
-    background-color: #ff4701;
-    &:hover {
-      filter: brightness(150%);
-    }
+    box-shadow: inset 0 -1px 2px 1px #da4600;
+    background-image: radial-gradient(
+      circle at 90% 90%,
+      #cc4600 0%,
+      #dc6527 55%,
+      #cd7546 70%,
+      #ffccb2 90%,
+      white 100%
+    );
     &:before {
       content: '';
       position: absolute;
@@ -160,7 +229,8 @@ const StyledWindow = styled.div`
   .app__content {
     flex: 1;
     position: relative;
-    height: calc(100% - 27px);
+    margin-top: 25px;
+    height: calc(100% - 25px);
   }
 `;
 
