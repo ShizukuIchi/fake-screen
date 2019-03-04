@@ -10,11 +10,11 @@ function NoMatch() {
       const { clientX, clientY } = e;
       target.style[
         '-webkit-mask-image'
-      ] = `radial-gradient(circle at ${clientX}px ${clientY}px, rgba(0,0,0,0.0) 0, rgba(0,0,0,1) 40%)`;
+      ] = `radial-gradient(circle at ${clientX}px ${clientY}px, rgba(0,0,0,0.0) 0, rgba(0,0,0,1) 30%)`;
     }
     target.style[
       '-webkit-mask-image'
-    ] = `radial-gradient(circle at 50% 50%, rgba(0,0,0,0.0) 0, rgba(0,0,0,1) 40%)`;
+    ] = `radial-gradient(circle at 50% 50%, rgba(0,0,0,0.0) 0, rgba(0,0,0,1) 30%)`;
     target.addEventListener('mousemove', mouseMove);
     return () => {
       target.removeEventListener('mousemove', mouseMove);
@@ -26,10 +26,10 @@ function NoMatch() {
       <Background>
         <div className="text">404</div>
         <div className="text">Not Found</div>
-        <div className="hint">{'<'}- Home Page</div>
+        <div className="hint">{'<'} Home Page</div>
       </Background>
       <Shadow ref={shadow}>
-        <div className="hint">{'<'}- Home Page</div>
+        <div className="hint">{'<'} Home Page</div>
       </Shadow>
     </>
   );

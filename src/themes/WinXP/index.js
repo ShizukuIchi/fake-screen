@@ -8,7 +8,7 @@ import Icons from './Icons';
 
 const initState = {
   apps: defaultAppState,
-  nextAppID: 1,
+  nextAppID: defaultAppState.length,
   focusing: 'window',
   icons: defaultIconState,
 };
@@ -37,28 +37,30 @@ const reducer = (state, action = {}) => {
       const restApps = [...state.apps.filter(app => app.id !== action.payload)];
       return {
         ...state,
-        apps: app ? [...restApps, app] : restApps,
+        apps: app ? [...restApps, { ...app, minimized: false }] : restApps,
         focusing: 'window',
       };
     }
-    case 'TOGGLE_APP':
+    case 'MINIMIZE_APP': {
       const app = state.apps.find(app => app.id === action.payload);
-      const openedApps = state.apps.filter(app => !app.minimized);
-      const focusedApp = openedApps[openedApps.length - 1];
-      const restApps = [...state.apps.filter(app => app.id !== action.payload)];
+      const restApps = state.apps.filter(app => app.id !== action.payload);
+      return {
+        ...state,
+        apps: app ? [...restApps, { ...app, minimized: true }] : restApps,
+        focusing: 'window',
+      };
+    }
+    case 'TOGGLE_MAXIMIZE_APP': {
+      const app = state.apps.find(app => app.id === action.payload);
+      const restApps = state.apps.filter(app => app.id !== action.payload);
       return {
         ...state,
         apps: app
-          ? [
-              ...restApps,
-              {
-                ...app,
-                minimized: focusedApp && focusedApp.id === action.payload,
-              },
-            ]
+          ? [...restApps, { ...app, maximized: !app.maximized }]
           : restApps,
         focusing: 'window',
       };
+    }
     case 'FOCUS_ICON':
       const icons = state.icons.map(icon => {
         if (icon.component === action.payload)
@@ -94,15 +96,28 @@ const reducer = (state, action = {}) => {
 function WinXP() {
   const ref = useRef(null);
   const [state, dispatch] = useReducer(reducer, initState);
-  function onClickApp(id) {
+  function onFocusApp(id) {
     dispatch({ type: 'FOCUS_APP', payload: id });
   }
+  function onMaximizeWindow(id) {
+    if (getFocusedAppId() === id && state.focusing === 'window') {
+      dispatch({ type: 'TOGGLE_MAXIMIZE_APP', payload: id });
+    }
+  }
+  function onMinimizeWindow(id) {
+    if (getFocusedAppId() === id && state.focusing === 'window') {
+      dispatch({ type: 'MINIMIZE_APP', payload: id });
+    }
+  }
   function onClickFooterApp(id) {
-    dispatch({ type: 'TOGGLE_APP', payload: id });
+    if (getFocusedAppId() === id) {
+      dispatch({ type: 'MINIMIZE_APP', payload: id });
+    } else {
+      dispatch({ type: 'FOCUS_APP', payload: id });
+    }
   }
   function onCloseApp(id) {
-    // delete if is focus
-    if (state.apps[state.apps.length - 1].id === id) {
+    if (getFocusedAppId() === id && state.focusing === 'window') {
       dispatch({ type: 'DEL_APP', payload: id });
     }
   }
@@ -111,6 +126,10 @@ function WinXP() {
   }
   function onDoubleClickIcon(appSetting) {
     dispatch({ type: 'ADD_APP', payload: appSetting });
+  }
+  function getFocusedAppId() {
+    const lastIndex = state.apps.map(app => app.minimized).lastIndexOf(false);
+    return lastIndex >= 0 ? state.apps[lastIndex].id : lastIndex;
   }
   useEffect(() => {
     const target = ref.current;
@@ -134,8 +153,10 @@ function WinXP() {
       />
       <Windows
         apps={state.apps}
-        onMouseDown={onClickApp}
-        onCloseWindow={onCloseApp}
+        onMouseDown={onFocusApp}
+        onClose={onCloseApp}
+        onMinimize={onMinimizeWindow}
+        onMaximize={onMaximizeWindow}
       />
       <Footer apps={state.apps} onClickApp={onClickFooterApp} />
     </Container>

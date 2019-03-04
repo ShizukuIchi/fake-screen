@@ -3,30 +3,50 @@ import { useWindowSize } from 'react-use';
 import useElementResize from 'src/hooks/useElementResize';
 import styled from 'styled-components';
 
-function Windows({ apps, onMouseDown, onCloseWindow }) {
+function Windows({ apps, onMouseDown, onClose, onMinimize, onMaximize }) {
   return apps.map(app => (
-    <Window
+    <StyledWindow
+      show={!app.minimized}
       key={app.id}
-      onMouseDown={onMouseDown.bind(null, app.id)}
-      onCloseWindow={onCloseWindow.bind(null, app.id)}
+      id={app.id}
+      onMouseDown={onMouseDown}
+      onMouseUpClose={onClose}
+      onMouseUpMinimize={onMinimize}
+      onMouseUpMaximize={onMaximize}
       {...app}
     >
-      <app.component onClose={onCloseWindow.bind(null, app.id)} />
-    </Window>
+      <app.component onClose={onClose.bind(null, app.id)} />
+    </StyledWindow>
   ));
 }
 
 function Window({
   children,
-  onCloseWindow,
+  id,
   onMouseDown,
+  onMouseUpClose,
+  onMouseUpMinimize,
+  onMouseUpMaximize,
   title,
   defaultSize,
   defaultOffset,
   resizable,
   headerIcon,
-  minimized,
+  maximized,
+  className,
 }) {
+  function _onMouseDown() {
+    onMouseDown(id);
+  }
+  function _onMouseUpClose() {
+    onMouseUpClose(id);
+  }
+  function _onMouseUpMinimize() {
+    onMouseUpMinimize(id);
+  }
+  function _onMouseUpMaximize() {
+    if (resizable) onMouseUpMaximize(id);
+  }
   const dragRef = useRef(null);
   const ref = useRef(null);
   const { width: windowWidth, height: windowHeight } = useWindowSize();
@@ -43,13 +63,23 @@ function Window({
     resizable,
     resizeThreshold: 10,
   });
-  const { width, height } = size;
-  const { x, y } = offset;
+  let width, height, x, y;
+  if (maximized) {
+    width = windowWidth + 6;
+    height = windowHeight - 24;
+    x = -3;
+    y = -3;
+  } else {
+    width = size.width;
+    height = size.height;
+    x = offset.x;
+    y = offset.y;
+  }
   return (
-    <StyledWindow
+    <div
+      className={className}
       ref={ref}
-      onMouseDown={onMouseDown}
-      show={!minimized}
+      onMouseDown={_onMouseDown}
       style={{
         transform: `translate(${x}px,${y}px)`,
         width: width ? `${width}px` : 'auto',
@@ -61,17 +91,23 @@ function Window({
         <img src={headerIcon} alt={title} className="app__header__icon" />
         <div className="app__header__title">{title}</div>
         <div className="app__header__buttons">
-          <button className="app__header__minimize" />
-          <button className="app__header__maximize" />
-          <button className="app__header__close" onMouseUp={onCloseWindow} />
+          <button
+            className="app__header__minimize"
+            onMouseUp={_onMouseUpMinimize}
+          />
+          <button
+            className="app__header__maximize"
+            onMouseUp={_onMouseUpMaximize}
+          />
+          <button className="app__header__close" onMouseUp={_onMouseUpClose} />
         </div>
       </header>
       <div className="app__content">{children}</div>
-    </StyledWindow>
+    </div>
   );
 }
 
-const StyledWindow = styled.div`
+const StyledWindow = styled(Window)`
   display: ${({ show }) => (show ? 'flex' : 'none')};
   position: absolute;
   padding: 3px;
@@ -128,8 +164,8 @@ const StyledWindow = styled.div`
     margin-right: 3px;
   }
   .app__header__title {
+    flex: 1;
     pointer-events: none;
-    width: calc(100% - 88px);
     padding-right: 5px;
     letter-spacing: 0.5px;
     overflow: hidden;

@@ -4,15 +4,19 @@ import styled from 'styled-components';
 import { appSettings } from 'src/themes/WinXP/apps';
 
 function Icons({ icons, onMouseDown, onDoubleClick, displayFocus }) {
-  return icons.map(icon => (
-    <StyledIcon
-      key={icon.component}
-      {...icon}
-      displayFocus={displayFocus}
-      onMouseDown={onMouseDown}
-      onDoubleClick={onDoubleClick}
-    />
-  ));
+  return (
+    <IconsContainer>
+      {icons.map(icon => (
+        <StyledIcon
+          key={icon.component}
+          {...icon}
+          displayFocus={displayFocus}
+          onMouseDown={onMouseDown}
+          onDoubleClick={onDoubleClick}
+        />
+      ))}
+    </IconsContainer>
+  );
 }
 
 function Icon({
@@ -46,11 +50,16 @@ function Icon({
   );
 }
 
-const StyledIcon = styled(Icon)`
-  width: 70px;
+const IconsContainer = styled.div`
+  position: absolute;
   margin-top: 60px;
   margin-left: 60px;
-  display: inline-flex;
+`;
+
+const StyledIcon = styled(Icon)`
+  width: 70px;
+  margin-bottom: 30px;
+  display: flex;
   flex-direction: column;
   align-items: center;
   &__text__container {

@@ -6,7 +6,6 @@ function GoogleAnalytics({ location }) {
     ga.initialize('UA-135148027-1');
   }, []);
   useEffect(() => {
-    if (window.location.hostname === 'localhost') return;
     ga.set({ page: location.pathname });
     ga.pageview(location.pathname);
   }, [location.pathname]);

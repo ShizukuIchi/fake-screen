@@ -6,6 +6,23 @@ import mine from 'src/assets/mine.png';
 
 export const defaultAppState = [
   {
+    title: 'Internet Explorer',
+    component: InternetExplorer,
+    defaultSize: {
+      width: 700,
+      height: 500,
+    },
+    defaultOffset: {
+      x: 200,
+      y: 200,
+    },
+    resizable: true,
+    headerIcon: iePaper,
+    minimized: false,
+    maximized: false,
+    id: 0,
+  },
+  {
     component: Minesweeper,
     title: 'Minesweeper',
     defaultSize: {
@@ -20,7 +37,7 @@ export const defaultAppState = [
     headerIcon: mine,
     minimized: false,
     maximized: false,
-    id: 0,
+    id: 1,
   },
 ];
 
