@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect, useRef } from 'react';
-import Footer from './Footer';
+import Footer from 'src/themes/WinXP/Footer';
 import styled from 'styled-components';
 
 import { defaultIconState, defaultAppState } from './apps';
@@ -131,6 +131,7 @@ function WinXP() {
     const lastIndex = state.apps.map(app => app.minimized).lastIndexOf(false);
     return lastIndex >= 0 ? state.apps[lastIndex].id : lastIndex;
   }
+
   useEffect(() => {
     const target = ref.current;
     if (!target) return;
@@ -158,7 +159,11 @@ function WinXP() {
         onMinimize={onMinimizeWindow}
         onMaximize={onMaximizeWindow}
       />
-      <Footer apps={state.apps} onClickApp={onClickFooterApp} />
+      <Footer
+        apps={state.apps}
+        onClickApp={onClickFooterApp}
+        focusedAppId={getFocusedAppId()}
+      />
     </Container>
   );
 }

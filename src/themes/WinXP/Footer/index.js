@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import FooterMenu from './FooterMenu';
 import startButton from 'src/assets/start.png';
 
 const getTime = () => {
@@ -17,19 +18,22 @@ const getTime = () => {
   return `${hour}:${min} ${hourPostFix}`;
 };
 
-function Footer({ onClickApp, apps }) {
-  const openedAppIds = apps.filter(app => !app.minimized).map(app => app.id);
-  const length = openedAppIds.length;
-  const lastId = length ? openedAppIds[length - 1] : -1;
-  const [time, setTime] = useState(getTime());
+function Footer({ onClickApp, apps, focusedAppId }) {
+  const [time, setTime] = useState(getTime);
   useEffect(() => {
-    const timer = setInterval(() => setTime(getTime()));
+    const timer = setInterval(() => {
+      const newTime = getTime();
+      newTime !== time && setTime(getTime());
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
   return (
     <Container>
       <div className="footer__items left">
-        <img src={startButton} alt="" className="footer__start" />
+        <div className="footer__start__menu">
+          <FooterMenu />
+        </div>
+        <img src={startButton} alt="start" className="footer__start" />
         {[...apps]
           .sort((a, b) => a.id - b.id)
           .map(app => (
@@ -39,7 +43,7 @@ function Footer({ onClickApp, apps }) {
               icon={app.headerIcon}
               title={app.title}
               onClick={onClickApp}
-              isFocus={lastId === app.id}
+              isFocus={focusedAppId === app.id}
             />
           ))}
       </div>
@@ -101,6 +105,12 @@ const Container = styled.footer`
     &:hover {
       filter: brightness(105%);
     }
+  }
+  .footer__start__menu {
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    background-color: #fff;
   }
   .footer__window {
     flex-grow: 0;
