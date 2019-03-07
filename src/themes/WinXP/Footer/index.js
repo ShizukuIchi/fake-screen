@@ -20,6 +20,10 @@ const getTime = () => {
 
 function Footer({ onClickApp, apps, focusedAppId }) {
   const [time, setTime] = useState(getTime);
+  const [menuOn, setMenuOn] = useState(true);
+  function toggleMenu() {
+    setMenuOn(on => !on);
+  }
   useEffect(() => {
     const timer = setInterval(() => {
       const newTime = getTime();
@@ -30,10 +34,13 @@ function Footer({ onClickApp, apps, focusedAppId }) {
   return (
     <Container>
       <div className="footer__items left">
-        <div className="footer__start__menu">
-          <FooterMenu />
-        </div>
-        <img src={startButton} alt="start" className="footer__start" />
+        <div className="footer__start__menu">{menuOn && <FooterMenu />}</div>
+        <img
+          src={startButton}
+          alt="start"
+          className="footer__start"
+          onMouseDown={toggleMenu}
+        />
         {[...apps]
           .sort((a, b) => a.id - b.id)
           .map(app => (
@@ -110,7 +117,6 @@ const Container = styled.footer`
     position: absolute;
     left: 0;
     bottom: 100%;
-    background-color: #fff;
   }
   .footer__window {
     flex-grow: 0;

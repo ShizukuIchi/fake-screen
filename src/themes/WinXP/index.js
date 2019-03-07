@@ -92,7 +92,6 @@ const reducer = (state, action = {}) => {
       return state;
   }
 };
-
 function WinXP() {
   const ref = useRef(null);
   const [state, dispatch] = useReducer(reducer, initState);

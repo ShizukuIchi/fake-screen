@@ -85,6 +85,7 @@ const StyledSubMenu = styled(SubMenu)`
   }
   &-text {
     font-size: 11px;
+    white-space: nowrap;
   }
   &-arrow {
     position: absolute;
