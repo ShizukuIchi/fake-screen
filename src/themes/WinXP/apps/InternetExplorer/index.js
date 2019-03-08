@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ie from 'src/assets/ie-paper.png';
+import ie from 'src/assets/internetExplorer/ie-paper.png';
 import { Google } from 'src/themes';
 
 function InternetExplorer() {

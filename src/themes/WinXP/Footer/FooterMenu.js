@@ -1,8 +1,33 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ie from 'src/assets/ie.ico';
+import ie from 'src/assets/internetExplorer/ie.ico';
+import mine from 'src/assets/minesweeper/mine-icon.png';
+import setAccess from 'src/assets/windowsIcons/set-access.png';
+import outlook from 'src/assets/windowsIcons/outlook.png';
+import mediaPlayer from 'src/assets/windowsIcons/media-player.png';
+import messenger from 'src/assets/windowsIcons/messenger.png';
+import tour from 'src/assets/windowsIcons/tour.png';
+import transfer from 'src/assets/windowsIcons/transfer.png';
+import calculator from 'src/assets/windowsIcons/calculator.png';
+import documents from 'src/assets/windowsIcons/documents.ico';
+import recentDocuments from 'src/assets/windowsIcons/recent-documents.ico';
+import pictures from 'src/assets/windowsIcons/pictures.ico';
+import music from 'src/assets/windowsIcons/music.ico';
+import computer from 'src/assets/windowsIcons/computer.ico';
+import controlPanel from 'src/assets/windowsIcons/control-panel.ico';
+import connect from 'src/assets/windowsIcons/connect.ico';
+import printer from 'src/assets/windowsIcons/printer.png';
+import help from 'src/assets/windowsIcons/help.ico';
+import search from 'src/assets/windowsIcons/search.ico';
+import run from 'src/assets/windowsIcons/run.ico';
+import lock from 'src/assets/windowsIcons/lock.ico';
+import user from 'src/assets/windowsIcons/user.png';
+import shut from 'src/assets/windowsIcons/shut.png';
+
 import empty from 'src/assets/empty.png';
+
 import SubMenu from 'src/components/SubMenu';
+
 import { AllPrograms, ConnectTo, MyRecentDocuments } from './FooterMenuData';
 
 function FooterMenu({ className }) {
@@ -15,7 +40,7 @@ function FooterMenu({ className }) {
   return (
     <div className={className}>
       <header>
-        <img className="header__img" src={ie} alt="avatar" />
+        <img className="header__img" src={user} alt="avatar" />
         <span className="header__text">User</span>
       </header>
       <section className="menu" onMouseOver={onMouseOver}>
@@ -24,33 +49,39 @@ function FooterMenu({ className }) {
           <Item text="Internet" icon={ie}>
             <div className="menu__item__subtext">Internet Explorer</div>
           </Item>
-          <Item text="E-mail" icon={ie}>
+          <Item text="E-mail" icon={outlook}>
             <div className="menu__item__subtext">Outlook Express</div>
           </Item>
           <div className="menu__separator" />
           <Items
             items={[
-              { icon: ie, text: 'Minesweeper' },
-              { icon: ie, text: 'Windows Media Player' },
-              { icon: ie, text: 'Windows Messenger' },
-              { icon: ie, text: 'Tour Windows XP' },
-              { icon: ie, text: 'Files and Settings Transfer Wizard' },
-              { icon: ie, text: 'Calculator' },
+              { icon: mine, text: 'Minesweeper' },
+              { icon: mediaPlayer, text: 'Windows Media Player' },
+              { icon: messenger, text: 'Windows Messenger' },
+              { icon: tour, text: 'Tour Windows XP' },
+              { icon: transfer, text: 'Files and Settings Transfer Wizard' },
+              { icon: calculator, text: 'Calculator' },
             ]}
           />
           <div style={{ flex: 1 }} />
           <div className="menu__separator" />
           <Item text="All Programs" icon={empty}>
             {hovering === 'All Programs' && (
-              <span style={{ position: 'relative' }}>
+              <span
+                style={{
+                  position: 'relative',
+                  display: 'inline-block',
+                  height: '100%',
+                }}
+              >
                 <SubMenu data={AllPrograms} />
               </span>
             )}
           </Item>
         </div>
         <div className="menu__right">
-          <Item text="My Documents" icon={ie} />
-          <Item text="My Recent Documents" icon={ie}>
+          <Item text="My Documents" icon={documents} />
+          <Item text="My Recent Documents" icon={recentDocuments}>
             {hovering === 'My Recent Documents' && (
               <span style={{ position: 'relative' }}>
                 <SubMenu data={MyRecentDocuments} />
@@ -59,43 +90,43 @@ function FooterMenu({ className }) {
           </Item>
           <Items
             items={[
-              { icon: ie, text: 'My Pictures' },
-              { icon: ie, text: 'My Music' },
-              { icon: ie, text: 'My Computer' },
+              { icon: pictures, text: 'My Pictures' },
+              { icon: music, text: 'My Music' },
+              { icon: computer, text: 'My Computer' },
             ]}
           />
           <div className="menu__separator" />
           <Items
             items={[
-              { icon: ie, text: 'Control Panel' },
-              { icon: ie, text: 'Set Program Access and Defaults' },
+              { icon: controlPanel, text: 'Control Panel' },
+              { icon: setAccess, text: 'Set Program Access and Defaults' },
             ]}
           />
-          <Item text="Connect To" icon={ie}>
+          <Item text="Connect To" icon={connect}>
             {hovering === 'Connect To' && (
               <span style={{ position: 'relative' }}>
                 <SubMenu data={ConnectTo} />
               </span>
             )}
           </Item>
-          <Item text="Printers and Faxes" icon={ie} />
+          <Item text="Printers and Faxes" icon={printer} />
           <div className="menu__separator" />
           <Items
             items={[
-              { icon: ie, text: 'Help and Support' },
-              { icon: ie, text: 'Search' },
-              { icon: ie, text: 'Run...' },
+              { icon: help, text: 'Help and Support' },
+              { icon: search, text: 'Search' },
+              { icon: run, text: 'Run...' },
             ]}
           />
         </div>
       </section>
       <footer>
         <div className="footer__item">
-          <img className="footer__item__img" src={ie} alt="" />
+          <img className="footer__item__img" src={lock} alt="" />
           <span>Log Off</span>
         </div>
         <div className="footer__item">
-          <img className="footer__item__img" src={ie} alt="" />
+          <img className="footer__item__img" src={shut} alt="" />
           <span>Turn Off Computer</span>
         </div>
       </footer>
@@ -153,9 +184,11 @@ export default styled(FooterMenu)`
     padding: 5px;
   }
   .header__img {
-    width: 40px;
-    height: 40px;
-    margin-right: 3px;
+    width: 42px;
+    height: 42px;
+    margin-right: 5px;
+    border-radius: 3px;
+    border: 2px solid rgb(222, 222, 222, 0.8);
   }
   .header__text {
     font-size: 14px;
@@ -177,6 +210,7 @@ export default styled(FooterMenu)`
     align-items: center;
   }
   .footer__item__img {
+    border-radius: 3px;
     margin-right: 2px;
     width: 22px;
     height: 22px;

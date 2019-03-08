@@ -1,8 +1,8 @@
 import InternetExplorer from './InternetExplorer';
 import Minesweeper from './Minesweeper';
-import iePaper from 'src/assets/ie-paper.png';
-import ie from 'src/assets/ie.ico';
-import mine from 'src/assets/mine.png';
+import iePaper from 'src/assets/internetExplorer/ie-paper.png';
+import ie from 'src/assets/internetExplorer/ie.ico';
+import mine from 'src/assets/minesweeper/mine-icon.png';
 
 export const defaultAppState = [
   {

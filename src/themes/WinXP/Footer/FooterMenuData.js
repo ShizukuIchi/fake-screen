@@ -1,4 +1,4 @@
-import icon from 'src/assets/ie.ico';
+import icon from 'src/assets/internetExplorer/ie.ico';
 import empty from 'src/assets/empty.png';
 
 export const MyRecentDocuments = [
