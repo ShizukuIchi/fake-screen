@@ -56,33 +56,41 @@ const StyledSubMenu = styled(SubMenu)`
   left: 100%;
   bottom: 0;
   background-color: white;
-  border: 1px black solid;
+  border: 1px #72ade9 solid;
+  border-left-width: 2px;
   &-separator {
+    padding: 0 5px;
     height: 2px;
-    background-color: gray;
+    box-shadow: inset 3px 0 #4081ff;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
   &-item {
-    height: 30px;
+    height: 25px;
     display: flex;
     align-items: center;
     padding: 0 10px;
-    box-shadow: inset 2px 0 skyblue;
+    box-shadow: inset 3px 0 #4081ff;
     position: relative;
     color: black;
     background-color: white;
   }
   &-item.hover {
-    background-color: blue;
+    background-color: #1b65cc;
     color: white;
   }
   &-item:hover {
-    background-color: blue;
+    background-color: #1b65cc;
     color: white;
   }
   &-img {
     margin-right: 6px;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
   &-text {
     font-size: 11px;

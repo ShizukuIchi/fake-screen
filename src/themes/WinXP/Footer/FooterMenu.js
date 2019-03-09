@@ -176,17 +176,58 @@ export default styled(FooterMenu)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1069ff;
+  background-color: #4282d6;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   letter-spacing: -0.2px;
   header {
+    position: relative;
     align-self: flex-start;
     display: flex;
     align-items: center;
     color: #fff;
-    height: 50px;
-    padding: 5px;
+    height: 54px;
+    padding: 6px 5px 5px;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: linear-gradient(
+      to bottom,
+      #1868ce 0%,
+      #0e60cb 12%,
+      #0e60cb 20%,
+      #1164cf 32%,
+      #1667cf 33%,
+      #1b6cd3 47%,
+      #1e70d9 54%,
+      #2476dc 60%,
+      #297ae0 65%,
+      #3482e3 77%,
+      #3786e5 79%,
+      #428ee9 90%,
+      #4791eb 100%
+    );
+    overflow: hidden;
+  }
+  header:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+      to right,
+      transparent 0,
+      rgb(255, 255, 255, 0.3) 1%,
+      rgb(255, 255, 255, 0.5) 2%,
+      rgb(255, 255, 255, 0.5) 95%,
+      rgb(255, 255, 255, 0.3) 98%,
+      rgb(255, 255, 255, 0.2) 99%,
+      transparent 100%
+    );
+    box-shadow: inset 0 -1px 1px #0e60cb;
   }
   .header__img {
     width: 42px;
@@ -207,6 +248,25 @@ export default styled(FooterMenu)`
     justify-content: flex-end;
     color: #fff;
     height: 32px;
+    width: 100%;
+    background: linear-gradient(
+      to bottom,
+      #4282d6 0%,
+      #3b85e0 3%,
+      #418ae3 5%,
+      #418ae3 17%,
+      #3c87e2 21%,
+      #3786e4 26%,
+      #3482e3 29%,
+      #2e7ee1 39%,
+      #2374df 49%,
+      #2072db 57%,
+      #196edb 62%,
+      #176bd8 72%,
+      #1468d5 75%,
+      #1165d2 83%,
+      #0f61cb 88%
+    );
   }
 
   .footer__item {
@@ -222,9 +282,10 @@ export default styled(FooterMenu)`
   }
   .menu {
     display: flex;
-    margin: 0 1px;
+    margin: 0 2px;
     position: relative;
-    border-top: 1px solid #0e0eff;
+    border-top: 1px solid #385de7;
+    box-shadow: 0 1px #385de7;
   }
   .orange-hr {
     position: absolute;
