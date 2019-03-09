@@ -65,7 +65,7 @@ const StyledSubMenu = styled(SubMenu)`
     height: 30px;
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 10px;
     box-shadow: inset 2px 0 skyblue;
     position: relative;
     color: black;
@@ -80,6 +80,7 @@ const StyledSubMenu = styled(SubMenu)`
     color: white;
   }
   &-img {
+    margin-right: 6px;
     width: 20px;
     height: 20px;
   }
@@ -92,7 +93,7 @@ const StyledSubMenu = styled(SubMenu)`
     right: 0;
     height: 100%;
     width: 10px;
-    background-color: black;
+    /* background-color: black; */
   }
 `;
 

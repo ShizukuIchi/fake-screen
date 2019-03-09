@@ -2,27 +2,28 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ie from 'src/assets/internetExplorer/ie.ico';
 import mine from 'src/assets/minesweeper/mine-icon.png';
-import setAccess from 'src/assets/windowsIcons/set-access.png';
-import outlook from 'src/assets/windowsIcons/outlook.png';
-import mediaPlayer from 'src/assets/windowsIcons/media-player.png';
-import messenger from 'src/assets/windowsIcons/messenger.png';
-import tour from 'src/assets/windowsIcons/tour.png';
-import transfer from 'src/assets/windowsIcons/transfer.png';
-import calculator from 'src/assets/windowsIcons/calculator.png';
-import documents from 'src/assets/windowsIcons/documents.ico';
-import recentDocuments from 'src/assets/windowsIcons/recent-documents.ico';
-import pictures from 'src/assets/windowsIcons/pictures.ico';
-import music from 'src/assets/windowsIcons/music.ico';
-import computer from 'src/assets/windowsIcons/computer.ico';
-import controlPanel from 'src/assets/windowsIcons/control-panel.ico';
-import connect from 'src/assets/windowsIcons/connect.ico';
-import printer from 'src/assets/windowsIcons/printer.png';
-import help from 'src/assets/windowsIcons/help.ico';
-import search from 'src/assets/windowsIcons/search.ico';
-import run from 'src/assets/windowsIcons/run.ico';
-import lock from 'src/assets/windowsIcons/lock.ico';
+import setAccess from 'src/assets/windowsIcons/227(32x32).png';
+import outlook from 'src/assets/windowsIcons/887(32x32).png';
+import mediaPlayer from 'src/assets/windowsIcons/846(32x32).png';
+import messenger from 'src/assets/windowsIcons/msn.png';
+import tour from 'src/assets/windowsIcons/853(32x32).png';
+import transfer from 'src/assets/windowsIcons/367(32x32).png';
+import calculator from 'src/assets/windowsIcons/74(32x32).png';
+import documents from 'src/assets/windowsIcons/308(32x32).png';
+import recentDocuments from 'src/assets/windowsIcons/301(32x32).png';
+import pictures from 'src/assets/windowsIcons/307(32x32).png';
+import music from 'src/assets/windowsIcons/550(32x32).png';
+import computer from 'src/assets/windowsIcons/676(32x32).png';
+import controlPanel from 'src/assets/windowsIcons/300(32x32).png';
+import connect from 'src/assets/windowsIcons/309(32x32).png';
+import printer from 'src/assets/windowsIcons/549(32x32).png';
+import help from 'src/assets/windowsIcons/747(32x32).png';
+import search from 'src/assets/windowsIcons/299(32x32).png';
+import run from 'src/assets/windowsIcons/743(32x32).png';
+import lock from 'src/assets/windowsIcons/546(32x32).png';
 import user from 'src/assets/windowsIcons/user.png';
-import shut from 'src/assets/windowsIcons/shut.png';
+import shut from 'src/assets/windowsIcons/310(32x32).png';
+import allProgramsIcon from 'src/assets/windowsIcons/all-programs.ico';
 
 import empty from 'src/assets/empty.png';
 
@@ -66,12 +67,16 @@ function FooterMenu({ className }) {
           <div style={{ flex: 1 }} />
           <div className="menu__separator" />
           <Item text="All Programs" icon={empty}>
+            <img
+              src={allProgramsIcon}
+              alt=""
+              style={{ marginLeft: '5px', position: 'relative', top: '3px' }}
+            />
             {hovering === 'All Programs' && (
               <span
                 style={{
                   position: 'relative',
-                  display: 'inline-block',
-                  height: '100%',
+                  display: 'inline',
                 }}
               >
                 <SubMenu data={AllPrograms} />
@@ -237,7 +242,7 @@ export default styled(FooterMenu)`
     border: 0;
   }
   .menu__right {
-    background-color: #b5d7ff;
+    background-color: #cbe3ff;
     border-left: solid #3a3aff5e 1px;
     padding: 6px 5px 5px;
     width: 190px;
@@ -297,7 +302,7 @@ export default styled(FooterMenu)`
     color: white;
   }
   .menu__right .menu__item__img {
-    margin-right: 2px;
+    margin-right: 5px;
     width: 22px;
     height: 22px;
   }
@@ -306,9 +311,8 @@ export default styled(FooterMenu)`
     width: 30px;
     height: 30px;
   }
-  .menu__item__texts {
-    display: flex;
-    flex-direction: column;
+  .menu__item__text {
+    display: inline-block;
   }
   .menu__right .menu__item:nth-child(-n + 5),
   .menu__left .menu__item:nth-child(-n + 2),
