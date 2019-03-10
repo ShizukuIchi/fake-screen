@@ -53,11 +53,12 @@ const SubMenuItem = ({ index, item, className, hover, onHover }) => {
 
 const StyledSubMenu = styled(SubMenu)`
   position: absolute;
-  left: 100%;
-  bottom: 0;
+  z-index: 1;
+  left: ${({ left }) => left || '100%'};
+  bottom: -1px;
   background-color: white;
-  border: 1px #72ade9 solid;
-  border-left-width: 2px;
+  padding-left: 1px;
+  box-shadow: inset 0 0 0 1px #72ade9, 2px 3px 3px rgb(0, 0, 0, 0.5);
   &-separator {
     padding: 0 5px;
     height: 2px;
@@ -76,8 +77,8 @@ const StyledSubMenu = styled(SubMenu)`
     padding: 0 10px;
     box-shadow: inset 3px 0 #4081ff;
     position: relative;
+    padding-right: 22px;
     color: black;
-    background-color: white;
   }
   &-item.hover {
     background-color: #1b65cc;
@@ -86,11 +87,18 @@ const StyledSubMenu = styled(SubMenu)`
   &-item:hover {
     background-color: #1b65cc;
     color: white;
+    &-arrow:before {
+      border-left-color: #fff;
+    }
+  }
+  &-item:hover,
+  &-item.hover > &-arrow:before {
+    border-left-color: #fff;
   }
   &-img {
     margin-right: 6px;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
   &-text {
     font-size: 11px;
@@ -101,7 +109,16 @@ const StyledSubMenu = styled(SubMenu)`
     right: 0;
     height: 100%;
     width: 10px;
-    /* background-color: black; */
+    &:before {
+      top: 9px;
+      right: 6px;
+      content: '';
+      display: block;
+      border: 4px solid transparent;
+      border-right: 0;
+      border-left-color: #000;
+      position: absolute;
+    }
   }
 `;
 

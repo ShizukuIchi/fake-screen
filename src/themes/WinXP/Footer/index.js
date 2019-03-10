@@ -20,7 +20,7 @@ const getTime = () => {
 
 function Footer({ onClickApp, apps, focusedAppId }) {
   const [time, setTime] = useState(getTime);
-  const [menuOn, setMenuOn] = useState(true);
+  const [menuOn, setMenuOn] = useState(false);
   function toggleMenu() {
     setMenuOn(on => !on);
   }

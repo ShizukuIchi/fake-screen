@@ -66,31 +66,60 @@ function FooterMenu({ className }) {
           />
           <div style={{ flex: 1 }} />
           <div className="menu__separator" />
-          <Item text="All Programs" icon={empty}>
-            <img
-              src={allProgramsIcon}
-              alt=""
-              style={{ marginLeft: '5px', position: 'relative', top: '3px' }}
-            />
-            {hovering === 'All Programs' && (
-              <span
-                style={{
-                  position: 'relative',
-                  display: 'inline',
-                }}
-              >
-                <SubMenu data={AllPrograms} />
-              </span>
-            )}
+          <Item
+            style={
+              hovering === 'All Programs'
+                ? {
+                    backgroundColor: '#2f71cd',
+                    color: '#FFF',
+                    textShadow: '0.1px 0 white',
+                    letterSpacing: '0.4px',
+                  }
+                : { textShadow: '0.1px 0 black' }
+            }
+            text={
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                All Programs
+                <img
+                  src={allProgramsIcon}
+                  alt=""
+                  style={{
+                    marginLeft: '5px',
+                    height: '18px',
+                  }}
+                />
+              </div>
+            }
+            icon={empty}
+          >
+            {hovering === 'All Programs' && <SubMenu data={AllPrograms} />}
           </Item>
         </div>
         <div className="menu__right">
           <Item text="My Documents" icon={documents} />
-          <Item text="My Recent Documents" icon={recentDocuments}>
+          <Item
+            style={
+              hovering === 'My Recent Documents'
+                ? {
+                    backgroundColor: '#2f71cd',
+                    color: '#FFF',
+                    textShadow: '0.1px 0 white',
+                    letterSpacing: '0.4px',
+                  }
+                : { textShadow: '0.1px 0 #00136b', letterSpacing: '0.4px' }
+            }
+            text="My Recent Documents"
+            icon={recentDocuments}
+          >
+            <div
+              style={{
+                borderLeftColor:
+                  hovering === 'My Recent Documents' ? '#FFF' : '#00136b',
+              }}
+              className="menu__arrow"
+            />
             {hovering === 'My Recent Documents' && (
-              <span style={{ position: 'relative' }}>
-                <SubMenu data={MyRecentDocuments} />
-              </span>
+              <SubMenu left="153px" data={MyRecentDocuments} />
             )}
           </Item>
           <Items
@@ -107,11 +136,26 @@ function FooterMenu({ className }) {
               { icon: setAccess, text: 'Set Program Access and Defaults' },
             ]}
           />
-          <Item text="Connect To" icon={connect}>
+          <Item
+            style={
+              hovering === 'Connect To'
+                ? {
+                    backgroundColor: '#2f71cd',
+                    color: '#FFF',
+                  }
+                : {}
+            }
+            text="Connect To"
+            icon={connect}
+          >
+            <div
+              style={{
+                borderLeftColor: hovering === 'Connect To' ? '#FFF' : '#00136b',
+              }}
+              className="menu__arrow"
+            />
             {hovering === 'Connect To' && (
-              <span style={{ position: 'relative' }}>
-                <SubMenu data={ConnectTo} />
-              </span>
+              <SubMenu left="153px" data={ConnectTo} />
             )}
           </Item>
           <Item text="Printers and Faxes" icon={printer} />
@@ -307,6 +351,7 @@ export default styled(FooterMenu)`
     border-left: solid #3a3aff5e 1px;
     padding: 6px 5px 5px;
     width: 190px;
+    color: #00136b;
   }
   .menu__left {
     background-color: #fff;
@@ -350,10 +395,15 @@ export default styled(FooterMenu)`
     padding: 1px;
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+  }
+  .menu__left .menu__item {
+    height: 34px;
   }
   .menu__right .menu__item {
+    height: 26px;
     margin-bottom: 4px;
+    line-height: 13px;
   }
   .menu__item:hover {
     color: white;
@@ -362,8 +412,15 @@ export default styled(FooterMenu)`
   .menu__item:hover .menu__item__subtext {
     color: white;
   }
+  .menu__item__texts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+  }
   .menu__right .menu__item__img {
-    margin-right: 5px;
+    margin-right: 3px;
     width: 22px;
     height: 22px;
   }
@@ -372,17 +429,21 @@ export default styled(FooterMenu)`
     width: 30px;
     height: 30px;
   }
-  .menu__item__text {
-    display: inline-block;
+  .menu__right .menu__item:nth-child(-n + 5):not(:nth-child(2)),
+  .menu__left .menu__item:nth-child(-n + 2) {
+    &:hover .menu__item__text {
+      text-shadow: 0.1px 0 white;
+    }
+    .menu__item__text {
+      text-shadow: 0.1px 0 #00136b;
+      letter-spacing: 0.4px;
+    }
   }
-  .menu__right .menu__item:nth-child(-n + 5),
-  .menu__left .menu__item:nth-child(-n + 2),
   .menu__left .menu__item:last-child {
     &:hover .menu__item__text {
       text-shadow: 0.1px 0 white;
     }
     .menu__item__text {
-      text-shadow: 0.1px 0 black;
       letter-spacing: 0.4px;
     }
   }
@@ -390,13 +451,19 @@ export default styled(FooterMenu)`
     color: rgba(0, 0, 0, 0.4);
     line-height: 12px;
     margin-bottom: 1px;
+    text-shadow: none;
+  }
+  .menu__left .menu__item:last-child {
+    height: 24px;
+  }
+  .menu__item:hover .menu__arrow {
+    border-left-color: #fff;
   }
   .menu__arrow {
-    padding: 10px;
-    width: 5px;
-    height: 5px;
-    background-color: #000;
-    position: relative;
-    margin-right: 10px;
+    border: 3.5px solid transparent;
+    border-right: 0;
+    border-left-color: #00136b;
+    position: absolute;
+    left: 146px;
   }
 `;

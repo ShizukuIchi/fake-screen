@@ -96,7 +96,7 @@ function Window({
             onMouseUp={_onMouseUpMinimize}
           />
           <button
-            className="app__header__maximize"
+            className={`app__header__maximize ${resizable ? '' : 'disable'}`}
             onMouseUp={_onMouseUpMaximize}
           />
           <button className="app__header__close" onMouseUp={_onMouseUpClose} />
@@ -229,6 +229,13 @@ const StyledWindow = styled(Window)`
       box-shadow: inset 0 3px white, inset 0 0 0 1px white;
       height: 12px;
       width: 12px;
+    }
+  }
+  .app__header__maximize.disable {
+    outline: none;
+    opacity: 0.5;
+    &:hover {
+      filter: brightness(100%);
     }
   }
   .app__header__close {
