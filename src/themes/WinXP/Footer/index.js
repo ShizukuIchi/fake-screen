@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import FooterMenu from './FooterMenu';
 import startButton from 'src/assets/start.png';
@@ -21,6 +21,7 @@ const getTime = () => {
 function Footer({ onClickApp, apps, focusedAppId }) {
   const [time, setTime] = useState(getTime);
   const [menuOn, setMenuOn] = useState(false);
+  const menu = useRef(null);
   function toggleMenu() {
     setMenuOn(on => !on);
   }
@@ -31,10 +32,21 @@ function Footer({ onClickApp, apps, focusedAppId }) {
     }, 1000);
     return () => clearInterval(timer);
   }, []);
+  useEffect(() => {
+    const target = menu.current;
+    if (!target) return;
+    function onMouseDown(e) {
+      if (!target.contains(e.target) && menuOn) setMenuOn(false);
+    }
+    window.addEventListener('mousedown', onMouseDown);
+    return () => window.removeEventListener('mousedown', onMouseDown);
+  }, [menuOn]);
   return (
     <Container>
       <div className="footer__items left">
-        <div className="footer__start__menu">{menuOn && <FooterMenu />}</div>
+        <div ref={menu} className="footer__start__menu">
+          {menuOn && <FooterMenu />}
+        </div>
         <img
           src={startButton}
           alt="start"

@@ -169,7 +169,7 @@ function WinXP() {
 
 const Container = styled.div`
   @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
-  font-family: 'Noto Sans', sans-serif;
+  font-family: Tahoma, 'Noto Sans', sans-serif;
   height: 100%;
   overflow: hidden;
   position: relative;
