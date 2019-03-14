@@ -158,7 +158,7 @@ const Container = styled.footer`
     border-radius: 2px;
     margin-top: 2px;
     padding-left: 8px;
-    height: 23px;
+    height: 22px;
     font-size: 11px;
     background-color: #3c81f3;
     box-shadow: inset -1px 0px rgb(0, 0, 0, 0.3),

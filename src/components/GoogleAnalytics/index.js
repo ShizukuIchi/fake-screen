@@ -3,11 +3,10 @@ import ga from 'react-ga';
 
 function GoogleAnalytics({ location }) {
   useEffect(() => {
-    ga.initialize('UA-135148027-1');
+    ga.initialize('UA-135148027-3');
   }, []);
   useEffect(() => {
-    ga.set({ page: location.pathname });
-    ga.pageview(location.pathname);
+    ga.pageview(`fake-screen${location.pathname}`);
   }, [location.pathname]);
   return null;
 }

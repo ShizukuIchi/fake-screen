@@ -12,6 +12,16 @@ const getThemeID = genID();
 const themes = [
   {
     id: getThemeID(),
+    fullScreen: true,
+    displayName: 'Windows XP',
+    name: 'winXP',
+    imgUrl: 'https://i.imgur.com/IMXn6u2.jpg',
+    isBackgroundDark: false,
+    component: WinXP,
+    objectFit: 'contain',
+  },
+  {
+    id: getThemeID(),
     fullScreen: false,
     displayName: 'Google not found',
     name: 'google',
@@ -81,16 +91,7 @@ const themes = [
     component: DVDScreensaver,
     objectFit: 'contain',
   },
-  {
-    id: getThemeID(),
-    fullScreen: true,
-    displayName: 'Windows XP',
-    name: 'winXP',
-    imgUrl: 'https://i.imgur.com/qwPV3GW.jpg',
-    isBackgroundDark: false,
-    component: WinXP,
-    objectFit: 'contain',
-  },
+
   // {
   //   id: getThemeID(),
   //   fullScreen: true,
