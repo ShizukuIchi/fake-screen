@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import FooterMenu from './FooterMenu';
 import startButton from 'src/assets/start.png';
 
+import sound from 'src/assets/windowsIcons/690(16x16).png';
+import usb from 'src/assets/windowsIcons/394(16x16).png';
+import risk from 'src/assets/windowsIcons/229(16x16).png';
+
 const getTime = () => {
   const date = new Date();
   let hour = date.getHours();
