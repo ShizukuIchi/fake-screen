@@ -53,7 +53,7 @@ function InternetExplorer() {
 const Div = styled.div`
   height: 100%;
   width: 100%;
-  position: relative;
+  position: absolute;
   display: flex;
   overflow: hidden;
   flex-direction: column;
