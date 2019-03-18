@@ -1,30 +1,98 @@
 import React from 'react';
 import styled from 'styled-components';
 import ie from 'src/assets/internetExplorer/ie-paper.png';
+import printer from 'src/assets/internetExplorer/17(32x32).png';
+import go from 'src/assets/internetExplorer/290.png';
+import links from 'src/assets/internetExplorer/links.png';
+import search from 'src/assets/internetExplorer/299(32x32).png';
+import favorite from 'src/assets/internetExplorer/744(32x32).png';
+import back from 'src/assets/internetExplorer/back.png';
+import earth from 'src/assets/internetExplorer/earth.png';
+import edit from 'src/assets/internetExplorer/edit.png';
+import forward from 'src/assets/internetExplorer/forward.png';
+import history from 'src/assets/internetExplorer/history.png';
+import home from 'src/assets/internetExplorer/home.png';
+import mail from 'src/assets/internetExplorer/mail.png';
+import msn from 'src/assets/internetExplorer/msn.png';
+import refresh from 'src/assets/internetExplorer/refresh.png';
+import stop from 'src/assets/internetExplorer/stop.png';
+import windows from 'src/assets/internetExplorer/windows.png';
 import { Google } from 'src/themes';
 
 function InternetExplorer() {
   return (
     <Div>
       <section className="ie__toolbar">
-        {'File,Edit,View,Favorites,Tools,Help'.split(',').map(name => (
-          <div className="ie__toolbar__item" key={name}>
-            {name}
-          </div>
-        ))}
+        <div className="ie__toolbar__options">
+          {'File,Edit,View,Favorites,Tools,Help'.split(',').map(name => (
+            <div className="ie__toolbar__option" key={name}>
+              {name}
+            </div>
+          ))}
+        </div>
+        <img className="ie__toolbar__img" src={windows} alt="windows" />
       </section>
       <section className="ie__function_bar">
-        {'Back,Forward,Cancel,Refresh,Home'.split(',').map(name => (
-          <div key={name} className="ie__function_bar__item">
-            {name}
-          </div>
-        ))}
+        <div className="ie__function_bar__button">
+          <img className="ie__function_bar__icon" src={back} alt="" />
+          <span className="ie__function_bar__text">Back</span>
+          <div className="ie__function_bar__arrow" />
+        </div>
+        <div className="ie__function_bar__button">
+          <img className="ie__function_bar__icon" src={forward} alt="" />
+          <div className="ie__function_bar__arrow" />
+        </div>
+        <div className="ie__function_bar__button">
+          <img className="ie__function_bar__icon--margin-1" src={stop} alt="" />
+        </div>
+        <div className="ie__function_bar__button">
+          <img
+            className="ie__function_bar__icon--margin-1"
+            src={refresh}
+            alt=""
+          />
+        </div>
+        <div className="ie__function_bar__button">
+          <img className="ie__function_bar__icon--margin-1" src={home} alt="" />
+        </div>
         <div className="ie__function_bar__separate" />
-        {'Search,Favorites'.split(',').map(name => (
-          <div key={name} className="ie__function_bar__item">
-            {name}
-          </div>
-        ))}
+        <div className="ie__function_bar__button">
+          <img
+            className="ie__function_bar__icon--normalize "
+            src={search}
+            alt=""
+          />
+          <span className="ie__function_bar__text">Search</span>
+        </div>
+        <div className="ie__function_bar__button">
+          <img
+            className="ie__function_bar__icon--normalize"
+            src={favorite}
+            alt=""
+          />
+          <span className="ie__function_bar__text">Favorites</span>
+        </div>
+        <div className="ie__function_bar__button">
+          <img className="ie__function_bar__icon" src={history} alt="" />
+        </div>
+        <div className="ie__function_bar__separate" />
+        <div className="ie__function_bar__button">
+          <img className="ie__function_bar__icon--margin-1" src={mail} alt="" />
+          <div className="ie__function_bar__arrow--margin-11" />
+        </div>
+        <div className="ie__function_bar__button">
+          <img
+            className="ie__function_bar__icon--margin12"
+            src={printer}
+            alt=""
+          />
+        </div>
+        <div className="ie__function_bar__button--disable">
+          <img className="ie__function_bar__icon" src={edit} alt="" />
+        </div>
+        <div className="ie__function_bar__button">
+          <img className="ie__function_bar__icon--margin12" src={msn} alt="" />
+        </div>
       </section>
       <section className="ie__address_bar">
         <div className="ie__address_bar__title">Address</div>
@@ -34,10 +102,18 @@ function InternetExplorer() {
             https://www.google.com.tw
           </div>
         </div>
-        <div className="ie__address_bar__buttons">
-          <div className="ie__address_bar__button">Go</div>
-          <div className="ie__address_bar__separate" />
-          <div className="ie__address_bar__button">Links</div>
+        <div className="ie__address_bar__go">
+          <img className="ie__address_bar__go__img" src={go} alt="go" />
+          <span className="ie__address_bar__go__text">Go</span>
+        </div>
+        <div className="ie__address_bar__separate" />
+        <div className="ie__address_bar__links">
+          <span className="ie__address_bar__links__text">Links</span>
+          <img
+            className="ie__address_bar__links__img"
+            src={links}
+            alt="links"
+          />
         </div>
       </section>
       <div className="ie__content">
@@ -45,7 +121,21 @@ function InternetExplorer() {
           <Google />
         </div>
       </div>
-      <footer className="ie__footer" />
+      <footer className="ie__footer">
+        <div className="ie__footer__status">
+          <img className="ie__footer__status__img" src={ie} alt="" />
+          <span className="ie__footer__status__text">Done</span>
+        </div>
+        <div className="ie__footer__block" />
+        <div className="ie__footer__block" />
+        <div className="ie__footer__block" />
+        <div className="ie__footer__block" />
+        <div className="ie__footer__right">
+          <img className="ie__footer__right__img" src={earth} alt="" />
+          <span className="ie__footer__right__text">Internet</span>
+          <div className="ie__footer__right__dots" />
+        </div>
+      </footer>
     </Div>
   );
 }
@@ -57,55 +147,132 @@ const Div = styled.div`
   display: flex;
   overflow: hidden;
   flex-direction: column;
+  background-color: rgb(236, 233, 216);
   .ie__toolbar {
-    background: rgb(200, 200, 200);
     display: flex;
     align-items: center;
     line-height: 100%;
     height: 22px;
-    border-bottom: 1px solid rgb(180, 180, 180);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   }
-  .ie__toolbar__item {
-    font-size: 10px;
+  .ie__toolbar__options {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    line-height: 100%;
+    height: 22px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+  }
+  .ie__toolbar__option {
+    font-size: 11px;
     line-height: 22px;
     margin: 0 7px;
   }
+  .ie__toolbar__img {
+    height: 100%;
+    border-left: 1px solid white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
   .ie__function_bar {
-    height: 40px;
+    height: 36px;
     display: flex;
     align-items: center;
-    background-color: rgb(200, 200, 200);
-    font-size: 10px;
-    padding: 0 5px;
-    border-bottom: 1px solid rgb(180, 180, 180);
+    font-size: 11px;
+    padding: 0 3px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  .ie__function_bar__item {
+  .ie__function_bar__button {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 3px;
+    &:hover {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.1);
+    }
+  }
+  .ie__function_bar__button--disable {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0);
+  }
+  .ie__function_bar__text {
+    margin-right: 4px;
+  }
+  .ie__function_bar__icon {
     height: 30px;
-    line-height: 30px;
-    margin: 0 5px;
+    width: 30px;
+    &--normalize {
+      height: 22px;
+      width: 22px;
+      margin: 0 4px 0 1px;
+    }
+    &--margin12 {
+      height: 22px;
+      width: 22px;
+      margin: 0 1px 0 2px;
+    }
+    &--margin-1 {
+      margin: 0 -1px;
+      height: 30px;
+      width: 30px;
+    }
   }
   .ie__function_bar__separate {
-    height: 36px;
+    height: 90%;
     width: 1px;
-    background-color: rgb(160, 160, 160);
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0 2px;
   }
-  .ie__address_bar {
-    height: 22px;
-    font-size: 10px;
+  .ie__function_bar__arrow {
+    height: 100%;
     display: flex;
     align-items: center;
-    background-color: rgb(200, 200, 200);
-    border-bottom: 2px solid rgb(160, 160, 160);
+    margin: 0 4px;
+    &:before {
+      content: '';
+      display: block;
+      border-width: 3px 3px 0;
+      border-color: #000 transparent;
+      border-style: solid;
+    }
+  }
+  .ie__function_bar__arrow--margin-11 {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: 0 1px 0 -1px;
+    &:before {
+      content: '';
+      display: block;
+      border-width: 3px 3px 0;
+      border-color: #000 transparent;
+      border-style: solid;
+    }
+  }
+  .ie__address_bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    height: 22px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    padding: 0 2px 2px;
+    box-shadow: inset 0 -2px 3px -1px #2d2d2d;
   }
   .ie__address_bar__title {
-    line-height: 22px;
+    line-height: 100%;
+    color: rgba(0, 0, 0, 0.5);
     padding: 5px;
   }
   .ie__address_bar__content {
-    border: rgba(52, 52, 255, 0.6) 1px solid;
+    border: rgba(122, 122, 255, 0.6) 1px solid;
     height: 100%;
     display: flex;
     flex: 1;
+    font-size: 10;
     align-items: center;
     background-color: white;
     padding-left: 1px;
@@ -118,23 +285,46 @@ const Div = styled.div`
       line-height: 100%;
     }
   }
-  .ie__address_bar__buttons {
+  .ie__address_bar__go {
     display: flex;
+    align-items: center;
+    padding: 0 18px 0 5px;
+    height: 100%;
+    position: relative;
+    &__img {
+      height: 95%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-right: 3px;
+    }
   }
-  .ie__address_bar__button {
-    width: 50px;
-    line-height: 22px;
-    padding: 0 3px;
+  .ie__address_bar__links {
+    display: flex;
+    align-items: center;
+    padding: 0 18px 0 5px;
+    height: 100%;
+    position: relative;
+    &__img {
+      position: absolute;
+      right: 2px;
+      top: 3px;
+      height: 5px;
+      width: 8px;
+    }
+    &__text {
+      color: rgba(0, 0, 0, 0.5);
+    }
   }
   .ie__address_bar__separate {
-    height: 22px;
+    height: 100%;
     width: 1px;
-    background-color: rgb(160, 160, 160);
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 0 rgba(255, 255, 255, 0.7);
   }
   .ie__content {
     flex: 1;
     overflow: auto;
-    border-left: 1px solid rgb(160, 160, 160);
+    padding-left: 1px;
+    border-left: 1px solid #6f6f6f;
     background-color: #f1f1f1;
     position: relative;
   }
@@ -147,8 +337,64 @@ const Div = styled.div`
   }
   .ie__footer {
     height: 20px;
-    border-top: 2px solid rgb(160, 160, 160);
-    background-color: rgb(200, 200, 200);
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 3px rgba(50, 50, 50, 0.8);
+    background-color: rgb(236, 233, 216);
+    display: flex;
+    align-items: center;
+    padding-top: 2px;
+  }
+  .ie__footer__status {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 2px;
+    &__text {
+      font-size: 11px;
+    }
+    &__img {
+      height: 14px;
+      width: 14px;
+      margin-right: 3px;
+    }
+  }
+  .ie__footer__block {
+    height: 85%;
+    width: 22px;
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: inset 1px 0 rgba(255, 255, 255, 0.7);
+  }
+  .ie__footer__right {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 80%;
+    border-left: 1px solid rgba(0, 0, 0, 0.11);
+    box-shadow: inset 1px 0 rgba(255, 255, 255, 0.7);
+    padding-left: 5px;
+    position: relative;
+    &__text {
+      font-size: 11px;
+    }
+    &__img {
+      height: 14px;
+      width: 14px;
+      margin-right: 3px;
+    }
+    &__dots {
+      position: absolute;
+      right: 11px;
+      bottom: -1px;
+      width: 2px;
+      height: 2px;
+      box-shadow: 2px 0px rgba(0, 0, 0, 0.25), 5.5px 0px rgba(0, 0, 0, 0.25),
+        9px 0px rgba(0, 0, 0, 0.25), 5.5px -3.5px rgba(0, 0, 0, 0.25),
+        9px -3.5px rgba(0, 0, 0, 0.25), 9px -7px rgba(0, 0, 0, 0.25),
+        3px 1px rgba(255, 255, 255, 1), 6.5px 1px rgba(255, 255, 255, 1),
+        10px 1px rgba(255, 255, 255, 1), 10px -2.5px rgba(255, 255, 255, 1),
+        10px -6px rgba(255, 255, 255, 1);
+    }
   }
 `;
 

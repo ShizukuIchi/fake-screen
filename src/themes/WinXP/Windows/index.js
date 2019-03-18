@@ -129,10 +129,10 @@ const StyledWindow = styled(Window)`
       #0055eb 56%,
       #005bf5 66%,
       #026afe 76%,
-      #026afe 86%,
-      #0061fc 92%,
-      #005cf7 94%,
-      #0044d1 100%
+      #0062ef 86%,
+      #0052d6 92%,
+      #0040ab 94%,
+      #003092 100%
     );
     position: absolute;
     left: 0;
@@ -142,6 +142,27 @@ const StyledWindow = styled(Window)`
     pointer-events: none;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    overflow: hidden;
+  }
+  .header__bg:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    background: linear-gradient(to right, #1638e6 0%, transparent 100%);
+    top: 0;
+    bottom: 0;
+    width: 15px;
+  }
+  .header__bg:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    background: linear-gradient(to left, #1638e6 0%, transparent 100%);
+    top: 0;
+    bottom: 0;
+    width: 15px;
   }
   .app__header {
     height: 25px;

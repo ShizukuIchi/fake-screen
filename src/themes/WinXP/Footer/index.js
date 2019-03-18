@@ -72,6 +72,9 @@ function Footer({ onClickApp, apps, focusedAppId }) {
       </div>
 
       <div className="footer__items right">
+        <img className="footer__icon" src={sound} alt="" />
+        <img className="footer__icon" src={usb} alt="" />
+        <img className="footer__icon" src={risk} alt="" />
         <div className="footer__time">{time}</div>
       </div>
     </Container>
@@ -87,7 +90,7 @@ function FooterWindow({ id, icon, title, onClick, isFocus }) {
       onClick={_onClick}
       className={`footer__window ${isFocus ? 'focus' : 'cover'}`}
     >
-      <img className="footer__window__icon" src={icon} alt={title} />
+      <img className="footer__icon" src={icon} alt={title} />
       {title}
     </div>
   );
@@ -143,6 +146,7 @@ const Container = styled.footer`
     );
     border-left: 1px solid #1042af;
     box-shadow: inset 1px 0 1px #18bbff;
+    padding: 0 10px;
   }
   .footer__items {
     display: flex;
@@ -216,15 +220,17 @@ const Container = styled.footer`
     box-shadow: inset 0 0 1px 1px rgb(0, 0, 0, 0.2),
       inset 1px 0 1px rgb(0, 0, 0, 0.7);
   }
-  .footer__window__icon {
+  .footer__icon {
     height: 15px;
     width: 15px;
     margin-right: 4px;
   }
   .footer__time {
-    margin: 0 15px 0 20px;
+    margin: 0 5px;
     color: #fff;
     font-size: 11px;
+    font-weight: lighter;
+    text-shadow: none;
   }
 `;
 

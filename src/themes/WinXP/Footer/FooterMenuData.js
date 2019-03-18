@@ -4,7 +4,6 @@ import backup from 'src/assets/windowsIcons/23(16x16).png';
 import keyboard from 'src/assets/windowsIcons/58(16x16).png';
 import cmd from 'src/assets/windowsIcons/56(16x16).png';
 import calculator from 'src/assets/windowsIcons/74(16x16).png';
-import icon from 'src/assets/windowsIcons/81(16x16).png';
 import utility from 'src/assets/windowsIcons/119(16x16).png';
 import volume from 'src/assets/windowsIcons/120(16x16).png';
 import characterMap from 'src/assets/windowsIcons/127(16x16).png';

@@ -13,8 +13,8 @@ export const defaultAppState = [
       height: 500,
     },
     defaultOffset: {
-      x: 200,
-      y: 200,
+      x: 100,
+      y: 100,
     },
     resizable: true,
     headerIcon: iePaper,
@@ -30,7 +30,7 @@ export const defaultAppState = [
       height: 0,
     },
     defaultOffset: {
-      x: 300,
+      x: 900,
       y: 100,
     },
     resizable: false,
