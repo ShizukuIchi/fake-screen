@@ -3,7 +3,14 @@ import { useWindowSize } from 'react-use';
 import useElementResize from 'src/hooks/useElementResize';
 import styled from 'styled-components';
 
-function Windows({ apps, onMouseDown, onClose, onMinimize, onMaximize }) {
+function Windows({
+  apps,
+  onMouseDown,
+  onClose,
+  onMinimize,
+  onMaximize,
+  focusedAppId,
+}) {
   return apps.map(app => (
     <StyledWindow
       show={!app.minimized}
@@ -13,6 +20,7 @@ function Windows({ apps, onMouseDown, onClose, onMinimize, onMaximize }) {
       onMouseUpClose={onClose}
       onMouseUpMinimize={onMinimize}
       onMouseUpMaximize={onMaximize}
+      isFocus={focusedAppId === app.id}
       {...app}
     >
       <app.component onClose={onClose.bind(null, app.id)} />
@@ -96,7 +104,9 @@ function Window({
             onMouseUp={_onMouseUpMinimize}
           />
           <button
-            className={`app__header__maximize ${resizable ? '' : 'disable'}`}
+            className={`app__header__maximize ${maximized ? 'maximized' : ''} ${
+              resizable ? '' : 'disable'
+            }`}
             onMouseUp={_onMouseUpMaximize}
           />
           <button className="app__header__close" onMouseUp={_onMouseUpClose} />
@@ -111,29 +121,15 @@ const StyledWindow = styled(Window)`
   display: ${({ show }) => (show ? 'flex' : 'none')};
   position: absolute;
   padding: 3px;
-  background-color: #0831d9;
+  background-color: ${({ isFocus }) => (isFocus ? '#0831d9' : '#6582f5')};
   flex-direction: column;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   .header__bg {
-    background: linear-gradient(
-      to bottom,
-      #0058ee 0%,
-      #3593ff 4%,
-      #288eff 6%,
-      #127dff 8%,
-      #036ffc 10%,
-      #0262ee 14%,
-      #0057e5 20%,
-      #0054e3 24%,
-      #0055eb 56%,
-      #005bf5 66%,
-      #026afe 76%,
-      #0062ef 86%,
-      #0052d6 92%,
-      #0040ab 94%,
-      #003092 100%
-    );
+    background: ${({ isFocus }) =>
+      isFocus
+        ? 'linear-gradient(to bottom,#0058ee 0%,#3593ff 4%,#288eff 6%,#127dff 8%,#036ffc 10%,#0262ee 14%,#0057e5 20%,#0054e3 24%,#0055eb 56%,#005bf5 66%,#026afe 76%,#0062ef 86%,#0052d6 92%,#0040ab 94%,#003092 100%)'
+        : 'linear-gradient(to bottom, #7697e7 0%,#7e9ee3 3%,#94afe8 6%,#97b4e9 8%,#82a5e4 14%,#7c9fe2 17%,#7996de 25%,#7b99e1 56%,#82a9e9 81%,#80a5e7 89%,#7b96e1 94%,#7a93df 97%,#abbae3 100%)'};
     position: absolute;
     left: 0;
     top: 0;
@@ -149,6 +145,7 @@ const StyledWindow = styled(Window)`
     display: block;
     position: absolute;
     left: 0;
+    opacity: ${({ isFocus }) => (isFocus ? 1 : 0.3)};
     background: linear-gradient(to right, #1638e6 0%, transparent 100%);
     top: 0;
     bottom: 0;
@@ -156,6 +153,7 @@ const StyledWindow = styled(Window)`
   }
   .header__bg:after {
     content: '';
+    opacity: ${({ isFocus }) => (isFocus ? 1 : 0.4)};
     display: block;
     position: absolute;
     right: 0;
@@ -195,6 +193,7 @@ const StyledWindow = styled(Window)`
     text-overflow: ellipsis;
   }
   .app__header__buttons {
+    opacity: ${({ isFocus }) => (isFocus ? 1 : 0.6)};
     height: 22px;
     display: flex;
     align-items: center;
@@ -258,6 +257,29 @@ const StyledWindow = styled(Window)`
     opacity: 0.5;
     &:hover {
       filter: brightness(100%);
+    }
+  }
+  .app__header__maximize.maximized {
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 7px;
+      top: 4px;
+      box-shadow: inset 0 2px white, inset 0 0 0 1px white;
+      height: 8px;
+      width: 8px;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      left: 4px;
+      top: 7px;
+      box-shadow: inset 0 2px white, inset 0 0 0 1px white, 1px -1px #136dff;
+      height: 8px;
+      width: 8px;
+      background-color: #136dff;
     }
   }
   .app__header__close {

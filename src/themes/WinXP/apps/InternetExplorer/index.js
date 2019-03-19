@@ -147,7 +147,7 @@ const Div = styled.div`
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  background-color: rgb(236, 233, 216);
+  background: linear-gradient(to right, #edede5 0%, #ede8cd 100%);
   .ie__toolbar {
     display: flex;
     align-items: center;

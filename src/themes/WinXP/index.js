@@ -143,6 +143,7 @@ function WinXP() {
       window.removeEventListener('mousedown', onMouseDown);
     };
   }, []);
+  const focusedAppId = getFocusedAppId();
   return (
     <Container ref={ref}>
       <Icons
@@ -157,11 +158,12 @@ function WinXP() {
         onClose={onCloseApp}
         onMinimize={onMinimizeWindow}
         onMaximize={onMaximizeWindow}
+        focusedAppId={focusedAppId}
       />
       <Footer
         apps={state.apps}
         onClickApp={onClickFooterApp}
-        focusedAppId={getFocusedAppId()}
+        focusedAppId={focusedAppId}
       />
     </Container>
   );

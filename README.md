@@ -1,4 +1,4 @@
-# [Fake Screen](https://sh1zuku.csie.io/fake-screen) &middot; [![codecov](https://codecov.io/gh/ShizukuIchi/fake-screen/branch/master/graph/badge.svg)](https://codecov.io/gh/ShizukuIchi/fake-screen)
+# [Fake Screen](https://sh1zuku.csie.io/fake-screen)
 
 Prank your friends with fake screens.
 

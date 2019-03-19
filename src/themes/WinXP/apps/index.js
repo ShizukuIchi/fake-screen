@@ -13,7 +13,7 @@ export const defaultAppState = [
       height: 500,
     },
     defaultOffset: {
-      x: 100,
+      x: 200,
       y: 100,
     },
     resizable: true,
@@ -30,8 +30,8 @@ export const defaultAppState = [
       height: 0,
     },
     defaultOffset: {
-      x: 900,
-      y: 100,
+      x: 230,
+      y: 80,
     },
     resizable: false,
     headerIcon: mine,
