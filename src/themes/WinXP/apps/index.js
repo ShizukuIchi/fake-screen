@@ -14,7 +14,7 @@ export const defaultAppState = [
     },
     defaultOffset: {
       x: 200,
-      y: 100,
+      y: 40,
     },
     resizable: true,
     headerIcon: iePaper,

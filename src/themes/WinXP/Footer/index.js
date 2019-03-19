@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import FooterMenu from './FooterMenu';
-import startButton from 'src/assets/start.png';
+import Balloon from 'src/components/Balloon';
 
+import startButton from 'src/assets/start.png';
 import sound from 'src/assets/windowsIcons/690(16x16).png';
 import usb from 'src/assets/windowsIcons/394(16x16).png';
 import risk from 'src/assets/windowsIcons/229(16x16).png';
@@ -75,6 +76,9 @@ function Footer({ onClickApp, apps, focusedAppId }) {
         <img className="footer__icon" src={sound} alt="" />
         <img className="footer__icon" src={usb} alt="" />
         <img className="footer__icon" src={risk} alt="" />
+        <div style={{ position: 'relative', width: 0, height: 0 }}>
+          <Balloon />
+        </div>
         <div className="footer__time">{time}</div>
       </div>
     </Container>
