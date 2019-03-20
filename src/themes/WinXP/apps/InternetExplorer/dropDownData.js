@@ -389,6 +389,7 @@ const Favorites = [
   },
   {
     type: 'menu',
+    symbol: 'folder',
     position: {
       left: 'calc(100% - 4px)',
       top: '-3px',
@@ -453,7 +454,7 @@ const Tools = [
       },
       {
         type: 'item',
-        text: 'Send a Link',
+        text: 'Send a Link...',
       },
       {
         type: 'item',

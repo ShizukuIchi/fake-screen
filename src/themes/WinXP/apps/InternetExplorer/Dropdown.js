@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import iePaper from 'src/assets/internetExplorer/ie-paper.png';
+import ieBook from 'src/assets/internetExplorer/ie-book.png';
+import check from 'src/assets/internetExplorer/checked.png';
+import folder from 'src/assets/internetExplorer/folder.png';
 
 export function DropDown({ items, position = {}, onClick }) {
   const [option, setOption] = useState('');
@@ -24,7 +28,9 @@ export function DropDown({ items, position = {}, onClick }) {
                   onMouseEnter={() => onMouseEnter(item.text)}
                   onClick={() => _onClick(item.text)}
                 >
-                  <div className="ie__drop-down__check" />
+                  <div className="ie__drop-down__check">
+                    <RowSymbol type={item.symbol} />
+                  </div>
                   <div className="ie__drop-down__text">{item.text}</div>
                   <span className="ie__drop-down__hot-key">
                     {item.hotkey || ''}
@@ -41,7 +47,9 @@ export function DropDown({ items, position = {}, onClick }) {
                   }`}
                   onMouseEnter={() => onMouseEnter(item.text)}
                 >
-                  <div className="ie__drop-down__check" />
+                  <div className="ie__drop-down__check">
+                    <RowSymbol type={item.symbol} />
+                  </div>
                   <div className="ie__drop-down__text">{item.text}</div>
                   <span className="ie__drop-down__hot-key">
                     {item.hotkey || ''}
@@ -65,6 +73,32 @@ export function DropDown({ items, position = {}, onClick }) {
   );
 }
 
+function RowSymbol({ type }) {
+  switch (type) {
+    case 'ie-paper':
+      return <img className="ie__drop-down__icon" src={iePaper} alt="" />;
+    case 'ie-book':
+      return <img className="ie__drop-down__icon" src={ieBook} alt="" />;
+    case 'folder':
+      return <img className="ie__drop-down__icon" src={folder} alt="" />;
+    case 'check':
+      return <img src={check} alt="" />;
+    case 'circle':
+      return (
+        <div
+          style={{
+            width: '6px',
+            height: '6px',
+            borderRadius: '50%',
+            backgroundColor: '#000',
+          }}
+        />
+      );
+    default:
+      return null;
+  }
+}
+
 const Div = styled.div`
   left: ${({ left }) => (left ? left : 'initial')};
   top: ${({ top }) => (top ? top : 'initial')};
@@ -81,10 +115,16 @@ const Div = styled.div`
       background: #e99f17;
       filter: invert(100%);
     }
+    &:hover > .ie__drop-down__check > .ie__drop-down__icon {
+      filter: invert(100%);
+    }
   }
   .ie__drop-down__row--active {
     position: relative;
     display: contents;
+    & > .ie__drop-down__check > .ie__drop-down__icon {
+      filter: invert(100%);
+    }
     & > *:not(:nth-child(5)) {
       background: #e99f17;
       filter: invert(100%);
@@ -126,6 +166,14 @@ const Div = styled.div`
   }
   .ie__drop-down__check {
     grid-column: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ie__drop-down__icon {
+    max-width: 13px;
+    max-height: 13px;
+    transform: translateX(-2px);
   }
   .ie__drop-down__text {
     white-space: nowrap;
