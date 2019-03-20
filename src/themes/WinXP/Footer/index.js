@@ -23,12 +23,16 @@ const getTime = () => {
   return `${hour}:${min} ${hourPostFix}`;
 };
 
-function Footer({ onClickApp, apps, focusedAppId }) {
+function Footer({ onMouseDownApp, apps, focusedAppId, onMouseDown }) {
   const [time, setTime] = useState(getTime);
   const [menuOn, setMenuOn] = useState(false);
   const menu = useRef(null);
   function toggleMenu() {
     setMenuOn(on => !on);
+  }
+  function _onMouseDown(e) {
+    if (e.target.closest('.footer__window')) return;
+    onMouseDown();
   }
   useEffect(() => {
     const timer = setInterval(() => {
@@ -48,7 +52,7 @@ function Footer({ onClickApp, apps, focusedAppId }) {
   }, [menuOn]);
   return (
     <Container>
-      <div className="footer__items left">
+      <div className="footer__items left" onMouseDown={_onMouseDown}>
         <div ref={menu} className="footer__start__menu">
           {menuOn && <FooterMenu />}
         </div>
@@ -66,7 +70,7 @@ function Footer({ onClickApp, apps, focusedAppId }) {
               id={app.id}
               icon={app.headerIcon}
               title={app.title}
-              onClick={onClickApp}
+              onMouseDown={onMouseDownApp}
               isFocus={focusedAppId === app.id}
             />
           ))}
@@ -85,13 +89,13 @@ function Footer({ onClickApp, apps, focusedAppId }) {
   );
 }
 
-function FooterWindow({ id, icon, title, onClick, isFocus }) {
-  function _onClick() {
-    onClick(id);
+function FooterWindow({ id, icon, title, onMouseDown, isFocus }) {
+  function _onMouseDown() {
+    onMouseDown(id);
   }
   return (
     <div
-      onClick={_onClick}
+      onMouseDown={_onMouseDown}
       className={`footer__window ${isFocus ? 'focus' : 'cover'}`}
     >
       <img className="footer__icon" src={icon} alt={title} />

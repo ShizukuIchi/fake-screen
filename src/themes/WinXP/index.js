@@ -108,7 +108,7 @@ function WinXP() {
       dispatch({ type: 'MINIMIZE_APP', payload: id });
     }
   }
-  function onClickFooterApp(id) {
+  function onMouseDownFooterApp(id) {
     if (getFocusedAppId() === id) {
       dispatch({ type: 'MINIMIZE_APP', payload: id });
     } else {
@@ -128,9 +128,13 @@ function WinXP() {
   }
   function getFocusedAppId() {
     const lastIndex = state.apps.map(app => app.minimized).lastIndexOf(false);
-    return lastIndex >= 0 ? state.apps[lastIndex].id : lastIndex;
+    return lastIndex >= 0 && state.focusing === 'window'
+      ? state.apps[lastIndex].id
+      : -1;
   }
-
+  function onMouseDownFooter() {
+    dispatch({ type: 'FOCUS_DESKTOP' });
+  }
   useEffect(() => {
     const target = ref.current;
     if (!target) return;
@@ -162,8 +166,9 @@ function WinXP() {
       />
       <Footer
         apps={state.apps}
-        onClickApp={onClickFooterApp}
+        onMouseDownApp={onMouseDownFooterApp}
         focusedAppId={focusedAppId}
+        onMouseDown={onMouseDownFooter}
       />
     </Container>
   );

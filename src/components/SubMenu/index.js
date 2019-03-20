@@ -42,7 +42,7 @@ const SubMenuItem = ({ index, item, className, hover, onHover }) => {
           <img className={`${className}-img`} src={item.icon} alt="" />
           <div className={`${className}-text`}>{item.text}</div>
           <div className={`${className}-arrow`}>
-            {hover && <StyledSubMenu data={item.items} />}
+            {hover && <StyledSubMenu data={item.items} bottom={item.bottom} />}
           </div>
         </div>
       );
@@ -55,7 +55,7 @@ const StyledSubMenu = styled(SubMenu)`
   position: absolute;
   z-index: 1;
   left: ${({ left }) => left || '100%'};
-  bottom: -1px;
+  bottom: ${({ bottom }) => bottom || '-1px'};
   background-color: white;
   padding-left: 1px;
   box-shadow: inset 0 0 0 1px #72ade9, 2px 3px 3px rgb(0, 0, 0, 0.5);

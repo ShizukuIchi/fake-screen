@@ -104,6 +104,7 @@ export const AllPrograms = [
         type: 'menu',
         icon: menu,
         text: 'Accessibility',
+        bottom: 'initial',
         items: [
           {
             type: 'item',
@@ -136,6 +137,7 @@ export const AllPrograms = [
         type: 'menu',
         icon: menu,
         text: 'Communications',
+        bottom: 'initial',
         items: [
           {
             type: 'item',
@@ -168,6 +170,7 @@ export const AllPrograms = [
         type: 'menu',
         icon: menu,
         text: 'Entertainment',
+        bottom: 'initial',
         items: [
           {
             type: 'item',
@@ -190,6 +193,7 @@ export const AllPrograms = [
         type: 'menu',
         icon: menu,
         text: 'System Tools',
+        bottom: 'initial',
         items: [
           {
             type: 'item',
