@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ie from 'src/assets/internetExplorer/ie-paper.png';
 import printer from 'src/assets/internetExplorer/17(32x32).png';
@@ -18,7 +18,8 @@ import refresh from 'src/assets/internetExplorer/refresh.png';
 import stop from 'src/assets/internetExplorer/stop.png';
 import windows from 'src/assets/internetExplorer/windows.png';
 import { Google } from 'src/themes/Google';
-
+import DropDown from './Dropdown';
+import dropDownData from './dropDownData';
 function InternetExplorer() {
   const [state, setState] = useState({
     route: 'main',
@@ -38,13 +39,49 @@ function InternetExplorer() {
       query: '',
     });
   }
-
+  const [openOption, setOpenOption] = useState('');
+  function hoverOption(option) {
+    if (openOption) setOpenOption(option);
+  }
+  function onMouseUp(e) {
+    const option = e.target.closest('.ie__toolbar__drop-down__label');
+    setOpenOption(option && option.textContent);
+  }
+  useEffect(() => {
+    window.addEventListener('mouseup', onMouseUp);
+    return () => {
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, []);
   return (
     <Div>
       <section className="ie__toolbar">
+        <div className="ie__toolbar__drop-downs">
+          {'File,Edit,View,Favorites,Tools,Help'.split(',').map(name => (
+            <div
+              className={`ie__toolbar__drop-down${
+                openOption === name ? '--active' : ''
+              }`}
+              key={name}
+            >
+              <div className="ie__toolbar__drop-down__label">{name}</div>
+              <DropDown
+                items={dropDownData[name]}
+                position={{ top: '20px', left: '0' }}
+              />
+            </div>
+          ))}
+        </div>
         <div className="ie__toolbar__options">
           {'File,Edit,View,Favorites,Tools,Help'.split(',').map(name => (
-            <div className="ie__toolbar__option" key={name}>
+            <div
+              key={name}
+              onMouseDown={() => {
+                setOpenOption(name);
+              }}
+              onMouseEnter={() => hoverOption(name)}
+              className="ie__toolbar__option"
+            >
               {name}
             </div>
           ))}
@@ -180,25 +217,60 @@ const Div = styled.div`
   flex-direction: column;
   background: linear-gradient(to right, #edede5 0%, #ede8cd 100%);
   .ie__toolbar {
+    position: relative;
     display: flex;
     align-items: center;
     line-height: 100%;
     height: 22px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.7);
   }
+  .ie__toolbar__drop-downs {
+    display: flex;
+    height: 100%;
+    position: absolute;
+    border-bottom: 1px solid transparent;
+  }
+  .ie__toolbar__drop-down {
+    font-size: 11px;
+    line-height: 20px;
+    height: 100%;
+    padding: 0 7px;
+    background-color: #1660e8;
+    position: relative;
+    visibility: hidden;
+  }
+  .ie__toolbar__drop-down--active {
+    font-size: 11px;
+    line-height: 20px;
+    height: 100%;
+    padding: 0 7px;
+    visibility: visible;
+    z-index: 1;
+    background-color: #1660e8;
+    position: relative;
+  }
+  .ie__toolbar__drop-down__label {
+    color: #fff;
+  }
   .ie__toolbar__options {
+    position: relative;
     flex: 1;
     display: flex;
     align-items: center;
     line-height: 100%;
-    height: 22px;
+    height: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     border-right: 1px solid rgba(0, 0, 0, 0.15);
   }
   .ie__toolbar__option {
     font-size: 11px;
-    line-height: 22px;
-    margin: 0 7px;
+    line-height: 20px;
+    height: 100%;
+    padding: 0 7px;
+    &:hover {
+      background-color: #1660e8;
+      color: #fff;
+    }
   }
   .ie__toolbar__img {
     height: 100%;
