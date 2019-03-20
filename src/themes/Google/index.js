@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Search from './Search';
 import Main from './Main';
 
-function Google() {
+function GoogleContainer() {
   const [state, setState] = useState({
     route: 'main',
     query: '',
@@ -21,9 +21,19 @@ function Google() {
       query: '',
     });
   }
-  if (state.route === 'main') return <Main onSearch={onSearch} />;
-  else
-    return <Search goMain={goMain} onSearch={onSearch} query={state.query} />;
+  return (
+    <Google
+      route={state.route}
+      query={state.query}
+      onSearch={onSearch}
+      goMain={goMain}
+    />
+  );
 }
 
-export default Google;
+export function Google({ route = 'main', query = '', onSearch, goMain }) {
+  if (route === 'main') return <Main onSearch={onSearch} />;
+  else return <Search goMain={goMain} onSearch={onSearch} query={query} />;
+}
+
+export default GoogleContainer;

@@ -519,7 +519,7 @@ export default styled(MineSweeperView)`
     font-size: 11px;
     &:hover {
       color: white;
-      background-color: #0b61ff;
+      background-color: #084fd2;
     }
   }
   .mine__content {

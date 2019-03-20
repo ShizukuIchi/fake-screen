@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ie from 'src/assets/internetExplorer/ie-paper.png';
 import printer from 'src/assets/internetExplorer/17(32x32).png';
@@ -17,9 +17,28 @@ import msn from 'src/assets/internetExplorer/msn.png';
 import refresh from 'src/assets/internetExplorer/refresh.png';
 import stop from 'src/assets/internetExplorer/stop.png';
 import windows from 'src/assets/internetExplorer/windows.png';
-import { Google } from 'src/themes';
+import { Google } from 'src/themes/Google';
 
 function InternetExplorer() {
+  const [state, setState] = useState({
+    route: 'main',
+    query: '',
+  });
+  function onSearch(str) {
+    if (str.length) {
+      setState({
+        route: 'search',
+        query: str,
+      });
+    }
+  }
+  function goMain() {
+    setState({
+      route: 'main',
+      query: '',
+    });
+  }
+
   return (
     <Div>
       <section className="ie__toolbar">
@@ -33,12 +52,17 @@ function InternetExplorer() {
         <img className="ie__toolbar__img" src={windows} alt="windows" />
       </section>
       <section className="ie__function_bar">
-        <div className="ie__function_bar__button">
+        <div
+          onClick={goMain}
+          className={`ie__function_bar__button${
+            state.route === 'main' ? '--disable' : ''
+          }`}
+        >
           <img className="ie__function_bar__icon" src={back} alt="" />
           <span className="ie__function_bar__text">Back</span>
           <div className="ie__function_bar__arrow" />
         </div>
-        <div className="ie__function_bar__button">
+        <div className="ie__function_bar__button--disable">
           <img className="ie__function_bar__icon" src={forward} alt="" />
           <div className="ie__function_bar__arrow" />
         </div>
@@ -52,7 +76,7 @@ function InternetExplorer() {
             alt=""
           />
         </div>
-        <div className="ie__function_bar__button">
+        <div className="ie__function_bar__button" onClick={goMain}>
           <img className="ie__function_bar__icon--margin-1" src={home} alt="" />
         </div>
         <div className="ie__function_bar__separate" />
@@ -99,7 +123,9 @@ function InternetExplorer() {
         <div className="ie__address_bar__content">
           <img src={ie} alt="ie" className="ie__address_bar__content__img" />
           <div className="ie__address_bar__content__text">
-            https://www.google.com.tw
+            {`https://www.google.com.tw${
+              state.route === 'search' ? `/search?q=${state.query}` : ''
+            }`}
           </div>
         </div>
         <div className="ie__address_bar__go">
@@ -118,7 +144,12 @@ function InternetExplorer() {
       </section>
       <div className="ie__content">
         <div className="ie__content__inner">
-          <Google />
+          <Google
+            route={state.route}
+            query={state.query}
+            onSearch={onSearch}
+            goMain={goMain}
+          />
         </div>
       </div>
       <footer className="ie__footer">
@@ -179,7 +210,7 @@ const Div = styled.div`
     display: flex;
     align-items: center;
     font-size: 11px;
-    padding: 0 3px;
+    padding: 1px 3px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .ie__function_bar__button {
@@ -192,8 +223,19 @@ const Div = styled.div`
       border: 1px solid rgba(0, 0, 0, 0.1);
       box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.1);
     }
+    &:hover:active {
+      border: 1px solid rgb(185, 185, 185);
+      background-color: #dedede;
+      box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.7);
+      & > * {
+        transform: translate(1px, 1px);
+      }
+    }
   }
   .ie__function_bar__button--disable {
+    filter: grayscale(1);
+    opacity: 0.7;
     display: flex;
     height: 100%;
     align-items: center;

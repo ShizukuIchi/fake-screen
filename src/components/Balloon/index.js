@@ -5,7 +5,7 @@ function Balloon({ style }) {
   const [show, setShow] = useState(true);
   const [start, setStart] = useState(false);
   useEffect(() => {
-    const openTimer = setTimeout(() => setStart(true), 3000);
+    const openTimer = setTimeout(() => setStart(true), 2000);
     const closeTimer = setTimeout(() => setShow(false), 15000);
     return () => {
       clearTimeout(openTimer);
