@@ -20,7 +20,7 @@ import windows from 'src/assets/internetExplorer/windows.png';
 import { Google } from 'src/themes/Google';
 import DropDown from './Dropdown';
 import dropDownData from './dropDownData';
-function InternetExplorer() {
+function InternetExplorer({ onClose }) {
   const [state, setState] = useState({
     route: 'main',
     query: '',
@@ -47,6 +47,14 @@ function InternetExplorer() {
     const option = e.target.closest('.ie__toolbar__drop-down__label');
     setOpenOption(option && option.textContent);
   }
+  function onClickOptionItem(item) {
+    switch (item) {
+      case 'Close':
+        return onClose();
+      default:
+        return;
+    }
+  }
   useEffect(() => {
     window.addEventListener('mouseup', onMouseUp);
     return () => {
@@ -66,6 +74,7 @@ function InternetExplorer() {
             >
               <div className="ie__toolbar__drop-down__label">{name}</div>
               <DropDown
+                onClick={onClickOptionItem}
                 items={dropDownData[name]}
                 position={{ top: '20px', left: '0' }}
               />

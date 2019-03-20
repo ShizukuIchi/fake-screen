@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-export function DropDown({ items, position = {} }) {
+export function DropDown({ items, position = {}, onClick }) {
   const [option, setOption] = useState('');
   function onMouseEnter(o) {
     setOption(o);
   }
-  function _onClick(op) {
-    console.log(op);
+  function _onClick(o) {
+    onClick(o);
   }
   return (
     <Div {...position}>
