@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "7a96c7d635e55db9000deaf8f22eb035",
-    "url": "/fake-screen/static/media/doge.7a96c7d6.ico"
+    "revision": "25e82cdb5ded265ec387736f7ed58ae1",
+    "url": "/fake-screen/static/media/user.25e82cdb.svg"
   },
   {
-    "revision": "d1089498a07542eac136",
-    "url": "/fake-screen/static/css/main.ac3205fb.chunk.css"
+    "revision": "4f870a39f56911f30d3e",
+    "url": "/fake-screen/static/css/main.07283811.chunk.css"
   },
   {
-    "revision": "250f3725d02fa5c1db04",
-    "url": "/fake-screen/static/js/1.250f3725.chunk.js"
+    "revision": "ffcada2fb567b1ddae87",
+    "url": "/fake-screen/static/js/1.ffcada2f.chunk.js"
   },
   {
     "revision": "b33e56f1db5c3bfe316a",
@@ -20,10 +20,6 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/smile.33211a17.svg"
   },
   {
-    "revision": "fa50144076135e2440f4d8089d0cbec9",
-    "url": "/fake-screen/static/media/ie.fa501440.ico"
-  },
-  {
     "revision": "13b72f8e9af511c6a0637551918938ce",
     "url": "/fake-screen/static/media/apple.13b72f8e.svg"
   },
@@ -32,12 +28,12 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/find.cfc00209.svg"
   },
   {
-    "revision": "d1089498a07542eac136",
-    "url": "/fake-screen/static/js/main.d1089498.chunk.js"
+    "revision": "7a96c7d635e55db9000deaf8f22eb035",
+    "url": "/fake-screen/static/media/doge.7a96c7d6.ico"
   },
   {
-    "revision": "25e82cdb5ded265ec387736f7ed58ae1",
-    "url": "/fake-screen/static/media/user.25e82cdb.svg"
+    "revision": "4f870a39f56911f30d3e",
+    "url": "/fake-screen/static/js/main.4f870a39.chunk.js"
   },
   {
     "revision": "886c1c9a8bd27d5bdb558d735f850c7f",
@@ -64,7 +60,11 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/restore.8e8ae78a.ico"
   },
   {
-    "revision": "4c22e39aac841b0e88766736b2d1f543",
+    "revision": "415b027d489dfadce00f9e229872e609",
+    "url": "/fake-screen/static/media/view-info.415b027d.ico"
+  },
+  {
+    "revision": "c074c420f5ccbe517c177f7fcaa13fb9",
     "url": "/fake-screen/index.html"
   }
 ];
