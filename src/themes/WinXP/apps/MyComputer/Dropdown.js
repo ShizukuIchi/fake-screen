@@ -57,11 +57,7 @@ export function DropDown({ items, position = {}, onClick }) {
                   <div className="ie__drop-down__arrow" />
                   <div style={{ position: 'relative' }}>
                     {option === item.text && (
-                      <DropDown
-                        position={item.position}
-                        items={item.items}
-                        onClick={onClick}
-                      />
+                      <DropDown position={item.position} items={item.items} />
                     )}
                   </div>
                 </div>

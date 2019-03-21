@@ -23,7 +23,13 @@ const getTime = () => {
   return `${hour}:${min} ${hourPostFix}`;
 };
 
-function Footer({ onMouseDownApp, apps, focusedAppId, onMouseDown }) {
+function Footer({
+  onMouseDownApp,
+  apps,
+  focusedAppId,
+  onMouseDown,
+  onClickMenuItem,
+}) {
   const [time, setTime] = useState(getTime);
   const [menuOn, setMenuOn] = useState(false);
   const menu = useRef(null);
@@ -33,6 +39,10 @@ function Footer({ onMouseDownApp, apps, focusedAppId, onMouseDown }) {
   function _onMouseDown(e) {
     if (e.target.closest('.footer__window')) return;
     onMouseDown();
+  }
+  function _onClickMenuItem(name) {
+    onClickMenuItem(name);
+    setMenuOn(false);
   }
   useEffect(() => {
     const timer = setInterval(() => {
@@ -50,11 +60,12 @@ function Footer({ onMouseDownApp, apps, focusedAppId, onMouseDown }) {
     window.addEventListener('mousedown', onMouseDown);
     return () => window.removeEventListener('mousedown', onMouseDown);
   }, [menuOn]);
+
   return (
     <Container>
       <div className="footer__items left" onMouseDown={_onMouseDown}>
         <div ref={menu} className="footer__start__menu">
-          {menuOn && <FooterMenu />}
+          {menuOn && <FooterMenu onClick={_onClickMenuItem} />}
         </div>
         <img
           src={startButton}

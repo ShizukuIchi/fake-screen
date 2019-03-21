@@ -31,7 +31,7 @@ function Icon({
     onMouseDown(component);
   }
   function _onDoubleClick() {
-    const setting = appSettings.find(s => s.component === component);
+    const setting = appSettings[title];
     onDoubleClick(setting);
   }
   return (

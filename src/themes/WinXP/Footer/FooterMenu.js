@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ie from 'src/assets/internetExplorer/ie.ico';
+import ie from 'src/assets/internetExplorer/ie.png';
 import mine from 'src/assets/minesweeper/mine-icon.png';
 import setAccess from 'src/assets/windowsIcons/227(32x32).png';
 import outlook from 'src/assets/windowsIcons/887(32x32).png';
@@ -31,7 +31,7 @@ import SubMenu from 'src/components/SubMenu';
 
 import { AllPrograms, ConnectTo, MyRecentDocuments } from './FooterMenuData';
 
-function FooterMenu({ className }) {
+function FooterMenu({ className, onClick }) {
   const [hovering, setHovering] = useState('');
   function onMouseOver(e) {
     const item = e.target.closest('.menu__item');
@@ -47,7 +47,7 @@ function FooterMenu({ className }) {
       <section className="menu" onMouseOver={onMouseOver}>
         <hr className="orange-hr" />
         <div className="menu__left">
-          <Item text="Internet" icon={ie}>
+          <Item onClick={onClick} text="Internet" icon={ie}>
             <div className="menu__item__subtext">Internet Explorer</div>
           </Item>
           <Item text="E-mail" icon={outlook}>
@@ -55,6 +55,7 @@ function FooterMenu({ className }) {
           </Item>
           <div className="menu__separator" />
           <Items
+            onClick={onClick}
             items={[
               { icon: mine, text: 'Minesweeper' },
               { icon: mediaPlayer, text: 'Windows Media Player' },

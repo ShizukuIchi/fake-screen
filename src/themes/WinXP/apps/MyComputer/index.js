@@ -44,21 +44,16 @@ function InternetExplorer({ onClose }) {
     if (openOption) setOpenOption(option);
   }
   function onMouseUp(e) {
-    const option = e.target.closest('.ie__toolbar__drop-downs');
-    if (!option) setOpenOption('');
+    const option = e.target.closest('.ie__toolbar__drop-down__label');
+    setOpenOption(option && option.textContent);
   }
   function onClickOptionItem(item) {
     switch (item) {
       case 'Close':
-        onClose();
-        break;
-      case 'Home Page':
-      case 'Back':
-        goMain();
-        break;
+        return onClose();
       default:
+        return;
     }
-    setOpenOption('');
   }
   useEffect(() => {
     window.addEventListener('mouseup', onMouseUp);
@@ -78,13 +73,11 @@ function InternetExplorer({ onClose }) {
               key={name}
             >
               <div className="ie__toolbar__drop-down__label">{name}</div>
-              {openOption === name && (
-                <DropDown
-                  onClick={onClickOptionItem}
-                  items={dropDownData[name]}
-                  position={{ top: '20px', left: '0' }}
-                />
-              )}
+              <DropDown
+                onClick={onClickOptionItem}
+                items={dropDownData[name]}
+                position={{ top: '20px', left: '0' }}
+              />
             </div>
           ))}
         </div>

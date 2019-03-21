@@ -2,7 +2,8 @@ import React, { useReducer, useEffect, useRef } from 'react';
 import Footer from 'src/themes/WinXP/Footer';
 import styled from 'styled-components';
 
-import { defaultIconState, defaultAppState } from './apps';
+import { defaultIconState, defaultAppState, appSettings } from './apps';
+import { InternetExplorer, Minesweeper } from './apps';
 import Windows from './Windows';
 import Icons from './Icons';
 
@@ -135,6 +136,13 @@ function WinXP() {
   function onMouseDownFooter() {
     dispatch({ type: 'FOCUS_DESKTOP' });
   }
+  function onClickMenuItem(o) {
+    if (o === 'Internet')
+      dispatch({ type: 'ADD_APP', payload: appSettings['Internet Explorer'] });
+    else if (o === 'Minesweeper')
+      dispatch({ type: 'ADD_APP', payload: appSettings.Minesweeper });
+    else dispatch({ type: 'ADD_APP', payload: appSettings.Error });
+  }
   useEffect(() => {
     const target = ref.current;
     if (!target) return;
@@ -155,6 +163,7 @@ function WinXP() {
         onMouseDown={onMouseDownIcon}
         onDoubleClick={onDoubleClickIcon}
         displayFocus={state.focusing === 'icon'}
+        appSettings={appSettings}
       />
       <Windows
         apps={state.apps}
@@ -169,6 +178,7 @@ function WinXP() {
         onMouseDownApp={onMouseDownFooterApp}
         focusedAppId={focusedAppId}
         onMouseDown={onMouseDownFooter}
+        onClickMenuItem={onClickMenuItem}
       />
     </Container>
   );
