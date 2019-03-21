@@ -88,6 +88,7 @@ function MineSweeperView({
   openingCeils,
 }) {
   const face = useRef(null);
+  const dropDown = useRef(null);
   const [mouseDownContent, setMouseDownContent] = useState(false);
   const [openOption, setOpenOption] = useState(null);
   const [openBehavior, setOpenBehavior] = useState({ index: -1, behavior: '' });
@@ -174,8 +175,9 @@ function MineSweeperView({
   function onMouseUp(e) {
     setOpenBehavior({ index: -1, behavior: '' });
     setMouseDownContent(false);
-    const option = e.target.closest('.mine__drop-down__title');
-    setOpenOption(option && option.textContent);
+    if (!dropDown.current.contains(e.target)) {
+      setOpenOption('');
+    }
   }
   useEffect(() => {
     window.addEventListener('mouseup', onMouseUp);
@@ -185,7 +187,7 @@ function MineSweeperView({
   }, []);
   return (
     <div className={className} onContextMenu={e => e.preventDefault()}>
-      <div className="mine__drop-downs">
+      <div className="mine__drop-downs" ref={dropDown}>
         <div
           style={{ visibility: openOption === 'Game' ? 'visible' : 'hidden' }}
           className="mine__drop-down"

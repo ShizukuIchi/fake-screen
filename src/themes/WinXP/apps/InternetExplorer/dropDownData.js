@@ -130,7 +130,7 @@ const Edit = [
     type: 'item',
     disable: true,
     text: 'Paste',
-    hotkey: 'Ctrl+Y',
+    hotkey: 'Ctrl+V',
   },
   {
     type: 'separator',

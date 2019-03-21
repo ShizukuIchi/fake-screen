@@ -1,10 +1,13 @@
 import InternetExplorer from './InternetExplorer';
 import Minesweeper from './Minesweeper';
 import ErrorBox from './ErrorBox';
+import MyComputer from './MyComputer';
 import iePaper from 'src/assets/internetExplorer/ie-paper.png';
 import ie from 'src/assets/internetExplorer/ie.png';
 import mine from 'src/assets/minesweeper/mine-icon.png';
 import error from 'src/assets/windowsIcons/897(16x16).png';
+import computer from 'src/assets/windowsIcons/676(16x16).png';
+import computerLarge from 'src/assets/windowsIcons/676(32x32).png';
 
 export const defaultAppState = [
   {
@@ -41,6 +44,23 @@ export const defaultAppState = [
     maximized: false,
     id: 1,
   },
+  {
+    component: MyComputer,
+    title: 'My Computer',
+    defaultSize: {
+      width: 600,
+      height: 500,
+    },
+    defaultOffset: {
+      x: 100,
+      y: 150,
+    },
+    resizable: true,
+    headerIcon: computer,
+    minimized: false,
+    maximized: false,
+    id: 2,
+  },
 ];
 
 export const defaultIconState = [
@@ -54,6 +74,12 @@ export const defaultIconState = [
     icon: mine,
     title: 'Minesweeper',
     component: Minesweeper,
+    isFocus: false,
+  },
+  {
+    icon: computerLarge,
+    title: 'My Computer',
+    component: MyComputer,
     isFocus: false,
   },
 ];
@@ -107,6 +133,22 @@ export const appSettings = {
     minimized: false,
     maximized: false,
   },
+  'My Computer': {
+    component: MyComputer,
+    title: 'My Computer',
+    defaultSize: {
+      width: 600,
+      height: 500,
+    },
+    defaultOffset: {
+      x: 100,
+      y: 200,
+    },
+    resizable: true,
+    headerIcon: computer,
+    minimized: false,
+    maximized: false,
+  },
 };
 
-export { InternetExplorer, Minesweeper, ErrorBox };
+export { InternetExplorer, Minesweeper, ErrorBox, MyComputer };

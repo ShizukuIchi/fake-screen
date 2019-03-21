@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import ie from 'src/assets/internetExplorer/ie-paper.png';
 import printer from 'src/assets/internetExplorer/17(32x32).png';
@@ -21,6 +21,7 @@ import { Google } from 'src/themes/Google';
 import DropDown from './Dropdown';
 import dropDownData from './dropDownData';
 function InternetExplorer({ onClose }) {
+  const dropDown = useRef(null);
   const [state, setState] = useState({
     route: 'main',
     query: '',
@@ -44,8 +45,7 @@ function InternetExplorer({ onClose }) {
     if (openOption) setOpenOption(option);
   }
   function onMouseUp(e) {
-    const option = e.target.closest('.ie__toolbar__drop-downs');
-    if (!option) setOpenOption('');
+    if (!dropDown.current.contains(e.target)) setOpenOption('');
   }
   function onClickOptionItem(item) {
     switch (item) {
@@ -69,7 +69,7 @@ function InternetExplorer({ onClose }) {
   return (
     <Div>
       <section className="ie__toolbar">
-        <div className="ie__toolbar__drop-downs">
+        <div className="ie__toolbar__drop-downs" ref={dropDown}>
           {'File,Edit,View,Favorites,Tools,Help'.split(',').map(name => (
             <div
               className={`ie__toolbar__drop-down${

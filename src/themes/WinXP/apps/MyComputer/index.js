@@ -1,59 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import ie from 'src/assets/internetExplorer/ie-paper.png';
-import printer from 'src/assets/internetExplorer/17(32x32).png';
 import go from 'src/assets/internetExplorer/290.png';
-import links from 'src/assets/internetExplorer/links.png';
 import search from 'src/assets/internetExplorer/299(32x32).png';
-import favorite from 'src/assets/internetExplorer/744(32x32).png';
+import computer from 'src/assets/windowsIcons/676(16x16).png';
 import back from 'src/assets/internetExplorer/back.png';
-import earth from 'src/assets/internetExplorer/earth.png';
-import edit from 'src/assets/internetExplorer/edit.png';
 import forward from 'src/assets/internetExplorer/forward.png';
-import history from 'src/assets/internetExplorer/history.png';
-import home from 'src/assets/internetExplorer/home.png';
-import mail from 'src/assets/internetExplorer/mail.png';
-import msn from 'src/assets/internetExplorer/msn.png';
-import refresh from 'src/assets/internetExplorer/refresh.png';
-import stop from 'src/assets/internetExplorer/stop.png';
-import windows from 'src/assets/internetExplorer/windows.png';
-import { Google } from 'src/themes/Google';
+import up from 'src/assets/windowsIcons/up.png';
+import viewInfo from 'src/assets/windowsIcons/view-info.ico';
+import remove from 'src/assets/windowsIcons/302(16x16).png';
+import control from 'src/assets/windowsIcons/300(16x16).png';
+import network from 'src/assets/windowsIcons/693(16x16).png';
+import document from 'src/assets/windowsIcons/308(16x16).png';
+import folderSmall from 'src/assets/windowsIcons/318(16x16).png';
+import menu from 'src/assets/windowsIcons/358(32x32).png';
+import folder from 'src/assets/windowsIcons/318(32x32).png';
+import folderOpen from 'src/assets/windowsIcons/337(32x32).png';
+import disk from 'src/assets/windowsIcons/334(32x32).png';
+import cd from 'src/assets/windowsIcons/111(32x32).png';
+
 import DropDown from './Dropdown';
 import dropDownData from './dropDownData';
-function InternetExplorer({ onClose }) {
-  const [state, setState] = useState({
-    route: 'main',
-    query: '',
-  });
-  function onSearch(str) {
-    if (str.length) {
-      setState({
-        route: 'search',
-        query: str,
-      });
-    }
-  }
-  function goMain() {
-    setState({
-      route: 'main',
-      query: '',
-    });
-  }
+function MyComputer({ onClose }) {
+  const dropDown = useRef(null);
   const [openOption, setOpenOption] = useState('');
   function hoverOption(option) {
     if (openOption) setOpenOption(option);
   }
   function onMouseUp(e) {
-    const option = e.target.closest('.ie__toolbar__drop-down__label');
-    setOpenOption(option && option.textContent);
+    if (!dropDown.current.contains(e.target)) setOpenOption('');
   }
   function onClickOptionItem(item) {
     switch (item) {
       case 'Close':
-        return onClose();
+        onClose();
+        break;
       default:
-        return;
     }
+    setOpenOption('');
   }
   useEffect(() => {
     window.addEventListener('mouseup', onMouseUp);
@@ -63,25 +46,27 @@ function InternetExplorer({ onClose }) {
   }, []);
   return (
     <Div>
-      <section className="ie__toolbar">
-        <div className="ie__toolbar__drop-downs">
+      <section className="com__toolbar">
+        <div className="com__toolbar__drop-downs" ref={dropDown}>
           {'File,Edit,View,Favorites,Tools,Help'.split(',').map(name => (
             <div
-              className={`ie__toolbar__drop-down${
+              className={`com__toolbar__drop-down${
                 openOption === name ? '--active' : ''
               }`}
               key={name}
             >
-              <div className="ie__toolbar__drop-down__label">{name}</div>
-              <DropDown
-                onClick={onClickOptionItem}
-                items={dropDownData[name]}
-                position={{ top: '20px', left: '0' }}
-              />
+              <div className="com__toolbar__drop-down__label">{name}</div>
+              {openOption === name && (
+                <DropDown
+                  onClick={onClickOptionItem}
+                  items={dropDownData[name]}
+                  position={{ top: '20px', left: '0' }}
+                />
+              )}
             </div>
           ))}
         </div>
-        <div className="ie__toolbar__options">
+        <div className="com__toolbar__options">
           {'File,Edit,View,Favorites,Tools,Help'.split(',').map(name => (
             <div
               key={name}
@@ -89,130 +74,234 @@ function InternetExplorer({ onClose }) {
                 setOpenOption(name);
               }}
               onMouseEnter={() => hoverOption(name)}
-              className="ie__toolbar__option"
+              className="com__toolbar__option"
             >
               {name}
             </div>
           ))}
         </div>
-        <img className="ie__toolbar__img" src={windows} alt="windows" />
       </section>
-      <section className="ie__function_bar">
-        <div
-          onClick={goMain}
-          className={`ie__function_bar__button${
-            state.route === 'main' ? '--disable' : ''
-          }`}
-        >
-          <img className="ie__function_bar__icon" src={back} alt="" />
-          <span className="ie__function_bar__text">Back</span>
-          <div className="ie__function_bar__arrow" />
+      <section className="com__function_bar">
+        <div className="com__function_bar__button--disable">
+          <img className="com__function_bar__icon" src={back} alt="" />
+          <span className="com__function_bar__text">Back</span>
+          <div className="com__function_bar__arrow" />
         </div>
-        <div className="ie__function_bar__button--disable">
-          <img className="ie__function_bar__icon" src={forward} alt="" />
-          <div className="ie__function_bar__arrow" />
+        <div className="com__function_bar__button--disable">
+          <img className="com__function_bar__icon" src={forward} alt="" />
+          <div className="com__function_bar__arrow" />
         </div>
-        <div className="ie__function_bar__button">
-          <img className="ie__function_bar__icon--margin-1" src={stop} alt="" />
+        <div className="com__function_bar__button">
+          <img className="com__function_bar__icon--normalize" src={up} alt="" />
         </div>
-        <div className="ie__function_bar__button">
+        <div className="com__function_bar__separate" />
+        <div className="com__function_bar__button">
           <img
-            className="ie__function_bar__icon--margin-1"
-            src={refresh}
-            alt=""
-          />
-        </div>
-        <div className="ie__function_bar__button" onClick={goMain}>
-          <img className="ie__function_bar__icon--margin-1" src={home} alt="" />
-        </div>
-        <div className="ie__function_bar__separate" />
-        <div className="ie__function_bar__button">
-          <img
-            className="ie__function_bar__icon--normalize "
+            className="com__function_bar__icon--normalize "
             src={search}
             alt=""
           />
-          <span className="ie__function_bar__text">Search</span>
+          <span className="com__function_bar__text">Search</span>
         </div>
-        <div className="ie__function_bar__button">
+        <div className="com__function_bar__button">
           <img
-            className="ie__function_bar__icon--normalize"
-            src={favorite}
+            className="com__function_bar__icon--normalize"
+            src={folderOpen}
             alt=""
           />
-          <span className="ie__function_bar__text">Favorites</span>
+          <span className="com__function_bar__text">Folders</span>
         </div>
-        <div className="ie__function_bar__button">
-          <img className="ie__function_bar__icon" src={history} alt="" />
-        </div>
-        <div className="ie__function_bar__separate" />
-        <div className="ie__function_bar__button">
-          <img className="ie__function_bar__icon--margin-1" src={mail} alt="" />
-          <div className="ie__function_bar__arrow--margin-11" />
-        </div>
-        <div className="ie__function_bar__button">
+        <div className="com__function_bar__separate" />
+        <div className="com__function_bar__button">
           <img
-            className="ie__function_bar__icon--margin12"
-            src={printer}
+            className="com__function_bar__icon--margin12"
+            src={menu}
             alt=""
           />
-        </div>
-        <div className="ie__function_bar__button--disable">
-          <img className="ie__function_bar__icon" src={edit} alt="" />
-        </div>
-        <div className="ie__function_bar__button">
-          <img className="ie__function_bar__icon--margin12" src={msn} alt="" />
+          <div className="com__function_bar__arrow" />
         </div>
       </section>
-      <section className="ie__address_bar">
-        <div className="ie__address_bar__title">Address</div>
-        <div className="ie__address_bar__content">
-          <img src={ie} alt="ie" className="ie__address_bar__content__img" />
-          <div className="ie__address_bar__content__text">
-            {`https://www.google.com.tw${
-              state.route === 'search' ? `/search?q=${state.query}` : ''
-            }`}
+      <section className="com__address_bar">
+        <div className="com__address_bar__title">Address</div>
+        <div className="com__address_bar__content">
+          <img
+            src={computer}
+            alt="ie"
+            className="com__address_bar__content__img"
+          />
+          <div className="com__address_bar__content__text">My Computer</div>
+        </div>
+        <div className="com__address_bar__go">
+          <img className="com__address_bar__go__img" src={go} alt="go" />
+          <span className="com__address_bar__go__text">Go</span>
+        </div>
+      </section>
+      <div className="com__content">
+        <div className="com__content__inner">
+          <div className="com__content__left">
+            <div className="com__content__left__card">
+              <div className="com__content__left__card__header">
+                System Tasks
+              </div>
+              <div className="com__content__left__card__content">
+                <div className="com__content__left__card__row">
+                  <img
+                    className="com__content__left__card__img"
+                    src={viewInfo}
+                    alt="view"
+                  />
+                  <div className="com__content__left__card__text">
+                    View system information
+                  </div>
+                </div>
+                <div className="com__content__left__card__row">
+                  <img
+                    className="com__content__left__card__img"
+                    src={remove}
+                    alt="remove"
+                  />
+                  <div className="com__content__left__card__text">
+                    Add or remove programs
+                  </div>
+                </div>
+                <div className="com__content__left__card__row">
+                  <img
+                    className="com__content__left__card__img"
+                    src={control}
+                    alt="control"
+                  />
+                  <div className="com__content__left__card__text">
+                    Change a setting
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="com__content__left__card">
+              <div className="com__content__left__card__header">
+                Other Places
+              </div>
+              <div className="com__content__left__card__content">
+                <div className="com__content__left__card__row">
+                  <img
+                    className="com__content__left__card__img"
+                    src={network}
+                    alt="network"
+                  />
+                  <div className="com__content__left__card__text">
+                    My Network Places
+                  </div>
+                </div>
+                <div className="com__content__left__card__row">
+                  <img
+                    className="com__content__left__card__img"
+                    src={document}
+                    alt="document"
+                  />
+                  <div className="com__content__left__card__text">
+                    My Documents
+                  </div>
+                </div>
+                <div className="com__content__left__card__row">
+                  <img
+                    className="com__content__left__card__img"
+                    src={folderSmall}
+                    alt="folder"
+                  />
+                  <div className="com__content__left__card__text">
+                    Shared Documents
+                  </div>
+                </div>
+                <div className="com__content__left__card__row">
+                  <img
+                    className="com__content__left__card__img"
+                    src={control}
+                    alt="control"
+                  />
+                  <div className="com__content__left__card__text">
+                    Control Panel
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="com__content__left__card">
+              <div className="com__content__left__card__header">Details</div>
+              <div className="com__content__left__card__content">
+                <div className="com__content__left__card__row">
+                  <div className="com__content__left__card__text">
+                    My Computer
+                  </div>
+                  <div className="com__content__left__card__text">
+                    System Folder
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="com__content__right">
+            <div className="com__content__right__card">
+              <div className="com__content__right__card__header">
+                Files Stored on This Computer
+              </div>
+              <div className="com__content__right__card__content">
+                <div className="com__content__right__card__item">
+                  <img
+                    src={folder}
+                    alt="folder"
+                    className="com__content__right__card__img"
+                  />
+                  <div className="com__content__right__card__text">
+                    Shared Documents
+                  </div>
+                </div>
+                <div className="com__content__right__card__item">
+                  <img
+                    src={folder}
+                    alt="folder"
+                    className="com__content__right__card__img"
+                  />
+                  <div className="com__content__right__card__text">
+                    User's Documents
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="com__content__right__card">
+              <div className="com__content__right__card__header">
+                Hard Disk Drives
+              </div>
+              <div className="com__content__right__card__content">
+                <div className="com__content__right__card__item">
+                  <img
+                    src={disk}
+                    alt="disk"
+                    className="com__content__right__card__img"
+                  />
+                  <div className="com__content__right__card__text">
+                    Local Disk (C:)
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="com__content__right__card">
+              <div className="com__content__right__card__header">
+                Devices with Removable Storage
+              </div>
+              <div className="com__content__right__card__content">
+                <div className="com__content__right__card__item">
+                  <img
+                    src={cd}
+                    alt="cd"
+                    className="com__content__right__card__img"
+                  />
+                  <div className="com__content__right__card__text">
+                    CD Drive (D:)
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="ie__address_bar__go">
-          <img className="ie__address_bar__go__img" src={go} alt="go" />
-          <span className="ie__address_bar__go__text">Go</span>
-        </div>
-        <div className="ie__address_bar__separate" />
-        <div className="ie__address_bar__links">
-          <span className="ie__address_bar__links__text">Links</span>
-          <img
-            className="ie__address_bar__links__img"
-            src={links}
-            alt="links"
-          />
-        </div>
-      </section>
-      <div className="ie__content">
-        <div className="ie__content__inner">
-          <Google
-            route={state.route}
-            query={state.query}
-            onSearch={onSearch}
-            goMain={goMain}
-          />
-        </div>
       </div>
-      <footer className="ie__footer">
-        <div className="ie__footer__status">
-          <img className="ie__footer__status__img" src={ie} alt="" />
-          <span className="ie__footer__status__text">Done</span>
-        </div>
-        <div className="ie__footer__block" />
-        <div className="ie__footer__block" />
-        <div className="ie__footer__block" />
-        <div className="ie__footer__block" />
-        <div className="ie__footer__right">
-          <img className="ie__footer__right__img" src={earth} alt="" />
-          <span className="ie__footer__right__text">Internet</span>
-          <div className="ie__footer__right__dots" />
-        </div>
-      </footer>
     </Div>
   );
 }
@@ -225,21 +314,22 @@ const Div = styled.div`
   overflow: hidden;
   flex-direction: column;
   background: linear-gradient(to right, #edede5 0%, #ede8cd 100%);
-  .ie__toolbar {
+  .com__toolbar {
     position: relative;
     display: flex;
     align-items: center;
     line-height: 100%;
     height: 22px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    flex-shrink: 0;
   }
-  .ie__toolbar__drop-downs {
+  .com__toolbar__drop-downs {
     display: flex;
     height: 100%;
     position: absolute;
     border-bottom: 1px solid transparent;
   }
-  .ie__toolbar__drop-down {
+  .com__toolbar__drop-down {
     font-size: 11px;
     line-height: 20px;
     height: 100%;
@@ -247,7 +337,7 @@ const Div = styled.div`
     position: relative;
     visibility: hidden;
   }
-  .ie__toolbar__drop-down--active {
+  .com__toolbar__drop-down--active {
     font-size: 11px;
     line-height: 20px;
     height: 100%;
@@ -256,11 +346,11 @@ const Div = styled.div`
     background-color: #1660e8;
     position: relative;
   }
-  .ie__toolbar__drop-down__label {
+  .com__toolbar__drop-down__label {
     padding: 0 7px;
     color: #fff;
   }
-  .ie__toolbar__options {
+  .com__toolbar__options {
     position: relative;
     flex: 1;
     display: flex;
@@ -270,7 +360,7 @@ const Div = styled.div`
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     border-right: 1px solid rgba(0, 0, 0, 0.15);
   }
-  .ie__toolbar__option {
+  .com__toolbar__option {
     font-size: 11px;
     line-height: 20px;
     height: 100%;
@@ -280,20 +370,21 @@ const Div = styled.div`
       color: #fff;
     }
   }
-  .ie__toolbar__img {
+  .com__toolbar__img {
     height: 100%;
     border-left: 1px solid white;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  .ie__function_bar {
+  .com__function_bar {
     height: 36px;
     display: flex;
     align-items: center;
     font-size: 11px;
     padding: 1px 3px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
   }
-  .ie__function_bar__button {
+  .com__function_bar__button {
     display: flex;
     height: 100%;
     align-items: center;
@@ -313,7 +404,7 @@ const Div = styled.div`
       }
     }
   }
-  .ie__function_bar__button--disable {
+  .com__function_bar__button--disable {
     filter: grayscale(1);
     opacity: 0.7;
     display: flex;
@@ -321,10 +412,10 @@ const Div = styled.div`
     align-items: center;
     border: 1px solid rgba(0, 0, 0, 0);
   }
-  .ie__function_bar__text {
+  .com__function_bar__text {
     margin-right: 4px;
   }
-  .ie__function_bar__icon {
+  .com__function_bar__icon {
     height: 30px;
     width: 30px;
     &--normalize {
@@ -343,13 +434,13 @@ const Div = styled.div`
       width: 30px;
     }
   }
-  .ie__function_bar__separate {
+  .com__function_bar__separate {
     height: 90%;
     width: 1px;
     background-color: rgba(0, 0, 0, 0.2);
     margin: 0 2px;
   }
-  .ie__function_bar__arrow {
+  .com__function_bar__arrow {
     height: 100%;
     display: flex;
     align-items: center;
@@ -362,7 +453,7 @@ const Div = styled.div`
       border-style: solid;
     }
   }
-  .ie__function_bar__arrow--margin-11 {
+  .com__function_bar__arrow--margin-11 {
     height: 100%;
     display: flex;
     align-items: center;
@@ -375,7 +466,8 @@ const Div = styled.div`
       border-style: solid;
     }
   }
-  .ie__address_bar {
+  .com__address_bar {
+    flex-shrink: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.7);
     height: 22px;
     font-size: 11px;
@@ -384,12 +476,12 @@ const Div = styled.div`
     padding: 0 2px 2px;
     box-shadow: inset 0 -2px 3px -1px #2d2d2d;
   }
-  .ie__address_bar__title {
+  .com__address_bar__title {
     line-height: 100%;
     color: rgba(0, 0, 0, 0.5);
     padding: 5px;
   }
-  .ie__address_bar__content {
+  .com__address_bar__content {
     border: rgba(122, 122, 255, 0.6) 1px solid;
     height: 100%;
     display: flex;
@@ -407,7 +499,7 @@ const Div = styled.div`
       line-height: 100%;
     }
   }
-  .ie__address_bar__go {
+  .com__address_bar__go {
     display: flex;
     align-items: center;
     padding: 0 18px 0 5px;
@@ -419,7 +511,7 @@ const Div = styled.div`
       margin-right: 3px;
     }
   }
-  .ie__address_bar__links {
+  .com__address_bar__links {
     display: flex;
     align-items: center;
     padding: 0 18px 0 5px;
@@ -436,88 +528,99 @@ const Div = styled.div`
       color: rgba(0, 0, 0, 0.5);
     }
   }
-  .ie__address_bar__separate {
+  .com__address_bar__separate {
     height: 100%;
     width: 1px;
     background-color: rgba(0, 0, 0, 0.1);
     box-shadow: 1px 0 rgba(255, 255, 255, 0.7);
   }
-  .ie__content {
+  .com__content {
     flex: 1;
-    overflow: auto;
-    padding-left: 1px;
-    border-left: 1px solid #6f6f6f;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-top-width: 0;
     background-color: #f1f1f1;
+    overflow: auto;
+    font-size: 11px;
     position: relative;
   }
-  .ie__content__inner {
-    position: relative;
-    min-height: 800px;
-    min-width: 800px;
+  .com__content__inner {
+    display: flex;
+    height: 100%;
+    overflow: auto;
+  }
+  .com__content__left {
+    width: 160px;
+    height: 100%;
+    background-color: blue;
+    overflow: auto;
+    padding: 12px;
+  }
+
+  .com__content__left__card {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
     width: 100%;
-    height: 100%;
+    background-color: #fff;
+    overflow: hidden;
   }
-  .ie__footer {
-    height: 20px;
-    border-top: 1px solid transparent;
-    box-shadow: inset 0 1px 3px rgba(50, 50, 50, 0.8);
-    background-color: rgb(236, 233, 216);
+  .com__content__left__card:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  .com__content__left__card__header {
+    padding: 5px 0 5px 10px;
+    font-weight: 700;
+    background: linear-gradient(to right, #fff 0, lightblue 100%);
+  }
+  .com__content__left__card__content {
+    padding: 5px 0 5px 10px;
+    font-weight: 700;
+    background-color: skyblue;
+  }
+  .com__content__left__card__row {
     display: flex;
-    align-items: center;
-    padding-top: 2px;
   }
-  .ie__footer__status {
+  .com__content__left__card__img {
+    width: 14px;
+    height: 14px;
+  }
+  .com__content__right {
+    height: 100%;
+    overflow: auto;
+    background-color: #fff;
     flex: 1;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 2px;
-    &__text {
-      font-size: 11px;
-    }
-    &__img {
-      height: 14px;
-      width: 14px;
-      margin-right: 3px;
-    }
   }
-  .ie__footer__block {
-    height: 85%;
-    width: 22px;
-    border-left: 1px solid rgba(0, 0, 0, 0.15);
-    box-shadow: inset 1px 0 rgba(255, 255, 255, 0.7);
-  }
-  .ie__footer__right {
-    display: flex;
-    align-items: center;
-    width: 150px;
-    height: 80%;
-    border-left: 1px solid rgba(0, 0, 0, 0.11);
-    box-shadow: inset 1px 0 rgba(255, 255, 255, 0.7);
-    padding-left: 5px;
+  .com__content__right__card__header {
+    width: 300px;
+    font-weight: 700;
+    padding: 2px 0 5px 12px;
     position: relative;
-    &__text {
-      font-size: 11px;
-    }
-    &__img {
-      height: 14px;
-      width: 14px;
-      margin-right: 3px;
-    }
-    &__dots {
+    &:after {
+      content: '';
+      display: block;
+      background-color: blue;
       position: absolute;
-      right: 11px;
-      bottom: -1px;
-      width: 2px;
+      bottom: 0;
+      left: -12px;
       height: 2px;
-      box-shadow: 2px 0px rgba(0, 0, 0, 0.25), 5.5px 0px rgba(0, 0, 0, 0.25),
-        9px 0px rgba(0, 0, 0, 0.25), 5.5px -3.5px rgba(0, 0, 0, 0.25),
-        9px -3.5px rgba(0, 0, 0, 0.25), 9px -7px rgba(0, 0, 0, 0.25),
-        3px 1px rgba(255, 255, 255, 1), 6.5px 1px rgba(255, 255, 255, 1),
-        10px 1px rgba(255, 255, 255, 1), 10px -2.5px rgba(255, 255, 255, 1),
-        10px -6px rgba(255, 255, 255, 1);
+      width: 100%;
     }
+  }
+  .com__content__right__card__content {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    padding-right: 0;
+  }
+  .com__content__right__card__item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 200px;
+  }
+  .com__content__right__card__img {
+  }
+  .com__content__right__card__text {
   }
 `;
 
-export default InternetExplorer;
+export default MyComputer;

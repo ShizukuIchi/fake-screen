@@ -73,17 +73,21 @@ const StyledIcon = styled(Icon)`
 
     &:before {
       content: '';
-      width: 50%;
+      display: block;
+      flex-grow: 1;
     }
     &:after {
       content: '';
-      width: 50%;
+      display: block;
+      flex-grow: 1;
     }
   }
   &__text {
     padding: 0 3px 2px;
     background-color: ${({ isFocus, displayFocus }) =>
       isFocus && displayFocus ? '#0b61ff' : 'transparent'};
+    text-align: center;
+    flex-shrink: 1;
   }
   &__img__container {
     width: 30px;
