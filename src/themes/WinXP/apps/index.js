@@ -94,8 +94,8 @@ export const appSettings = {
       height: 500,
     },
     defaultOffset: {
-      x: 200,
-      y: 40,
+      x: 210,
+      y: 50,
     },
     resizable: true,
     minimized: false,
@@ -110,8 +110,8 @@ export const appSettings = {
       height: 0,
     },
     defaultOffset: {
-      x: 230,
-      y: 80,
+      x: 240,
+      y: 90,
     },
     resizable: false,
     minimized: false,
@@ -141,8 +141,8 @@ export const appSettings = {
       height: 500,
     },
     defaultOffset: {
-      x: 100,
-      y: 200,
+      x: 110,
+      y: 160,
     },
     resizable: true,
     headerIcon: computer,

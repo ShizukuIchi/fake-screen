@@ -7,63 +7,57 @@ import folder from 'src/assets/internetExplorer/folder.png';
 
 export function DropDown({ items, position = {}, onClick }) {
   const [option, setOption] = useState('');
-  function onMouseEnter(o) {
-    setOption(o);
-  }
-  function _onClick(o) {
-    onClick(o);
-  }
   return (
     <Div {...position}>
-      <div className="ie__drop-down__menu">
+      <div className="drop-down__menu">
         {items.map((item, index) => {
           switch (item.type) {
             case 'item':
               return (
                 <div
                   key={item.text}
-                  className={`ie__drop-down__row${
+                  className={`drop-down__row${
                     item.disable ? '--disable' : ''
                   }`}
-                  onMouseEnter={() => onMouseEnter(item.text)}
-                  onClick={() => _onClick(item.text)}
+                  onMouseEnter={() => setOption(item.text)}
+                  onClick={() => onClick(item.text)}
                 >
-                  <div className="ie__drop-down__check">
+                  <div className="drop-down__check">
                     <RowSymbol type={item.symbol} />
                   </div>
-                  <div className="ie__drop-down__text">{item.text}</div>
-                  <span className="ie__drop-down__hot-key">
+                  <div className="drop-down__text">{item.text}</div>
+                  <span className="drop-down__hot-key">
                     {item.hotkey || ''}
                   </span>
-                  <div className="ie__drop-down__arrow--disable" />
+                  <div className="drop-down__arrow--disable" />
                 </div>
               );
             case 'menu':
               return (
                 <div
                   key={item.text}
-                  className={`ie__drop-down__row${
+                  className={`drop-down__row${
                     option === item.text ? '--active' : ''
                   }`}
-                  onMouseEnter={() => onMouseEnter(item.text)}
+                  onMouseEnter={() => setOption(item.text)}
                 >
-                  <div className="ie__drop-down__check">
+                  <div className="drop-down__check">
                     <RowSymbol type={item.symbol} />
                   </div>
-                  <div className="ie__drop-down__text">{item.text}</div>
-                  <span className="ie__drop-down__hot-key">
+                  <div className="drop-down__text">{item.text}</div>
+                  <span className="drop-down__hot-key">
                     {item.hotkey || ''}
                   </span>
-                  <div className="ie__drop-down__arrow" />
+                  <div className="drop-down__arrow" />
                   <div style={{ position: 'relative' }}>
                     {option === item.text && (
-                      <DropDown position={item.position} items={item.items} />
+                      <DropDown position={item.position} items={item.items} onClick={onClick} />
                     )}
                   </div>
                 </div>
               );
             case 'separator':
-              return <div key={index} className="ie__drop-down__separator" />;
+              return <div key={index} className="drop-down__separator" />;
             default:
               return null;
           }
@@ -76,11 +70,11 @@ export function DropDown({ items, position = {}, onClick }) {
 function RowSymbol({ type }) {
   switch (type) {
     case 'ie-paper':
-      return <img className="ie__drop-down__icon" src={iePaper} alt="" />;
+      return <img className="drop-down__icon" src={iePaper} alt="" />;
     case 'ie-book':
-      return <img className="ie__drop-down__icon" src={ieBook} alt="" />;
+      return <img className="drop-down__icon" src={ieBook} alt="" />;
     case 'folder':
-      return <img className="ie__drop-down__icon" src={folder} alt="" />;
+      return <img className="drop-down__icon" src={folder} alt="" />;
     case 'check':
       return <img src={check} alt="" />;
     case 'circle':
@@ -108,21 +102,21 @@ const Div = styled.div`
   display: flex;
   font-size: 11px;
   border-bottom: 1px solid transparent;
-  .ie__drop-down__row {
+  .drop-down__row {
     position: relative;
     display: contents;
     &:hover > *:not(:nth-child(5)) {
       background: #e99f17;
       filter: invert(100%);
     }
-    &:hover > .ie__drop-down__check > .ie__drop-down__icon {
+    &:hover > .drop-down__check > .drop-down__icon {
       filter: invert(100%);
     }
   }
-  .ie__drop-down__row--active {
+  .drop-down__row--active {
     position: relative;
     display: contents;
-    & > .ie__drop-down__check > .ie__drop-down__icon {
+    & > .drop-down__check > .drop-down__icon {
       filter: invert(100%);
     }
     & > *:not(:nth-child(5)) {
@@ -130,7 +124,7 @@ const Div = styled.div`
       filter: invert(100%);
     }
   }
-  .ie__drop-down__row--disable {
+  .drop-down__row--disable {
     display: contents;
     color: #8c8c8cb5;
     &:hover > * {
@@ -138,14 +132,14 @@ const Div = styled.div`
       filter: invert(100%);
     }
   }
-  .ie__drop-down__title {
+  .drop-down__title {
     padding: 0 7px;
     height: 100%;
     line-height: 20px;
     color: white;
     background-color: #1660e8;
   }
-  .ie__drop-down__menu {
+  .drop-down__menu {
     background-color: #fff;
     z-index: 1;
     padding: 2px;
@@ -157,35 +151,35 @@ const Div = styled.div`
     border: 1px solid gray;
     grid-template-columns: 16px auto auto 15px 0px;
   }
-  .ie__drop-down__separator {
+  .drop-down__separator {
     grid-column: 1 / 5;
     height: 7px;
     padding: 3px 1px;
     background-color: rgba(0, 0, 0, 0.2);
     background-clip: content-box;
   }
-  .ie__drop-down__check {
+  .drop-down__check {
     grid-column: 1;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .ie__drop-down__icon {
+  .drop-down__icon {
     max-width: 13px;
     max-height: 13px;
     transform: translateX(-2px);
   }
-  .ie__drop-down__text {
+  .drop-down__text {
     white-space: nowrap;
     padding-right: 8px;
     grid-column: 2;
   }
-  .ie__drop-down__hot-key {
+  .drop-down__hot-key {
     white-space: nowrap;
     grid-column: 3;
     padding-right: 2px;
   }
-  .ie__drop-down__arrow {
+  .drop-down__arrow {
     position: relative;
     grid-column: 4;
     width: 100%;
@@ -203,7 +197,7 @@ const Div = styled.div`
       display: block;
     }
   }
-  .ie__drop-down__arrow--disable {
+  .drop-down__arrow--disable {
     grid-column: 4;
     width: 100%;
     height: 100%;

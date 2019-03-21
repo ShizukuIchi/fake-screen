@@ -37,6 +37,7 @@ export default styled(Error)`
   }
   .error__messages {
     padding-top: 3px;
+    line-height: 11px;
   }
   .error__message {
     margin-bottom: 9px;

@@ -18,8 +18,9 @@ import refresh from 'src/assets/internetExplorer/refresh.png';
 import stop from 'src/assets/internetExplorer/stop.png';
 import windows from 'src/assets/internetExplorer/windows.png';
 import { Google } from 'src/themes/Google';
-import DropDown from './Dropdown';
+import {WindowDropdown} from 'src/components';
 import dropDownData from './dropDownData';
+
 function InternetExplorer({ onClose }) {
   const dropDown = useRef(null);
   const [state, setState] = useState({
@@ -79,7 +80,7 @@ function InternetExplorer({ onClose }) {
             >
               <div className="ie__toolbar__drop-down__label">{name}</div>
               {openOption === name && (
-                <DropDown
+                <WindowDropdown
                   onClick={onClickOptionItem}
                   items={dropDownData[name]}
                   position={{ top: '20px', left: '0' }}

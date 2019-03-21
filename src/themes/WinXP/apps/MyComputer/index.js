@@ -18,8 +18,9 @@ import folderOpen from 'src/assets/windowsIcons/337(32x32).png';
 import disk from 'src/assets/windowsIcons/334(32x32).png';
 import cd from 'src/assets/windowsIcons/111(32x32).png';
 
-import DropDown from './Dropdown';
+import { WindowDropdown } from 'src/components';
 import dropDownData from './dropDownData';
+
 function MyComputer({ onClose }) {
   const dropDown = useRef(null);
   const [openOption, setOpenOption] = useState('');
@@ -57,7 +58,7 @@ function MyComputer({ onClose }) {
             >
               <div className="com__toolbar__drop-down__label">{name}</div>
               {openOption === name && (
-                <DropDown
+                <WindowDropdown
                   onClick={onClickOptionItem}
                   items={dropDownData[name]}
                   position={{ top: '20px', left: '0' }}

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-function SubMenu({ className, data, style }) {
+function SubMenu({ className, data, style, onClick }) {
   const [hoverIndex, setHoverIndex] = useState(-1);
   return (
     <div style={{ ...style }} className={className}>
       {data.map((item, index) => (
         <SubMenuItem
+          onClick={onClick}
           onHover={setHoverIndex}
           key={index}
           hover={hoverIndex === index}
@@ -19,14 +20,17 @@ function SubMenu({ className, data, style }) {
   );
 }
 
-const SubMenuItem = ({ index, item, className, hover, onHover }) => {
+const SubMenuItem = ({ index, item, className, hover, onHover, onClick }) => {
   function _onMouseOver() {
     onHover(index);
+  }
+  function _onClick() {
+    onClick(item.text)
   }
   switch (item.type) {
     case 'item':
       return (
-        <div onMouseEnter={_onMouseOver} className={`${className}-item`}>
+        <div onClick={_onClick} onMouseEnter={_onMouseOver} className={`${className}-item`}>
           <img className={`${className}-img`} src={item.icon} alt="" />
           <div className={`${className}-text`}>{item.text}</div>
         </div>
@@ -42,7 +46,7 @@ const SubMenuItem = ({ index, item, className, hover, onHover }) => {
           <img className={`${className}-img`} src={item.icon} alt="" />
           <div className={`${className}-text`}>{item.text}</div>
           <div className={`${className}-arrow`}>
-            {hover && <StyledSubMenu data={item.items} bottom={item.bottom} />}
+            {hover && <StyledSubMenu data={item.items} bottom={item.bottom} onClick={onClick} />}
           </div>
         </div>
       );
