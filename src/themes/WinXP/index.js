@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useEffect } from 'react';
+import React, { useReducer, useRef } from 'react';
 import Footer from 'src/themes/WinXP/Footer';
 import styled from 'styled-components';
 
