@@ -65,18 +65,21 @@ export const defaultAppState = [
 
 export const defaultIconState = [
   {
+    id: 0,
     icon: ie,
     title: 'Internet Explorer',
     component: InternetExplorer,
     isFocus: false,
   },
   {
+    id: 1,
     icon: mine,
     title: 'Minesweeper',
     component: Minesweeper,
     isFocus: false,
   },
   {
+    id: 2,
     icon: computerLarge,
     title: 'My Computer',
     component: MyComputer,

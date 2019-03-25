@@ -1,7 +1,8 @@
-import React, { useReducer, useEffect, useRef } from 'react';
+import React, { useReducer, useRef, useEffect } from 'react';
 import Footer from 'src/themes/WinXP/Footer';
 import styled from 'styled-components';
 
+import useMouse from 'src/hooks/useMouse';
 import { defaultIconState, defaultAppState, appSettings } from './apps';
 import Windows from './Windows';
 import Icons from './Icons';
@@ -11,6 +12,7 @@ const initState = {
   nextAppID: defaultAppState.length,
   focusing: 'window',
   icons: defaultIconState,
+  selecting: false,
 };
 const reducer = (state, action = {}) => {
   switch (action.type) {
@@ -61,9 +63,9 @@ const reducer = (state, action = {}) => {
         focusing: 'window',
       };
     }
-    case 'FOCUS_ICON':
+    case 'FOCUS_ICON': {
       const icons = state.icons.map(icon => {
-        if (icon.component === action.payload)
+        if (icon.id === action.payload)
           return {
             ...icon,
             isFocus: true,
@@ -79,6 +81,26 @@ const reducer = (state, action = {}) => {
         focusing: 'icon',
         icons,
       };
+    }
+    case 'SELECT_ICONS': {
+      const icons = state.icons.map(icon => {
+        if (action.payload.includes(icon.id))
+          return {
+            ...icon,
+            isFocus: true,
+          };
+        else
+          return {
+            ...icon,
+            isFocus: false,
+          };
+      });
+      return {
+        ...state,
+        icons,
+        focusing: 'icon',
+      };
+    }
     case 'FOCUS_DESKTOP':
       return {
         ...state,
@@ -88,12 +110,29 @@ const reducer = (state, action = {}) => {
           isFocus: false,
         })),
       };
+    case 'START_SELECT':
+      return {
+        ...state,
+        focusing: 'desktop',
+        icons: state.icons.map(icon => ({
+          ...icon,
+          isFocus: false,
+        })),
+        selecting: action.payload,
+      };
+    case 'END_SELECT':
+      return {
+        ...state,
+        selecting: null,
+      };
     default:
       return state;
   }
 };
 function WinXP() {
   const [state, dispatch] = useReducer(reducer, initState);
+  const ref = useRef(null);
+  const mouse = useMouse(ref);
   function onFocusApp(id) {
     dispatch({ type: 'FOCUS_APP', payload: id });
   }
@@ -119,10 +158,13 @@ function WinXP() {
       dispatch({ type: 'DEL_APP', payload: id });
     }
   }
-  function onMouseDownIcon(component) {
-    dispatch({ type: 'FOCUS_ICON', payload: component });
+  function onMouseDownIcon(id) {
+    dispatch({ type: 'FOCUS_ICON', payload: id });
   }
-  function onDoubleClickIcon(appSetting) {
+  function onDoubleClickIcon(component) {
+    const appSetting = Object.values(appSettings).find(
+      setting => setting.component === component,
+    );
     dispatch({ type: 'ADD_APP', payload: appSetting });
   }
   function getFocusedAppId() {
@@ -144,18 +186,36 @@ function WinXP() {
     else dispatch({ type: 'ADD_APP', payload: appSettings.Error });
   }
   function onMouseDownDesktop(e) {
-    if (e.target === e.currentTarget) dispatch({ type: 'FOCUS_DESKTOP' });
+    if (e.target === e.currentTarget)
+      dispatch({
+        type: 'START_SELECT',
+        payload: { x: mouse.docX, y: mouse.docY },
+      });
+  }
+  function onMouseUpDesktop(e) {
+    dispatch({ type: 'END_SELECT' });
+  }
+  function onIconsSelected(iconIds) {
+    dispatch({ type: 'SELECT_ICONS', payload: iconIds });
   }
   const focusedAppId = getFocusedAppId();
   return (
-    <Container onMouseDown={onMouseDownDesktop}>
+    <Container
+      ref={ref}
+      onMouseUp={onMouseUpDesktop}
+      onMouseDown={onMouseDownDesktop}
+    >
       <Icons
         icons={state.icons}
         onMouseDown={onMouseDownIcon}
         onDoubleClick={onDoubleClickIcon}
         displayFocus={state.focusing === 'icon'}
         appSettings={appSettings}
+        mouse={mouse}
+        selecting={state.selecting}
+        setSelectedIcons={onIconsSelected}
       />
+      <DashBox startPos={state.selecting} mouse={mouse} />
       <Windows
         apps={state.apps}
         onMouseDown={onFocusApp}
@@ -174,6 +234,34 @@ function WinXP() {
     </Container>
   );
 }
+
+const DashBox = ({ mouse, startPos }) => {
+  function getRect() {
+    return {
+      x: Math.min(startPos.x, mouse.docX),
+      y: Math.min(startPos.y, mouse.docY),
+      w: Math.abs(startPos.x - mouse.docX),
+      h: Math.abs(startPos.y - mouse.docY),
+    };
+  }
+  if (startPos) {
+    const { x, y, w, h } = getRect();
+    return (
+      startPos && (
+        <div
+          style={{
+            transform: `translate(${x}px,${y}px)`,
+            width: w,
+            height: h,
+            position: 'absolute',
+            border: `1px dotted gray`,
+          }}
+        />
+      )
+    );
+  }
+  return null;
+};
 
 const Container = styled.div`
   @import url('https://fonts.googleapis.com/css?family=Noto+Sans');

@@ -1,18 +1,44 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { appSettings } from 'src/themes/WinXP/apps';
-
-function Icons({ icons, onMouseDown, onDoubleClick, displayFocus }) {
+function Icons({
+  icons,
+  onMouseDown,
+  onDoubleClick,
+  displayFocus,
+  mouse,
+  selecting,
+  setSelectedIcons,
+}) {
+  const [iconsRect, setIconsRect] = useState([]);
+  function measure(rect) {
+    if (iconsRect.find(r => r.id === rect.id)) return;
+    setIconsRect(iconsRect => [...iconsRect, rect]);
+  }
+  useEffect(() => {
+    if (!selecting) return;
+    const sx = Math.min(selecting.x, mouse.docX);
+    const sy = Math.min(selecting.y, mouse.docY);
+    const sw = Math.abs(selecting.x - mouse.docX);
+    const sh = Math.abs(selecting.y - mouse.docY);
+    const selectedIds = iconsRect
+      .filter(rect => {
+        const { x, y, w, h } = rect;
+        return x - sx < sw && sx - x < w && y - sy < sh && sy - y < h;
+      })
+      .map(icon => icon.id);
+    setSelectedIcons(selectedIds);
+  });
   return (
     <IconsContainer>
       {icons.map(icon => (
         <StyledIcon
-          key={icon.component}
+          key={icon.id}
           {...icon}
           displayFocus={displayFocus}
           onMouseDown={onMouseDown}
           onDoubleClick={onDoubleClick}
+          measure={measure}
         />
       ))}
     </IconsContainer>
@@ -21,24 +47,35 @@ function Icons({ icons, onMouseDown, onDoubleClick, displayFocus }) {
 
 function Icon({
   title,
-  component,
   onMouseDown,
   onDoubleClick,
   icon,
   className,
+  id,
+  component,
+  measure,
 }) {
+  const ref = useRef(null);
   function _onMouseDown() {
-    onMouseDown(component);
+    onMouseDown(id);
   }
   function _onDoubleClick() {
-    const setting = appSettings[title];
-    onDoubleClick(setting);
+    onDoubleClick(component);
   }
+  useEffect(() => {
+    const target = ref.current;
+    if (!target) return;
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+    const posX = left + window.scrollX;
+    const posY = top + window.scrollY;
+    measure({ id, x: posX, y: posY, w: width, h: height });
+  }, []);
   return (
     <div
       className={className}
       onMouseDown={_onMouseDown}
       onDoubleClick={_onDoubleClick}
+      ref={ref}
     >
       <div className={`${className}__img__container`}>
         <img src={icon} alt={title} className={`${className}__img`} />
