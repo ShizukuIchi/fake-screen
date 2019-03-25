@@ -17,8 +17,9 @@ import msn from 'src/assets/internetExplorer/msn.png';
 import refresh from 'src/assets/internetExplorer/refresh.png';
 import stop from 'src/assets/internetExplorer/stop.png';
 import windows from 'src/assets/internetExplorer/windows.png';
+import dropdown from 'src/assets/windowsIcons/dropdown.png';
 import { Google } from 'src/themes/Google';
-import {WindowDropdown} from 'src/components';
+import { WindowDropdown } from 'src/components';
 import dropDownData from './dropDownData';
 
 function InternetExplorer({ onClose }) {
@@ -181,6 +182,11 @@ function InternetExplorer({ onClose }) {
               state.route === 'search' ? `/search?q=${state.query}` : ''
             }`}
           </div>
+          <img
+            src={dropdown}
+            alt="dropdown"
+            className="ie__address_bar__content__img"
+          />
         </div>
         <div className="ie__address_bar__go">
           <img className="ie__address_bar__go__img" src={go} alt="go" />
@@ -405,13 +411,22 @@ const Div = styled.div`
     font-size: 10;
     align-items: center;
     background-color: white;
-    padding-left: 1px;
+    padding: 0 1px;
     &__img {
       width: 14px;
       height: 14px;
       margin-right: 2px;
     }
+    &__img:last-child {
+      width: 15px;
+      height: 15px;
+      margin-right: 0;
+    }
+    &__img:last-child:hover {
+      filter: brightness(1.1);
+    }
     &__text {
+      flex: 1;
       line-height: 100%;
     }
   }

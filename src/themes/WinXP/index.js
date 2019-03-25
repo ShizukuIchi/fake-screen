@@ -3,7 +3,6 @@ import Footer from 'src/themes/WinXP/Footer';
 import styled from 'styled-components';
 
 import { defaultIconState, defaultAppState, appSettings } from './apps';
-import { InternetExplorer, Minesweeper } from './apps';
 import Windows from './Windows';
 import Icons from './Icons';
 

@@ -13,10 +13,12 @@ import network from 'src/assets/windowsIcons/693(16x16).png';
 import document from 'src/assets/windowsIcons/308(16x16).png';
 import folderSmall from 'src/assets/windowsIcons/318(16x16).png';
 import menu from 'src/assets/windowsIcons/358(32x32).png';
-import folder from 'src/assets/windowsIcons/318(32x32).png';
+import folder from 'src/assets/windowsIcons/318(48x48).png';
 import folderOpen from 'src/assets/windowsIcons/337(32x32).png';
-import disk from 'src/assets/windowsIcons/334(32x32).png';
-import cd from 'src/assets/windowsIcons/111(32x32).png';
+import disk from 'src/assets/windowsIcons/334(48x48).png';
+import cd from 'src/assets/windowsIcons/111(48x48).png';
+import dropdown from 'src/assets/windowsIcons/dropdown.png';
+import pullup from 'src/assets/windowsIcons/pullup.png';
 
 import { WindowDropdown } from 'src/components';
 import dropDownData from './dropDownData';
@@ -131,6 +133,11 @@ function MyComputer({ onClose }) {
             className="com__address_bar__content__img"
           />
           <div className="com__address_bar__content__text">My Computer</div>
+          <img
+            src={dropdown}
+            alt="dropdown"
+            className="com__address_bar__content__img"
+          />
         </div>
         <div className="com__address_bar__go">
           <img className="com__address_bar__go__img" src={go} alt="go" />
@@ -142,7 +149,14 @@ function MyComputer({ onClose }) {
           <div className="com__content__left">
             <div className="com__content__left__card">
               <div className="com__content__left__card__header">
-                System Tasks
+                <div className="com__content__left__card__header__text">
+                  System Tasks
+                </div>
+                <img
+                  src={pullup}
+                  alt=""
+                  className="com__content__left__card__header__img"
+                />
               </div>
               <div className="com__content__left__card__content">
                 <div className="com__content__left__card__row">
@@ -151,7 +165,7 @@ function MyComputer({ onClose }) {
                     src={viewInfo}
                     alt="view"
                   />
-                  <div className="com__content__left__card__text">
+                  <div className="com__content__left__card__text link">
                     View system information
                   </div>
                 </div>
@@ -161,7 +175,7 @@ function MyComputer({ onClose }) {
                     src={remove}
                     alt="remove"
                   />
-                  <div className="com__content__left__card__text">
+                  <div className="com__content__left__card__text link">
                     Add or remove programs
                   </div>
                 </div>
@@ -171,7 +185,7 @@ function MyComputer({ onClose }) {
                     src={control}
                     alt="control"
                   />
-                  <div className="com__content__left__card__text">
+                  <div className="com__content__left__card__text link">
                     Change a setting
                   </div>
                 </div>
@@ -179,7 +193,14 @@ function MyComputer({ onClose }) {
             </div>
             <div className="com__content__left__card">
               <div className="com__content__left__card__header">
-                Other Places
+                <div className="com__content__left__card__header__text">
+                  Other Places
+                </div>
+                <img
+                  src={pullup}
+                  alt=""
+                  className="com__content__left__card__header__img"
+                />
               </div>
               <div className="com__content__left__card__content">
                 <div className="com__content__left__card__row">
@@ -188,7 +209,7 @@ function MyComputer({ onClose }) {
                     src={network}
                     alt="network"
                   />
-                  <div className="com__content__left__card__text">
+                  <div className="com__content__left__card__text link">
                     My Network Places
                   </div>
                 </div>
@@ -198,7 +219,7 @@ function MyComputer({ onClose }) {
                     src={document}
                     alt="document"
                   />
-                  <div className="com__content__left__card__text">
+                  <div className="com__content__left__card__text link">
                     My Documents
                   </div>
                 </div>
@@ -208,7 +229,7 @@ function MyComputer({ onClose }) {
                     src={folderSmall}
                     alt="folder"
                   />
-                  <div className="com__content__left__card__text">
+                  <div className="com__content__left__card__text link">
                     Shared Documents
                   </div>
                 </div>
@@ -218,20 +239,31 @@ function MyComputer({ onClose }) {
                     src={control}
                     alt="control"
                   />
-                  <div className="com__content__left__card__text">
+                  <div className="com__content__left__card__text link">
                     Control Panel
                   </div>
                 </div>
               </div>
             </div>
             <div className="com__content__left__card">
-              <div className="com__content__left__card__header">Details</div>
+              <div className="com__content__left__card__header">
+                <div className="com__content__left__card__header__text">
+                  Details
+                </div>
+                <img
+                  src={pullup}
+                  alt=""
+                  className="com__content__left__card__header__img"
+                />
+              </div>
               <div className="com__content__left__card__content">
                 <div className="com__content__left__card__row">
-                  <div className="com__content__left__card__text">
+                  <div className="com__content__left__card__text black bold">
                     My Computer
                   </div>
-                  <div className="com__content__left__card__text">
+                </div>
+                <div className="com__content__left__card__row">
+                  <div className="com__content__left__card__text black">
                     System Folder
                   </div>
                 </div>
@@ -315,6 +347,7 @@ const Div = styled.div`
   overflow: hidden;
   flex-direction: column;
   background: linear-gradient(to right, #edede5 0%, #ede8cd 100%);
+
   .com__toolbar {
     position: relative;
     display: flex;
@@ -470,12 +503,12 @@ const Div = styled.div`
   .com__address_bar {
     flex-shrink: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.7);
-    height: 22px;
+    height: 20px;
     font-size: 11px;
     display: flex;
     align-items: center;
-    padding: 0 2px 2px;
-    box-shadow: inset 0 -2px 3px -1px #2d2d2d;
+    padding: 0 2px;
+    box-shadow: inset 0 -2px 3px -1px #b0b0b0;
   }
   .com__address_bar__title {
     line-height: 100%;
@@ -490,16 +523,26 @@ const Div = styled.div`
     font-size: 10;
     align-items: center;
     background-color: white;
-    padding-left: 1px;
+    padding: 0 1px;
     &__img {
       width: 14px;
       height: 14px;
       margin-right: 2px;
     }
+    &__img:last-child {
+      width: 15px;
+      height: 15px;
+      margin: 0;
+    }
+    &__img:last-child:hover {
+      filter: brightness(110%);
+    }
     &__text {
       line-height: 100%;
+      flex: 1;
     }
   }
+
   .com__address_bar__go {
     display: flex;
     align-items: center;
@@ -550,39 +593,87 @@ const Div = styled.div`
     overflow: auto;
   }
   .com__content__left {
-    width: 160px;
+    width: 180px;
     height: 100%;
-    background-color: blue;
+    background: linear-gradient(to bottom, #748aff 0%, #4057d3 100%);
     overflow: auto;
-    padding: 12px;
+    padding: 10px;
   }
 
   .com__content__left__card {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     width: 100%;
-    background-color: #fff;
     overflow: hidden;
   }
   .com__content__left__card:not(:last-child) {
     margin-bottom: 12px;
   }
   .com__content__left__card__header {
-    padding: 5px 0 5px 10px;
+    display: flex;
+    align-items: center;
+    height: 23px;
+    padding-left: 11px;
+    padding-right: 2px;
+    cursor: pointer;
+    background: linear-gradient(
+      to right,
+      rgb(240, 240, 255) 0,
+      rgb(240, 240, 255) 30%,
+      rgb(168, 188, 255) 100%
+    );
+  }
+  .com__content__left__card__header:hover {
+    & .com__content__left__card__header__text {
+      color: #1c68ff;
+    }
+  }
+  .com__content__left__card__header__text {
     font-weight: 700;
-    background: linear-gradient(to right, #fff 0, lightblue 100%);
+    color: #0c327d;
+    flex: 1;
+  }
+  .com__content__left__card__header__img {
+    width: 18px;
+    height: 18px;
+    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
   }
   .com__content__left__card__content {
     padding: 5px 0 5px 10px;
-    font-weight: 700;
-    background-color: skyblue;
+    background: linear-gradient(
+      to right,
+      rgb(180, 200, 251) 0%,
+      rgb(164, 185, 251) 50%,
+      rgb(180, 200, 251) 100%
+    );
+    background-color: rgba(198, 211, 255, 0.87);
   }
   .com__content__left__card__row {
     display: flex;
+    margin-bottom: 2px;
   }
+
   .com__content__left__card__img {
     width: 14px;
     height: 14px;
+    margin-right: 5px;
+  }
+  .com__content__left__card__text {
+    font-size: 10px;
+    line-height: 12px;
+    color: #0c327d;
+    &.black {
+      color: #000;
+    }
+    &.bold {
+      font-weight: bold;
+    }
+
+    &.link:hover {
+      cursor: pointer;
+      color: #2b72ff;
+      text-decoration: underline;
+    }
   }
   .com__content__right {
     height: 100%;
@@ -593,34 +684,43 @@ const Div = styled.div`
   .com__content__right__card__header {
     width: 300px;
     font-weight: 700;
-    padding: 2px 0 5px 12px;
+    padding: 2px 0 3px 12px;
     position: relative;
     &:after {
       content: '';
       display: block;
-      background-color: blue;
+      background: linear-gradient(to right, #70bfff 0, #fff 100%);
       position: absolute;
       bottom: 0;
       left: -12px;
-      height: 2px;
+      height: 1px;
       width: 100%;
     }
   }
   .com__content__right__card__content {
     display: flex;
     align-items: center;
-    padding: 15px;
     padding-right: 0;
+    flex-wrap: wrap;
+    padding: 15px 15px 0;
   }
   .com__content__right__card__item {
     display: flex;
     align-items: center;
-    height: 100%;
     width: 200px;
+    margin-bottom: 15px;
+    height: auto;
   }
   .com__content__right__card__img {
+    width: 45px;
+    height: 45px;
+    margin-right: 5px;
+    display: inline-block;
   }
   .com__content__right__card__text {
+    white-space: nowrap;
+    display: inline-block;
+    height: 100%;
   }
 `;
 
