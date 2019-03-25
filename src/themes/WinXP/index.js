@@ -93,7 +93,6 @@ const reducer = (state, action = {}) => {
   }
 };
 function WinXP() {
-  const ref = useRef(null);
   const [state, dispatch] = useReducer(reducer, initState);
   function onFocusApp(id) {
     dispatch({ type: 'FOCUS_APP', payload: id });
@@ -144,21 +143,12 @@ function WinXP() {
       dispatch({ type: 'ADD_APP', payload: appSettings['My Computer'] });
     else dispatch({ type: 'ADD_APP', payload: appSettings.Error });
   }
-  useEffect(() => {
-    const target = ref.current;
-    if (!target) return;
-    function onMouseDown(e) {
-      if (e.target !== target) return;
-      dispatch({ type: 'FOCUS_DESKTOP' });
-    }
-    window.addEventListener('mousedown', onMouseDown);
-    return () => {
-      window.removeEventListener('mousedown', onMouseDown);
-    };
-  }, []);
+  function onMouseDownDesktop(e) {
+    if (e.target === e.currentTarget) dispatch({ type: 'FOCUS_DESKTOP' });
+  }
   const focusedAppId = getFocusedAppId();
   return (
-    <Container ref={ref}>
+    <Container onMouseDown={onMouseDownDesktop}>
       <Icons
         icons={state.icons}
         onMouseDown={onMouseDownIcon}

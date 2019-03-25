@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useReducer } from 'react';
 import styled from 'styled-components';
-import { useWindowSize } from 'react-use';
+import useWindowSize from 'react-use/lib/useWindowSize';
 import { choose } from 'src/lib';
 import DVDLogo from './DVDLogo';
 

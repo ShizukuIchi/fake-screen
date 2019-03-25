@@ -282,8 +282,10 @@ function MyComputer({ onClose }) {
                     alt="folder"
                     className="com__content__right__card__img"
                   />
-                  <div className="com__content__right__card__text">
-                    Shared Documents
+                  <div className="com__content__right__card__img-container">
+                    <div className="com__content__right__card__text">
+                      Shared Documents
+                    </div>
                   </div>
                 </div>
                 <div className="com__content__right__card__item">
@@ -292,8 +294,10 @@ function MyComputer({ onClose }) {
                     alt="folder"
                     className="com__content__right__card__img"
                   />
-                  <div className="com__content__right__card__text">
-                    User's Documents
+                  <div className="com__content__right__card__img-container">
+                    <div className="com__content__right__card__text">
+                      User's Documents
+                    </div>
                   </div>
                 </div>
               </div>
@@ -309,8 +313,10 @@ function MyComputer({ onClose }) {
                     alt="disk"
                     className="com__content__right__card__img"
                   />
-                  <div className="com__content__right__card__text">
-                    Local Disk (C:)
+                  <div className="com__content__right__card__img-container">
+                    <div className="com__content__right__card__text">
+                      Local Disk (C:)
+                    </div>
                   </div>
                 </div>
               </div>
@@ -321,11 +327,13 @@ function MyComputer({ onClose }) {
               </div>
               <div className="com__content__right__card__content">
                 <div className="com__content__right__card__item">
-                  <img
-                    src={cd}
-                    alt="cd"
-                    className="com__content__right__card__img"
-                  />
+                  <div className="com__content__right__card__img-container">
+                    <img
+                      src={cd}
+                      alt="cd"
+                      className="com__content__right__card__img"
+                    />
+                  </div>
                   <div className="com__content__right__card__text">
                     CD Drive (D:)
                   </div>
@@ -540,6 +548,7 @@ const Div = styled.div`
     &__text {
       line-height: 100%;
       flex: 1;
+      white-space: nowrap;
     }
   }
 
@@ -711,15 +720,17 @@ const Div = styled.div`
     margin-bottom: 15px;
     height: auto;
   }
+  .com__content__right__card__img-container {
+    /* filter: drop-shadow(0 0 blue); */
+  }
   .com__content__right__card__img {
     width: 45px;
     height: 45px;
     margin-right: 5px;
-    display: inline-block;
+    /* opacity: 0.5; */
   }
   .com__content__right__card__text {
     white-space: nowrap;
-    display: inline-block;
     height: 100%;
   }
 `;

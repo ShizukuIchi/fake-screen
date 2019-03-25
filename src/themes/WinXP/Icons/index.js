@@ -93,13 +93,13 @@ const StyledIcon = styled(Icon)`
     width: 30px;
     height: 30px;
     filter: ${({ isFocus, displayFocus }) =>
-      isFocus && displayFocus
-        ? 'sepia(100%) hue-rotate(170deg) brightness(60%) saturate(500%);'
-        : ''};
+      isFocus && displayFocus ? 'drop-shadow(0 0 blue)' : ''};
   }
   &__img {
     width: 30px;
     height: 30px;
+    opacity: ${({ isFocus, displayFocus }) =>
+      isFocus && displayFocus ? 0.5 : 1};
   }
 `;
 

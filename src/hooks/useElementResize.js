@@ -210,7 +210,8 @@ function useElementResize(ref, options) {
       if (dragTarget && e.target === dragTarget) return onDragStart(e);
       if (e.target !== target || !resizable) return;
       const { offsetX, offsetY } = e;
-      const { width, height } = target.getBoundingClientRect();
+      // const { width, height } = target.getBoundingClientRect();
+      const { width, height } = previousSize;
       if (offsetX < resizeThreshold) {
         _boundary.right = originMouseX + previousSize.width - constraintSize;
         if (offsetY < resizeThreshold) {

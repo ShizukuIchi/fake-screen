@@ -6,9 +6,11 @@ function Balloon({ style }) {
   const [start, setStart] = useState(false);
   useEffect(() => {
     const openTimer = setTimeout(() => setStart(true), 4000);
-    const closeTimer = setTimeout(() => setShow(false), 19000);
+    const fadeTimer = setTimeout(() => setShow(false), 19000);
+    const closeTimer = setTimeout(() => setStart(false), 20000);
     return () => {
       clearTimeout(openTimer);
+      clearTimeout(fadeTimer);
       clearTimeout(closeTimer);
     };
   }, []);

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useWindowSize } from 'react-use';
+import useWindowSize from 'react-use/lib/useWindowSize';
 import useElementResize from 'src/hooks/useElementResize';
 import styled from 'styled-components';
 

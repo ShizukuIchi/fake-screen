@@ -48,11 +48,11 @@ export const defaultAppState = [
     component: MyComputer,
     title: 'My Computer',
     defaultSize: {
-      width: 600,
+      width: 660,
       height: 500,
     },
     defaultOffset: {
-      x: 100,
+      x: 130,
       y: 150,
     },
     resizable: true,
@@ -137,11 +137,11 @@ export const appSettings = {
     component: MyComputer,
     title: 'My Computer',
     defaultSize: {
-      width: 600,
+      width: 660,
       height: 500,
     },
     defaultOffset: {
-      x: 110,
+      x: 140,
       y: 160,
     },
     resizable: true,
