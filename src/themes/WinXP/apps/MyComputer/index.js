@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import ga from 'react-ga';
 import go from 'src/assets/internetExplorer/290.png';
 import search from 'src/assets/internetExplorer/299(32x32).png';
 import computer from 'src/assets/windowsIcons/676(16x16).png';
@@ -264,14 +265,14 @@ function MyComputer({ onClose }) {
                     src={logo}
                     alt="control"
                   />
-                  <a
-                    href="https://github.com/ShizukuIchi"
-                    rel="noopener noreferrer"
+                  <ga.OutboundLink
+                    eventLabel="https://github.com/ShizukuIchi"
+                    to="https://github.com/ShizukuIchi"
                     className="com__content__left__card__text link"
                     target="_blank"
                   >
                     Github
-                  </a>
+                  </ga.OutboundLink>
                 </div>
                 <div className="com__content__left__card__row">
                   <img
@@ -279,14 +280,14 @@ function MyComputer({ onClose }) {
                     src="https://cdn.iconscout.com/icon/free/png-256/medium-1425876-1205067.png"
                     alt="control"
                   />
-                  <a
-                    href="https://medium.com/@ShizukuIchi"
-                    rel="noopener noreferrer"
+                  <ga.OutboundLink
+                    eventLabel="https://medium.com/@ShizukuIchi"
+                    to="https://medium.com/@ShizukuIchi"
                     className="com__content__left__card__text link"
                     target="_blank"
                   >
                     Medium
-                  </a>
+                  </ga.OutboundLink>
                 </div>
                 <div className="com__content__left__card__row">
                   <img
@@ -294,14 +295,14 @@ function MyComputer({ onClose }) {
                     src="https://image.flaticon.com/icons/png/128/179/179312.png"
                     alt="control"
                   />
-                  <a
-                    href="https://sh1zuku.csie.io/blog"
-                    rel="noopener noreferrer"
+                  <ga.OutboundLink
+                    eventLabel="https://sh1zuku.csie.io/blog"
+                    to="https://sh1zuku.csie.io/blog"
                     className="com__content__left__card__text link"
                     target="_blank"
                   >
                     Blog
-                  </a>
+                  </ga.OutboundLink>
                 </div>
               </div>
             </div>
@@ -376,41 +377,39 @@ function MyComputer({ onClose }) {
                 </div>
               </div>
             </div>
-            <div className="com__content__right__card">
+            <div className="com__content__right__card com__content__right__card--me">
               <div className="com__content__right__card__header">
                 About Me :)
               </div>
               <div className="com__content__right__card__content">
-                <div className="com__content__right__card__item">
+                <ga.OutboundLink
+                  eventLabel="https://github.com/ShizukuIchi/fake-screen"
+                  to="https://github.com/ShizukuIchi/fake-screen"
+                  className="com__content__right__card__item--me"
+                  target="_blank"
+                >
                   <img
                     className="com__content__right__card__img"
                     src={logo}
                     alt="control"
                   />
-                  <a
-                    href="https://github.com/ShizukuIchi/fake-screen"
-                    rel="noopener noreferrer"
-                    className="com__content__right__card__text link"
-                    target="_blank"
-                  >
-                    Github
-                  </a>
-                </div>
-                <div className="com__content__right__card__item">
+                  <div className="com__content__right__card__text">Github</div>
+                </ga.OutboundLink>
+                <ga.OutboundLink
+                  eventLabel="https://sh1zuku.csie.io"
+                  to="https://sh1zuku.csie.io"
+                  className="com__content__right__card__item--me"
+                  target="_blank"
+                >
                   <img
                     className="com__content__right__card__img"
                     src="https://a.ppy.sh/2926513_1448497605.png"
                     alt="control"
                   />
-                  <a
-                    href="https://sh1zuku.csie.io"
-                    rel="noopener noreferrer"
-                    className="com__content__right__card__text link"
-                    target="_blank"
-                  >
+                  <div className="com__content__right__card__text">
                     My Website
-                  </a>
-                </div>
+                  </div>
+                </ga.OutboundLink>
               </div>
             </div>
           </div>
@@ -793,18 +792,45 @@ const Div = styled.div`
     margin-bottom: 15px;
     height: auto;
   }
-  .com__content__right__card__img-container {
-    /* filter: drop-shadow(0 0 blue); */
-  }
   .com__content__right__card__img {
     width: 45px;
     height: 45px;
     margin-right: 5px;
-    /* opacity: 0.5; */
   }
   .com__content__right__card__text {
     white-space: nowrap;
     height: 100%;
+  }
+  .com__content__right__card--me {
+    .com__content__right__card__header:after,
+    .com__content__right__card__header {
+      transition: 0.4s;
+    }
+    &:hover {
+      .com__content__right__card__header:after {
+        width: 0;
+      }
+      .com__content__right__card__header {
+        transform: scale(1.2) translate(20px, 5px);
+      }
+    }
+  }
+  .com__content__right__card__item--me {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    margin-bottom: 15px;
+    height: auto;
+    & > * {
+      transition: transform 0.2s;
+    }
+    &:hover .com__content__right__card__img {
+      transform: rotate(-10deg) scale(0.9);
+    }
+    &:hover .com__content__right__card__text {
+      transform: scale(1.2);
+      transition-timing-function: cubic-bezier(0.23, 1.93, 0.59, -0.15);
+    }
   }
 `;
 

@@ -1,8 +1,10 @@
 import React, { useReducer, useRef } from 'react';
 import Footer from 'src/themes/WinXP/Footer';
 import styled from 'styled-components';
+import ga from 'react-ga';
 
-import useMouse from 'src/hooks/useMouse';
+// import useMouse from 'src/hooks/useMouse';
+import useMouse from 'react-use/lib/useMouse';
 import { defaultIconState, defaultAppState, appSettings } from './apps';
 import Windows from './Windows';
 import Icons from './Icons';
@@ -15,6 +17,10 @@ const initState = {
   selecting: false,
 };
 const reducer = (state, action = {}) => {
+  ga.event({
+    category: 'XP interaction',
+    action: action.type,
+  });
   switch (action.type) {
     case 'ADD_APP':
       return {
