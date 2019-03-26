@@ -19,8 +19,10 @@ import disk from 'src/assets/windowsIcons/334(48x48).png';
 import cd from 'src/assets/windowsIcons/111(48x48).png';
 import dropdown from 'src/assets/windowsIcons/dropdown.png';
 import pullup from 'src/assets/windowsIcons/pullup.png';
+import logo from 'src/assets/github-logo.png';
 
 import { WindowDropdown } from 'src/components';
+import GithubProfile from './GithubProfile';
 import dropDownData from './dropDownData';
 
 function MyComputer({ onClose }) {
@@ -258,14 +260,49 @@ function MyComputer({ onClose }) {
               </div>
               <div className="com__content__left__card__content">
                 <div className="com__content__left__card__row">
-                  <div className="com__content__left__card__text black bold">
-                    My Computer
-                  </div>
+                  <img
+                    className="com__content__left__card__img"
+                    src={logo}
+                    alt="control"
+                  />
+                  <a
+                    href="https://github.com/ShizukuIchi/fake-screen"
+                    rel="noopener noreferrer"
+                    className="com__content__left__card__text link"
+                    target="_blank"
+                  >
+                    Github
+                  </a>
                 </div>
                 <div className="com__content__left__card__row">
-                  <div className="com__content__left__card__text black">
-                    System Folder
-                  </div>
+                  <img
+                    className="com__content__left__card__img"
+                    src="https://cdn.iconscout.com/icon/free/png-256/medium-1425876-1205067.png"
+                    alt="control"
+                  />
+                  <a
+                    href="https://medium.com/@ShizukuIchi"
+                    rel="noopener noreferrer"
+                    className="com__content__left__card__text link"
+                    target="_blank"
+                  >
+                    Medium
+                  </a>
+                </div>
+                <div className="com__content__left__card__row">
+                  <img
+                    className="com__content__left__card__img"
+                    src="https://image.flaticon.com/icons/png/128/179/179312.png"
+                    alt="control"
+                  />
+                  <a
+                    href="https://sh1zuku.csie.io/blog"
+                    rel="noopener noreferrer"
+                    className="com__content__left__card__text link"
+                    target="_blank"
+                  >
+                    Blog
+                  </a>
                 </div>
               </div>
             </div>
@@ -317,6 +354,25 @@ function MyComputer({ onClose }) {
                     <div className="com__content__right__card__text">
                       Local Disk (C:)
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="com__content__right__card">
+              <div className="com__content__right__card__header">
+                Devices with Removable Storage
+              </div>
+              <div className="com__content__right__card__content">
+                <div className="com__content__right__card__item">
+                  <div className="com__content__right__card__img-container">
+                    <img
+                      src={cd}
+                      alt="cd"
+                      className="com__content__right__card__img"
+                    />
+                  </div>
+                  <div className="com__content__right__card__text">
+                    CD Drive (D:)
                   </div>
                 </div>
               </div>
@@ -648,7 +704,7 @@ const Div = styled.div`
     filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
   }
   .com__content__left__card__content {
-    padding: 5px 0 5px 10px;
+    padding: 5px 10px;
     background: linear-gradient(
       to right,
       rgb(180, 200, 251) 0%,
@@ -669,7 +725,7 @@ const Div = styled.div`
   }
   .com__content__left__card__text {
     font-size: 10px;
-    line-height: 12px;
+    line-height: 14px;
     color: #0c327d;
     &.black {
       color: #000;
