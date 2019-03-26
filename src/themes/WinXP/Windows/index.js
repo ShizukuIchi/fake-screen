@@ -209,6 +209,9 @@ const StyledWindow = styled(Window)`
       &:hover {
         filter: brightness(120%);
       }
+      &:hover:active {
+        filter: brightness(90%);
+      }
     }
   }
   .app__header__minimize {

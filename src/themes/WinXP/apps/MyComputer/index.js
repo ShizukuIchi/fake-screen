@@ -22,7 +22,6 @@ import pullup from 'src/assets/windowsIcons/pullup.png';
 import logo from 'src/assets/github-logo.png';
 
 import { WindowDropdown } from 'src/components';
-import GithubProfile from './GithubProfile';
 import dropDownData from './dropDownData';
 
 function MyComputer({ onClose }) {
@@ -266,7 +265,7 @@ function MyComputer({ onClose }) {
                     alt="control"
                   />
                   <a
-                    href="https://github.com/ShizukuIchi/fake-screen"
+                    href="https://github.com/ShizukuIchi"
                     rel="noopener noreferrer"
                     className="com__content__left__card__text link"
                     target="_blank"
@@ -379,20 +378,38 @@ function MyComputer({ onClose }) {
             </div>
             <div className="com__content__right__card">
               <div className="com__content__right__card__header">
-                Devices with Removable Storage
+                About Me :)
               </div>
               <div className="com__content__right__card__content">
                 <div className="com__content__right__card__item">
-                  <div className="com__content__right__card__img-container">
-                    <img
-                      src={cd}
-                      alt="cd"
-                      className="com__content__right__card__img"
-                    />
-                  </div>
-                  <div className="com__content__right__card__text">
-                    CD Drive (D:)
-                  </div>
+                  <img
+                    className="com__content__right__card__img"
+                    src={logo}
+                    alt="control"
+                  />
+                  <a
+                    href="https://github.com/ShizukuIchi/fake-screen"
+                    rel="noopener noreferrer"
+                    className="com__content__right__card__text link"
+                    target="_blank"
+                  >
+                    Github
+                  </a>
+                </div>
+                <div className="com__content__right__card__item">
+                  <img
+                    className="com__content__right__card__img"
+                    src="https://a.ppy.sh/2926513_1448497605.png"
+                    alt="control"
+                  />
+                  <a
+                    href="https://sh1zuku.csie.io"
+                    rel="noopener noreferrer"
+                    className="com__content__right__card__text link"
+                    target="_blank"
+                  >
+                    My Website
+                  </a>
                 </div>
               </div>
             </div>
