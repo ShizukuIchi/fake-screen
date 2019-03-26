@@ -1,27 +1,27 @@
 self.__precacheManifest = [
   {
-    "revision": "6d0f501b52c9235cd5933ba61983317a",
-    "url": "/fake-screen/static/media/user.6d0f501b.svg"
+    "revision": "25e82cdb5ded265ec387736f7ed58ae1",
+    "url": "/fake-screen/static/media/user.25e82cdb.svg"
   },
   {
-    "revision": "fb5e74d1a27baedb8f72",
-    "url": "/fake-screen/static/css/main.dd133034.chunk.css"
+    "revision": "7f5e1dc4cbe7ecf5aacc",
+    "url": "/fake-screen/static/css/main.94b60fc9.chunk.css"
   },
   {
-    "revision": "8ccc08ae1f4d6d0bc38c",
-    "url": "/fake-screen/static/js/1.8ccc08ae.chunk.js"
+    "revision": "0e3e006ce4a5de0d2e76",
+    "url": "/fake-screen/static/js/1.0e3e006c.chunk.js"
   },
   {
     "revision": "b33e56f1db5c3bfe316a",
     "url": "/fake-screen/static/js/runtime~main.b33e56f1.js"
   },
   {
-    "revision": "28ff52a81d3d6f9369e199a42b76a73a",
-    "url": "/fake-screen/static/media/smile.28ff52a8.svg"
+    "revision": "33211a17eb64aaa6b94254b72a70bcb9",
+    "url": "/fake-screen/static/media/smile.33211a17.svg"
   },
   {
-    "revision": "6046f0c7c8a1fe157f8d5b5d1212a3f9",
-    "url": "/fake-screen/static/media/apple.6046f0c7.svg"
+    "revision": "13b72f8e9af511c6a0637551918938ce",
+    "url": "/fake-screen/static/media/apple.13b72f8e.svg"
   },
   {
     "revision": "cfc00209c2e6a9df522c90e356be6241",
@@ -32,16 +32,16 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/doge.7a96c7d6.ico"
   },
   {
-    "revision": "fb5e74d1a27baedb8f72",
-    "url": "/fake-screen/static/js/main.fb5e74d1.chunk.js"
+    "revision": "7f5e1dc4cbe7ecf5aacc",
+    "url": "/fake-screen/static/js/main.7f5e1dc4.chunk.js"
   },
   {
-    "revision": "13128bd7a4beba48fcdb07e7882ea68b",
-    "url": "/fake-screen/static/media/settings.13128bd7.svg"
+    "revision": "886c1c9a8bd27d5bdb558d735f850c7f",
+    "url": "/fake-screen/static/media/settings.886c1c9a.svg"
   },
   {
-    "revision": "88ee9aa84cca91defed1e5309016031a",
-    "url": "/fake-screen/static/media/ubuntu.88ee9aa8.svg"
+    "revision": "05114c5cd61134bf45e181764954b0b4",
+    "url": "/fake-screen/static/media/ubuntu.05114c5c.svg"
   },
   {
     "revision": "cc54965ec257bd155246628c4c081889",
@@ -64,7 +64,7 @@ self.__precacheManifest = [
     "url": "/fake-screen/static/media/view-info.415b027d.ico"
   },
   {
-    "revision": "fe21dff15bb8143c180849b0e3b356d8",
+    "revision": "0ce7e6eeff5673201cd62580227a8795",
     "url": "/fake-screen/index.html"
   }
 ];
