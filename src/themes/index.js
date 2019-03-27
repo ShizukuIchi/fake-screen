@@ -6,20 +6,20 @@ import WannaCry from './WannaCry';
 import Ubuntu from './Ubuntu';
 import Win10Update from './Win10Update';
 import DVDScreensaver from './DVDScreensaver';
-import WinXP from './WinXP';
+// import WinXP from './WinXP';
 
 const getThemeID = genID();
 const themes = [
-  {
-    id: getThemeID(),
-    fullScreen: true,
-    displayName: 'Windows XP',
-    name: 'winXP',
-    imgUrl: 'https://i.imgur.com/IMXn6u2.jpg',
-    isBackgroundDark: false,
-    component: WinXP,
-    objectFit: 'contain',
-  },
+  // {
+  //   id: getThemeID(),
+  //   fullScreen: true,
+  //   displayName: 'Windows XP',
+  //   name: 'winXP',
+  //   imgUrl: 'https://i.imgur.com/4miokE2.jpg',
+  //   isBackgroundDark: false,
+  //   component: WinXP,
+  //   objectFit: 'contain',
+  // },
   {
     id: getThemeID(),
     fullScreen: false,
@@ -64,7 +64,7 @@ const themes = [
   {
     id: getThemeID(),
     fullScreen: true,
-    displayName: 'Windows 10 crash',
+    displayName: 'Win10 crash',
     name: 'win10-crash',
     imgUrl: 'https://i.imgur.com/lRT82Co.png',
     isBackgroundDark: false,
@@ -74,7 +74,7 @@ const themes = [
   {
     id: getThemeID(),
     fullScreen: true,
-    displayName: 'Windows 10 update',
+    displayName: 'Win10 update',
     name: 'win10-update',
     imgUrl: 'https://i.imgur.com/vj1vLO7.png',
     isBackgroundDark: false,
@@ -114,5 +114,5 @@ export {
   Ubuntu,
   Win10Update,
   DVDScreensaver,
-  WinXP,
+  // WinXP,
 };

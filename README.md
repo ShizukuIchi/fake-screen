@@ -1,8 +1,6 @@
 # [Fake Screen](https://sh1zuku.csie.io/fake-screen)
 
-Prank your friends with fake screens.
-
-![overview](https://i.imgur.com/a0t0Ad0.png)
+🤔 Prank your friends with fake screens. 😲
 
 ## Themes
 
@@ -13,4 +11,12 @@ Prank your friends with fake screens.
 - [Windows 10 Crash](https://sh1zuku.csie.io/fake-screen/#/win10-crash)
 - [Windows 10 Update](https://sh1zuku.csie.io/fake-screen/#/win10-update)
 - [DVD Screensaver](https://sh1zuku.csie.io/fake-screen/#/dvd-screensaver)
-- [Windows XP](https://sh1zuku.csie.io/fake-screen/#/winXP)
+
+
+![overview](https://i.imgur.com/dbKTf7y.png)
+
+
+## Also Try this
+
+Windows XP 👉 https://winxp.now.sh  
+Repo 👉 https://github.com/ShizukuIchi/winXP
