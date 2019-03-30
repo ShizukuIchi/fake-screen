@@ -25,6 +25,7 @@ const Win10Blue = ({ className }) => {
 export default styled(Win10Blue)`
   height: 100%;
   background: #0065cc;
+  cursor: none;
   display: flex;
   align-items: center;
   justify-content: center;
