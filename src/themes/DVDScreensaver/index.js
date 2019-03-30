@@ -99,6 +99,7 @@ function DVDScreensaver({ className }) {
 export default styled(DVDScreensaver)`
   background-color: #000;
   height: 100%;
+  cursor: none;
   overflow: hidden;
   .logo {
     overflow: hidden;
