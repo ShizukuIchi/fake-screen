@@ -25,6 +25,7 @@ export default styled(Win10UpdateView)`
   height: 100%;
   background: #0065cc;
   display: flex;
+  cursor: none;
   align-items: center;
   justify-content: center;
   font-family: 'Segoe UI light', Arial;
