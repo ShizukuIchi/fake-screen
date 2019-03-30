@@ -74,6 +74,7 @@ export default styled(MacOS)`
   @import url('https://fonts.googleapis.com/css?family=Roboto:300');
   height: 100%;
   background: #000;
+  cursor: none;
   display: flex;
   justify-content: center;
   align-items: center;
