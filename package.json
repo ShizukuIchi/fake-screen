@@ -1,18 +1,16 @@
 {
   "name": "fake-screen",
   "version": "1.0.0",
-  "homepage": "https://sh1zuku.csie.io/fake-screen",
+  "homepage": "https://screen.now.sh",
   "scripts": {
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-report": "yarn test --watch --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "now-build": "react-scripts build"
   },
   "dependencies": {
-    "lodash.samplesize": "^4.2.0",
     "react": "^16.8.0-alpha.0",
     "react-dom": "^16.8.0-alpha.0",
     "react-ga": "^2.5.7",

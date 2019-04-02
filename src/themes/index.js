@@ -6,20 +6,9 @@ import WannaCry from './WannaCry';
 import Ubuntu from './Ubuntu';
 import Win10Update from './Win10Update';
 import DVDScreensaver from './DVDScreensaver';
-// import WinXP from './WinXP';
 
 const getThemeID = genID();
 const themes = [
-  // {
-  //   id: getThemeID(),
-  //   fullScreen: true,
-  //   displayName: 'Windows XP',
-  //   name: 'winXP',
-  //   imgUrl: 'https://i.imgur.com/4miokE2.jpg',
-  //   isBackgroundDark: false,
-  //   component: WinXP,
-  //   objectFit: 'contain',
-  // },
   {
     id: getThemeID(),
     fullScreen: false,
@@ -114,5 +103,4 @@ export {
   Ubuntu,
   Win10Update,
   DVDScreensaver,
-  // WinXP,
 };

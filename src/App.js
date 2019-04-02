@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
 import { Options, CloseButton, GoogleAnalytics, NoMatch } from 'src/components';
 import themes from 'src/themes';
