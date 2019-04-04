@@ -42,7 +42,7 @@
       "!src/assets/*",
       "!src/components/index.js",
       "!src/themes/index.js",
-      "!src/hooks/useSafariNotScale.js",
+      "!src/hooks/useNoScale.js",
       "!src/components/GoogleAnalytics/index.js"
     ],
     "coverageThreshold": {

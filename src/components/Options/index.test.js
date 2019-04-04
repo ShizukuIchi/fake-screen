@@ -15,19 +15,3 @@ it('Options has content without crashing', () => {
   );
   expect(container.innerHTML).toMatch(/Google/);
 });
-
-it('Options no content without crashing', async () => {
-  const { container } = render(
-    <Router>
-      <div>
-        <Options location={{ pathname: '/no' }} />
-      </div>
-    </Router>,
-  );
-  expect(container.innerText).toBeFalsy();
-});
-
-it('Option without crashing', () => {
-  render(<Option />);
-  render(<Option zoom={true} />);
-});

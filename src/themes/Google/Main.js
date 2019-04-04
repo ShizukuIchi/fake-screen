@@ -29,6 +29,7 @@ function Main({ onSearch, className }) {
         />
         <div className="search-bar">
           <input
+            data-testid="input"
             id="search"
             type="text"
             name="search"
@@ -44,7 +45,7 @@ function Main({ onSearch, className }) {
           </div>
         </div>
         <div className="buttons">
-          <button onClick={onClick} id="enter">
+          <button onClick={onClick} id="enter" data-testid="enter">
             Google Search
           </button>
           <button>I'm Feeling Lucky</button>

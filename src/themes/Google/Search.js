@@ -23,6 +23,7 @@ function Search({ className, goMain, onSearch, query }) {
         onClick={() => setTag(tagName)}
         className={`tag ${tagName === tag ? 'active' : ''}`}
         key={tagName}
+        data-testid={tagName}
       >
         {tagName}
       </div>
@@ -34,6 +35,7 @@ function Search({ className, goMain, onSearch, query }) {
         <div className="top-bar">
           <div className="bar-items left">
             <img
+              data-testid="logo"
               onClick={goMain}
               className="logo"
               src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
@@ -41,6 +43,7 @@ function Search({ className, goMain, onSearch, query }) {
             />
             <div className="search-bar">
               <input
+                data-testid="input2"
                 id="search"
                 type="text"
                 name="search"
@@ -54,7 +57,7 @@ function Search({ className, goMain, onSearch, query }) {
                   alt="microphone"
                 />
               </div>
-              <div className="icon" onClick={onClick}>
+              <div className="icon" onClick={onClick} data-testid="search">
                 <img src={find} alt="find" />
               </div>
             </div>
@@ -75,8 +78,11 @@ function Search({ className, goMain, onSearch, query }) {
       </section>
       <section className="content">
         <p>
-          Your search - <span id="search-in-content">{query}</span> - did not
-          match any documents.
+          Your search -{' '}
+          <span data-testid="content" id="search-in-content">
+            {query}
+          </span>{' '}
+          - did not match any documents.
         </p>
         <p>Suggestions</p>
         <ul>

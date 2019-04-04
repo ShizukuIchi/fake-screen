@@ -1,42 +1,40 @@
 import React from 'react';
-import { HashRouter, Route, Redirect } from 'react-router-dom';
 import { render, fireEvent } from 'react-testing-library';
-import Google from 'src/themes/Google';
+import GoogleContainer, { Google } from 'src/themes/Google';
 
 it('Result hello without crashing', () => {
-  const { container, getByAltText } = render(
-    <HashRouter>
-      <Route
-        exact
-        path="/"
-        render={() => <Redirect to="/google/search?query=" />}
-      />
-      <Route component={Google} />
-    </HashRouter>,
-  );
-  const input = container.querySelector('input');
+  const { getByTestId } = render(<GoogleContainer />);
+  getByTestId('enter').click();
+  fireEvent.keyDown(getByTestId('input'), {
+    key: 'Enter?',
+  });
 
-  fireEvent.change(input, { target: { value: '' } });
-  const button = getByAltText('find');
-  button.click();
-  fireEvent.change(input, { target: { value: '123' } });
-  button.click();
-  button.click();
-  expect(container.innerHTML).toMatch(/123/);
+  fireEvent.change(getByTestId('input'), {
+    target: {
+      value: '123',
+    },
+  });
+  fireEvent.keyDown(getByTestId('input'), {
+    key: 'Enter',
+  });
+  expect(getByTestId('content').innerHTML).toMatch(/123/);
+  fireEvent.change(getByTestId('input2'), {
+    target: {
+      value: '1234',
+    },
+  });
+  getByTestId('search').click();
+  fireEvent.keyDown(getByTestId('input2'), {
+    key: 'Enter?',
+  });
 
-  const logo = getByAltText('Google');
-  logo.click();
-});
-
-it('Search hello without crashing', () => {
-  const { container, getByValue } = render(
-    <HashRouter>
-      <Route render={props => <Google {...props} />} />
-    </HashRouter>,
-  );
-  const input = getByValue('');
-  const button = container.querySelector('#enter');
-  button.click();
-  fireEvent.change(input, { target: { value: '123' } });
-  button.click();
+  fireEvent.keyDown(getByTestId('input2'), {
+    key: 'Enter',
+  });
+  const maps = getByTestId('Maps');
+  maps.click();
+  expect(maps.className).toMatch(/active/);
+  getByTestId('logo').click();
+  const { rerender } = render(<Google route="???" />);
+  rerender(<Google query="???" />);
 });

@@ -36,7 +36,8 @@ export default styled(Win10Blue)`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 12%;
+    justify-content: center;
+    padding: 0 50px;
   }
   .face {
     font-size: 9em;
