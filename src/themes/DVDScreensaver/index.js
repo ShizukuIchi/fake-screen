@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useReducer } from 'react';
+import React, { useRef, useReducer, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import useWindowSize from 'react-use/lib/useWindowSize';
 import { choose } from 'src/lib';
@@ -34,10 +34,10 @@ function DVDScreensaver({ className }) {
   const ref = useRef();
   const { width: windowWidth, height: windowHeight } = useWindowSize();
   const [state, dispatch] = useReducer(reducer, initState);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { velocity } = state;
     let myRaf;
-    let canceled = false;
+    // let canceled = false;
     let vx = velocity.x;
     let vy = velocity.y;
     let {
@@ -47,7 +47,7 @@ function DVDScreensaver({ className }) {
       height: logoHeight,
     } = ref.current.getBoundingClientRect();
     function animate() {
-      if (canceled) return;
+      // if (canceled) return;
       let shouldUpdate = true;
       if (logoLeft < 0) {
         logoLeft = 0;
@@ -83,7 +83,7 @@ function DVDScreensaver({ className }) {
     }
     myRaf = requestAnimationFrame(animate);
     return () => {
-      canceled = true;
+      // canceled = true;
       cancelAnimationFrame(myRaf);
     };
   }, [windowWidth, windowHeight]);
