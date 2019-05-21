@@ -1,4 +1,4 @@
-import React, { useRef, useReducer, useLayoutEffect } from 'react';
+import React, { useRef, useState, useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import useWindowSize from 'react-use/lib/useWindowSize';
 import { choose } from 'src/lib';
@@ -15,31 +15,15 @@ const colors = [
   'purple',
 ];
 
-export const initState = {
-  color: 'white',
-  velocity: { x: 2, y: 2 },
-};
-
-export const reducer = (state = initState, action = {}) => {
-  switch (action.type) {
-    case 'SET':
-      return action.payload;
-    case 'CLEAR':
-      return initState;
-    default:
-      return state;
-  }
-};
 function DVDScreensaver({ className }) {
   const ref = useRef();
+  const velocity = useRef({ x: 2, y: 2 });
   const { width: windowWidth, height: windowHeight } = useWindowSize();
-  const [state, dispatch] = useReducer(reducer, initState);
+  const [color, setColor] = useState(colors[0]);
   useLayoutEffect(() => {
-    const { velocity } = state;
-    let myRaf;
-    // let canceled = false;
-    let vx = velocity.x;
-    let vy = velocity.y;
+    let raf;
+    let vx = velocity.current.x;
+    let vy = velocity.current.y;
     let {
       left: logoLeft,
       top: logoTop,
@@ -47,7 +31,6 @@ function DVDScreensaver({ className }) {
       height: logoHeight,
     } = ref.current.getBoundingClientRect();
     function animate() {
-      // if (canceled) return;
       let shouldUpdate = true;
       if (logoLeft < 0) {
         logoLeft = 0;
@@ -63,34 +46,25 @@ function DVDScreensaver({ className }) {
         vy = -Math.abs(vy);
       } else {
         shouldUpdate = false;
-        logoLeft += vx;
-        logoTop += vy;
-        ref.current.style.transform = `translate(${logoLeft}px, ${logoTop}px)`;
       }
       if (shouldUpdate) {
-        dispatch({
-          type: 'SET',
-          payload: {
-            velocity: {
-              x: vx,
-              y: vy,
-            },
-            color: choose(colors),
-          },
-        });
+        velocity.current = { x: vx, y: vy };
+        setColor(choose(colors));
       }
-      myRaf = requestAnimationFrame(animate);
+      logoLeft += vx;
+      logoTop += vy;
+      ref.current.style.transform = `translate(${logoLeft}px, ${logoTop}px)`;
+      raf = requestAnimationFrame(animate);
     }
-    myRaf = requestAnimationFrame(animate);
+    raf = requestAnimationFrame(animate);
     return () => {
-      // canceled = true;
-      cancelAnimationFrame(myRaf);
+      cancelAnimationFrame(raf);
     };
   }, [windowWidth, windowHeight]);
   return (
     <div className={className}>
       <div ref={ref} className="logo">
-        <DVDLogo color={state.color} />
+        <DVDLogo color={color} />
       </div>
     </div>
   );

@@ -142,7 +142,7 @@ function WannaCryWindow({
                   window.
                 </p>
                 <p>
-                  After your payment, click &lt;Check Payment&gt;. Best teim to
+                  After your payment, click &lt;Check Payment&gt;. Best time to
                   check: 9:00am - 11:00am GMT from Monday to Friday.
                 </p>
                 <p>
@@ -160,7 +160,7 @@ function WannaCryWindow({
               <div className="manual">
                 <p className="darkred">
                   We strongly recommend you to not remove this software, and
-                  disable your anti-virus for a while, intil you pay and the
+                  disable your anti-virus for a while, until you pay and the
                   payment gets processed. If your anti-virus gets updated and
                   removes this software automatically, it will not be able to
                   recover your files even if you pay!
